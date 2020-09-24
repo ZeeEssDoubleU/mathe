@@ -6,7 +6,6 @@ const SET_ACTIVE_PRODUCTS_CATEGORY = "SET_ACTIVE_PRODUCTS_CATEGORY"
 const SAVE_PREV_PATH = "SAVE_PREV_PATH"
 const SAVE_CURRENT_PATH = "SAVE_CURRENT_PATH"
 const TRANSITION_TRIGGERED = "TRANSITION_TRIGGERED"
-const SET_LOADING = "SET_LOADING"
 
 // action creators
 export const setActiveCategory = (dispatch, payload) => {
@@ -33,8 +32,6 @@ const reducer = (state, action) => {
       return { ...state, pathname_current: action.payload }
     case TRANSITION_TRIGGERED:
       return { ...state, transition_triggered_page: action.payload }
-    case SET_LOADING:
-      return { ...state, loading: false }
     default:
       return state
   }
@@ -44,7 +41,6 @@ const reducer = (state, action) => {
 const initState =
   typeof window !== "undefined"
     ? {
-        loading: true,
         activeCategory: "yerba mate",
         pathname_prev: "/",
         pathname_current: "/",
