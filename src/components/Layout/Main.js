@@ -31,11 +31,11 @@ Main.propTypes = {}
 export default Main
 
 const Container = styled.main`
+  /* moves up/down with PageTransition component */
   position: absolute;
   top: 100%;
   height: 100%;
   width: 100%;
 
   overflow: auto;
-  overscroll-behavior: none;
 `

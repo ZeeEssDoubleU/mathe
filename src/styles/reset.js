@@ -35,9 +35,13 @@ export default createGlobalStyle`
       margin: 0;
    }
 
+   body, html {
+      overflow-y: auto;
+      min-height: 100%;
+   }
+
    /* Set core body defaults */
    body {
-      min-height: 100vh;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
       line-height: 1.5;
