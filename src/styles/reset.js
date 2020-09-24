@@ -36,8 +36,9 @@ export default createGlobalStyle`
    }
 
    /* Set core body defaults */
+   html,
    body {
-      min-height: 100vh;
+      height: 100%;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
       line-height: 1.5;

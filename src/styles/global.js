@@ -7,9 +7,6 @@ export default createGlobalStyle`
          font-weight: ${props => props.theme.fontMainWeight};
          background: black;
 
-         /* to adjust for changing mobile view ports */
-         height: 100%;
-
          overflow: hidden;
       }
 `
