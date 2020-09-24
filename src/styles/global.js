@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
 export default createGlobalStyle`
       html, body {
@@ -7,6 +7,9 @@ export default createGlobalStyle`
          font-weight: ${props => props.theme.fontMainWeight};
          background: black;
 
+         /* to adjust for changing mobile view ports */
+         height: 100%;
+
          overflow: hidden;
       }
-`;
+`
