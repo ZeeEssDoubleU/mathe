@@ -33,7 +33,7 @@ export default Hero
 const Container = styled.header`
   position: relative;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   text-align: center;
   @media (min-height: ${props => props.theme.short + "px"}) {
     height: 75%;
