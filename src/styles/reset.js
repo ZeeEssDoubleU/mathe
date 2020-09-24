@@ -35,11 +35,6 @@ export default createGlobalStyle`
       margin: 0;
    }
 
-   body, html {
-      overflow-y: auto;
-      min-height: 100%;
-   }
-
    /* Set core body defaults */
    body {
       scroll-behavior: smooth;
@@ -64,7 +59,7 @@ export default createGlobalStyle`
 
    /* Make images easier to work with */
    img {
-      max-width: 100%;
+      max-width: 100vw;
       display: block;
    }
 

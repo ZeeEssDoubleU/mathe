@@ -10,8 +10,9 @@ import {
   saveCurrentPath,
   transitionTriggered,
 } from "../../store/useStore"
-// import animations
+// import utils
 import * as anim from "../../utils/animations"
+import { useWindowResize } from "../../utils/useWindowResize"
 
 // ************
 // component
@@ -21,6 +22,8 @@ const Layout = ({ children, location }) => {
   const { state, dispatch } = useStore()
   const didMountRef = useRef(false)
   const { pathname } = location
+
+  const windowSize = useWindowResize()
 
   useEffect(() => {
     saveCurrentPath(dispatch, pathname)
@@ -66,11 +69,12 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
 
+  /* so nav isn't visible when pulling down */
   overflow: hidden;
 `
 const PageTransition = styled.div`
   /* moves up/down when nav link clicked */
   position: relative;
   height: 100%;
-  width: 100%;
+  width: 100%; ;
 `

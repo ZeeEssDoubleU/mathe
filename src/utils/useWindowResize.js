@@ -1,16 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { onWindowResize } from "../store/useStore"
-export const useWindowResize = (dispatch, themeContext) => {
-  useEffect(() => {
-    // get window size and add event listener on component mount
-    onWindowResize(dispatch, themeContext)
-    window.addEventListener("resize", () => {
-      onWindowResize(dispatch, themeContext)
+export const useWindowResize = () => {
+  const [windowSize, setWindowSize] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  })
+
+  const handleResize = () => {
+    setWindowSize({
+      height: window.innerHeight,
+      width: window.innerWidth,
     })
-    // remove event listener on component unmount
-    return () =>
-      window.removeEventListener("resize", () => {
-        onWindowResize(dispatch, themeContext)
-      })
-  }, [themeContext, dispatch])
+  }
+
+  // effect adds eventlistener on mount and unmount
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+    return () => window.addEventListener("resize", handleResize)
+  }, [])
+
+  return windowSize
 }

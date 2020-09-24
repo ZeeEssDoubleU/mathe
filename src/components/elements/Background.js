@@ -129,7 +129,7 @@ const ToggleDisplay = styled.div`
   left: 9999px;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   /* left transition is delayed on way out and is instant coming back in */
   transition-delay: 2000ms;
 
@@ -148,7 +148,7 @@ const ImageWrapper = styled(FadeAnim)`
   left: 0;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   z-index: 0;
 `
 const Image = styled(Img)`
