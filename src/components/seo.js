@@ -1,89 +1,138 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
+import React from "react";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+// ************
+// component
+// ************
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
+const SEO = (props) => {
+	const { site, datoCmsSite } = useStaticQuery(query);
+	const { siteMetadata } = site;
+	const { globalSeo } = datoCmsSite;
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+	return (
+		<Helmet
+			title={props.title || siteMetadata.title || globalSeo.siteName}
+			titleTemplate={
+				"%s" + siteMetadata.titleTemplate || "%s" + globalSeo.titleSuffix
+			}
+		>
+			<html lang={siteMetadata.lang} />
 
-  return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
-  )
-}
+			{/* serp */}
+			<meta
+				name="description"
+				content={
+					props.description ||
+					siteMetadata.description ||
+					globalSeo.fallbackSeo.description
+				}
+			/>
+			<meta
+				name="image"
+				content={
+					props.image ||
+					siteMetadata.image ||
+					globalSeo.fallbackSeo.image.url
+				}
+			/>
+			<meta name="theme-color" content={siteMetadata.themeColor} />
+			<meta
+				name="keywords"
+				content={props.keywords || siteMetadata.keywords}
+			/>
 
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
+			{/* facebook */}
+			<meta property="og:url" content={props.url || siteMetadata.siteUrl} />
+			<meta
+				property="og:title"
+				content={
+					props.title || siteMetadata.title || globalSeo.fallbackSeo.title
+				}
+			/>
+			<meta
+				property="og:description"
+				content={
+					props.description ||
+					siteMetadata.description ||
+					globalSeo.fallbackSeo.description
+				}
+			/>
+			<meta
+				property="og:image"
+				content={
+					props.image ||
+					siteMetadata.image ||
+					globalSeo.fallbackSeo.image.url
+				}
+			/>
 
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-}
+			{/* twitter */}
+			<meta name="twitter:card" content="summary" />
+			<meta
+				name="twitter:title"
+				content={
+					props.title || siteMetadata.title || globalSeo.fallbackSeo.title
+				}
+			/>
+			<meta
+				name="twitter:description"
+				content={
+					props.description ||
+					siteMetadata.description ||
+					globalSeo.fallbackSeo.description
+				}
+			/>
+			<meta
+				name="twitter:image"
+				content={
+					props.image ||
+					siteMetadata.image ||
+					globalSeo.fallbackSeo.image.url
+				}
+			/>
+		</Helmet>
+	);
+};
+export default SEO;
 
-export default SEO
+// ************
+// query
+// ************
+
+const query = graphql`
+	{
+		site {
+			siteMetadata {
+				title
+				titleTemplate
+				description
+				siteUrl
+				image
+				keywords
+				themeColor
+				lang
+			}
+		}
+		datoCmsSite {
+			faviconMetaTags {
+				...GatsbyDatoCmsFaviconMetaTags
+			}
+			globalSeo {
+				facebookPageUrl
+				fallbackSeo {
+					title
+					twitterCard
+					description
+					image {
+						url
+					}
+				}
+				siteName
+				twitterAccount
+				titleSuffix
+			}
+		}
+	}
+`;

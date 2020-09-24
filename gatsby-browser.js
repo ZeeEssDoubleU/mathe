@@ -1,7 +1,5 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/browser-apis/
- */
+import WrapRoot from "./src/components/GatsbyAPI/WrapRoot"
+import WrapPage from "./src/components/GatsbyAPI/WrapPage"
 
-// You can delete this file if you're not using it
+export const wrapRootElement = WrapRoot
+export const wrapPageElement = WrapPage
