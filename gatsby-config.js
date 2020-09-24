@@ -2,9 +2,7 @@ const axios = require("axios")
 const fs = require("fs")
 
 // dotenv needed to protect contentful API keys
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv/config")
-}
+require("dotenv/config")
 
 // creates favicon.svg and faviconShare.svg file for gatsby-plugin-manifest
 const saveIcons = async () => {
@@ -82,6 +80,7 @@ module.exports = {
       resolve: "gatsby-source-datocms",
       options: {
         apiToken: process.env.DATO_API_TOKEN,
+        disableLiveReload: false,
         localeFallbacks: {
           it: ["en"],
         },
