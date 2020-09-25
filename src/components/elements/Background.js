@@ -41,6 +41,8 @@ const Background = ({ pathname }) => {
                 title={img.title}
                 alt={img.alt}
                 fluid={{ ...img.fluid }}
+                fadeIn={true}
+                durationFadeIn={1000}
               />
             </ImageWrapper>
           </ToggleImage>
