@@ -171,7 +171,7 @@ const query = graphql`
           imageGallery {
             alt
             title
-            fluid(maxWidth: 1400, imgixParams: { fm: "jpg" }) {
+            fluid(maxWidth: 1400, imgixParams: { fm: "jpg", q: 0 }) {
               ...GatsbyDatoCmsFluid
             }
           }
