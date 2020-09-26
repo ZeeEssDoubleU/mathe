@@ -13,6 +13,10 @@ const NavMenu = props => {
   const [textIndex, setTextIndex] = useState(0)
   const textOptions = ["Premium teas", "Yerba mate"]
 
+  useEffect(() => {
+    anim.nav_fadeIn()
+  }, [])
+
   // tracks and handles nav animation.  No state used, so component is not re-rendered!  Score!
   const handleMouseMove = e => {
     const navElem = navRef.current

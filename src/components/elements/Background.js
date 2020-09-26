@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react"
+import React, { useCallback, useState, useEffect, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -11,8 +11,9 @@ import { useStore } from "../../store/useStore"
 
 const Background = ({ pathname }) => {
   const { state } = useStore()
-  const [catIndex, setCatIndex] = useState(0)
-  const [bgIndex, setBgIndex] = useState(0)
+  const [categoryIndex, setCategoryIndex] = useState(0)
+  const [backgroundIndex, setBackgroundIndex] = useState(0)
+  const [initialImageLoaded, setInitialImageLoaded] = useState(false)
   // query called below
   const { datoCmsLandingPage } = useStaticQuery(query)
   const { background } = datoCmsLandingPage
@@ -24,29 +25,36 @@ const Background = ({ pathname }) => {
   const backgroundMap = background.map((category, index1) => (
     <ToggleCategory
       key={index1}
-      className={catIndex === index1 ? "active" : ""}
+      className={categoryIndex === index1 ? "active" : ""}
     >
-      <Category key={index1} className={catIndex === index1 ? "active" : ""}>
-        {category.imageGallery.map((img, index2) => (
-          <ToggleImage
-            key={index2}
-            className={bgIndex === index2 ? "active" : ""}
-          >
-            <ImageWrapper
+      <Category
+        key={index1}
+        className={categoryIndex === index1 ? "active" : ""}
+      >
+        {category.imageGallery.map((img, index2) => {
+          return (
+            <ToggleImage
               key={index2}
-              className={bgIndex === index2 ? "active" : ""}
+              className={backgroundIndex === index2 ? "active" : ""}
             >
-              <Image
+              <ImageWrapper
                 key={index2}
-                title={img.title}
-                alt={img.alt}
-                fluid={{ ...img.fluid }}
-                fadeIn={true}
-                durationFadeIn={1000}
-              />
-            </ImageWrapper>
-          </ToggleImage>
-        ))}
+                className={backgroundIndex === index2 ? "active" : ""}
+              >
+                <Image
+                  key={index2}
+                  title={img.title}
+                  alt={img.alt}
+                  fluid={{ ...img.fluid }}
+                  fadeIn={true}
+                  durationFadeIn={1000}
+                  onLoad={() => setInitialImageLoaded(true)}
+                  {...{ initialImageLoaded }}
+                />
+              </ImageWrapper>
+            </ToggleImage>
+          )
+        })}
       </Category>
     </ToggleCategory>
   ))
@@ -61,13 +69,13 @@ const Background = ({ pathname }) => {
 
       // check if new random index equals current index
       const newIndex =
-        randomIndex === bgIndex
-          ? (bgIndex + 1) % activeGalleryLength
+        randomIndex === backgroundIndex
+          ? (backgroundIndex + 1) % activeGalleryLength
           : randomIndex
 
-      setBgIndex(newIndex)
+      setBackgroundIndex(newIndex)
     },
-    [bgIndex]
+    [backgroundIndex]
   )
 
   // effect to set background category
@@ -78,18 +86,19 @@ const Background = ({ pathname }) => {
       item.title.toLowerCase().includes(state.activeCategory)
     )
     // record category index based on pathname or if 'all tea' selected
-    const actualCatIndex =
+    const activeCategoryIndex =
       state.pathname_current !== "/products" || state.activeCategory === "tea"
         ? 0
         : categoryIndex
-    const activeGalleryLength = background[actualCatIndex].imageGallery.length
+    const activeGalleryLength =
+      background[activeCategoryIndex].imageGallery.length
 
-    // set catIndex on page or activeCategory change
-    setCatIndex(actualCatIndex)
+    // set categoryIndex on page or activeCategory change
+    setCategoryIndex(activeCategoryIndex)
 
-    // set bgIndex if greater than or equal to new activeGalleryLength
+    // set backgroundIndex if greater than or equal to new activeGalleryLength
     // [x, y, z].length === 3.  Index of 3 does not exist.
-    if (bgIndex >= activeGalleryLength) {
+    if (backgroundIndex >= activeGalleryLength) {
       cycleBg(activeGalleryLength, categoryIndex)
     }
     // set cycle interval
@@ -103,7 +112,7 @@ const Background = ({ pathname }) => {
   }, [
     state.pathname_current,
     state.activeCategory,
-    bgIndex,
+    backgroundIndex,
     cycleBg,
     background,
   ])
@@ -158,6 +167,10 @@ const Image = styled(Img)`
   left: 0;
   top: 0;
   height: 100%;
+  visibility: ${props =>
+    props.initialImageLoaded === true ? "visible" : "hidden"};
+  opacity: ${props => (props.initialImageLoaded === true ? 1 : 0)};
+  transition: opacity 2000ms, visibility 2000ms;
 `
 
 // ************

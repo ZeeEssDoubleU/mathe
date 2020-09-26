@@ -10,7 +10,7 @@ const Nav = props => {
 
   return (
     <Container>
-      <h1>
+      <h1 className="nav-logo">
         <NavLogo src={logo.url} title={logo.title} alt={logo.alt} />
       </h1>
       <NavMenu />
