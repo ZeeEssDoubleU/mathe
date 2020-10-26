@@ -19,13 +19,13 @@ const ProductsHeader = props => {
     .map((edge, categoryIndex) => {
       const category = edge.node
       // set all titles to lowercase for compare and sort
-      category.title = category?.title.toLowerCase()
+      category.title = category.title?.toLowerCase()
 
       // DISPLAY category button
       return (
         <StyledButton
           key={categoryIndex}
-          className={category.title === state?.activeCategory ? "active" : ""}
+          className={category.title === state.activeCategory ? "active" : ""}
           // set active category when category clicked
           onClick={() => {
             setActiveCategory(dispatch, category.title)
@@ -46,7 +46,7 @@ const ProductsHeader = props => {
   // category filters
   const categoryFilter = props.categories.edges.filter(edge => {
     const category = edge.node
-    return state?.activeCategory.toLowerCase() === category?.title.toLowerCase()
+    return state.activeCategory?.toLowerCase() === category.title?.toLowerCase()
   })
   const categoryDisplayName = categoryFilter.map(edge => {
     const category = edge.node
@@ -65,7 +65,7 @@ const ProductsHeader = props => {
   const subCategoryFilter = props.subCategories.edges.filter(edge => {
     const subCategory = edge.node
     return (
-      state?.activeCategory.toLowerCase() === subCategory?.title.toLowerCase()
+      state.activeCategory?.toLowerCase() === subCategory.title?.toLowerCase()
     )
   })
   const subCategoryDisplayName = subCategoryFilter.map(edge => {
