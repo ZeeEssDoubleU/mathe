@@ -13,7 +13,7 @@ import { Content, ContentWrapper, MarginAuto } from "../../styles/elements"
 const Main = props => {
   return (
     <Container>
-      <SEO />
+      <SEO title={props.heroSubheader} />
       <Hero
         header={props.heroHeader}
         subHeader={props.heroSubheader}
@@ -21,7 +21,7 @@ const Main = props => {
       />
       <Content>
         <MarginAuto>
-          <ContentWrapper>{props.content}</ContentWrapper>
+          <ContentWrapper>{props.children}</ContentWrapper>
         </MarginAuto>
       </Content>
     </Container>
