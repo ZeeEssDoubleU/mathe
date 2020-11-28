@@ -21,27 +21,38 @@ const ProductsHeader = props => {
       // set all titles to lowercase for compare and sort
       category.title = category.title?.toLowerCase()
 
+      // TODO: will need to modify filter when mobile nav is created
+      const hide = ["tea blend", "traditionally scented", "decaf", "flavored"]
+      const show = !hide.includes(category.title)
+
       // DISPLAY category button
       return (
-        <StyledButton
-          key={categoryIndex}
-          className={category.title === state.activeCategory ? "active" : ""}
-          // set active category when category clicked
-          onClick={() => {
-            setActiveCategory(dispatch, category.title)
-          }}
-        >
-          {/* change button display from 'tea' to 'all' */}
-          {category.title === "tea" ? "all" : category.title}
-        </StyledButton>
+        // TODO: will need to modify filter when mobile nav is created
+        show && (
+          <StyledButton
+            key={categoryIndex}
+            className={category.title === state.activeCategory ? "active" : ""}
+            // set active category when category clicked
+            onClick={() => {
+              setActiveCategory(dispatch, category.title)
+            }}
+          >
+            {/* change button display from 'tea' to 'all' */}
+            {category.title === "tea" ? "all" : category.title}
+          </StyledButton>
+        )
       )
     })
+    // TODO: will need to modify filter when mobile nav is created
+    .filter(elem => elem !== false)
     // sort array alphabetically
     .sort((a, b) => {
       if (a.props.children < b.props.children) return -1
       if (a.props.children > b.props.children) return 1
       return 0
     })
+
+  console.log("filtered", categoryArray)
 
   // category filters
   const categoryFilter = props.categories.edges.filter(edge => {
@@ -61,35 +72,13 @@ const ProductsHeader = props => {
     return category.description
   })
 
-  // sub category filters
-  const subCategoryFilter = props.subCategories.edges.filter(edge => {
-    const subCategory = edge.node
-    return (
-      state.activeCategory?.toLowerCase() === subCategory.title?.toLowerCase()
-    )
-  })
-  const subCategoryDisplayName = subCategoryFilter.map(edge => {
-    const subCategory = edge.node
-    return subCategory.displayName
-  })
-  const subCategorySubTitle = subCategoryFilter.map(edge => {
-    const subCategory = edge.node
-    return subCategory.subTitle
-  })
-  const subCategoryDescription = subCategoryFilter.map(edge => {
-    const subCategory = edge.node
-    return subCategory.description
-  })
-
   // active category filters
   const activeCategoryDisplay =
-    (categoryDisplayName.length !== 0 && categoryDisplayName) ||
-    subCategoryDisplayName
+    categoryDisplayName.length !== 0 && categoryDisplayName
   const activeCategorySubTitle =
-    (categorySubTitle.length !== 0 && categorySubTitle) || subCategorySubTitle
+    categorySubTitle.length !== 0 && categorySubTitle
   const activeCategoryDescription =
-    (categoryDescription.length !== 0 && categoryDescription) ||
-    subCategoryDescription
+    categoryDescription.length !== 0 && categoryDescription
 
   // DISPLAY category buttons (plural)
   return (

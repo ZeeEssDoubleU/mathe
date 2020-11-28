@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useLayoutEffect } from "react"
+import React, { useCallback, useState, useEffect } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -186,7 +186,7 @@ const query = graphql`
           imageGallery {
             alt
             title
-            fluid(maxWidth: 1400, imgixParams: { fm: "jpg", q: 0 }) {
+            fluid(imgixParams: { auto: "format, compress", maxW: 2560 }) {
               ...GatsbyDatoCmsFluid
             }
           }

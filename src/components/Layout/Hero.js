@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef, memo, useRef } from "react"
 import styled from "styled-components"
 import SVG from "react-inlinesvg"
 // import components
@@ -9,20 +9,22 @@ import BackButton from "../elements/BackButton"
 // component
 // ************
 
-const Hero = props => {
-  return (
-    <Container>
-      <BackButton />
-      <Headers>
-        {props.subHeader && <SubHeader>{props.subHeader}</SubHeader>}
-        {props.header && <Header>{props.header}</Header>}
-      </Headers>
-      <Medallion>
-        {props.medallion && <SVG src={props.medallion.url}></SVG>}
-      </Medallion>
-    </Container>
-  )
-}
+const Hero = memo(
+  forwardRef((props, ref) => {
+    return (
+      <Container ref={ref}>
+        <BackButton />
+        <Headers>
+          {props.subHeader && <SubHeader>{props.subHeader}</SubHeader>}
+          {props.header && <Header>{props.header}</Header>}
+        </Headers>
+        <Medallion>
+          {props.medallion && <SVG src={props.medallion.url}></SVG>}
+        </Medallion>
+      </Container>
+    )
+  })
+)
 Hero.propTypes = {}
 export default Hero
 

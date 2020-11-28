@@ -11,16 +11,15 @@ import { Divider, Section } from "../styles/elements"
 // component
 // ************
 
+// TODO: need to fix Tea Blend filter link
+
 const Products = () => {
-  const { page, categories, subCategories, products } = useStaticQuery(query)
+  const { page, categories, products } = useStaticQuery(query)
 
   const contentSection = (
     <>
       <Section>
-        <ProductCategories
-          categories={categories}
-          subCategories={subCategories}
-        />
+        <ProductCategories categories={categories} />
       </Section>
       <Divider />
       <Section>
@@ -42,7 +41,6 @@ const Products = () => {
 Products.propTypes = {}
 export default Products
 
-// TODO: figure out why medallion's aren't coming through on netlify
 // *** QUERY ***
 const query = graphql`
   {
@@ -60,27 +58,12 @@ const query = graphql`
           subTitle
           displayName
           description
-          image {
+          noNavDisplay
+          slug
+          images {
             title
             alt
-            fluid(maxWidth: 1400, imgixParams: { fm: "jpg" }) {
-              ...GatsbyDatoCmsFluid
-            }
-          }
-        }
-      }
-    }
-    subCategories: allDatoCmsSubCategory {
-      edges {
-        node {
-          title
-          subTitle
-          displayName
-          description
-          image {
-            title
-            alt
-            fluid(maxWidth: 1400, imgixParams: { fm: "jpg" }) {
+            fluid(imgixParams: { auto: "format, compress", maxW: 2560 }) {
               ...GatsbyDatoCmsFluid
             }
           }
@@ -100,10 +83,7 @@ const query = graphql`
           categories {
             title
           }
-          subCategories {
-            title
-          }
-          # image {
+          # images {
           # 	title
           # 	alt
           # 	fluid(maxWidth: 1400) {

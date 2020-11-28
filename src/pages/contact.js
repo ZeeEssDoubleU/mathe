@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 // import components
 import { ContactDetails } from "../components/Contact/ContactDetails"
 import { ContactForm } from "../components/Contact/ContactForm"
