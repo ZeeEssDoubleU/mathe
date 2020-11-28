@@ -52,8 +52,6 @@ const ProductsHeader = props => {
       return 0
     })
 
-  console.log("filtered", categoryArray)
-
   // category filters
   const categoryFilter = props.categories.edges.filter(edge => {
     const category = edge.node
