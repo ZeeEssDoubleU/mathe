@@ -49,7 +49,7 @@ const Layout = ({ children, location }) => {
     <Container>
       <Background />
       <PageTransition className="page-transition">
-        <Nav pathname={pathname} />
+        <Nav />
         {/* children are page elements */}
         {children}
       </PageTransition>

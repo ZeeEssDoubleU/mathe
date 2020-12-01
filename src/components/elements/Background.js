@@ -9,55 +9,57 @@ import { useStore } from "../../store/useStore"
 // component
 // ************
 
-const Background = ({ pathname }) => {
+const Background = props => {
   const { state } = useStore()
   const [categoryIndex, setCategoryIndex] = useState(0)
   const [backgroundIndex, setBackgroundIndex] = useState(0)
   const [initialImageLoaded, setInitialImageLoaded] = useState(false)
   // query called below
-  const { datoCmsLandingPage } = useStaticQuery(query)
-  const { background } = datoCmsLandingPage
+  const { allDatoCmsProductImage } = useStaticQuery(query)
+  const categories = allDatoCmsProductImage.edges.map(edge => edge.node)
 
   // data structure
   // [category] = [img][img][img]
   // [category] = [img][img][img]
   // [category] = [img][img][img]
-  const backgroundMap = background.map((category, index1) => (
-    <ToggleCategory
-      key={index1}
-      className={categoryIndex === index1 ? "active" : ""}
-    >
-      <Category
+  const backgroundMap = categories.map((category, index1) => {
+    return (
+      <ToggleCategory
         key={index1}
         className={categoryIndex === index1 ? "active" : ""}
       >
-        {category.imageGallery.map((img, index2) => {
-          return (
-            <ToggleImage
-              key={index2}
-              className={backgroundIndex === index2 ? "active" : ""}
-            >
-              <ImageWrapper
+        <Category
+          key={index1}
+          className={categoryIndex === index1 ? "active" : ""}
+        >
+          {category.imageGallery.map((img, index2) => {
+            return (
+              <ToggleImage
                 key={index2}
                 className={backgroundIndex === index2 ? "active" : ""}
               >
-                <Image
+                <ImageWrapper
                   key={index2}
-                  title={img.title}
-                  alt={img.alt}
-                  fluid={{ ...img.fluid }}
-                  fadeIn={true}
-                  durationFadeIn={1000}
-                  onLoad={() => setInitialImageLoaded(true)}
-                  {...{ initialImageLoaded }}
-                />
-              </ImageWrapper>
-            </ToggleImage>
-          )
-        })}
-      </Category>
-    </ToggleCategory>
-  ))
+                  className={backgroundIndex === index2 ? "active" : ""}
+                >
+                  <Image
+                    key={index2}
+                    title={img.title}
+                    alt={img.alt}
+                    fluid={{ ...img.fluid }}
+                    fadeIn={true}
+                    durationFadeIn={1000}
+                    onLoad={() => setInitialImageLoaded(true)}
+                    {...{ initialImageLoaded }}
+                  />
+                </ImageWrapper>
+              </ToggleImage>
+            )
+          })}
+        </Category>
+      </ToggleCategory>
+    )
+  })
 
   // cycle through landing background
   const cycleBg = useCallback(
@@ -81,20 +83,22 @@ const Background = ({ pathname }) => {
   // effect to set background category
   // effect resets cycle upon changing activeCategory
   useEffect(() => {
-    // match activeCategory to background category
-    const categoryIndex = background.findIndex(item =>
-      item.title.toLowerCase().includes(state.activeCategory)
+    // match categoryIndex to product image category
+    const categoryIndex = categories.findIndex(item =>
+      item.title
+        .toLowerCase()
+        .includes(
+          !state.pathname_current.includes("/products") ||
+            state.activeCategory === "tea"
+            ? "all tea"
+            : state.activeCategory
+        )
     )
-    // record category index based on pathname or if 'all tea' selected
-    const activeCategoryIndex =
-      state.pathname_current !== "/products" || state.activeCategory === "tea"
-        ? 0
-        : categoryIndex
-    const activeGalleryLength =
-      background[activeCategoryIndex].imageGallery.length
+
+    const activeGalleryLength = categories[categoryIndex].imageGallery.length
 
     // set categoryIndex on page or activeCategory change
-    setCategoryIndex(activeCategoryIndex)
+    setCategoryIndex(categoryIndex)
 
     // set backgroundIndex if greater than or equal to new activeGalleryLength
     // [x, y, z].length === 3.  Index of 3 does not exist.
@@ -114,7 +118,7 @@ const Background = ({ pathname }) => {
     state.activeCategory,
     backgroundIndex,
     cycleBg,
-    background,
+    categories,
   ])
 
   return <Images>{backgroundMap}</Images>
@@ -179,9 +183,9 @@ const Image = styled(Img)`
 
 const query = graphql`
   {
-    datoCmsLandingPage {
-      background {
-        ... on DatoCmsBackgroundGallery {
+    allDatoCmsProductImage {
+      edges {
+        node {
           title
           imageGallery {
             alt

@@ -1,20 +1,18 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 // import components
-import ProductCategories from "../components/Products/ProductCategories"
-import ProductListings from "../components/Products/ProductListings"
-import Main from "../components/Layout/Main"
+import ProductCategories from "../../components/Products/ProductCategories"
+import ProductListings from "../../components/Products/ProductListings"
+import Main from "../../components/Layout/Main"
 // import styles
-import { Divider, Section } from "../styles/elements"
+import { Divider, Section } from "../../styles/elements"
 
 // ************
 // component
 // ************
 
-// TODO: need to fix Tea Blend filter link
-
-const Products = () => {
-  const { page, categories, products } = useStaticQuery(query)
+const Products = ({ data }) => {
+  const { page, categories, products } = data
 
   const contentSection = (
     <>
@@ -41,9 +39,12 @@ const Products = () => {
 Products.propTypes = {}
 export default Products
 
-// *** QUERY ***
-const query = graphql`
-  {
+// ************
+// query
+// ************
+
+export const query = graphql`
+  query {
     page: datoCmsProductsPage {
       header
       subHeader
@@ -61,10 +62,12 @@ const query = graphql`
           noNavDisplay
           slug
           images {
-            title
-            alt
-            fluid(imgixParams: { auto: "format, compress", maxW: 2560 }) {
-              ...GatsbyDatoCmsFluid
+            imageGallery {
+              title
+              alt
+              fluid(imgixParams: { auto: "format, compress", maxW: 2560 }) {
+                ...GatsbyDatoCmsFluid
+              }
             }
           }
         }
@@ -82,6 +85,7 @@ const query = graphql`
           }
           categories {
             title
+            slug
           }
           # images {
           # 	title

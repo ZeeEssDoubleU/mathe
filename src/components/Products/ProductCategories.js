@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import styled from "styled-components"
 import dompurify from "dompurify"
 // import styles
@@ -29,17 +30,21 @@ const ProductsHeader = props => {
       return (
         // TODO: will need to modify filter when mobile nav is created
         show && (
-          <StyledButton
-            key={categoryIndex}
-            className={category.title === state.activeCategory ? "active" : ""}
-            // set active category when category clicked
-            onClick={() => {
-              setActiveCategory(dispatch, category.title)
-            }}
-          >
-            {/* change button display from 'tea' to 'all' */}
-            {category.title === "tea" ? "all" : category.title}
-          </StyledButton>
+          <Link to={`/products/${category.slug}`} key={categoryIndex}>
+            <StyledButton
+              key={categoryIndex}
+              className={
+                category.title === state.activeCategory ? "active" : ""
+              }
+              // set active category when category clicked
+              onClick={() => {
+                setActiveCategory(dispatch, category.title)
+              }}
+            >
+              {/* change button display from 'tea' to 'all' */}
+              {category.title === "tea" ? "all" : category.title}
+            </StyledButton>
+          </Link>
         )
       )
     })
@@ -47,8 +52,10 @@ const ProductsHeader = props => {
     .filter(elem => elem !== false)
     // sort array alphabetically
     .sort((a, b) => {
-      if (a.props.children < b.props.children) return -1
-      if (a.props.children > b.props.children) return 1
+      if (a.props.children.props.children < b.props.children.props.children)
+        return -1
+      if (a.props.children.props.children > b.props.children.props.children)
+        return 1
       return 0
     })
 

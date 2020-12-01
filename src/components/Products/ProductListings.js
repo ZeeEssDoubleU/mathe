@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import styled from "styled-components"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
@@ -35,15 +36,17 @@ const ProductsBody = props => {
 
         // DISPLAY category tags for each product
         return (
-          <StyledButton
-            key={tagIndex}
-            onClick={() => {
-              // set active category when tag clicked
-              setActiveCategory(dispatch, tag.title)
-            }}
-          >
-            {tag.title}
-          </StyledButton>
+          <Link to={`/products/${tag.slug}`} key={tagIndex}>
+            <StyledButton
+              key={tagIndex}
+              onClick={() => {
+                // set active category when tag clicked
+                setActiveCategory(dispatch, tag.title)
+              }}
+            >
+              {tag.title}
+            </StyledButton>
+          </Link>
         )
       })
 
