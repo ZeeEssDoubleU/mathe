@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react"
+import React, { useCallback, useState, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -10,13 +10,27 @@ import { useStore } from "../../store/useStore"
 // ************
 
 const Background = props => {
-  const { state } = useStore()
-  const [categoryIndex, setCategoryIndex] = useState(0)
-  const [backgroundIndex, setBackgroundIndex] = useState(0)
-  const [initialImageLoaded, setInitialImageLoaded] = useState(false)
-  // query called below
   const { allDatoCmsProductImage } = useStaticQuery(query)
   const categories = allDatoCmsProductImage.edges.map(edge => edge.node)
+
+  const { state } = useStore()
+  const [categoryIndex, setCategoryIndex] = useState(activeCategoryIndex())
+  const [backgroundIndex, setBackgroundIndex] = useState(0)
+  const [initialImageLoaded, setInitialImageLoaded] = useState(false)
+
+  // match activeCategoryIndex to product image category
+  function activeCategoryIndex() {
+    return categories.findIndex(item =>
+      item.title
+        .toLowerCase()
+        .includes(
+          !state.pathname_current.includes("/products") ||
+            state.activeCategory === "tea"
+            ? "all tea"
+            : state.activeCategory
+        )
+    )
+  }
 
   // data structure
   // [category] = [img][img][img]
@@ -82,32 +96,21 @@ const Background = props => {
 
   // effect to set background category
   // effect resets cycle upon changing activeCategory
-  useEffect(() => {
-    // match categoryIndex to product image category
-    const categoryIndex = categories.findIndex(item =>
-      item.title
-        .toLowerCase()
-        .includes(
-          !state.pathname_current.includes("/products") ||
-            state.activeCategory === "tea"
-            ? "all tea"
-            : state.activeCategory
-        )
-    )
+  useLayoutEffect(() => {
+    const activeGalleryLength =
+      categories[activeCategoryIndex()].imageGallery.length
 
-    const activeGalleryLength = categories[categoryIndex].imageGallery.length
-
-    // set categoryIndex on page or activeCategory change
-    setCategoryIndex(categoryIndex)
+    // set activeCategoryIndex() on page or activeCategory change
+    setCategoryIndex(activeCategoryIndex())
 
     // set backgroundIndex if greater than or equal to new activeGalleryLength
     // [x, y, z].length === 3.  Index of 3 does not exist.
     if (backgroundIndex >= activeGalleryLength) {
-      cycleBg(activeGalleryLength, categoryIndex)
+      cycleBg(activeGalleryLength, activeCategoryIndex())
     }
     // set cycle interval
     const backgroundInterval = setInterval(
-      () => cycleBg(activeGalleryLength, categoryIndex),
+      () => cycleBg(activeGalleryLength, activeCategoryIndex()),
       8000
     )
 
