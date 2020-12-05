@@ -13,6 +13,7 @@ const ProductsBody = props => {
     // filter array on products that only match activeCategory
     .filter(edge => {
       const product = edge.node
+
       const categories = product.categories
       const categoryMap = categories.map(category =>
         category.title.toLowerCase()
@@ -31,6 +32,7 @@ const ProductsBody = props => {
       const product = edge.node
       // turn categories into a tag map to be displayed with products
       const tagArray = product.categories
+
       const tagMap = tagArray.map((tag, tagIndex) => {
         tag.title = tag.title.toLowerCase()
 

@@ -31,26 +31,27 @@ const NavMenu = props => {
     navElem.style.transform = `translateX(${moveX}vw)`
   }
 
-  // function to cycle through text
-  const cycleText = useCallback(() => {
-    setTextIndex((textIndex + 1) % textOptions.length)
-  }, [textIndex, textOptions.length])
-  // function to turn off text opacity
-  const opacityOff = elem => {
-    elem.style.opacity = 0
-  }
+  // ! disabled
+  // // function to cycle through text
+  // const cycleText = useCallback(() => {
+  //   setTextIndex((textIndex + 1) % textOptions.length)
+  // }, [textIndex, textOptions.length])
+  // // function to turn off text opacity
+  // const opacityOff = elem => {
+  //   elem.style.opacity = 0
+  // }
 
-  // effect to cycle product text and fade in/out opacity
-  useEffect(() => {
-    // set opacity 1
-    cycleRef.current.style.opacity = 1
-    // set cycle interval
-    const cycleInterval = 5000
-    // cycle product text
-    setTimeout(() => cycleText(cycleInterval), cycleInterval)
-    // set opacity 0
-    setTimeout(() => opacityOff(cycleRef.current), cycleInterval - 500)
-  }, [textIndex, cycleText])
+  // // effect to cycle product text and fade in/out opacity
+  // useEffect(() => {
+  //   // set opacity 1
+  //   cycleRef.current.style.opacity = 1
+  //   // set cycle interval
+  //   const cycleInterval = 5000
+  //   // cycle product text
+  //   setTimeout(() => cycleText(cycleInterval), cycleInterval)
+  //   // set opacity 0
+  //   setTimeout(() => opacityOff(cycleRef.current), cycleInterval - 500)
+  // }, [textIndex, cycleText])
 
   return (
     <Container ref={navRef} onMouseMove={handleMouseMove}>
@@ -77,9 +78,11 @@ const NavMenu = props => {
       >
         <div className="nav-item">
           <h1 ref={cycleRef} className="cycle">
-            {textOptions[textIndex]}
+            Shop
+            {/* // ! disabled
+            {textOptions[textIndex]} */}
           </h1>
-          <h5>Our selections</h5>
+          <h5>Premium teas + yerba mate</h5>
         </div>
       </Link>
       <Link

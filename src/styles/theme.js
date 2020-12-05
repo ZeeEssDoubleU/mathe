@@ -1,28 +1,28 @@
 export const theme = {
-	// general
-	appGreen: "hsla(86, 48%, 48%, 1.0)",
-	appGreenPartial: "86, 48%, 48%",
-	shadow: "black 0 2px",
-	background: "hsla(0, 0%, 0%, 0.85)",
+  // general
+  appGreen: "hsla(86, 48%, 48%, 1.0)",
+  appGreenPartial: "86, 48%, 48%",
+  shadow: "black 0 2px",
+  background: "hsla(0, 0%, 0%, 0.85)",
 
-	// font families
-	fontMain: "Montserrat, Avenir, Arial, sans-serif",
-	fontMainWeight: "200",
-	fontItalic: "Merriweather, Garamond, serif",
+  // font families
+  fontMain: "Montserrat, Avenir, Arial, sans-serif",
+  fontMainWeight: 200,
+  fontItalic: "Merriweather, Garamond, serif",
 
-	// media queries (px) - width
-	mobile: "320",
-	tablet: "768",
-	desktop: "1024",
-	wide: "1216",
-	fullhd: "1408",
+  // media queries (px) - width
+  mobile: 320,
+  tablet: 768,
+  desktop: 1024,
+  wide: 1216,
+  fullhd: 1408,
 
-	// media queries (px) - height
-	short: "480",
-	med: "720",
-	tall: "960",
-	giant: "1080",
-};
+  // media queries (px) - height
+  short: 480,
+  med: 720,
+  tall: 960,
+  giant: 1080,
+}
 
 // // Spacing and sizing guide
 // 4px

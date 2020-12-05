@@ -29,7 +29,8 @@ export default function ScrollToTop({ show, scrollElem, ...props }) {
 // ************
 
 const Container = styled(CategoryButton)`
-  position: sticky;
+  position: fixed;
+  z-index: 99;
   bottom: 2rem;
   left: calc(100% - 3.5rem - 4rem);
   height: 3.5rem;

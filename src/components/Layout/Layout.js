@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useLayoutEffect } from "react"
 import styled from "styled-components"
+import GlobalStyle from "../../styles/global"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
@@ -47,6 +48,7 @@ const Layout = ({ children, location }) => {
 
   return (
     <Container>
+      <GlobalStyle />
       <Background />
       <PageTransition className="page-transition">
         <Nav />
