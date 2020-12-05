@@ -31,8 +31,8 @@ export default function ScrollToTop({ show, scrollElem, ...props }) {
 const Container = styled(CategoryButton)`
   position: fixed;
   z-index: 99;
-  bottom: 2rem;
-  left: calc(100% - 3.5rem - 4rem);
+  bottom: calc(-100% + 1.5rem);
+  right: 1.5rem;
   height: 3.5rem;
   width: 3.5rem;
   padding: 0.75rem;
