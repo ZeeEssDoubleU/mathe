@@ -1,4 +1,4 @@
-import { gsap, TimelineLite } from "gsap"
+import { gsap } from "gsap"
 import { useStore } from "../store/useStore"
 import { useLayoutEffect, useRef } from "react"
 
@@ -31,11 +31,12 @@ export const anim_hide = (targetElem, duration) => {
   gsap.to(targetElem, { autoAlpha: 0, duration })
 }
 
-export const nav_fadeIn = () => {
+export const nav_fadeIn = () =>
   gsap.from([".nav-item"], {
     opacity: 0,
     stagger: 0.3,
     duration: 1.5,
     delay: 0.3,
   })
-}
+
+export const scroll_top = targetElem => gsap.to(targetElem, { scrollTo: 0 })

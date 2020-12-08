@@ -41,6 +41,7 @@
 		"react-helmet": "^6.1.0",
 		"react-icons": "^4.1.0",
 		"react-inlinesvg": "^2.1.1",
+		"react-scroll": "^1.8.1",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {

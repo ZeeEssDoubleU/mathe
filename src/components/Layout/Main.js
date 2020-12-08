@@ -19,7 +19,7 @@ const Main = props => {
   return (
     <Container
       ref={mainRef}
-      className="mainScroll"
+      id="mainScroll"
       onScroll={() =>
         // show scroll to top button if scrolled below hero section
         showScrollToTop_set(
@@ -54,4 +54,5 @@ const Container = styled.main`
   width: 100%;
 
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 `

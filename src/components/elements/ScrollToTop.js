@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import { gsap } from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 // import components
 import Icon from "../Icons/Icon"
 // import styles
@@ -12,14 +14,11 @@ import { scroll_top } from "../../utils/animations"
 // ************
 
 export default function ScrollToTop({ show, scrollElem, ...props }) {
+  gsap.registerPlugin(ScrollToPlugin)
+
   return (
     <Container {...{ show }}>
-      <Icon
-        name="up-chevron"
-        onClick={() =>
-          scrollElem.current.scroll({ top: 0, left: 0, behavior: "smooth" })
-        }
-      />
+      <Icon name="up-chevron" onClick={() => scroll_top(scrollElem.current)} />
     </Container>
   )
 }
