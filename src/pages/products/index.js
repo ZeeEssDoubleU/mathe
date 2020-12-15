@@ -84,16 +84,9 @@ const query = graphql`
             description
           }
           categories {
+            slug
             title
           }
-          # images {
-          # 	title
-          # 	alt
-          # 	fluid(maxWidth: 1400) {
-          # 		...GatsbyDatoCmsFluid
-          # 	}
-          # }
-          # ingredients
         }
       }
     }
