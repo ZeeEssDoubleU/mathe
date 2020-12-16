@@ -4,6 +4,7 @@ import GlobalStyle from "../../styles/global"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
+import CartTab from "../Cart/CartTab"
 // impprt store
 import {
   useStore,
@@ -55,6 +56,7 @@ const Layout = ({ children, location }) => {
         {/* children are page elements */}
         {children}
       </PageTransition>
+      <CartTab />
     </Container>
   )
 }

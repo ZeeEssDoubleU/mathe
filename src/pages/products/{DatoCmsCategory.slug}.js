@@ -76,17 +76,22 @@ export const query = graphql`
     products: allDatoCmsProduct {
       edges {
         node {
+          id
+          active
           title
           subtitle
           description
-          grade {
-            title
-            description
-          }
           categories {
             slug
             title
           }
+          price
+          weight {
+            weight
+            amount
+            units
+          }
+          slug
         }
       }
     }

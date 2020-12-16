@@ -13,12 +13,12 @@ import { scroll_top } from "../../utils/animations"
 // component
 // ************
 
-export default function ScrollToTop({ show, scrollElem, ...props }) {
+export default function CartTab({ show, scrollElem, ...props }) {
   gsap.registerPlugin(ScrollToPlugin)
 
   return (
-    <Container {...{ show }}>
-      <Icon name="up-chevron" onClick={() => scroll_top(scrollElem.current)} />
+    <Container className="snipcart-checkout">
+      <Icon name="cart-zoom" />
     </Container>
   )
 }
@@ -30,22 +30,14 @@ export default function ScrollToTop({ show, scrollElem, ...props }) {
 const Container = styled(CategoryButton)`
   position: fixed;
   z-index: 99;
-  /* TODO: eventually change this to be located on layout component */
-  bottom: calc(-100% + 1.5rem);
-  right: 1.5rem;
+  top: 15%;
+  right: -0.5rem;
   height: 3.5rem;
   width: 3.5rem;
-  padding: 0.75rem;
-  border-radius: 50%;
+  padding: calc(0.6rem + 0.25rem);
+  border-radius: 1em 0 0 1em;
   background: ${props => props.theme.background};
   fill: ${props => props.theme.appGreen};
-  visibility: ${props => (props.show ? "visible" : "hidden")};
-
-  @media (max-width: ${props => props.theme.tablet}px) {
-    left: calc(100% - 3rem - 2rem);
-    height: 3rem;
-    width: 3rem;
-  }
 
   &:hover {
     background: hsla(${props => props.theme.appGreenPartial}, 0.5);

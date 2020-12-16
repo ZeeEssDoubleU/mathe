@@ -5,6 +5,8 @@ import SVG from "react-inlinesvg"
 import back from "./back.svg"
 import backArrow from "./left-arrow.svg"
 import backArrowFull from "./left.svg"
+import cart from "./cart-checkered.svg"
+import cartZoom from "./cart-zoom.svg"
 import email from "./envelope-neat.svg"
 import instagram from "./instagram-simple.svg"
 import facebook from "./facebook.svg"
@@ -28,6 +30,10 @@ const Icon = props => {
       return <SVG src={backArrow} {...props} />
     case "back-arrow-full":
       return <SVG src={backArrowFull} {...props} />
+    case "cart":
+      return <SVG src={cart} {...props} />
+    case "cart-zoom":
+      return <SVG src={cartZoom} {...props} />
     case "email":
       return <SVG src={email} {...props} />
     case "facebook":

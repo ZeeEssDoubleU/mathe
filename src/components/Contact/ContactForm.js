@@ -110,7 +110,7 @@ const Form = styled.form`
 
     width: 64px;
     height: 64px;
-    border: 2px solid ${props => props.theme.appGreen};
+    border: 1px solid ${props => props.theme.appGreen};
     margin: 16px auto;
 
     background: none;
@@ -120,12 +120,14 @@ const Form = styled.form`
       height: 30px;
       width: 30px;
       margin: 0 auto;
-
       fill: white;
     }
     &:hover {
       cursor: pointer;
-      background: ${props => props.theme.appGreen};
+      background: hsla(${props => props.theme.appGreenPartial}, 0.5);
+      svg {
+        fill: white;
+      }
     }
   }
 `

@@ -20,7 +20,9 @@ const ProductsBody = props => {
       )
 
       // filter on active category
-      return categoryMap.includes(state.activeCategory)
+      return (
+        product.active === true && categoryMap.includes(state.activeCategory)
+      )
     })
     // sort array alphabetically
     .sort((a, b) => {
@@ -55,10 +57,29 @@ const ProductsBody = props => {
       // DISPLAY each product
       return (
         <Listing key={productIndex}>
-          <TitleBlock>
-            <Title>{product.title}</Title>
-            {product.subtitle && <SubTitle>{product.subtitle}</SubTitle>}
-          </TitleBlock>
+          <HeaderBlock>
+            <TitleBlock>
+              <Title>{product.title}</Title>
+              {product.subtitle && <SubTitle>{product.subtitle}</SubTitle>}
+            </TitleBlock>
+            <BuyBlock>
+              <Price>
+                ${product.price.toFixed(2)} / {product.weight.amount}{" "}
+                {product.weight.units}
+              </Price>
+              <BuyButton
+                className="snipcart-add-item"
+                data-item-id={`${product.slug}`}
+                data-item-name={product.title}
+                data-item-desc={product.description}
+                data-item-price={product.price}
+                data-item-size={`${product.amount} + ${product.units}`}
+                data-item-url={`/products/all-tea`}
+              >
+                Add to Cart
+              </BuyButton>
+            </BuyBlock>
+          </HeaderBlock>
           <Description>{product.description}</Description>
           <Tags>{tagMap}</Tags>
         </Listing>
@@ -82,11 +103,42 @@ export default ProductsBody
 // styles
 // ************
 
+const BuyBlock = styled.div`
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-columns: auto auto;
+  margin: 12px 0;
+`
+const BuyButton = styled(CategoryButton)`
+  border: 1px solid ${props => props.theme.appGreen};
+  color: white;
+  &:hover {
+    background: hsla(${props => props.theme.appGreenPartial}, 0.5);
+    border: 1px solid ${props => props.theme.appGreen};
+    color: white;
+    cursor: pointer;
+  }
+  &.active {
+    background: none;
+    border: 1px solid white;
+    color: white;
+  }
+`
 const Description = styled.p`
   margin-bottom: 12px;
 `
+const HeaderBlock = styled.div`
+  display: grid;
+  grid-template-rows: auto auto;
+`
 const Listing = styled.div`
   margin: 64px 0;
+`
+const Price = styled.p`
+  /* color: ${props => props.theme.appGreen}; */
+  font-size: 14px;
+  font-weight: 500;
 `
 const ProductCount = styled.p`
   margin: 48px 0;
@@ -109,9 +161,7 @@ const StyledButton = styled(CategoryButton)`
 const Tags = styled(CategoryNav)`
   justify-content: flex-start;
 `
-const TitleBlock = styled.div`
-  margin-bottom: 12px;
-`
+const TitleBlock = styled.div``
 const Title = styled.h4`
   font-size: 20px;
   font-weight: 300;

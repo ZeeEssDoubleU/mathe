@@ -69,7 +69,7 @@ const NavMenu = props => {
         </div>
       </Link>
       <Link
-        to="/products"
+        to="/products/yerba-mate"
         className="nav-link"
         onClick={() => {
           transitionTriggered(dispatch, true)

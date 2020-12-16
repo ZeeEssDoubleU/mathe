@@ -2,6 +2,7 @@ export const theme = {
   // general
   appGreen: "hsla(86, 48%, 48%, 1.0)",
   appGreenPartial: "86, 48%, 48%",
+  appGold: "hsla(43, 47%, 35%, 1.0)",
   shadow: "black 0 2px",
   background: "hsla(0, 0%, 0%, 0.85)",
 
