@@ -12,4 +12,9 @@ export default createGlobalStyle`
 
          overflow: hidden;
       }
+
+      // ************
+      // snipcart
+      // ************ 
+      
 `

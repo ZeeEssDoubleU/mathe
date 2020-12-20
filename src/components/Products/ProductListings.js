@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import store
 import { useStore, setActiveCategory } from "../../store/useStore"
+// import utils
+import { convertGrams } from "../../utils/convertGrams"
 
 const ProductsBody = props => {
   const { state, dispatch } = useStore()
@@ -69,12 +71,18 @@ const ProductsBody = props => {
               </Price>
               <BuyButton
                 className="snipcart-add-item"
+                // required
                 data-item-id={`${product.slug}`}
-                data-item-name={product.title}
-                data-item-desc={product.description}
                 data-item-price={product.price}
-                data-item-size={`${product.amount} + ${product.units}`}
                 data-item-url={`/products/all-tea`}
+                // optional
+                data-item-name={product.title}
+                data-item-description={product.description}
+                data-item-size={`${product.weight.amount} + ${product.weight.units}`}
+                data-item-weight={convertGrams(
+                  product.weight.amount,
+                  product.weight.units
+                )}
               >
                 Add to Cart
               </BuyButton>

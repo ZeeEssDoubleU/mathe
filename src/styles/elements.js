@@ -65,4 +65,26 @@ export const MarginAuto = styled.div`
   margin: 0 auto;
   width: fit-content;
 `
+export const ModalButton = styled(CategoryButton)`
+  position: fixed;
+  z-index: 99;
+  right: 0;
+  height: 3.5rem;
+  width: 3.5rem;
+  padding: 0.75rem;
+  border-right: 0;
+  border-radius: 1em 0 0 1em;
+  margin-right: 0;
+  background: ${props => props.theme.background};
+  fill: ${props => props.theme.appGreen};
+
+  &:hover {
+    background: hsla(${props => props.theme.appGreenPartial}, 0.5);
+    border: 1px solid ${props => props.theme.appGreen};
+    border-right: 0;
+    color: white;
+    fill: white;
+    cursor: pointer;
+  }
+`
 export const Section = styled.section``
