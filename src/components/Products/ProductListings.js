@@ -74,7 +74,7 @@ const ProductsBody = props => {
                 // required
                 data-item-id={`${product.slug}`}
                 data-item-price={product.price}
-                data-item-url={`/products/all-tea`}
+                data-item-url={"/products/all-tea"}
                 // optional
                 data-item-name={product.title}
                 data-item-description={product.description}

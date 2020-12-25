@@ -10,6 +10,8 @@ export const theme = {
   fontMain: "Montserrat, Avenir, Arial, sans-serif",
   fontMainWeight: 200,
   fontItalic: "Merriweather, Garamond, serif",
+  fontCartWeight: 300,
+  fontCartLinkWeight: 400,
 
   // media queries (px) - width
   mobile: 320,
