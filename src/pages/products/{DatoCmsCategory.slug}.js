@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useLayoutEffect } from "react"
 import { graphql } from "gatsby"
 // import components
 import ProductCategories from "../../components/Products/ProductCategories"
@@ -6,13 +6,26 @@ import ProductListings from "../../components/Products/ProductListings"
 import Main from "../../components/Layout/Main"
 // import styles
 import { Divider, Section } from "../../styles/elements"
+import { setActiveCategory } from "../../store/useStore"
+// import store
+import { useStore } from "../../store/useStore"
 
 // ************
 // component
 // ************
 
-const Products = ({ data }) => {
+const Products = ({ path, data }) => {
+  const { dispatch } = useStore()
   const { page, categories, products } = data
+
+  // TODO: fix to make setActiveCategory change before page loads
+  useLayoutEffect(() => {
+    setActiveCategory(
+      dispatch,
+      categories.edges.filter(category => path.includes(category.node.slug))[0]
+        .node.title
+    )
+  }, [])
 
   const contentSection = (
     <>
