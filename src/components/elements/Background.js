@@ -9,7 +9,7 @@ import { useStore } from "../../store/useStore"
 // component
 // ************
 
-const Background = props => {
+const Background = ({ path }) => {
   const { allDatoCmsProductImage } = useStaticQuery(query)
   const categories = allDatoCmsProductImage.edges.map(edge => edge.node)
 
@@ -24,8 +24,7 @@ const Background = props => {
       item.title
         .toLowerCase()
         .includes(
-          !state.pathname_current.includes("/products") ||
-            state.activeCategory === "tea"
+          !path.includes("/products") || state.activeCategory === "tea"
             ? "all tea"
             : state.activeCategory
         )
@@ -116,13 +115,7 @@ const Background = props => {
 
     // clear interval upon changing product category
     return () => clearInterval(backgroundInterval)
-  }, [
-    state.pathname_current,
-    state.activeCategory,
-    backgroundIndex,
-    cycleBg,
-    categories,
-  ])
+  }, [path, state.activeCategory, backgroundIndex, cycleBg, categories])
 
   return <Images>{backgroundMap}</Images>
 }

@@ -1,18 +1,12 @@
 import React, { useEffect, useRef, useLayoutEffect } from "react"
 // import styles
 import styled from "styled-components"
-import GlobalStyle from "../../styles/global"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
 import CartTab from "../Cart/CartTab"
 // impprt store
-import {
-  useStore,
-  savePrevPath,
-  saveCurrentPath,
-  transitionTriggered,
-} from "../../store/useStore"
+import { useStore, transitionTriggered } from "../../store/useStore"
 // import utils
 import * as anim from "../../utils/animations"
 import { useWindowResize } from "../../utils/useWindowResize"
@@ -21,37 +15,27 @@ import { useWindowResize } from "../../utils/useWindowResize"
 // component
 // ************
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, path }) => {
   const { state, dispatch } = useStore()
   const didMountRef = useRef(false)
-  const { pathname } = location
-
   const windowSize = useWindowResize()
 
-  useEffect(() => {
-    saveCurrentPath(dispatch, pathname)
-    return () => {
-      savePrevPath(dispatch, pathname)
-    }
-  }, [dispatch, pathname])
-
-  // effect sets nav (actually whole app) position when mounted and when pathname changes
+  // effect sets nav (actually whole app) position when mounted and when path changes
   useLayoutEffect(() => {
     // check if transition was triggered from button press (Link, BackButton, etc)
     // if not, set page-transition elem position
     if (state.transition_triggered_page === false) {
-      pathname === "/"
+      path === "/"
         ? anim.enter_top_set(".page-transition")
         : anim.exit_top_set(".page-transition")
     } else {
       transitionTriggered(dispatch, false)
     }
-  }, [pathname])
+  }, [path])
 
   return (
     <Container>
-      <GlobalStyle />
-      <Background />
+      <Background path={path} />
       <PageTransition className="page-transition">
         <Nav />
         {/* children are page elements */}

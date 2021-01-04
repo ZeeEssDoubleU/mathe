@@ -6,26 +6,16 @@ import ProductListings from "../../components/Products/ProductListings"
 import Main from "../../components/Layout/Main"
 // import styles
 import { Divider, Section } from "../../styles/elements"
-import { setActiveCategory } from "../../store/useStore"
 // import store
-import { useStore } from "../../store/useStore"
+import { useStore, setActiveCategory } from "../../store/useStore"
 
 // ************
 // component
 // ************
 
-const Products = ({ path, data }) => {
+const Products = ({ data }) => {
   const { dispatch } = useStore()
   const { page, categories, products } = data
-
-  // TODO: fix to make setActiveCategory change before page loads
-  useLayoutEffect(() => {
-    setActiveCategory(
-      dispatch,
-      categories.edges.filter(category => path.includes(category.node.slug))[0]
-        .node.title
-    )
-  }, [])
 
   const contentSection = (
     <>
@@ -57,7 +47,7 @@ export default Products
 // ************
 
 export const query = graphql`
-  query {
+  {
     page: datoCmsProductsPage {
       header
       subHeader

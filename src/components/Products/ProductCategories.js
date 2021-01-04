@@ -36,10 +36,6 @@ const ProductsHeader = props => {
               className={
                 category.title === state.activeCategory ? "active" : ""
               }
-              // set active category when category clicked
-              onClick={() => {
-                setActiveCategory(dispatch, category.title)
-              }}
             >
               {/* change button display from 'tea' to 'all' */}
               {category.title === "tea" ? "all" : category.title}
