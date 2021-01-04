@@ -41,12 +41,13 @@ const reducer = (state, action) => {
 
 // if not a product page, active category equals yerba mate
 // otherwise, active category equal product page category
-const activeCategory = (categories, path) =>
-  !path.includes("/products")
+const activeCategory = (categories, path) => {
+  return !path.includes("/products")
     ? "yerba mate"
     : categories.edges
         .filter(category => path.includes(category.node.slug))[0]
         .node.title.toLowerCase()
+}
 
 const initState = (categories, path) => {
   return typeof window !== "undefined"
@@ -64,7 +65,7 @@ const initState = (categories, path) => {
 // ************
 
 // context that stores and shares data
-const StoreContext = createContext()
+const StoreContext = createContext(initState)
 
 export const StoreProvider = ({ children, path }) => {
   const { categories } = useStaticQuery(query)

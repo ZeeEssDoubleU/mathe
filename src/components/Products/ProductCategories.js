@@ -34,7 +34,7 @@ const ProductsHeader = props => {
             <StyledButton
               key={categoryIndex}
               className={
-                category.title === state.activeCategory ? "active" : ""
+                category.title === state?.activeCategory ? "active" : ""
               }
             >
               {/* change button display from 'tea' to 'all' */}
@@ -58,7 +58,9 @@ const ProductsHeader = props => {
   // category filters
   const categoryFilter = props.categories.edges.filter(edge => {
     const category = edge.node
-    return state.activeCategory?.toLowerCase() === category.title?.toLowerCase()
+    return (
+      state?.activeCategory?.toLowerCase() === category.title?.toLowerCase()
+    )
   })
   const categoryDisplayName = categoryFilter.map(edge => {
     const category = edge.node

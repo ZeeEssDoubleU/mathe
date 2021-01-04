@@ -24,9 +24,9 @@ const Background = ({ path }) => {
       item.title
         .toLowerCase()
         .includes(
-          !path.includes("/products") || state.activeCategory === "tea"
+          !path.includes("/products") || state?.activeCategory === "tea"
             ? "all tea"
-            : state.activeCategory
+            : state?.activeCategory
         )
     )
   }
@@ -115,7 +115,7 @@ const Background = ({ path }) => {
 
     // clear interval upon changing product category
     return () => clearInterval(backgroundInterval)
-  }, [path, state.activeCategory, backgroundIndex, cycleBg, categories])
+  }, [path, state?.activeCategory, backgroundIndex, cycleBg, categories])
 
   return <Images>{backgroundMap}</Images>
 }

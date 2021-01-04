@@ -23,7 +23,7 @@ const ProductsBody = props => {
 
       // filter on active category
       return (
-        product.active === true && categoryMap.includes(state.activeCategory)
+        product.active === true && categoryMap.includes(state?.activeCategory)
       )
     })
     // sort array alphabetically
