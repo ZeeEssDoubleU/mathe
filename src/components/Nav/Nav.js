@@ -29,6 +29,8 @@ const query = graphql`
     datoCmsLandingPage {
       logo {
         url
+        title
+        url
       }
     }
   }
