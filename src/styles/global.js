@@ -37,14 +37,9 @@ export default createGlobalStyle`
             font-weight: ${props => props.theme.fontCartLinkWeight} !important;
       }
 
-      .snipcart-modal__close-icon path,
-      .snipcart-cart-header__icon path {
-            fill: ${props => props.theme.appGreen} !important
-      }
-
-      .snipcart-item-quantity__button {
-            &:active path, 
-            &:focus path {
+      .snipcart-cart-header .snipcart__icon path,
+      .snipcart-item-quantity__button:active path, 
+      .snipcart-item-quantity__button:focus path {
                   fill: ${props => props.theme.appGreen} !important;
             }
       }
