@@ -25,18 +25,18 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
   ]
 
   const bodyComponents = [
-    <script
-      key="snipcart_js"
-      src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
-      async
-    />,
     <div
+      hidden
       key="snipcart_div"
       id="snipcart"
       data-config-add-product-behavior="none"
       data-config-modal-style="side"
       data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
-      hidden
+    />,
+    <script
+      async
+      key="snipcart_js"
+      src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
     />,
   ]
 

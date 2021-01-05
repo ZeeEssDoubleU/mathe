@@ -27,6 +27,10 @@ export default function CartTab({ show, scrollElem, ...props }) {
 // ************
 
 const Container = styled(ModalButton)`
-  top: 15%;
+  top: 1.5rem;
+
+  @media (min-width: ${props => props.theme.tablet + "px"}) {
+    top: 7.5%;
+  }
 `
 const ItemCount = styled.span``
