@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import dompurify from "dompurify"
@@ -14,6 +14,8 @@ import { useStore, setActiveCategory } from "../../store/useStore"
 
 const ProductsHeader = props => {
   const { state, dispatch } = useStore()
+  // toggle button text
+  const [expand, expand_set] = useState(false)
 
   // category array for filtering products
   const categoryArray = props.categories.edges
@@ -93,12 +95,16 @@ const ProductsHeader = props => {
           <h5>{activeCategorySubTitle}</h5>
         </Header>
         <Body
+          expand={expand}
           dangerouslySetInnerHTML={{
             // TODO: Figure out why dompurify not working with netlify
             // __html: dompurify.sanitize(activeCategoryDescription),
             __html: activeCategoryDescription,
           }}
         />
+        <Expand onClick={() => expand_set(!expand)}>
+          {expand === true ? "show less" : "show more"}
+        </Expand>
       </ActiveCategory>
     </>
   )
@@ -113,13 +119,32 @@ export default ProductsHeader
 const ActiveCategory = styled.div`
   margin: 48px 0;
 `
-const Header = styled(ContentHeader)`
-  text-align: left;
-`
 const Body = styled(ContentBody)`
+  max-height: ${props => (props.expand === false ? "9em" : "100%")};
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: height 0.2s;
+
+  /* allows body to collapse with ellipsis at line break */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${props => (props.expand === false ? 6 : null)};
+
   p {
     margin-bottom: 1.5em;
   }
+  p:last-child {
+    margin-bottom: 0;
+  }
+`
+const Expand = styled(CategoryButton)`
+  margin: 18px 0 0 0;
+  padding: 0;
+  font-size: 12px;
+`
+const Header = styled(ContentHeader)`
+  text-align: left;
 `
 const StyledButton = styled(CategoryButton)`
   &:hover {
