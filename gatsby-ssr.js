@@ -34,7 +34,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
     />,
     <script
-      async
+      defer
       key="snipcart_js"
       src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
     />,
