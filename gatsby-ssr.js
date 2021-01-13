@@ -33,11 +33,11 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       data-config-modal-style="side"
       data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
     />,
-    <script
-      defer
-      key="snipcart_js"
-      src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
-    />,
+    // <script
+    //   defer
+    //   key="snipcart_js"
+    //   src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
+    // />,
   ]
 
   setHeadComponents(headComponents)
