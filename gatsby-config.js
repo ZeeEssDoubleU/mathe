@@ -39,6 +39,9 @@ module.exports = {
       "yerba mate, tea, premium tea, premium yerba mate, healthy drink, antioxidant, organic, organic yerba mate",
     lang: "en",
   },
+  flags: {
+    DEV_SSR: false,
+  },
   plugins: [
     "gatsby-plugin-sharp",
     "gatsby-plugin-react-helmet",
