@@ -6,17 +6,17 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "gatsby build",
-		"dev": "gatsby develop -o",
-		"dev-m": "gatsby develop -o -H $HOSTNAME -p 8000",
-		"format": "prettier --write src/**/*.{js,jsx}",
-		"start": "npm run develop",
+		"dev": "concurrently 'yarn run start -o' 'yarn run test'",
+		"dev-m": "concurrently 'yarn run start -o -H $HOSTNAME -p 8000' 'yarn run test'",
+		"format": "prettier --write src/**/*.{js, jsx}",
+		"start": "gatsby develop",
 		"serve": "gatsby serve -o",
 		"serve-m": "gatsby serve -o -H $HOSTNAME -p 9000",
-		"test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+		"test": "yarn run type-check",
+		"type-check": "tsc --watch"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
-		"dompurify": "^2.2.6",
 		"gatsby": "^2.29.3",
 		"gatsby-image": "^2.8.0",
 		"gatsby-plugin-google-analytics": "^2.8.0",
@@ -34,7 +34,7 @@
 		"gatsby-transformer-json": "^2.8.0",
 		"gatsby-transformer-sharp": "^2.9.0",
 		"gsap": "^3.5.1",
-		"html-react-parser": "^0.14.3",
+		"html-react-parser": "^1.2.4",
 		"intersection-observer": "^0.11.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
@@ -42,11 +42,20 @@
 		"react-icons": "^4.1.0",
 		"react-inlinesvg": "^2.2.2",
 		"react-scroll": "^1.8.1",
+		"sanitize-html": "^2.3.2",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {
+		"@babel/preset-typescript": "^7.12.13",
+		"@types/node": "^14.14.24",
+		"@types/react": "^17.0.1",
+		"@types/react-dom": "^17.0.0",
+		"@types/react-helmet": "^6.1.0",
+		"@types/styled-components": "^5.1.7",
 		"babel-plugin-styled-components": "^1.12.0",
-		"dotenv": "^8.2.0"
+		"concurrently": "^5.3.0",
+		"dotenv": "^8.2.0",
+		"typescript": "^4.1.3"
 	},
 	"repository": {
 		"type": "git",

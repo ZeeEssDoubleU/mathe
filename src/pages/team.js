@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-import dompurify from "dompurify"
+import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
 // import styles
@@ -32,9 +32,7 @@ const Team = () => {
         <h4>{member.name}</h4>
         <p
           dangerouslySetInnerHTML={{
-            // TODO: Figure out why dompurify not working with netlify
-            // __html: dompurify.sanitize(member.bio),
-            __html: member.bio,
+            __html: sanitizeHtml(member.bio),
           }}
         />
         <Divider />

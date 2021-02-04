@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import dompurify from "dompurify"
+import sanitizeHtml from "sanitize-html"
 // import styles
 import {
   CategoryButton,
@@ -97,9 +97,7 @@ const ProductsHeader = props => {
         <Body
           expand={expand}
           dangerouslySetInnerHTML={{
-            // TODO: Figure out why dompurify not working with netlify
-            // __html: dompurify.sanitize(activeCategoryDescription),
-            __html: activeCategoryDescription,
+            __html: sanitizeHtml(activeCategoryDescription),
           }}
         />
         <Expand onClick={() => expand_set(!expand)}>

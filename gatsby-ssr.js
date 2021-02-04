@@ -20,7 +20,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     <link
       key="snipcart_style"
       rel="stylesheet"
-      href="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.css"
+      href="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.css"
     />,
   ]
 
@@ -28,7 +28,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     <script
       async
       key="snipcart_js"
-      src="https://cdn.snipcart.com/themes/v3.0.27/default/snipcart.js"
+      src="https://cdn.snipcart.com/themes/v3.0.28/default/snipcart.js"
     />,
     <div
       hidden
