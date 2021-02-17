@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 // import components
 import ProductCategories from "../../components/Products/ProductCategories"
@@ -6,15 +6,12 @@ import ProductListings from "../../components/Products/ProductListings"
 import Main from "../../components/Layout/Main"
 // import styles
 import { Divider, Section } from "../../styles/elements"
-// import store
-import { useStore, setActiveCategory } from "../../store/useStore"
 
 // ************
 // component
 // ************
 
 const Products = ({ data }) => {
-  const { dispatch } = useStore()
   const { page, categories, products } = data
 
   const contentSection = (

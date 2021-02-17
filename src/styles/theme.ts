@@ -1,3 +1,12 @@
+import "styled-components"
+
+// merge theme (below) to DefaultTheme
+declare module "styled-components" {
+  type Theme = typeof theme
+  export interface DefaultTheme extends Theme {}
+}
+
+// declare theme
 export const theme = {
   // general
   appGreen: "hsla(86, 48%, 48%, 1.0)",

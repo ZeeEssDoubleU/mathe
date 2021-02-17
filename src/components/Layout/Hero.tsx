@@ -1,32 +1,41 @@
-import React, { forwardRef, memo, useRef } from "react"
+import React, { forwardRef, memo, ReactChild, ReactElement } from "react"
 import styled from "styled-components"
 import SVG from "react-inlinesvg"
 // import components
 import BackButton from "../elements/BackButton"
-// import styles
+
+// ************
+// types
+// ************
+
+interface MainProps {
+  children?: ReactChild
+  header?: string
+  subHeader?: string
+  medallion: {
+    url: string
+  }
+}
 
 // ************
 // component
 // ************
 
-const Hero = memo(
-  forwardRef((props, ref) => {
-    return (
-      <Container ref={ref}>
-        <BackButton />
-        <Headers>
-          {props.subHeader && <SubHeader>{props.subHeader}</SubHeader>}
-          {props.header && <Header>{props.header}</Header>}
-        </Headers>
-        <Medallion>
-          {props.medallion && <SVG src={props.medallion.url}></SVG>}
-        </Medallion>
-      </Container>
-    )
-  })
+const Hero = forwardRef<HTMLElement, MainProps>(
+  (props, forwardedRef): ReactElement => (
+    <Container ref={forwardedRef}>
+      <BackButton />
+      <Headers>
+        {props.subHeader && <SubHeader>{props.subHeader}</SubHeader>}
+        {props.header && <Header>{props.header}</Header>}
+      </Headers>
+      <Medallion>
+        {props.medallion && <SVG src={props.medallion.url}></SVG>}
+      </Medallion>
+    </Container>
+  )
 )
-Hero.propTypes = {}
-export default Hero
+export default memo(Hero)
 
 // ************
 // styles
@@ -37,14 +46,13 @@ const Container = styled.header`
   height: 100%;
   width: 100%;
   text-align: center;
-  @media (min-height: ${props => props.theme.short + "px"}) {
+  @media (min-height: ${({ theme }) => theme.short + "px"}) {
     height: 75%;
   }
-  @media (min-height: ${props => props.theme.med + "px"}) {
+  @media (min-height: ${({ theme }) => theme.med + "px"}) {
     height: 45%;
   }
 `
-
 const Headers = styled.div`
   position: absolute;
   left: 50%;
@@ -56,28 +64,27 @@ const Headers = styled.div`
 const Header = styled.h1`
   font-size: 24px;
   font-weight: 400;
-  text-shadow: ${props => props.theme.shadow};
-  @media (min-width: ${props => props.theme.tablet + "px"}) {
+  text-shadow: ${({ theme }) => theme.shadow};
+  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
     font-size: 32px;
   }
-  @media (min-width: ${props => props.theme.desktop + "px"}) {
+  @media (min-width: ${({ theme }) => theme.desktop + "px"}) {
     font-size: 48px;
   }
 `
 const SubHeader = styled.h1`
   display: inline-block;
-  background: hsla(${props => props.theme.appGreenPartial}, 0.85);
+  background: hsla(${({ theme }) => theme.appGreenPartial}, 0.85);
   border-radius: 1em;
   font-size: 16px;
   font-weight: 300;
   /* letter-spacing: 0.1em; */
   margin: 12px 0;
   padding: 4px 16px;
-  @media (min-width: ${props => props.theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
     font-size: 20px;
   }
 `
-
 const Medallion = styled.div`
   position: absolute;
   bottom: 0;
@@ -92,7 +99,7 @@ const Medallion = styled.div`
 
   border: none;
   border-radius: 50%;
-  background: ${props => props.theme.appGreen};
+  background: ${({ theme }) => theme.appGreen};
 
   svg {
     height: 30px;

@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
+import React, { ReactElement } from "react"
 import { Link } from "gatsby"
+import styled from "styled-components"
 import { navigate } from "@reach/router"
 // import store
 import { useStore, transitionTriggered } from "../../store/useStore"
@@ -8,11 +8,23 @@ import { useStore, transitionTriggered } from "../../store/useStore"
 import * as anim from "../../utils/animations"
 
 // ************
+// types
+// ************
+
+interface BackVars {
+  layerHeight: number
+  buttonWidth: number
+  buttonHeight: number
+  layerRadius: number
+}
+
+// ************
 // component
 // ************
 
-const BackButton = props => {
+function BackButton(): ReactElement {
   const { state, dispatch } = useStore()
+  const { transition_duration_page } = state
 
   return (
     <Link
@@ -21,11 +33,11 @@ const BackButton = props => {
       onClick={e => {
         e.preventDefault()
         transitionTriggered(dispatch, true)
-        anim.enter_top(".page-transition", state.transition_duration_page)
+        anim.enter_top(".page-transition", transition_duration_page)
         setTimeout(() => {
           navigate("/")
           // multiply by 1000 for setTimeout to convert store's duration correctly
-        }, state.transition_duration_page * 1000)
+        }, transition_duration_page * 1000)
       }}
     >
       <Container>
@@ -38,7 +50,6 @@ const BackButton = props => {
     </Link>
   )
 }
-BackButton.propTypes = {}
 export default React.memo(BackButton)
 
 // ************
@@ -46,12 +57,12 @@ export default React.memo(BackButton)
 // ************
 
 // variables for quick customization of hamburger
-const backVars = {}
-backVars.layerHeight = 2
-backVars.buttonWidth = 50
-backVars.buttonHeight = backVars.buttonWidth
-backVars.layerRadius = 4
-
+const backVars: BackVars = {
+  layerHeight: 2,
+  buttonWidth: 50,
+  buttonHeight: 50,
+  layerRadius: 4,
+}
 const Container = styled.button`
   padding: 0;
   background: none;
@@ -60,12 +71,13 @@ const Container = styled.button`
   margin-top: 12px;
 `
 // sizing of button
+// TODO: check if backVars props implemented properly
 const Inner = styled.div`
   position: relative;
   width: ${backVars.buttonWidth * 0.75}px;
   height: ${backVars.buttonHeight * 0.75}px;
-  filter: drop-shadow(${props => props.theme.shadow});
-  @media (min-width: ${props => props.theme.tablet + "px"}) {
+  filter: drop-shadow(${({ theme }) => theme.shadow});
+  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
     width: ${backVars.buttonWidth}px;
     height: ${backVars.buttonHeight}px;
   }
@@ -79,7 +91,7 @@ const Inner = styled.div`
     background: white;
     height: ${backVars.layerHeight * 0.75}px;
     border-radius: ${backVars.layerRadius * 0.75}px;
-    @media (min-width: ${props => props.theme.tablet + "px"}) {
+    @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
       border: none;
       border-radius: ${backVars.layerRadius}px;
     }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, ReactElement, ReactChild } from "react"
 import styled from "styled-components"
 // import components
 import SEO from "../SEO"
@@ -8,24 +8,40 @@ import ScrollToTop from "../elements/ScrollToTop"
 import { Content, ContentWrapper, MarginAuto } from "../../styles/elements"
 
 // ************
+// types
+// ************
+
+export interface MainProps {
+  children?: ReactChild
+  heroHeader?: string
+  heroSubheader?: string
+  medallion: {
+    url: string
+  }
+}
+
+// ************
 // component
 // ************
 
-const Main = props => {
-  const mainRef = useRef()
-  const heroRef = useRef()
-  const [showScrollToTop, showScrollToTop_set] = useState(false)
+export default function Main(props: MainProps): ReactElement {
+  const mainRef = useRef<HTMLElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
+  const [showScrollToTop, showScrollToTop_set] = useState<boolean>(false)
 
   return (
     <Container
       ref={mainRef}
       id="mainScroll"
-      onScroll={() =>
-        // show scroll to top button if scrolled below hero section
-        showScrollToTop_set(
-          mainRef.current.scrollTop >= heroRef.current.clientHeight
-        )
-      }
+      onScroll={() => {
+        // if mainRef and heroRef exist
+        if (mainRef.current && heroRef.current) {
+          // show scroll to top button if scrolled below hero section
+          showScrollToTop_set(
+            mainRef.current.scrollTop >= heroRef.current.clientHeight
+          )
+        }
+      }}
     >
       <SEO title={props.heroSubheader} />
       <Hero
@@ -43,8 +59,10 @@ const Main = props => {
     </Container>
   )
 }
-Main.propTypes = {}
-export default Main
+
+// ************
+// styles
+// ************
 
 const Container = styled.main`
   /* moves up/down with PageTransition component */

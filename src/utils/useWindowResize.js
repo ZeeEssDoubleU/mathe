@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { onWindowResize } from "../store/useStore"
+
 export const useWindowResize = () => {
   const [windowSize, setWindowSize] = useState({
     height: window.innerHeight,

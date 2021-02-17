@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 // import animations
@@ -10,8 +10,6 @@ const NavMenu = props => {
   const { state, dispatch } = useStore()
   const navRef = useRef(null)
   const cycleRef = useRef(null)
-  const [textIndex, setTextIndex] = useState(0)
-  const textOptions = ["Premium teas", "Yerba mate"]
 
   useEffect(() => {
     anim.nav_fadeIn()

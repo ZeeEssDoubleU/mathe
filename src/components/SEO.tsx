@@ -1,13 +1,64 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React, { ReactElement } from "react"
+import { Helmet, HelmetProps } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+
+// ************
+// types
+// ************
+
+export interface QueryProps {
+  site: {
+    siteMetadata: {
+      title: string
+      titleTemplate: string
+      description: string
+      siteUrl: string
+      image: string
+      keywords: string
+      themeColor: string
+      lang: string
+    }
+  }
+  datoCmsSite: {
+    faviconMetaTags: {
+      attributes: {
+        href: string
+        rel: string
+        sizes: string
+      }
+      tagName: string
+    }[]
+    globalSeo: {
+      facebookPageUrl?: string
+      fallbackSeo: {
+        title: string
+        twitterCard: string
+        description: string
+        image: {
+          url: string
+        }
+      }
+      siteName: string
+      twitterAccount?: string
+      titleSuffix: string
+    }
+  }
+}
+
+// TODO: need to fix SeoProps title type declaration
+export interface SeoProps extends HelmetProps {
+  description: string
+  image: string
+  keywords: string
+  url: string
+}
 
 // ************
 // component
 // ************
 
-export default function SEO(props) {
-  const { site, datoCmsSite } = useStaticQuery(query)
+export default function SEO(props: SeoProps): ReactElement {
+  const { site, datoCmsSite }: QueryProps = useStaticQuery(query)
   const { siteMetadata } = site
   const { globalSeo } = datoCmsSite
 

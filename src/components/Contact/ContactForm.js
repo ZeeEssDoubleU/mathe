@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../Icons/Icon"
@@ -8,8 +8,6 @@ import Icon from "../Icons/Icon"
 // ************
 
 export const ContactForm = () => {
-  const [submitState, setSubmitState] = useState()
-
   return (
     <Form
       id="contact-form"

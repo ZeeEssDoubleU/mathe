@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useLayoutEffect } from "react"
+import React, { ReactElement, useLayoutEffect } from "react"
+import { PageProps } from "gatsby"
 // import styles
 import styled from "styled-components"
 // import components
@@ -9,16 +10,13 @@ import CartTab from "../Cart/CartTab"
 import { useStore, transitionTriggered } from "../../store/useStore"
 // import utils
 import * as anim from "../../utils/animations"
-import { useWindowResize } from "../../utils/useWindowResize"
 
 // ************
 // component
 // ************
 
-const Layout = ({ children, path }) => {
+export default function ({ children, path }: PageProps): ReactElement {
   const { state, dispatch } = useStore()
-  const didMountRef = useRef(false)
-  const windowSize = useWindowResize()
 
   // effect sets nav (actually whole app) position when mounted and when path changes
   useLayoutEffect(() => {
@@ -45,8 +43,6 @@ const Layout = ({ children, path }) => {
     </Container>
   )
 }
-Layout.propTypes = {}
-export default Layout
 
 // ************
 // styles

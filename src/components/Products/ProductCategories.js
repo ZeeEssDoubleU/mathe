@@ -10,10 +10,10 @@ import {
   ContentHeader,
 } from "../../styles/elements"
 // import store
-import { useStore, setActiveCategory } from "../../store/useStore"
+import { useStore } from "../../store/useStore"
 
 const ProductsHeader = props => {
-  const { state, dispatch } = useStore()
+  const { state } = useStore()
   // toggle button text
   const [expand, expand_set] = useState(false)
 

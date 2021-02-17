@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React, { ReactElement, ReactFragment } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import styled from "styled-components"
+import Img, { GatsbyImageFluidProps } from "gatsby-image"
 import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
@@ -12,22 +12,44 @@ import {
   Divider,
   Section,
 } from "../styles/elements"
+import GatsbyImage from "gatsby-image"
+
+// ************
+// types
+// ************
+
+export interface Member {
+  id: string
+  name: string
+  bio: string
+  picture: GatsbyImageFluidProps
+}
+export interface QueryProps {
+  page: {
+    header: string
+    subHeader: string
+    medallion: {
+      url: string
+    }
+    members: Member[]
+  }
+}
 
 // ************
 // component
 // ************
 
-const Team = () => {
-  const { page } = useStaticQuery(query)
+export default function Team(): ReactElement {
+  const { page }: QueryProps = useStaticQuery(query)
   const { members } = page
 
-  const displayMembers = members.map(member => {
-    return (
+  const displayMembers: ReactElement[] = members.map(
+    (member): ReactElement => (
       <div className="member-section" key={member.id}>
         <Image
           title={member.picture.title}
           alt={member.picture.alt}
-          fluid={{ ...member.picture.fluid }}
+          fluid={member.picture.fluid}
         />
         <h4>{member.name}</h4>
         <p
@@ -38,16 +60,14 @@ const Team = () => {
         <Divider />
       </div>
     )
-  })
+  )
 
-  const contentSection = (
-    <>
-      <Section>
-        <Header>{/* <h3></h3>
-					<h5></h5> */}</Header>
-        <Body>{displayMembers}</Body>
-      </Section>
-    </>
+  const contentSection: ReactElement = (
+    <Section>
+      {/* // TODO: fill header if needed */}
+      <Header></Header>
+      <Body>{displayMembers}</Body>
+    </Section>
   )
 
   return (
@@ -60,8 +80,6 @@ const Team = () => {
     </Main>
   )
 }
-Team.propTypes = {}
-export default Team
 
 // ************
 // styles
@@ -75,7 +93,7 @@ const Body = styled(ContentBody)`
       font-weight: 300;
       text-transform: uppercase;
 
-      color: ${props => props.theme.appGreen};
+      color: ${({ theme }) => theme.appGreen};
     }
     p {
       text-align: left;
@@ -84,7 +102,7 @@ const Body = styled(ContentBody)`
     }
   }
 `
-const Image = styled(Img)`
+const Image = styled(Img)<GatsbyImageFluidProps>`
   float: left;
   height: 200px;
   width: 200px;
@@ -107,6 +125,7 @@ const query = graphql`
       members {
         id
         name
+        bio
         picture {
           alt
           title
@@ -114,7 +133,6 @@ const query = graphql`
             ...GatsbyDatoCmsFluid
           }
         }
-        bio
       }
     }
   }

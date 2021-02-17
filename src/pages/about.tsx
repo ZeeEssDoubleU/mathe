@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { useStaticQuery } from "gatsby"
+import React, { ReactElement } from "react"
+import { graphql, useStaticQuery, StaticQuery } from "gatsby"
+import styled, { DefaultTheme } from "styled-components"
 // import components
 import Main from "../components/Layout/Main"
 // import styles
@@ -12,15 +12,44 @@ import {
 } from "../styles/elements"
 
 // ************
+// types
+// ************
+
+// TODO: type checks not working
+interface QueryProps {
+  page: {
+    header: string
+    subHeader: string
+    content: [
+      {
+        __typename: "DatoCmsContentBlock"
+        header: string
+        subHeader: string
+        content: string
+      },
+      {
+        __typename: "DatoCmsQuote"
+        quote: string
+        author: string
+        title: string
+      }
+    ]
+    medallion: {
+      url: string
+    }
+  }
+}
+
+// ************
 // component
 // ************
 
-const About = () => {
-  const { page } = useStaticQuery(query)
+export default function About(): ReactElement {
+  const { page }: QueryProps = useStaticQuery(query)
   const content = page.content[0]
   const quote = page.content[1]
 
-  const contentSection = (
+  const contentSection: ReactElement = (
     <>
       <Section>
         <Header>
@@ -50,8 +79,6 @@ const About = () => {
     </Main>
   )
 }
-About.propTypes = {}
-export default About
 
 // ************
 // styles
@@ -71,12 +98,12 @@ const Quote = styled(ContentBody)`
   .title {
     margin: 0;
     text-align: right;
-    font-family: ${props => props.theme.fontItalic};
+    font-family: ${({ theme }) => theme.fontItalic};
     font-style: italic;
     font-size: 16px;
     font-weight: 300;
     letter-spacing: 0.03em;
-    color: ${props => props.theme.appGreen};
+    color: ${({ theme }) => theme.appGreen};
   }
 `
 

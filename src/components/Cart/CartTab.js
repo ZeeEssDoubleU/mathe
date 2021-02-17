@@ -1,13 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { gsap } from "gsap"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 // import components
 import Icon from "../Icons/Icon"
 // import styles
 import { ModalButton } from "../../styles/elements"
-// import animation
-import { scroll_top } from "../../utils/animations"
 
 // ************
 // component

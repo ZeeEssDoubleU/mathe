@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import styled from "styled-components"
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
@@ -13,7 +13,11 @@ import { scroll_top } from "../../utils/animations"
 // component
 // ************
 
-export default function ScrollToTop({ show, scrollElem, ...props }) {
+export default function ScrollToTop({
+  show,
+  scrollElem,
+  ...props
+}): ReactElement {
   gsap.registerPlugin(ScrollToPlugin)
 
   return (
