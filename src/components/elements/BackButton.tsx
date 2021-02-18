@@ -77,7 +77,7 @@ const Inner = styled.div`
   width: ${backVars.buttonWidth * 0.75}px;
   height: ${backVars.buttonHeight * 0.75}px;
   filter: drop-shadow(${({ theme }) => theme.shadow});
-  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet}px) {
     width: ${backVars.buttonWidth}px;
     height: ${backVars.buttonHeight}px;
   }
@@ -91,7 +91,7 @@ const Inner = styled.div`
     background: white;
     height: ${backVars.layerHeight * 0.75}px;
     border-radius: ${backVars.layerRadius * 0.75}px;
-    @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
+    @media (min-width: ${({ theme }) => theme.tablet}px) {
       border: none;
       border-radius: ${backVars.layerRadius}px;
     }

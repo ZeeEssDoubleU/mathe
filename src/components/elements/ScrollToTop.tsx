@@ -1,4 +1,10 @@
-import React, { ReactElement } from "react"
+import React, {
+  ElementRef,
+  PropsWithRef,
+  ReactElement,
+  RefAttributes,
+  RefObject,
+} from "react"
 import styled from "styled-components"
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
@@ -10,18 +16,26 @@ import { ModalButton } from "../../styles/elements"
 import { scroll_top } from "../../utils/animations"
 
 // ************
+// types
+// ************
+
+interface ScrollToTopProps {
+  show: boolean
+  scrollElem: RefObject<HTMLElement>
+}
+
+// ************
 // component
 // ************
 
 export default function ScrollToTop({
   show,
   scrollElem,
-  ...props
-}): ReactElement {
+}: ScrollToTopProps): ReactElement {
   gsap.registerPlugin(ScrollToPlugin)
 
   return (
-    <Container {...{ show }}>
+    <Container show={show}>
       <Icon name="up-chevron" onClick={() => scroll_top(scrollElem.current)} />
     </Container>
   )
@@ -31,7 +45,7 @@ export default function ScrollToTop({
 // styles
 // ************
 
-const Container = styled(ModalButton)`
+const Container = styled(ModalButton)<{ show: boolean }>`
   /* TODO: eventually change this to be located on layout component */
   bottom: calc(-100% + 1.5rem);
   visibility: ${props => (props.show ? "visible" : "hidden")};

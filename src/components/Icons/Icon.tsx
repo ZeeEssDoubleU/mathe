@@ -1,27 +1,40 @@
-import React from "react"
+import React, { ReactElement, ReactNode } from "react"
 import SVG from "react-inlinesvg"
 
 // import icons (from icons folder - local file system)
-import back from "./back.svg"
-import backArrow from "./left-arrow.svg"
-import backArrowFull from "./left.svg"
-import cart from "./cart-checkered.svg"
-import cartZoom from "./cart-zoom.svg"
-import email from "./envelope-neat.svg"
-import instagram from "./instagram-simple.svg"
-import facebook from "./facebook.svg"
-import globe from "./globe.svg"
-import message from "./smartphone-text.svg"
-import messenger from "./messenger-rect.svg"
-import pencil from "./pencil.svg"
-import phone from "./phone-ring.svg"
-import send from "./forward.svg"
-import tea from "./tea.svg"
-import upArrow from "./up-arrow.svg"
-import upChevron from "./up-chevron.svg"
-import upChevronDouble from "./up-chevron-double.svg"
+const back = require("./back.svg") as string
+const backArrow = require("./left-arrow.svg") as string
+const backArrowFull = require("./left.svg") as string
+const cart = require("./cart-checkered.svg") as string
+const cartZoom = require("./cart-zoom.svg") as string
+const email = require("./envelope-neat.svg") as string
+const instagram = require("./instagram-simple.svg") as string
+const facebook = require("./facebook.svg") as string
+const globe = require("./globe.svg") as string
+const message = require("./smartphone-text.svg") as string
+const messenger = require("./messenger-rect.svg") as string
+const pencil = require("./pencil.svg") as string
+const phone = require("./phone-ring.svg") as string
+const send = require("./forward.svg") as string
+const tea = require("./tea.svg") as string
+const upArrow = require("./up-arrow.svg") as string
+const upChevron = require("./up-chevron.svg") as string
+const upChevronDouble = require("./up-chevron-double.svg") as string
 
-const Icon = props => {
+// ************
+// types
+// ************
+
+interface IconProps {
+  name: string
+  onClick?: () => void
+}
+
+// ************
+// component
+// ************
+
+export default function (props: IconProps): ReactElement | null {
   switch (props.name) {
     case "back":
       return <SVG src={back} {...props} />
@@ -63,5 +76,3 @@ const Icon = props => {
       return null
   }
 }
-
-export default Icon

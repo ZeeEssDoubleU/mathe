@@ -119,11 +119,11 @@ const BuyBlock = styled.div`
   margin: 12px 0;
 `
 const BuyButton = styled(CategoryButton)`
-  border: 1px solid ${props => props.theme.appGreen};
+  border: 1px solid ${({ theme }) => theme.appGreen};
   color: white;
   &:hover {
-    background: hsla(${props => props.theme.appGreenPartial}, 0.5);
-    border: 1px solid ${props => props.theme.appGreen};
+    background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+    border: 1px solid ${({ theme }) => theme.appGreen};
     color: white;
     cursor: pointer;
   }
@@ -144,7 +144,7 @@ const Listing = styled.div`
   margin: 64px 0;
 `
 const Price = styled.p`
-  /* color: ${props => props.theme.appGreen}; */
+  /* color: ${({ theme }) => theme.appGreen}; */
   font-size: 14px;
   font-weight: 500;
 `
@@ -152,7 +152,7 @@ const ProductCount = styled.p`
   margin: 48px 0;
   .count {
     font-weight: 500;
-    color: ${props => props.theme.appGreen};
+    color: ${({ theme }) => theme.appGreen};
   }
 `
 const SubTitle = styled.h5`

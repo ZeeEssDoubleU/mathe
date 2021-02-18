@@ -6,6 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 // types
 // ************
 
+// TODO: make sure QueryProps type check properly
 export interface QueryProps {
   site: {
     siteMetadata: {
@@ -45,12 +46,11 @@ export interface QueryProps {
   }
 }
 
-// TODO: need to fix SeoProps title type declaration
 export interface SeoProps extends HelmetProps {
-  description: string
-  image: string
-  keywords: string
-  url: string
+  description?: string
+  image?: string
+  keywords?: string
+  url?: string
 }
 
 // ************

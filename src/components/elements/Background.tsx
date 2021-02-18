@@ -1,25 +1,55 @@
-import React, { useCallback, useState, useLayoutEffect } from "react"
+import React, {
+  useCallback,
+  useState,
+  useLayoutEffect,
+  ReactElement,
+} from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import Img, { GatsbyImageFluidProps } from "gatsby-image"
 // import store
 import { useStore } from "../../store/useStore"
+
+// ************
+// types
+// ************
+
+interface QueryProps {
+  allDatoCmsProductImage: {
+    edges: {
+      node: {
+        title: string
+        imageGallery: GatsbyImageFluidProps[]
+      }
+    }[]
+  }
+}
+
+interface ImageProps extends GatsbyImageFluidProps {
+  initialImageLoaded: boolean
+}
+
+interface BackgroudProps {
+  path: string
+}
 
 // ************
 // component
 // ************
 
-const Background = ({ path }) => {
-  const { allDatoCmsProductImage } = useStaticQuery(query)
+export default function Background({ path }: BackgroudProps): ReactElement {
+  const { allDatoCmsProductImage }: QueryProps = useStaticQuery(query)
   const categories = allDatoCmsProductImage.edges.map(edge => edge.node)
 
   const { state } = useStore()
-  const [categoryIndex, setCategoryIndex] = useState(activeCategoryIndex())
-  const [backgroundIndex, setBackgroundIndex] = useState(0)
-  const [initialImageLoaded, setInitialImageLoaded] = useState(false)
+  const [categoryIndex, setCategoryIndex] = useState<number>(
+    activeCategoryIndex()
+  )
+  const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
+  const [initialImageLoaded, setInitialImageLoaded] = useState<boolean>(false)
 
   // match activeCategoryIndex to product image category
-  function activeCategoryIndex() {
+  function activeCategoryIndex(): number {
     return categories.findIndex(item =>
       item.title
         .toLowerCase()
@@ -35,7 +65,7 @@ const Background = ({ path }) => {
   // [category] = [img][img][img]
   // [category] = [img][img][img]
   // [category] = [img][img][img]
-  const backgroundMap = categories.map((category, index1) => {
+  const backgroundMap: ReactElement[] = categories.map((category, index1) => {
     return (
       <ToggleCategory
         key={index1}
@@ -59,11 +89,11 @@ const Background = ({ path }) => {
                     key={index2}
                     title={img.title}
                     alt={img.alt}
-                    fluid={{ ...img.fluid }}
+                    fluid={img.fluid}
                     fadeIn={true}
                     durationFadeIn={1000}
                     onLoad={() => setInitialImageLoaded(true)}
-                    {...{ initialImageLoaded }}
+                    initialImageLoaded={initialImageLoaded}
                   />
                 </ImageWrapper>
               </ToggleImage>
@@ -76,7 +106,7 @@ const Background = ({ path }) => {
 
   // cycle through landing background
   const cycleBg = useCallback(
-    (activeGalleryLength, categoryIndex) => {
+    (activeGalleryLength: number, categoryIndex: number): void => {
       // pick new random index
       const randomIndex = Math.floor(
         Math.random() * Math.floor(activeGalleryLength)
@@ -119,8 +149,6 @@ const Background = ({ path }) => {
 
   return <Images>{backgroundMap}</Images>
 }
-Background.propTypes = {}
-export default Background
 
 // ************
 // styles
@@ -128,7 +156,7 @@ export default Background
 
 // components listed outside to inside
 const Images = styled.div``
-const FadeAnim = styled.div`
+const FadeAnim = styled.div<{ className: string }>`
   visibility: ${props => (props.className === "active" ? "visible" : "hidden")};
   opacity: ${props => (props.className === "active" ? 1 : 0)};
   transition: opacity 2000ms, visibility 2000ms;
@@ -162,7 +190,7 @@ const ImageWrapper = styled(FadeAnim)`
   width: 100%;
   z-index: 0;
 `
-const Image = styled(Img)`
+const Image = styled(Img)<ImageProps>`
   position: absolute;
   left: 0;
   top: 0;

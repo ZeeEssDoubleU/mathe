@@ -15,7 +15,7 @@ import * as anim from "../../utils/animations"
 // component
 // ************
 
-export default function ({ children, path }: PageProps): ReactElement {
+export default function Layout({ children, path }: PageProps): ReactElement {
   const { state, dispatch } = useStore()
 
   // effect sets nav (actually whole app) position when mounted and when path changes

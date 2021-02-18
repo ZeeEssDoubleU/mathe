@@ -46,10 +46,10 @@ const Container = styled.header`
   height: 100%;
   width: 100%;
   text-align: center;
-  @media (min-height: ${({ theme }) => theme.short + "px"}) {
+  @media (min-height: ${({ theme }) => theme.short}px) {
     height: 75%;
   }
-  @media (min-height: ${({ theme }) => theme.med + "px"}) {
+  @media (min-height: ${({ theme }) => theme.med}px) {
     height: 45%;
   }
 `
@@ -65,10 +65,10 @@ const Header = styled.h1`
   font-size: 24px;
   font-weight: 400;
   text-shadow: ${({ theme }) => theme.shadow};
-  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet}px) {
     font-size: 32px;
   }
-  @media (min-width: ${({ theme }) => theme.desktop + "px"}) {
+  @media (min-width: ${({ theme }) => theme.desktop}px) {
     font-size: 48px;
   }
 `
@@ -81,7 +81,7 @@ const SubHeader = styled.h1`
   /* letter-spacing: 0.1em; */
   margin: 12px 0;
   padding: 4px 16px;
-  @media (min-width: ${({ theme }) => theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet}px) {
     font-size: 20px;
   }
 `

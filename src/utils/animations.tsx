@@ -1,14 +1,4 @@
 import { gsap } from "gsap"
-import { ReactElement, useLayoutEffect } from "react"
-
-// ************
-// animations
-// ************
-
-interface AnimationProps {
-  targetElem: string
-  duration?: number
-}
 
 // ************
 // animations
@@ -58,5 +48,5 @@ export const nav_fadeIn = () =>
     delay: 0.3,
   })
 
-export const scroll_top = (targetElem: string) =>
+export const scroll_top = (targetElem: HTMLElement | null) =>
   gsap.to(targetElem, { scrollTo: 0 })

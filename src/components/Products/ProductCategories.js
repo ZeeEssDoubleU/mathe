@@ -146,8 +146,8 @@ const Header = styled(ContentHeader)`
 `
 const StyledButton = styled(CategoryButton)`
   &:hover {
-    background: hsla(${props => props.theme.appGreenPartial}, 0.5);
-    border: 1px solid ${props => props.theme.appGreen};
+    background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+    border: 1px solid ${({ theme }) => theme.appGreen};
     color: white;
     cursor: pointer;
   }

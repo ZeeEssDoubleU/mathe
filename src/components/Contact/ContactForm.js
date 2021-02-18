@@ -88,7 +88,7 @@ const Form = styled.form`
 		&:focus {
 			transform: scale(1.02);
 			box-shadow: 0 0 0 1px
-				hsla(${props => props.theme.appGreenPartial}, 0.5);
+				hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
 			&::placeholder {
 				opacity: 0;
 			}
@@ -108,7 +108,7 @@ const Form = styled.form`
 
     width: 64px;
     height: 64px;
-    border: 1px solid ${props => props.theme.appGreen};
+    border: 1px solid ${({ theme }) => theme.appGreen};
     margin: 16px auto;
 
     background: none;
@@ -122,7 +122,7 @@ const Form = styled.form`
     }
     &:hover {
       cursor: pointer;
-      background: hsla(${props => props.theme.appGreenPartial}, 0.5);
+      background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
       svg {
         fill: white;
       }

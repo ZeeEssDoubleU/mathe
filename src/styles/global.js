@@ -3,8 +3,8 @@ import { createGlobalStyle } from "styled-components"
 
 export default createGlobalStyle`
       html, body {
-         font-family: ${props => props.theme.fontMain};
-         font-weight: ${props => props.theme.fontMainWeight};
+         font-family: ${({ theme }) => theme.fontMain};
+         font-weight: ${({ theme }) => theme.fontMainWeight};
 
          height: 100%; 
          width: 100%;
@@ -19,7 +19,7 @@ export default createGlobalStyle`
 
       .snipcart-modal__container {
             box-shadow: none !important;
-            font-weight: ${props => props.theme.fontCartWeight} !important;
+            font-weight: ${({ theme }) => theme.fontCartWeight} !important;
       }
 
       /* .snipcart-cart__secondary-header, .snipcart-item-line, .snipcart-cart--edit .snipcart-cart__footer {
@@ -28,19 +28,19 @@ export default createGlobalStyle`
 
       .snipcart-cart-button--highlight {
             background-image: none;
-            background: ${props => props.theme.appGreen}
+            background: ${({ theme }) => theme.appGreen}
       }
 
       .snipcart__actions--link {
-            color: ${props => props.theme.appGreen};
-            font-family: ${props => props.theme.fontMain};
-            font-weight: ${props => props.theme.fontCartLinkWeight} !important;
+            color: ${({ theme }) => theme.appGreen};
+            font-family: ${({ theme }) => theme.fontMain};
+            font-weight: ${({ theme }) => theme.fontCartLinkWeight} !important;
       }
 
       .snipcart-cart-header .snipcart__icon path,
       .snipcart-item-quantity__button:active path, 
       .snipcart-item-quantity__button:focus path {
-                  fill: ${props => props.theme.appGreen} !important;
+                  fill: ${({ theme }) => theme.appGreen} !important;
             }
       }
 `

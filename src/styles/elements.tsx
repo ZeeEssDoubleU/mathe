@@ -4,7 +4,7 @@ export const CategoryButton = styled.button`
   background: none;
   border: 1px solid transparent;
   border-radius: 1em;
-  color: ${props => props.theme.appGreen};
+  color: ${({ theme }) => theme.appGreen};
   font-size: 14px;
   font-weight: 300;
   margin: 4px;
@@ -23,7 +23,7 @@ export const CategoryNav = styled.nav`
   justify-content: center;
 `
 export const Content = styled.div`
-  background: ${props => props.theme.background};
+  background: ${({ theme }) => theme.background};
   min-height: 55%;
   width: 100%;
 `
@@ -41,8 +41,8 @@ export const ContentHeader = styled.div`
     font-weight: 300;
   }
   h5 {
-    color: ${props => props.theme.appGreen};
-    font-family: ${props => props.theme.fontItalic};
+    color: ${({ theme }) => theme.appGreen};
+    font-family: ${({ theme }) => theme.fontItalic};
     font-style: italic;
     font-size: 16px;
     font-weight: 300;
@@ -59,7 +59,7 @@ export const Divider = styled.div`
   margin: 48px auto;
   height: 1px;
   width: 10%;
-  background: ${props => props.theme.appGreen};
+  background: ${({ theme }) => theme.appGreen};
 `
 export const MarginAuto = styled.div`
   margin: 0 auto;
@@ -75,12 +75,12 @@ export const ModalButton = styled(CategoryButton)`
   border-right: 0;
   border-radius: 1em 0 0 1em;
   margin-right: 0;
-  background: ${props => props.theme.background};
-  fill: ${props => props.theme.appGreen};
+  background: ${({ theme }) => theme.background};
+  fill: ${({ theme }) => theme.appGreen};
 
   &:hover {
-    background: hsla(${props => props.theme.appGreenPartial}, 0.5);
-    border: 1px solid ${props => props.theme.appGreen};
+    background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+    border: 1px solid ${({ theme }) => theme.appGreen};
     border-right: 0;
     color: white;
     fill: white;

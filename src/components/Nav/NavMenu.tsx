@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { MouseEvent, ReactElement, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 // import animations
@@ -6,27 +6,35 @@ import * as anim from "../../utils/animations"
 // import store
 import { useStore, transitionTriggered } from "../../store/useStore"
 
-const NavMenu = props => {
+// ************
+// component
+// ************
+
+export default function NavMenu(): ReactElement {
   const { state, dispatch } = useStore()
-  const navRef = useRef(null)
-  const cycleRef = useRef(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const cycleRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     anim.nav_fadeIn()
   }, [])
 
   // tracks and handles nav animation.  No state used, so component is not re-rendered!  Score!
-  const handleMouseMove = e => {
-    const navElem = navRef.current
-    const navWidth = navElem.offsetWidth
-    const mouseX = e.clientX
-    // set navShift based on how many extra navLinks carry off the page.
-    // navShift sets the correct starting point for nav mouseMove effect
-    // ex: if each navLink is 25vw and there's 2 extra, navShift should equal 50
-    const navShift = 0
-    const moveX = navShift * (mouseX / navWidth)
+  function handleMouseMove(e: MouseEvent): void {
+    const navElem = navRef?.current
 
-    navElem.style.transform = `translateX(${moveX}vw)`
+    if (navElem) {
+      const navWidth = navElem.offsetWidth
+      const mouseX = e.clientX
+      // set navShift based on how many extra navLinks carry off the page.
+      // navShift sets the correct starting point for nav mouseMove effect
+      // ex: if each navLink is 25vw and there's 2 extra, navShift should equal 50
+      const navShift: number = 0
+
+      const moveX: number = navShift * (mouseX / navWidth)
+
+      navElem.style.transform = `translateX(${moveX}vw)`
+    }
   }
 
   // ! disabled
@@ -112,8 +120,6 @@ const NavMenu = props => {
     </Container>
   )
 }
-export default NavMenu
-NavMenu.propTypes = {}
 
 // ************
 // styles
@@ -125,7 +131,7 @@ const Container = styled.div`
   top: 20%;
   height: 80%;
   width: 100%;
-  @media (min-width: ${props => props.theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet}px) {
     top: 0;
     height: 100%;
     /* does not wrap nav elements down to next line */
@@ -136,7 +142,7 @@ const Container = styled.div`
     display: inline-block;
     height: 25%;
     width: 100%;
-    @media (min-width: ${props => props.theme.tablet + "px"}),
+    @media (min-width: ${({ theme }) => theme.tablet}px),
       (orientation: landscape) {
       height: 100%;
       width: 25vw;
@@ -153,14 +159,15 @@ const Container = styled.div`
       h1 {
         font-size: 24px;
         font-weight: 400;
-        text-shadow: ${props => props.theme.shadow};
+        text-shadow: ${({ theme }) => theme.shadow};
         white-space: normal;
-        @media (min-height: ${props => props.theme.tall + "px"}) {
+        @media (min-height: ${({ theme }) => theme.tall}px) {
           font-size: 30px;
         }
-        @media (min-width: ${props =>
-            props.theme.desktop + "px"}) and (min-height: ${props =>
-            props.theme.tall + "px"}) {
+        // min-width: desktop
+        // min-height: tall
+        @media (min-width: ${({ theme }) => theme.desktop}px),
+          (min-height: ${({ theme }) => theme.tall}px) {
           font-size: 36px;
         }
         &.cycle {
@@ -171,17 +178,17 @@ const Container = styled.div`
         transform: translateY(-2em);
         padding: 0.5em 1em;
         margin: 0.5em 0;
-        font-family: ${props => props.theme.fontItalic};
+        font-family: ${({ theme }) => theme.fontItalic};
         font-size: 12px;
         font-style: italic;
         font-weight: 300;
         letter-spacing: 0.6px;
         line-height: 1em;
         opacity: 0;
-        background: hsla(${props => props.theme.appGreenPartial}, 0.85);
+        background: hsla(${({ theme }) => theme.appGreenPartial}, 0.85);
         border-radius: 1em;
         transition: transform 300ms ease-out, opacity 300ms ease-out;
-        @media (min-width: ${props => props.theme.tablet + "px"}) {
+        @media (min-width: ${({ theme }) => theme.tablet}px) {
           font-size: 16px;
         }
       }

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../Icons/Icon"
@@ -9,7 +9,7 @@ import { ModalButton } from "../../styles/elements"
 // component
 // ************
 
-export default function CartTab({ show, scrollElem, ...props }) {
+export default function CartTab(): ReactElement {
   return (
     <Container className="snipcart-checkout">
       <Icon name="cart-zoom" />
@@ -25,7 +25,7 @@ export default function CartTab({ show, scrollElem, ...props }) {
 const Container = styled(ModalButton)`
   top: 1.5rem;
 
-  @media (min-width: ${props => props.theme.tablet + "px"}) {
+  @media (min-width: ${({ theme }) => theme.tablet}px) {
     top: 7.5%;
   }
 `
