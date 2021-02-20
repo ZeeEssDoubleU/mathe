@@ -126,7 +126,7 @@ export default function Background({ path }: Background_I): ReactElement {
   // effect to set background category
   // effect resets cycle upon changing activeCategory
   useLayoutEffect(() => {
-    const activeGalleryLength =
+    const activeGalleryLength: number =
       categories[activeCategoryIndex()].imageGallery.length
 
     // set activeCategoryIndex() on page or activeCategory change

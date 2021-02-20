@@ -44,7 +44,7 @@ export default function ProductsBody({ products }: Products_I): ReactElement {
       // turn categories into a tag map to be displayed with products
       const tagArray = product.categories
 
-      const tagMap = tagArray.map((tag, tagIndex) => {
+      const tagMap: ReactElement[] = tagArray.map((tag, tagIndex) => {
         tag.title = tag.title.toLowerCase()
 
         // DISPLAY category tags for each product

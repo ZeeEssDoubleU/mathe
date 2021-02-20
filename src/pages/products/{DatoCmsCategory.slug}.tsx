@@ -25,11 +25,13 @@ export default function Products(): ReactElement {
   const contentSection = (
     <>
       <Section>
-        <ProductCategories categories={categories} /> // all categories
+        {/* all categories */}
+        <ProductCategories categories={categories} />
       </Section>
       <Divider />
       <Section>
-        <ProductListings products={products} /> // all products
+        {/* all products */}
+        <ProductListings products={products} />
       </Section>
     </>
   )
