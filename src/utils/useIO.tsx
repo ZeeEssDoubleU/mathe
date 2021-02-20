@@ -1,12 +1,27 @@
-import { useEffect } from "react"
+import { RefObject, useEffect } from "react"
 import "intersection-observer"
 
-export const useIntersectionObserver = (
+// ************
+// types
+// ************
+
+export interface IO_I {
+  dispatch: () => void
+  isDesktop: boolean
+  target: RefObject<HTMLElement>
+  onToggleNav: (dispatch: () => void, isIntersecting: boolean) => void
+}
+
+// ************
+// hook
+// ************
+
+export const useIntersectionObserver = ({
   dispatch,
   isDesktop,
   target,
-  onToggleNav
-) => {
+  onToggleNav,
+}: IO_I): void => {
   useEffect(() => {
     // mount
     const io = new IntersectionObserver(
@@ -18,7 +33,11 @@ export const useIntersectionObserver = (
       },
       { rootMargin: "-100px" }
     )
-    io.observe(target.current)
+
+    if (target.current) {
+      io.observe(target.current)
+    }
+
     // unmount
     return () => io.disconnect()
   }, [dispatch, isDesktop, target, onToggleNav])

@@ -11,7 +11,7 @@ import * as anim from "../../utils/animations"
 // types
 // ************
 
-interface BackVars {
+export interface BackVars_I {
   layerHeight: number
   buttonWidth: number
   buttonHeight: number
@@ -57,7 +57,7 @@ export default React.memo(BackButton)
 // ************
 
 // variables for quick customization of hamburger
-const backVars: BackVars = {
+const backVars: BackVars_I = {
   layerHeight: 2,
   buttonWidth: 50,
   buttonHeight: 50,

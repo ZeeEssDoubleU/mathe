@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { ReactElement, useEffect } from "react"
 // import components
 import SEO from "../components/SEO"
 
@@ -6,7 +6,7 @@ import SEO from "../components/SEO"
 // component
 // ************
 
-const App = () => {
+export default function App(): ReactElement {
   // let the document know when mouse is being used
   useEffect(() => {
     document.body.addEventListener("mousedown", () => {
@@ -19,4 +19,3 @@ const App = () => {
 
   return <SEO />
 }
-export default App

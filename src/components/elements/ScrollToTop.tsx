@@ -19,7 +19,7 @@ import { scroll_top } from "../../utils/animations"
 // types
 // ************
 
-interface ScrollToTopProps {
+interface ScrollToTop_I {
   show: boolean
   scrollElem: RefObject<HTMLElement>
 }
@@ -31,7 +31,7 @@ interface ScrollToTopProps {
 export default function ScrollToTop({
   show,
   scrollElem,
-}: ScrollToTopProps): ReactElement {
+}: ScrollToTop_I): ReactElement {
   gsap.registerPlugin(ScrollToPlugin)
 
   return (

@@ -1,6 +1,7 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { Products_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import store
@@ -8,16 +9,22 @@ import { useStore, setActiveCategory } from "../../store/useStore"
 // import utils
 import { convertGrams } from "../../utils/convertGrams"
 
-const ProductsBody = props => {
+// ************
+// component
+// ************
+
+// TODO: figure out how to use parameter aliases
+export default function ProductsBody({ products }: Products_I): ReactElement {
   const { state, dispatch } = useStore()
 
-  const productArray = props.allProducts.edges
+  console.log("products:", products)
+
+  const productArray: ReactElement[] = products.edges
     // filter array on products that only match activeCategory
     .filter(edge => {
       const product = edge.node
-
       const categories = product.categories
-      const categoryMap = categories.map(category =>
+      const categoryMap: string[] = categories.map(category =>
         category.title.toLowerCase()
       )
 
@@ -78,7 +85,8 @@ const ProductsBody = props => {
                 // optional
                 data-item-name={product.title}
                 data-item-description={product.description}
-                data-item-size={`${product.weight.amount} + ${product.weight.units}`}
+                // TODO: make sure this works
+                data-item-size={`${product.weight.amount} ${product.weight.units}`}
                 data-item-weight={convertGrams(
                   product.weight.amount,
                   product.weight.units
@@ -104,8 +112,6 @@ const ProductsBody = props => {
     </>
   )
 }
-ProductsBody.propType = {}
-export default ProductsBody
 
 // ************
 // styles

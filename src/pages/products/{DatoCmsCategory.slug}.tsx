@@ -1,5 +1,7 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React, { ReactElement } from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import { GatsbyImageFluidProps } from "gatsby-image"
+import { Page_I, Categories_I, Products_I } from "../../@types/query"
 // import components
 import ProductCategories from "../../components/Products/ProductCategories"
 import ProductListings from "../../components/Products/ProductListings"
@@ -8,20 +10,26 @@ import Main from "../../components/Layout/Main"
 import { Divider, Section } from "../../styles/elements"
 
 // ************
+// types
+// ************
+
+export interface ProductsQuery_I extends Page_I, Categories_I, Products_I {}
+
+// ************
 // component
 // ************
 
-const Products = ({ data }) => {
-  const { page, categories, products } = data
+export default function Products(): ReactElement {
+  const { page, categories, products }: ProductsQuery_I = useStaticQuery(query)
 
   const contentSection = (
     <>
       <Section>
-        <ProductCategories categories={categories} />
+        <ProductCategories categories={categories} /> // all categories
       </Section>
       <Divider />
       <Section>
-        <ProductListings allProducts={products} />
+        <ProductListings products={products} /> // all products
       </Section>
     </>
   )
@@ -36,8 +44,6 @@ const Products = ({ data }) => {
     </Main>
   )
 }
-Products.propTypes = {}
-export default Products
 
 // ************
 // query

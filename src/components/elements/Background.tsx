@@ -14,7 +14,7 @@ import { useStore } from "../../store/useStore"
 // types
 // ************
 
-interface QueryProps {
+interface Query_I {
   allDatoCmsProductImage: {
     edges: {
       node: {
@@ -24,12 +24,10 @@ interface QueryProps {
     }[]
   }
 }
-
-interface ImageProps extends GatsbyImageFluidProps {
+interface Image_I extends GatsbyImageFluidProps {
   initialImageLoaded: boolean
 }
-
-interface BackgroudProps {
+interface Background_I {
   path: string
 }
 
@@ -37,8 +35,8 @@ interface BackgroudProps {
 // component
 // ************
 
-export default function Background({ path }: BackgroudProps): ReactElement {
-  const { allDatoCmsProductImage }: QueryProps = useStaticQuery(query)
+export default function Background({ path }: Background_I): ReactElement {
+  const { allDatoCmsProductImage }: Query_I = useStaticQuery(query)
   const categories = allDatoCmsProductImage.edges.map(edge => edge.node)
 
   const { state } = useStore()
@@ -65,44 +63,46 @@ export default function Background({ path }: BackgroudProps): ReactElement {
   // [category] = [img][img][img]
   // [category] = [img][img][img]
   // [category] = [img][img][img]
-  const backgroundMap: ReactElement[] = categories.map((category, index1) => {
-    return (
-      <ToggleCategory
-        key={index1}
-        className={categoryIndex === index1 ? "active" : ""}
-      >
-        <Category
+  const backgroundMap: ReactElement[] = categories.map(
+    (category, index1): ReactElement => {
+      return (
+        <ToggleCategory
           key={index1}
           className={categoryIndex === index1 ? "active" : ""}
         >
-          {category.imageGallery.map((img, index2) => {
-            return (
-              <ToggleImage
-                key={index2}
-                className={backgroundIndex === index2 ? "active" : ""}
-              >
-                <ImageWrapper
+          <Category
+            key={index1}
+            className={categoryIndex === index1 ? "active" : ""}
+          >
+            {category.imageGallery.map((img, index2) => {
+              return (
+                <ToggleImage
                   key={index2}
                   className={backgroundIndex === index2 ? "active" : ""}
                 >
-                  <Image
+                  <ImageWrapper
                     key={index2}
-                    title={img.title}
-                    alt={img.alt}
-                    fluid={img.fluid}
-                    fadeIn={true}
-                    durationFadeIn={1000}
-                    onLoad={() => setInitialImageLoaded(true)}
-                    initialImageLoaded={initialImageLoaded}
-                  />
-                </ImageWrapper>
-              </ToggleImage>
-            )
-          })}
-        </Category>
-      </ToggleCategory>
-    )
-  })
+                    className={backgroundIndex === index2 ? "active" : ""}
+                  >
+                    <Image
+                      key={index2}
+                      title={img.title}
+                      alt={img.alt}
+                      fluid={img.fluid}
+                      fadeIn={true}
+                      durationFadeIn={1000}
+                      onLoad={() => setInitialImageLoaded(true)}
+                      initialImageLoaded={initialImageLoaded}
+                    />
+                  </ImageWrapper>
+                </ToggleImage>
+              )
+            })}
+          </Category>
+        </ToggleCategory>
+      )
+    }
+  )
 
   // cycle through landing background
   const cycleBg = useCallback(
@@ -190,7 +190,7 @@ const ImageWrapper = styled(FadeAnim)`
   width: 100%;
   z-index: 0;
 `
-const Image = styled(Img)<ImageProps>`
+const Image = styled(Img)<Image_I>`
   position: absolute;
   left: 0;
   top: 0;

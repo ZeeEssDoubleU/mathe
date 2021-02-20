@@ -15,8 +15,8 @@ import {
 // types
 // ************
 
-// TODO: type checks not working
-interface QueryProps {
+// TODO: make sure type checks working
+export interface AboutQuery_I {
   page: {
     header: string
     subHeader: string
@@ -45,7 +45,7 @@ interface QueryProps {
 // ************
 
 export default function About(): ReactElement {
-  const { page }: QueryProps = useStaticQuery(query)
+  const { page }: AboutQuery_I = useStaticQuery(query)
   const content = page.content[0]
   const quote = page.content[1]
 

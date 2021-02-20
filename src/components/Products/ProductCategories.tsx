@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { ReactElement, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
+import { Categories_I } from "../../@types/query"
 // import styles
 import {
   CategoryButton,
@@ -12,78 +13,65 @@ import {
 // import store
 import { useStore } from "../../store/useStore"
 
-const ProductsHeader = props => {
+// ************
+// component
+// ************
+
+export default function ProductsHeader({
+  categories,
+}: Categories_I): ReactElement {
   const { state } = useStore()
   // toggle button text
-  const [expand, expand_set] = useState(false)
+  const [expand, expand_set] = useState<boolean>(false)
 
   // category array for filtering products
-  const categoryArray = props.categories.edges
-    .map((edge, categoryIndex) => {
+  const categoryArray: ReactElement[] = categories.edges
+    .filter(edge => {
       const category = edge.node
       // set all titles to lowercase for compare and sort
       category.title = category.title?.toLowerCase()
 
       // TODO: will need to modify filter when mobile nav is created
       const hide = ["tea blend", "traditionally scented", "decaf", "flavored"]
-      const show = !hide.includes(category.title)
+
+      // return non-hidden categories
+      return !hide.includes(category.title)
+    })
+    // sort array alphabetically
+    .sort((a, b) => {
+      if (a.node.title < b.node.title) return -1
+      if (a.node.title > b.node.title) return 1
+      return 0
+    })
+    .map((edge, categoryIndex) => {
+      const category = edge.node
+      // set all titles to lowercase for compare and sort
+      category.title = category.title?.toLowerCase()
 
       // DISPLAY category button
       return (
         // TODO: will need to modify filter when mobile nav is created
-        show && (
-          <Link to={`/products/${category.slug}`} key={categoryIndex}>
-            <StyledButton
-              key={categoryIndex}
-              className={
-                category.title === state?.activeCategory ? "active" : ""
-              }
-            >
-              {/* change button display from 'tea' to 'all' */}
-              {category.title === "tea" ? "all" : category.title}
-            </StyledButton>
-          </Link>
-        )
+        <Link to={`/products/${category.slug}`} key={categoryIndex}>
+          <StyledButton
+            key={categoryIndex}
+            className={category.title === state?.activeCategory ? "active" : ""}
+          >
+            {/* change button display from 'tea' to 'all' */}
+            {category.title === "tea" ? "all" : category.title}
+          </StyledButton>
+        </Link>
       )
-    })
-    // TODO: will need to modify filter when mobile nav is created
-    .filter(elem => elem !== false)
-    // sort array alphabetically
-    .sort((a, b) => {
-      if (a.props.children.props.children < b.props.children.props.children)
-        return -1
-      if (a.props.children.props.children > b.props.children.props.children)
-        return 1
-      return 0
     })
 
   // category filters
-  const categoryFilter = props.categories.edges.filter(edge => {
-    const category = edge.node
-    return (
-      state?.activeCategory?.toLowerCase() === category.title?.toLowerCase()
-    )
-  })
-  const categoryDisplayName = categoryFilter.map(edge => {
-    const category = edge.node
-    return category.displayName
-  })
-  const categorySubTitle = categoryFilter.map(edge => {
-    const category = edge.node
-    return category.subTitle
-  })
-  const categoryDescription = categoryFilter.map(edge => {
-    const category = edge.node
-    return category.description
-  })
-
-  // active category filters
-  const activeCategoryDisplay =
-    categoryDisplayName.length !== 0 && categoryDisplayName
-  const activeCategorySubTitle =
-    categorySubTitle.length !== 0 && categorySubTitle
-  const activeCategoryDescription =
-    categoryDescription.length !== 0 && categoryDescription
+  const activeCategoryFilter = categories.edges.filter(
+    edge =>
+      state?.activeCategory?.toLowerCase() === edge.node.title?.toLowerCase()
+  )
+  const activeCategoryDisplay: string = activeCategoryFilter[0].node.displayName
+  const activeCategorySubTitle: string = activeCategoryFilter[0].node.subTitle
+  const activeCategoryDescription: string =
+    activeCategoryFilter[0].node.description
 
   // DISPLAY category buttons (plural)
   return (
@@ -107,8 +95,6 @@ const ProductsHeader = props => {
     </>
   )
 }
-ProductsHeader.propType = {}
-export default ProductsHeader
 
 // ************
 // styles
@@ -117,7 +103,7 @@ export default ProductsHeader
 const ActiveCategory = styled.div`
   margin: 48px 0;
 `
-const Body = styled(ContentBody)`
+const Body = styled(ContentBody)<{ expand: boolean }>`
   max-height: ${props => (props.expand === false ? "9em" : "100%")};
   margin-bottom: 0;
   overflow: hidden;

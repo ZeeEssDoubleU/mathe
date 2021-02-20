@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../Icons/Icon"
@@ -7,7 +7,7 @@ import Icon from "../Icons/Icon"
 // component
 // ************
 
-export const ContactForm = () => {
+export default function ContactForm(): ReactElement {
   return (
     <Form
       id="contact-form"
@@ -50,7 +50,7 @@ export const ContactForm = () => {
         name="message"
         className="contact-form-input"
         placeholder="message"
-        rows="10"
+        rows={10}
         spellCheck={true}
         // TODO: May need to revise in future in case Grammarly needed
         data-gramm_editor="false"
@@ -61,7 +61,6 @@ export const ContactForm = () => {
     </Form>
   )
 }
-ContactForm.propTypes = {}
 
 // ************
 // styles

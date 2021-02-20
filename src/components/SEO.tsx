@@ -6,8 +6,8 @@ import { useStaticQuery, graphql } from "gatsby"
 // types
 // ************
 
-// TODO: make sure QueryProps type check properly
-export interface QueryProps {
+// TODO: make sure SeoQuery_I type check properly
+export interface SeoQuery_I {
   site: {
     siteMetadata: {
       title: string
@@ -46,7 +46,7 @@ export interface QueryProps {
   }
 }
 
-export interface SeoProps extends HelmetProps {
+export interface Seo_I extends HelmetProps {
   description?: string
   image?: string
   keywords?: string
@@ -57,8 +57,8 @@ export interface SeoProps extends HelmetProps {
 // component
 // ************
 
-export default function SEO(props: SeoProps): ReactElement {
-  const { site, datoCmsSite }: QueryProps = useStaticQuery(query)
+export default function SEO(props: Seo_I): ReactElement {
+  const { site, datoCmsSite }: SeoQuery_I = useStaticQuery(query)
   const { siteMetadata } = site
   const { globalSeo } = datoCmsSite
 

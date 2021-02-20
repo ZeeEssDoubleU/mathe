@@ -8,7 +8,7 @@ import BackButton from "../elements/BackButton"
 // types
 // ************
 
-interface MainProps {
+export interface Hero_I {
   children?: ReactChild
   header?: string
   subHeader?: string
@@ -21,7 +21,7 @@ interface MainProps {
 // component
 // ************
 
-const Hero = forwardRef<HTMLElement, MainProps>(
+const Hero = forwardRef<HTMLElement, Hero_I>(
   (props, forwardedRef): ReactElement => (
     <Container ref={forwardedRef}>
       <BackButton />

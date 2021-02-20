@@ -25,8 +25,9 @@ const upChevronDouble = require("./up-chevron-double.svg") as string
 // types
 // ************
 
-interface IconProps {
+export interface Icon_I {
   name: string
+  className?: string
   onClick?: () => void
 }
 
@@ -34,7 +35,7 @@ interface IconProps {
 // component
 // ************
 
-export default function (props: IconProps): ReactElement | null {
+export default function Icon(props: Icon_I): ReactElement | null {
   switch (props.name) {
     case "back":
       return <SVG src={back} {...props} />

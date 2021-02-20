@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 // import components
@@ -7,13 +7,33 @@ import Main from "../components/Layout/Main"
 import { ContentHeader, ContentBody, Section } from "../styles/elements"
 
 // ************
+// types
+// ************
+
+export interface BlogQuery_I {
+  page: {
+    header: string
+    subHeader: string
+    content: {
+      __typename: "DatoCmsContentBlock"
+      header: string
+      subHeader: string
+      content: string
+    }
+    medallion: {
+      url: string
+    }
+  }
+}
+
+// ************
 // component
 // ************
 
-const Blog = () => {
-  const { page } = useStaticQuery(query)
+export default function Blog(): ReactElement {
+  const { page }: BlogQuery_I = useStaticQuery(query)
 
-  const contentSection = (
+  const contentSection: ReactElement = (
     <>
       <Section>
         <Header>
@@ -39,8 +59,6 @@ const Blog = () => {
     </Main>
   )
 }
-Blog.propTypes = {}
-export default Blog
 
 // ************
 // styles

@@ -11,8 +11,8 @@ import { Content, ContentWrapper, MarginAuto } from "../../styles/elements"
 // types
 // ************
 
-export interface MainProps {
-  children?: ReactChild
+export interface Main_I {
+  children?: ReactChild | ReactChild[]
   heroHeader?: string
   heroSubheader?: string
   medallion: {
@@ -24,7 +24,7 @@ export interface MainProps {
 // component
 // ************
 
-export default function Main(props: MainProps): ReactElement {
+export default function Main(props: Main_I): ReactElement {
   const mainRef = useRef<HTMLElement>(null)
   const heroRef = useRef<HTMLElement>(null)
   const [showScrollToTop, showScrollToTop_set] = useState<boolean>(false)

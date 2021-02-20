@@ -18,20 +18,22 @@ import GatsbyImage from "gatsby-image"
 // types
 // ************
 
-export interface Member {
+export interface Member_I {
   id: string
   name: string
   bio: string
   picture: GatsbyImageFluidProps
 }
-export interface QueryProps {
+
+// TODO: make sure type checks working
+export interface MemberQuery_I {
   page: {
     header: string
     subHeader: string
     medallion: {
       url: string
     }
-    members: Member[]
+    members: Member_I[]
   }
 }
 
@@ -40,10 +42,10 @@ export interface QueryProps {
 // ************
 
 export default function Team(): ReactElement {
-  const { page }: QueryProps = useStaticQuery(query)
+  const { page }: MemberQuery_I = useStaticQuery(query)
   const { members } = page
 
-  const displayMembers: ReactElement[] = members.map(
+  const displayMember_Is: ReactElement[] = members.map(
     (member): ReactElement => (
       <div className="member-section" key={member.id}>
         <Image
@@ -66,7 +68,7 @@ export default function Team(): ReactElement {
     <Section>
       {/* // TODO: fill header if needed */}
       <Header></Header>
-      <Body>{displayMembers}</Body>
+      <Body>{displayMember_Is}</Body>
     </Section>
   )
 

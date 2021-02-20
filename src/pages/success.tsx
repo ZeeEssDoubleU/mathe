@@ -1,6 +1,6 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import styled from "styled-components"
-import { useStaticQuery } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { navigate } from "@reach/router"
 // import components
 import Main from "../components/Layout/Main"
@@ -14,14 +14,34 @@ import {
 } from "../styles/elements"
 
 // ************
+// types
+// ************
+
+export interface SuccessQuery_I {
+  page: {
+    header: string
+    subHeader: string
+    content: {
+      __typename: "DatoCmsContentBlock"
+      header: string
+      subHeader: string
+      content: string
+    }[]
+    medallion: {
+      url: string
+    }
+  }
+}
+
+// ************
 // component
 // ************
 
-const Success = () => {
-  const { page } = useStaticQuery(query)
+export default function Success(): ReactElement {
+  const { page }: SuccessQuery_I = useStaticQuery(query)
   const content = page.content[0]
 
-  const contentSection = (
+  const contentSection: ReactElement = (
     <>
       <Section>
         <Header>
@@ -52,8 +72,6 @@ const Success = () => {
     </Main>
   )
 }
-Success.propTypes = {}
-export default Success
 
 // ************
 // styles

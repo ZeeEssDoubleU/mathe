@@ -8,7 +8,7 @@ import NavMenu from "./NavMenu"
 // types
 // ************
 
-interface QueryProps {
+interface Query_I {
   datoCmsLandingPage: {
     logo: {
       url: string
@@ -23,7 +23,7 @@ interface QueryProps {
 // ************
 
 export default function Nav(): ReactElement {
-  const { datoCmsLandingPage }: QueryProps = useStaticQuery(query)
+  const { datoCmsLandingPage }: Query_I = useStaticQuery(query)
   const { logo } = datoCmsLandingPage
 
   return (
