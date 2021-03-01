@@ -8,17 +8,23 @@ import GlobalStyle from "../../styles/global"
 import { theme } from "../../styles/theme"
 
 // ************
+// types
+// ************
+
+export interface WrapRoot_I {
+	element: ReactElement | ReactElement[]
+}
+
+// ************
 // component
 // ************
 
-export default function WrapRoot({
-  element,
-}: WrapRootElementBrowserArgs): ReactElement {
-  return (
-    <ThemeProvider theme={theme}>
-      <ResetStyle />
-      <GlobalStyle />
-      {element}
-    </ThemeProvider>
-  )
+export default function WrapRoot({ element }: WrapRoot_I): ReactElement {
+	return (
+		<ThemeProvider theme={theme}>
+			<ResetStyle />
+			<GlobalStyle />
+			{element}
+		</ThemeProvider>
+	)
 }

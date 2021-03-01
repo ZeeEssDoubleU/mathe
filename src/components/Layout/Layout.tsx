@@ -12,36 +12,45 @@ import { useStore, transitionTriggered } from "../../store/useStore"
 import * as anim from "../../utils/animations"
 
 // ************
+// types
+// ************
+
+export interface Layout_I {
+	children?: ReactElement | ReactElement[]
+	path: PageProps["path"]
+}
+
+// ************
 // component
 // ************
 
-export default function Layout({ children, path }: PageProps): ReactElement {
-  const { state, dispatch } = useStore()
+export default function Layout({ children, path }: Layout_I): ReactElement {
+	const { state, dispatch } = useStore()
 
-  // effect sets nav (actually whole app) position when mounted and when path changes
-  useLayoutEffect(() => {
-    // check if transition was triggered from button press (Link, BackButton, etc)
-    // if not, set page-transition elem position
-    if (state.transition_triggered_page === false) {
-      path === "/"
-        ? anim.enter_top_set(".page-transition")
-        : anim.exit_top_set(".page-transition")
-    } else {
-      transitionTriggered(dispatch, false)
-    }
-  }, [path])
+	// effect sets nav (actually whole app) position when mounted and when path changes
+	useLayoutEffect(() => {
+		// check if transition was triggered from button press (Link, BackButton, etc)
+		// if not, set page-transition elem position
+		if (state.transition_triggered_page === false) {
+			path === "/"
+				? anim.enter_top_set(".page-transition")
+				: anim.exit_top_set(".page-transition")
+		} else {
+			transitionTriggered(dispatch, false)
+		}
+	}, [path])
 
-  return (
-    <Container>
-      <Background path={path} />
-      <PageTransition className="page-transition">
-        <Nav />
-        {/* children are page elements */}
-        {children}
-      </PageTransition>
-      <CartTab />
-    </Container>
-  )
+	return (
+		<Container>
+			<Background path={path} />
+			<PageTransition className="page-transition">
+				<Nav />
+				{/* children are page elements */}
+				{children}
+			</PageTransition>
+			<CartTab />
+		</Container>
+	)
 }
 
 // ************
@@ -49,17 +58,17 @@ export default function Layout({ children, path }: PageProps): ReactElement {
 // ************
 
 const Container = styled.div`
-  /* always stayes bound relative to viewport */
-  position: fixed;
-  height: 100%;
-  width: 100%;
+	/* always stayes bound relative to viewport */
+	position: fixed;
+	height: 100%;
+	width: 100%;
 
-  /* so nav isn't visible when pulling down */
-  overflow: hidden;
+	/* so nav isn't visible when pulling down */
+	overflow: hidden;
 `
 const PageTransition = styled.div`
-  /* moves up/down when nav link clicked */
-  position: relative;
-  height: 100%;
-  width: 100%; ;
+	/* moves up/down when nav link clicked */
+	position: relative;
+	height: 100%;
+	width: 100%; ;
 `
