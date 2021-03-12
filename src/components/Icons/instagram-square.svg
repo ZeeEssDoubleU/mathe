@@ -1,8 +1,9 @@
-<svg version="1.1" id="Layer_1" 
-	xmlns="http://www.w3.org/2000/svg" 
-	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+	style="enable-background:new 0 0 512 512;" xml:space="preserve">
 	<g transform="translate(1 1)">
-		<path d="M365.08-1H144.92C64.707-1-1,64.707-1,144.92v220.16C-1,445.293,64.707,511,144.92,511h220.16
+		<path
+			d="M365.08-1H144.92C64.707-1-1,64.707-1,144.92v220.16C-1,445.293,64.707,511,144.92,511h220.16
 				C445.293,511,511,445.293,511,365.08V144.92C511,64.707,445.293-1,365.08-1z M493.933,365.08
 				c0,70.827-58.027,128.853-128.853,128.853H144.92c-70.827,0-128.853-58.027-128.853-128.853V144.92
 				c0-70.827,58.027-128.853,128.853-128.853h220.16c70.827,0,128.853,58.027,128.853,128.853V365.08z" />

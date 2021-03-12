@@ -43,6 +43,7 @@ export default {
 		DEV_SSR: false,
 	},
 	plugins: [
+		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-sitemap",
@@ -80,9 +81,19 @@ export default {
 			},
 		},
 		{
+			resolve: "gatsby-source-shopify",
+			options: {
+				shopName: "mathe-tea-dev",
+				// See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
+				accessToken: "5f3c0b0ce36956255d9bdd61ba06ea97",
+				apiVersion: "2021-01",
+				downloadImages: true,
+			},
+		},
+		{
 			resolve: "gatsby-source-datocms",
 			options: {
-				apiToken: process.env.DATO_API_TOKEN,
+				apiToken: process.env.DATOCMS_API_TOKEN,
 				disableLiveReload: false,
 				localeFallbacks: {
 					it: ["en"],

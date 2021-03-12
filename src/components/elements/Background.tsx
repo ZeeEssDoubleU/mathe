@@ -6,7 +6,7 @@ import React, {
 } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
-import Img, { GatsbyImageFluidProps } from "gatsby-image"
+import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image"
 // import store
 import { useStore } from "../../store/useStore"
 
@@ -19,12 +19,12 @@ interface Query_I {
 		edges: {
 			node: {
 				title: string
-				imageGallery: GatsbyImageFluidProps[]
+				imageGallery: GatsbyImageProps[]
 			}
 		}[]
 	}
 }
-interface Image_I extends GatsbyImageFluidProps {
+interface Image_I extends GatsbyImageProps {
 	initialImageLoaded: boolean
 }
 interface Background_I {
@@ -92,9 +92,7 @@ export default function Background({ path }: Background_I): ReactElement {
 											key={index2}
 											title={img.title}
 											alt={img.alt}
-											fluid={img.fluid}
-											fadeIn={true}
-											durationFadeIn={1000}
+											image={img.gatsbyImageData}
 											onLoad={() => setInitialImageLoaded(true)}
 											initialImageLoaded={initialImageLoaded}
 										/>
@@ -195,11 +193,12 @@ const ImageWrapper = styled(FadeAnim)`
 	width: 100%;
 	z-index: 0;
 `
-const Image = styled(Img)<Image_I>`
+const Image = styled(GatsbyImage)<Image_I>`
 	position: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
+	width: 100%;
 	visibility: ${(props) =>
 		props.initialImageLoaded === true ? "visible" : "hidden"};
 	opacity: ${(props) => (props.initialImageLoaded === true ? 1 : 0)};
@@ -219,9 +218,10 @@ const query = graphql`
 					imageGallery {
 						alt
 						title
-						fluid(imgixParams: { auto: "format, compress", maxW: 2560 }) {
-							...GatsbyDatoCmsFluid
-						}
+						gatsbyImageData(
+							layout: FULL_WIDTH
+							imgixParams: { auto: "format, compress", maxW: 2560 }
+						)
 					}
 				}
 			}

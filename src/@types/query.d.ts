@@ -1,4 +1,4 @@
-import { GatsbyImageFluidProps } from "gatsby-image"
+import { GatsbyImageFluidProps } from "gatsby-plugin-image"
 
 export interface Page_I {
 	page: {

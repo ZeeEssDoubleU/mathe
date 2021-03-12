@@ -1,8 +1,8 @@
-"use strict";
+"use strict"
 
-const { generateConfig } = require("gatsby-plugin-ts-config");
+const { generateConfig } = require("gatsby-plugin-ts-config")
 
 module.exports = generateConfig({
 	configDir: "gatsby_config", // or wherever you would like to store your gatsby files
 	projectRoot: __dirname,
-});
+})

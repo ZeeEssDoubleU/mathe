@@ -10,12 +10,12 @@ import { ModalButton } from "../../styles/elements"
 // ************
 
 export default function CartTab(): ReactElement {
-  return (
-    <Container className="snipcart-checkout">
-      <Icon name="cart-zoom" />
-      <ItemCount className="snipcart-items-count">0</ItemCount>
-    </Container>
-  )
+	return (
+		<Container className="snipcart-checkout">
+			<Icon name="cart-zoom" />
+			<ItemCount className="snipcart-items-count">0</ItemCount>
+		</Container>
+	)
 }
 
 // ************
@@ -23,10 +23,10 @@ export default function CartTab(): ReactElement {
 // ************
 
 const Container = styled(ModalButton)`
-  top: 1.5rem;
+	top: 1.5rem;
 
-  @media (min-width: ${({ theme }) => theme.tablet}px) {
-    top: 7.5%;
-  }
+	@media (min-width: ${({ theme }) => theme.tablet}px) {
+		top: 7.5%;
+	}
 `
 const ItemCount = styled.span``

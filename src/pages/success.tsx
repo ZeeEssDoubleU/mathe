@@ -7,10 +7,10 @@ import Main from "../components/Layout/Main"
 import Icon from "../components/Icons/Icon"
 // import styles
 import {
-  ContentHeader,
-  ContentBody,
-  Divider,
-  Section,
+	ContentHeader,
+	ContentBody,
+	Divider,
+	Section,
 } from "../styles/elements"
 
 // ************
@@ -18,19 +18,19 @@ import {
 // ************
 
 export interface SuccessQuery_I {
-  page: {
-    header: string
-    subHeader: string
-    content: {
-      __typename: "DatoCmsContentBlock"
-      header: string
-      subHeader: string
-      content: string
-    }[]
-    medallion: {
-      url: string
-    }
-  }
+	page: {
+		header: string
+		subHeader: string
+		content: {
+			__typename: "DatoCmsContentBlock"
+			header: string
+			subHeader: string
+			content: string
+		}[]
+		medallion: {
+			url: string
+		}
+	}
 }
 
 // ************
@@ -38,39 +38,39 @@ export interface SuccessQuery_I {
 // ************
 
 export default function Success(): ReactElement {
-  const { page }: SuccessQuery_I = useStaticQuery(query)
-  const content = page.content[0]
+	const { page }: SuccessQuery_I = useStaticQuery(query)
+	const content = page.content[0]
 
-  const contentSection: ReactElement = (
-    <>
-      <Section>
-        <Header>
-          <h3>{content.header}</h3>
-          <h5>{content.subHeader}</h5>
-        </Header>
-        <Body
-          onClick={() => {
-            // navigates back
-            navigate(-1)
-          }}
-        >
-          <Icon name="back-arrow" />
-          {content.content}
-        </Body>
-      </Section>
-      <Divider />
-    </>
-  )
+	const contentSection: ReactElement = (
+		<>
+			<Section>
+				<Header>
+					<h3>{content.header}</h3>
+					<h5>{content.subHeader}</h5>
+				</Header>
+				<Body
+					onClick={() => {
+						// navigates back
+						navigate(-1)
+					}}
+				>
+					<Icon name="back-arrow" />
+					{content.content}
+				</Body>
+			</Section>
+			<Divider />
+		</>
+	)
 
-  return (
-    <Main
-      heroHeader={page.header}
-      heroSubheader={page.subHeader}
-      medallion={page.medallion}
-    >
-      {contentSection}
-    </Main>
-  )
+	return (
+		<Main
+			heroHeader={page.header}
+			heroSubheader={page.subHeader}
+			medallion={page.medallion}
+		>
+			{contentSection}
+		</Main>
+	)
 }
 
 // ************
@@ -79,20 +79,20 @@ export default function Success(): ReactElement {
 
 const Header = styled(ContentHeader)``
 const Body = styled(ContentBody)`
-  text-align: center;
-  transition: transform 300ms;
-  cursor: pointer;
+	text-align: center;
+	transition: transform 300ms;
+	cursor: pointer;
 
-  svg {
-    height: 1em;
-    width: 1em;
-    margin-right: 1em;
-    fill: white;
-    vertical-align: middle;
-  }
-  &:hover {
-    transform: translateX(-2.5%);
-  }
+	svg {
+		height: 1em;
+		width: 1em;
+		margin-right: 1em;
+		fill: white;
+		vertical-align: middle;
+	}
+	&:hover {
+		transform: translateX(-2.5%);
+	}
 `
 
 // ************
@@ -100,20 +100,20 @@ const Body = styled(ContentBody)`
 // ************
 
 const query = graphql`
-  {
-    page: datoCmsSuccessPage {
-      header
-      subHeader
-      content {
-        ... on DatoCmsContentBlock {
-          header
-          subHeader
-          content
-        }
-      }
-      medallion {
-        url
-      }
-    }
-  }
+	{
+		page: datoCmsSuccessPage {
+			header
+			subHeader
+			content {
+				... on DatoCmsContentBlock {
+					header
+					subHeader
+					content
+				}
+			}
+			medallion {
+				url
+			}
+		}
+	}
 `

@@ -1,40 +1,39 @@
-import React, { ReactElement, ReactFragment } from "react"
+import React, { ReactElement } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-import Img, { GatsbyImageFluidProps } from "gatsby-image"
+import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image"
 import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
 // import styles
 import {
-  ContentHeader,
-  ContentBody,
-  Divider,
-  Section,
+	ContentHeader,
+	ContentBody,
+	Divider,
+	Section,
 } from "../styles/elements"
-import GatsbyImage from "gatsby-image"
 
 // ************
 // types
 // ************
 
 export interface Member_I {
-  id: string
-  name: string
-  bio: string
-  picture: GatsbyImageFluidProps
+	id: string
+	name: string
+	bio: string
+	picture: GatsbyImageProps
 }
 
 // TODO: make sure type checks working
 export interface MemberQuery_I {
-  page: {
-    header: string
-    subHeader: string
-    medallion: {
-      url: string
-    }
-    members: Member_I[]
-  }
+	page: {
+		header: string
+		subHeader: string
+		medallion: {
+			url: string
+		}
+		members: Member_I[]
+	}
 }
 
 // ************
@@ -42,45 +41,45 @@ export interface MemberQuery_I {
 // ************
 
 export default function Team(): ReactElement {
-  const { page }: MemberQuery_I = useStaticQuery(query)
-  const { members } = page
+	const { page }: MemberQuery_I = useStaticQuery(query)
+	const { members } = page
 
-  const displayMember_Is: ReactElement[] = members.map(
-    (member): ReactElement => (
-      <div className="member-section" key={member.id}>
-        <Image
-          title={member.picture.title}
-          alt={member.picture.alt}
-          fluid={member.picture.fluid}
-        />
-        <h4>{member.name}</h4>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: sanitizeHtml(member.bio),
-          }}
-        />
-        <Divider />
-      </div>
-    )
-  )
+	const displayMember_Is: ReactElement[] = members.map(
+		(member): ReactElement => (
+			<div className="member-section" key={member.id}>
+				<Image
+					title={member.picture.title}
+					alt={member.picture.alt}
+					image={member.picture.gatsbyImageData}
+				/>
+				<h4>{member.name}</h4>
+				<p
+					dangerouslySetInnerHTML={{
+						__html: sanitizeHtml(member.bio),
+					}}
+				/>
+				<Divider />
+			</div>
+		),
+	)
 
-  const contentSection: ReactElement = (
-    <Section>
-      {/* // TODO: fill header if needed */}
-      <Header></Header>
-      <Body>{displayMember_Is}</Body>
-    </Section>
-  )
+	const contentSection: ReactElement = (
+		<Section>
+			{/* // TODO: fill header if needed */}
+			<Header></Header>
+			<Body>{displayMember_Is}</Body>
+		</Section>
+	)
 
-  return (
-    <Main
-      heroHeader={page.header}
-      heroSubheader={page.subHeader}
-      medallion={page.medallion}
-    >
-      {contentSection}
-    </Main>
-  )
+	return (
+		<Main
+			heroHeader={page.header}
+			heroSubheader={page.subHeader}
+			medallion={page.medallion}
+		>
+			{contentSection}
+		</Main>
+	)
 }
 
 // ************
@@ -89,27 +88,27 @@ export default function Team(): ReactElement {
 
 const Header = styled(ContentHeader)``
 const Body = styled(ContentBody)`
-  .member-section {
-    h4 {
-      font-size: 24px;
-      font-weight: 300;
-      text-transform: uppercase;
+	.member-section {
+		h4 {
+			font-size: 24px;
+			font-weight: 300;
+			text-transform: uppercase;
 
-      color: ${({ theme }) => theme.appGreen};
-    }
-    p {
-      text-align: left;
-      margin-top: 16px;
-      white-space: pre-wrap;
-    }
-  }
+			color: ${({ theme }) => theme.appGreen};
+		}
+		p {
+			text-align: left;
+			margin-top: 16px;
+			white-space: pre-wrap;
+		}
+	}
 `
-const Image = styled(Img)<GatsbyImageFluidProps>`
-  float: left;
-  height: 200px;
-  width: 200px;
-  margin: 0 24px 24px 0;
-  border-radius: 0.25em;
+const Image = styled(GatsbyImage)<GatsbyImageProps>`
+	float: left;
+	height: 200px;
+	width: 200px;
+	margin: 0 24px 24px 0;
+	border-radius: 0.25em;
 `
 
 // ************
@@ -117,25 +116,23 @@ const Image = styled(Img)<GatsbyImageFluidProps>`
 // ************
 
 const query = graphql`
-  {
-    page: datoCmsTeamPage {
-      header
-      subHeader
-      medallion {
-        url
-      }
-      members {
-        id
-        name
-        bio
-        picture {
-          alt
-          title
-          fluid {
-            ...GatsbyDatoCmsFluid
-          }
-        }
-      }
-    }
-  }
+	{
+		page: datoCmsTeamPage {
+			header
+			subHeader
+			medallion {
+				url
+			}
+			members {
+				id
+				name
+				bio
+				picture {
+					alt
+					title
+					gatsbyImageData(layout: FULL_WIDTH)
+				}
+			}
+		}
+	}
 `
