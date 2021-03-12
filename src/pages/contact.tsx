@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
+import sanitizeHtml from "sanitize-html"
 import { useStaticQuery, graphql } from "gatsby"
 import { Page_I } from "../@types/query"
 // import components
@@ -77,7 +78,14 @@ export default function Contact(): ReactElement {
 						(elem, index3): ReactElement | null => {
 							switch (elem.internal.type) {
 								case "DatoCmsContent":
-									return <p key={index3}>{elem.content}</p>
+									return (
+										<div
+											key={index3}
+											dangerouslySetInnerHTML={{
+												__html: sanitizeHtml(elem.content),
+											}}
+										/>
+									)
 								case "DatoCmsContactInfo":
 									return <ContactDetails elem={elem} key={index3} />
 								case "DatoCmsForm":

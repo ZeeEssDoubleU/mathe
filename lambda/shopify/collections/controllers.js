@@ -1,4 +1,5 @@
-const datocms = require("../index").datocms
+const { SiteClient } = require("datocms-client")
+const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
 // ************
 // controller

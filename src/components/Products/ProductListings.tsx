@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import sanitizeHtml from "sanitize-html"
 import { Products_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
@@ -97,7 +98,11 @@ export default function ProductsBody({ products }: Products_I): ReactElement {
 							</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>
-					<Description>{product.description}</Description>
+					<Description
+						dangerouslySetInnerHTML={{
+							__html: sanitizeHtml(product.description),
+						}}
+					/>
 					<Tags>{tagMap}</Tags>
 				</Listing>
 			)

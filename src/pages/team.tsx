@@ -44,7 +44,7 @@ export default function Team(): ReactElement {
 	const { page }: MemberQuery_I = useStaticQuery(query)
 	const { members } = page
 
-	const displayMember_Is: ReactElement[] = members.map(
+	const displayMembers: ReactElement[] = members.map(
 		(member): ReactElement => (
 			<div className="member-section" key={member.id}>
 				<Image
@@ -52,8 +52,8 @@ export default function Team(): ReactElement {
 					alt={member.picture.alt}
 					image={member.picture.gatsbyImageData}
 				/>
-				<h4>{member.name}</h4>
-				<p
+				<Header>{member.name}</Header>
+				<Body
 					dangerouslySetInnerHTML={{
 						__html: sanitizeHtml(member.bio),
 					}}
@@ -63,13 +63,7 @@ export default function Team(): ReactElement {
 		),
 	)
 
-	const contentSection: ReactElement = (
-		<Section>
-			{/* // TODO: fill header if needed */}
-			<Header></Header>
-			<Body>{displayMember_Is}</Body>
-		</Section>
-	)
+	const contentSection: ReactElement = <Section>{displayMembers}</Section>
 
 	return (
 		<Main
@@ -86,29 +80,34 @@ export default function Team(): ReactElement {
 // styles
 // ************
 
-const Header = styled(ContentHeader)``
-const Body = styled(ContentBody)`
-	.member-section {
-		h4 {
-			font-size: 24px;
-			font-weight: 300;
-			text-transform: uppercase;
-
-			color: ${({ theme }) => theme.appGreen};
-		}
-		p {
-			text-align: left;
-			margin-top: 16px;
-			white-space: pre-wrap;
-		}
-	}
-`
 const Image = styled(GatsbyImage)<GatsbyImageProps>`
 	float: left;
 	height: 200px;
 	width: 200px;
 	margin: 0 24px 24px 0;
 	border-radius: 0.25em;
+
+	@media (max-width: ${({ theme }) => theme.tablet}px) {
+		float: none;
+		margin: auto;
+	}
+`
+const Header = styled(ContentHeader)`
+	margin-bottom: 16px;
+
+	font-size: 24px;
+	font-weight: 300;
+	text-align: left;
+	text-transform: uppercase;
+	color: ${({ theme }) => theme.appGreen};
+
+	@media (max-width: ${({ theme }) => theme.tablet}px) {
+		margin: 1rem auto;
+		text-align: center;
+	}
+`
+const Body = styled(ContentBody)`
+	margin: auto;
 `
 
 // ************

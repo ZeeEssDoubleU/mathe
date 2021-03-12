@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react"
 import { graphql, useStaticQuery, StaticQuery } from "gatsby"
 import styled, { DefaultTheme } from "styled-components"
+import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
 // import styles
@@ -56,12 +57,21 @@ export default function About(): ReactElement {
 					<h3>{content.header}</h3>
 					<h5>{content.subHeader}</h5>
 				</Header>
-				<Body>{content.content}</Body>
+				<Body
+					dangerouslySetInnerHTML={{
+						__html: sanitizeHtml(content.content),
+					}}
+				/>
 			</Section>
 			<Divider />
 			<Section>
 				<Quote>
-					<blockquote className="quote">{quote.quote}</blockquote>
+					<blockquote
+						className="quote"
+						dangerouslySetInnerHTML={{
+							__html: sanitizeHtml(quote.quote),
+						}}
+					/>
 					<h3 className="author">{quote.author}</h3>
 					<h5 className="title">{quote.title}</h5>
 				</Quote>

@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
+import sanitizeHtml from "sanitize-html"
 import { useStaticQuery, graphql } from "gatsby"
 import { navigate } from "@reach/router"
 // import components
@@ -55,7 +56,11 @@ export default function Success(): ReactElement {
 					}}
 				>
 					<Icon name="back-arrow" />
-					{content.content}
+					<div
+						dangerouslySetInnerHTML={{
+							__html: sanitizeHtml(content.content),
+						}}
+					/>
 				</Body>
 			</Section>
 			<Divider />
@@ -89,6 +94,10 @@ const Body = styled(ContentBody)`
 		margin-right: 1em;
 		fill: white;
 		vertical-align: middle;
+	}
+	div,
+	p {
+		display: inline;
 	}
 	&:hover {
 		transform: translateX(-2.5%);

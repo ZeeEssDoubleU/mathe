@@ -3,8 +3,8 @@ const express = require("express")
 const bodyParser = require("body-parser")
 
 // import controllers
-const controllers_collections = require("./sync/collections")
-const controllers_products = require("./sync/products")
+const controllers_collections = require("./collections/controllers")
+const controllers_products = require("./products/controllers")
 
 // initializations
 const app = express()
