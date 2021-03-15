@@ -19,5 +19,16 @@ module.exports = {
 		sourceType: "module",
 	},
 	plugins: ["react", "@typescript-eslint"],
-	rules: {},
-};
+	rules: {
+		"react/prop-types": "off", // typescript will take care of type-checking
+		"react/display-name": "off", // to allow anonymous functions
+	},
+	overrides: [
+		{
+			files: ["*.js"],
+			rules: {
+				"@typescript-eslint/no-var-requires": "off",
+			},
+		},
+	],
+}

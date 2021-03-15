@@ -60,47 +60,44 @@ export const query = graphql`
 			}
 		}
 		categories: allDatoCmsCategory {
-			edges {
-				node {
-					title
-					subTitle
-					displayName
-					description
-					noNavDisplay
-					slug
-					images {
-						imageGallery {
-							title
-							alt
-							gatsbyImageData(
-								layout: FULL_WIDTH
-								imgixParams: { auto: "format, compress", maxW: 2560 }
-							)
-						}
+			nodes {
+				title
+				subTitle
+				displayName
+				description
+				noNavDisplay
+				slug
+				images {
+					imageGallery {
+						title
+						alt
+						gatsbyImageData(
+							layout: FULL_WIDTH
+							imgixParams: { auto: "format, compress", maxW: 2560 }
+						)
 					}
 				}
 			}
 		}
+
 		products: allDatoCmsProduct {
-			edges {
-				node {
-					id
-					active
-					title
-					subtitle
-					description
-					categories {
-						slug
-						title
-					}
-					price
-					weight {
-						weight
-						amount
-						units
-					}
+			nodes {
+				id
+				active
+				title
+				subtitle
+				description
+				categories {
 					slug
+					title
 				}
+				price
+				weight {
+					weight
+					amount
+					units
+				}
+				slug
 			}
 		}
 	}

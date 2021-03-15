@@ -33,11 +33,11 @@ function BackButton(): ReactElement {
 			onClick={(e) => {
 				e.preventDefault()
 				transitionTriggered(dispatch, true)
-				anim.enter_top(".page-transition", transition_duration_page!)
+				anim.enter_top(".page-transition", transition_duration_page)
 				setTimeout(() => {
 					navigate("/")
 					// multiply by 1000 for setTimeout to convert store's duration correctly
-				}, transition_duration_page! * 1000)
+				}, transition_duration_page * 1000)
 			}}
 		>
 			<Container>

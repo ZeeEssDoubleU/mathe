@@ -1,7 +1,11 @@
 import React, { ReactElement } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image"
+import {
+	GatsbyImage,
+	GatsbyImageProps,
+	IGatsbyImageData,
+} from "gatsby-plugin-image"
 import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
@@ -21,7 +25,11 @@ export interface Member_I {
 	id: string
 	name: string
 	bio: string
-	picture: GatsbyImageProps
+	picture: {
+		alt: string
+		title: string
+		gatsbyImageData: IGatsbyImageData
+	}
 }
 
 // TODO: make sure type checks working

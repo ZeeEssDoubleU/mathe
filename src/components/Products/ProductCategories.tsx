@@ -25,9 +25,8 @@ export default function ProductsHeader({
 	const [expand, expand_set] = useState<boolean>(false)
 
 	// category array for filtering products
-	const categoryArray: ReactElement[] = categories.edges
-		.filter((edge) => {
-			const category = edge.node
+	const categoryArray: ReactElement[] = categories.nodes
+		.filter((category) => {
 			// set all titles to lowercase for compare and sort
 			category.title = category.title?.toLowerCase()
 
@@ -44,12 +43,11 @@ export default function ProductsHeader({
 		})
 		// sort array alphabetically
 		.sort((a, b) => {
-			if (a.node.title < b.node.title) return -1
-			if (a.node.title > b.node.title) return 1
+			if (a.title < b.title) return -1
+			if (a.title > b.title) return 1
 			return 0
 		})
-		.map((edge, categoryIndex) => {
-			const category = edge.node
+		.map((category, categoryIndex) => {
 			// set all titles to lowercase for compare and sort
 			category.title = category.title?.toLowerCase()
 
@@ -71,18 +69,15 @@ export default function ProductsHeader({
 		})
 
 	// category filters
-	const activeCategoryFilter = categories.edges.filter(
-		(edge) =>
-			state?.activeCategory?.toLowerCase() ===
-			edge.node.title?.toLowerCase(),
+	const activeCategoryFilter = categories.nodes.filter(
+		(category) =>
+			state?.activeCategory?.toLowerCase() === category.title?.toLowerCase(),
 	)
 
 	// TODO: need to check activeCategoryFilter optional chaining
-	const activeCategoryDisplay: string =
-		activeCategoryFilter[0]?.node.displayName
-	const activeCategorySubTitle: string = activeCategoryFilter[0]?.node.subTitle
-	const activeCategoryDescription: string =
-		activeCategoryFilter[0]?.node.description
+	const activeCategoryDisplay: string = activeCategoryFilter[0].displayName
+	const activeCategorySubTitle: string = activeCategoryFilter[0].subTitle
+	const activeCategoryDescription: string = activeCategoryFilter[0].description
 
 	// DISPLAY category buttons (plural)
 	return (

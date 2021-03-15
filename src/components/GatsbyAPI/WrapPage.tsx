@@ -1,5 +1,5 @@
-import React, { ReactElement, ReactNode } from "react"
-import { WrapPageElementBrowserArgs, PageProps } from "gatsby"
+import React, { ReactElement } from "react"
+import { PageProps } from "gatsby"
 // import providers
 import { StoreProvider } from "../../store/useStore"
 // import components

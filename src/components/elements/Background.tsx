@@ -6,7 +6,11 @@ import React, {
 } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image"
+import {
+	GatsbyImage,
+	GatsbyImageProps,
+	IGatsbyImageData,
+} from "gatsby-plugin-image"
 // import store
 import { useStore } from "../../store/useStore"
 
@@ -16,11 +20,13 @@ import { useStore } from "../../store/useStore"
 
 interface Query_I {
 	allDatoCmsProductImage: {
-		edges: {
-			node: {
+		nodes: {
+			title: string
+			imageGallery: {
+				alt: string
 				title: string
-				imageGallery: GatsbyImageProps[]
-			}
+				gatsbyImageData: IGatsbyImageData
+			}[]
 		}[]
 	}
 }
@@ -37,7 +43,7 @@ interface Background_I {
 
 export default function Background({ path }: Background_I): ReactElement {
 	const { allDatoCmsProductImage }: Query_I = useStaticQuery(query)
-	const categories = allDatoCmsProductImage.edges.map((edge) => edge.node)
+	const categories = allDatoCmsProductImage.nodes
 
 	const { state } = useStore()
 	const [categoryIndex, setCategoryIndex] = useState<number>(
@@ -52,9 +58,9 @@ export default function Background({ path }: Background_I): ReactElement {
 			item.title
 				.toLowerCase()
 				.includes(
-					!path.includes("/products") || state?.activeCategory === "tea"
+					!path.includes("/products") || state.activeCategory === "tea"
 						? "all tea"
-						: state?.activeCategory!,
+						: state.activeCategory,
 				),
 		)
 	}
@@ -212,17 +218,15 @@ const Image = styled(GatsbyImage)<Image_I>`
 const query = graphql`
 	{
 		allDatoCmsProductImage {
-			edges {
-				node {
+			nodes {
+				title
+				imageGallery {
+					alt
 					title
-					imageGallery {
-						alt
-						title
-						gatsbyImageData(
-							layout: FULL_WIDTH
-							imgixParams: { auto: "format, compress", maxW: 2560 }
-						)
-					}
+					gatsbyImageData(
+						layout: FULL_WIDTH
+						imgixParams: { auto: "format, compress", maxW: 2560 }
+					)
 				}
 			}
 		}

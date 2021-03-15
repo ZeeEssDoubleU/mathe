@@ -67,7 +67,7 @@ export default function Contact(): ReactElement {
 					<h3>{section.header}</h3>
 					{section.contentSection.map(
 						(elem, index2): ReactElement | null => {
-							return elem.internal.type === "DatoCmsSubHeader" ? (
+							return "subHeader" in elem ? (
 								<h5 key={index2}>{elem.subHeader}</h5>
 							) : null
 						},
@@ -76,24 +76,23 @@ export default function Contact(): ReactElement {
 				<Body>
 					{section.contentSection.map(
 						(elem, index3): ReactElement | null => {
-							switch (elem.internal.type) {
-								case "DatoCmsContent":
-									return (
-										<div
-											key={index3}
-											dangerouslySetInnerHTML={{
-												__html: sanitizeHtml(elem.content),
-											}}
-										/>
-									)
-								case "DatoCmsContactInfo":
-									return <ContactDetails elem={elem} key={index3} />
-								case "DatoCmsForm":
-									return <ContactForm key={index3} />
-								case "DatoCmsDivider":
-									return <Divider key={index3} />
-								default:
-									return null
+							if ("content" in elem) {
+								return (
+									<div
+										key={index3}
+										dangerouslySetInnerHTML={{
+											__html: sanitizeHtml(elem.content),
+										}}
+									/>
+								)
+							} else if ("address" in elem) {
+								return <ContactDetails elem={elem} key={index3} />
+							} else if ("form" in elem) {
+								return <ContactForm key={index3} />
+							} else if ("divider" in elem) {
+								return <Divider key={index3} />
+							} else {
+								return null
 							}
 						},
 					)}

@@ -18,10 +18,9 @@ import { convertGrams } from "../../utils/convertGrams"
 export default function ProductsBody({ products }: Products_I): ReactElement {
 	const { state, dispatch } = useStore()
 
-	const productArray: ReactElement[] = products.edges
+	const productArray: ReactElement[] = products.nodes
 		// filter array on products that only match activeCategory
-		.filter((edge) => {
-			const product = edge.node
+		.filter((product) => {
 			const categories = product.categories
 			const categoryMap: string[] = categories.map((category) =>
 				category.title.toLowerCase(),
@@ -30,17 +29,16 @@ export default function ProductsBody({ products }: Products_I): ReactElement {
 			// filter on active category
 			return (
 				product.active === true &&
-				categoryMap.includes(state?.activeCategory!) // activeCategory will exist
+				categoryMap.includes(state.activeCategory)
 			)
 		})
 		// sort array alphabetically
 		.sort((a, b) => {
-			if (a.node.title < b.node.title) return -1
-			if (a.node.title > b.node.title) return 1
+			if (a.title < b.title) return -1
+			if (a.title > b.title) return 1
 			return 0
 		})
-		.map((edge, productIndex) => {
-			const product = edge.node
+		.map((product, productIndex) => {
 			// turn categories into a tag map to be displayed with products
 			const tagArray = product.categories
 

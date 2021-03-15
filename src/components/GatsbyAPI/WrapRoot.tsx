@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react"
-import { WrapRootElementBrowserArgs } from "gatsby"
 // import providers
 import { ThemeProvider } from "styled-components"
 // import styles
