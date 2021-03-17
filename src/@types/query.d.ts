@@ -1,48 +1,53 @@
 import { GatsbyImageFluidProps } from "gatsby-plugin-image"
 
 export interface Page_I {
-	page: {
-		header: string
-		subHeader: string
-		medallion: {
-			url: string
-		}
+	header: string
+	subHeader: string
+	medallion: {
+		url: string
 	}
 }
-export interface Categories_I {
-	categories: {
-		nodes: {
-			title: string
-			subTitle: string
-			displayName: string
-			description: string
-			noNavDisplay: boolean
-			slug: string
-			images: {
-				imageGallery: GatsbyImageFluidProps[]
-			}
-		}[]
-	}
-}
-export interface Products_I {
-	products: {
-		nodes: {
-			id: string
-			active: boolean
-			title: string
-			subtitle: string
-			description: string
-			categories: {
+export interface ProductsQuery_I {
+	data: {
+		page: Page_I
+		allCollections_datocms: {
+			nodes: {
 				slug: string
 				title: string
+				displayName: string
+				description: string
+				noNavDisplay: boolean
 			}[]
-			price: number
-			weight: {
-				weight: string
-				amount: number
-				units: string
-			}
+		}
+		collection_datocms: {
 			slug: string
-		}[]
+			title: string
+			subtitle: string
+			displayName: string
+			description: string
+		}
+		collection_shopify: {
+			handle: string
+			products: {
+				handle: string
+				title: string
+				descriptionHtml: string
+				productType: string
+				tags: string[]
+				variants: {
+					weight: number
+					weightUnit: string
+					priceNumber: number
+				}[]
+			}[]
+		}
+		products_datocms: {
+			nodes: {
+				slug: string
+				title: string
+				subtitle: string
+				description: string
+			}[]
+		}
 	}
 }

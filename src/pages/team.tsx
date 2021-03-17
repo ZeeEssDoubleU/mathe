@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 import {
 	GatsbyImage,
@@ -32,15 +32,16 @@ export interface Member_I {
 	}
 }
 
-// TODO: make sure type checks working
 export interface MemberQuery_I {
-	page: {
-		header: string
-		subHeader: string
-		medallion: {
-			url: string
+	data: {
+		page: {
+			header: string
+			subHeader: string
+			medallion: {
+				url: string
+			}
+			members: Member_I[]
 		}
-		members: Member_I[]
 	}
 }
 
@@ -48,8 +49,8 @@ export interface MemberQuery_I {
 // component
 // ************
 
-export default function Team(): ReactElement {
-	const { page }: MemberQuery_I = useStaticQuery(query)
+export default function Team({ data }: MemberQuery_I): ReactElement {
+	const { page } = data
 	const { members } = page
 
 	const displayMembers: ReactElement[] = members.map(
@@ -122,7 +123,7 @@ const Body = styled(ContentBody)`
 // query
 // ************
 
-const query = graphql`
+export const query = graphql`
 	{
 		page: datoCmsTeamPage {
 			header

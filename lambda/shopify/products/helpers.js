@@ -1,11 +1,8 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
-// ************
-// helper
-// ************
-
-const product_modelID = 148325
+// constants
+const PRODUCT_MODEL_ID = 148325
 
 // ************
 // helper
@@ -31,7 +28,7 @@ async function getProduct_bySlug(body) {
 
 	const [existingProduct] = await datocms.items.all({
 		filter: {
-			type: String(product_modelID), // model ID from DatoCMS
+			type: String(PRODUCT_MODEL_ID), // model ID from DatoCMS
 			fields: {
 				slug: {
 					eq: body.handle, // handle from Shopify
@@ -51,7 +48,7 @@ async function getProduct_byShopifyID(body) {
 
 	const [existingProduct] = await datocms.items.all({
 		filter: {
-			type: String(product_modelID), // model ID from DatoCMS
+			type: String(PRODUCT_MODEL_ID), // model ID from DatoCMS
 			fields: {
 				shopifyId: {
 					eq: body.id, // id from Shopify
@@ -70,12 +67,12 @@ async function createProduct(body) {
 	console.log("creating product on DatoCMS...") // ? debug
 
 	const res = await datocms.items.create({
-		itemType: String(product_modelID), // API specifies string
+		itemType: String(PRODUCT_MODEL_ID), // API specifies string
 		active: body.status === "active" ? true : false,
 		shopifyId: String(body.id), // API specifies string
 		title: body.title,
 		subtitle: null,
-		description: null,
+		description: body.body_html,
 		price: null, // TODO: remove
 		weight: null, // TODO: remove
 		categories: null,
@@ -90,7 +87,7 @@ async function createProduct(body) {
 }
 
 module.exports = {
-	product_modelID,
+	PRODUCT_MODEL_ID,
 	getProduct,
 	getProduct_bySlug,
 	getProduct_byShopifyID,

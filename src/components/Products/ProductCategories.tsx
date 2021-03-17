@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
-import { Categories_I } from "../../@types/query"
+import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import {
 	CategoryButton,
@@ -10,8 +10,15 @@ import {
 	ContentBody,
 	ContentHeader,
 } from "../../styles/elements"
-// import store
-import { useStore } from "../../store/useStore"
+
+// ************
+// types
+// ************
+
+export interface ProductCategories_I {
+	categories: ProductsQuery_I["data"]["allCollections_datocms"]
+	category_selected: ProductsQuery_I["data"]["collection_datocms"]
+}
 
 // ************
 // component
@@ -19,32 +26,19 @@ import { useStore } from "../../store/useStore"
 
 export default function ProductsHeader({
 	categories,
-}: Categories_I): ReactElement {
-	const { state } = useStore()
+	category_selected,
+}: ProductCategories_I): ReactElement {
 	// toggle button text
 	const [expand, expand_set] = useState<boolean>(false)
 
-	// category array for filtering products
 	const categoryArray: ReactElement[] = categories.nodes
 		.filter((category) => {
-			// set all titles to lowercase for compare and sort
-			category.title = category.title?.toLowerCase()
-
-			// TODO: will need to modify filter when mobile nav is created
-			const hide = [
-				"tea blend",
-				"traditionally scented",
-				"decaf",
-				"flavored",
-			]
-
-			// return non-hidden categories
-			return !hide.includes(category.title)
+			return category.noNavDisplay === false
 		})
 		// sort array alphabetically
 		.sort((a, b) => {
-			if (a.title < b.title) return -1
-			if (a.title > b.title) return 1
+			if (a.displayName < b.displayName) return -1
+			if (a.displayName > b.displayName) return 1
 			return 0
 		})
 		.map((category, categoryIndex) => {
@@ -58,7 +52,7 @@ export default function ProductsHeader({
 					<StyledButton
 						key={categoryIndex}
 						className={
-							category.title === state?.activeCategory ? "active" : ""
+							category.slug === category_selected.slug ? "active" : ""
 						}
 					>
 						{/* change button display from 'tea' to 'all' */}
@@ -68,16 +62,7 @@ export default function ProductsHeader({
 			)
 		})
 
-	// category filters
-	const activeCategoryFilter = categories.nodes.filter(
-		(category) =>
-			state?.activeCategory?.toLowerCase() === category.title?.toLowerCase(),
-	)
-
-	// TODO: need to check activeCategoryFilter optional chaining
-	const activeCategoryDisplay: string = activeCategoryFilter[0].displayName
-	const activeCategorySubTitle: string = activeCategoryFilter[0].subTitle
-	const activeCategoryDescription: string = activeCategoryFilter[0].description
+	console.log("categoryArray:", categoryArray)
 
 	// DISPLAY category buttons (plural)
 	return (
@@ -85,18 +70,24 @@ export default function ProductsHeader({
 			<CategoryNav>{categoryArray}</CategoryNav>
 			<ActiveCategory>
 				<Header>
-					<h3>{activeCategoryDisplay}</h3>
-					<h5>{activeCategorySubTitle}</h5>
+					<h3>{category_selected.displayName}</h3>
+					{category_selected.subtitle && (
+						<h5>{category_selected.subtitle}</h5>
+					)}
 				</Header>
-				<Body
-					expand={expand}
-					dangerouslySetInnerHTML={{
-						__html: sanitizeHtml(activeCategoryDescription),
-					}}
-				/>
-				<Expand onClick={() => expand_set(!expand)}>
-					{expand === true ? "show less" : "show more"}
-				</Expand>
+				{category_selected.description && (
+					<>
+						<Body
+							expand={expand}
+							dangerouslySetInnerHTML={{
+								__html: sanitizeHtml(category_selected.description),
+							}}
+						/>
+						<Expand onClick={() => expand_set(!expand)}>
+							{expand === true ? "show less" : "show more"}
+						</Expand>
+					</>
+				)}
 			</ActiveCategory>
 		</>
 	)

@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
-import { graphql, useStaticQuery, StaticQuery } from "gatsby"
-import styled, { DefaultTheme } from "styled-components"
+import { graphql } from "gatsby"
+import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
 // import components
 import Main from "../components/Layout/Main"
@@ -18,25 +18,27 @@ import {
 
 // TODO: make sure type checks working
 export interface AboutQuery_I {
-	page: {
-		header: string
-		subHeader: string
-		content: [
-			{
-				__typename: "DatoCmsContentBlock"
-				header: string
-				subHeader: string
-				content: string
-			},
-			{
-				__typename: "DatoCmsQuote"
-				quote: string
-				author: string
-				title: string
-			},
-		]
-		medallion: {
-			url: string
+	data: {
+		page: {
+			header: string
+			subHeader: string
+			content: [
+				{
+					__typename: "DatoCmsContentBlock"
+					header: string
+					subHeader: string
+					content: string
+				},
+				{
+					__typename: "DatoCmsQuote"
+					quote: string
+					author: string
+					title: string
+				},
+			]
+			medallion: {
+				url: string
+			}
 		}
 	}
 }
@@ -45,8 +47,8 @@ export interface AboutQuery_I {
 // component
 // ************
 
-export default function About(): ReactElement {
-	const { page }: AboutQuery_I = useStaticQuery(query)
+export default function About({ data }: AboutQuery_I): ReactElement {
+	const { page } = data
 	const content = page.content[0]
 	const quote = page.content[1]
 
@@ -121,7 +123,7 @@ const Quote = styled(ContentBody)`
 // query
 // ************
 
-const query = graphql`
+export const query = graphql`
 	{
 		page: datoCmsAboutPage {
 			header

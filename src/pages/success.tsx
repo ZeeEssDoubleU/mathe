@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { navigate } from "@reach/router"
 // import components
 import Main from "../components/Layout/Main"
@@ -19,17 +19,19 @@ import {
 // ************
 
 export interface SuccessQuery_I {
-	page: {
-		header: string
-		subHeader: string
-		content: {
-			__typename: "DatoCmsContentBlock"
+	data: {
+		page: {
 			header: string
 			subHeader: string
-			content: string
-		}[]
-		medallion: {
-			url: string
+			content: {
+				__typename: "DatoCmsContentBlock"
+				header: string
+				subHeader: string
+				content: string
+			}[]
+			medallion: {
+				url: string
+			}
 		}
 	}
 }
@@ -38,8 +40,8 @@ export interface SuccessQuery_I {
 // component
 // ************
 
-export default function Success(): ReactElement {
-	const { page }: SuccessQuery_I = useStaticQuery(query)
+export default function Success({ data }: SuccessQuery_I): ReactElement {
+	const { page } = data
 	const content = page.content[0]
 
 	const contentSection: ReactElement = (
@@ -108,7 +110,7 @@ const Body = styled(ContentBody)`
 // query
 // ************
 
-const query = graphql`
+export const query = graphql`
 	{
 		page: datoCmsSuccessPage {
 			header

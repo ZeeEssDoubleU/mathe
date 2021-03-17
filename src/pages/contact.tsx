@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { Page_I } from "../@types/query"
 // import components
 import ContactDetails from "../components/Contact/ContactDetails"
@@ -19,37 +19,40 @@ import {
 // types
 // ************
 
-export interface ContactQuery_I extends Page_I {
-	sections: {
-		nodes: {
-			header: string
-			contentSection: [
-				{
-					internal: { type: "DatoCmsSubHeader" }
-					subHeader: string
-				},
-				{
-					internal: { type: "DatoCmsContent" }
-					content: string
-				},
-				{
-					internal: { type: "DatoCmsContactInfo" }
-					address: string
-					phone: string
-					email: string
-					facebook: string
-					instagram: string
-				},
-				{
-					internal: { type: "DatoCmsForm" }
-					form: string
-				},
-				{
-					internal: { type: "DatoCmsDivider" }
-					divider: string
-				},
-			]
-		}[]
+export interface ContactQuery_I {
+	data: {
+		page: Page_I
+		sections: {
+			nodes: {
+				header: string
+				contentSection: [
+					{
+						internal: { type: "DatoCmsSubHeader" }
+						subHeader: string
+					},
+					{
+						internal: { type: "DatoCmsContent" }
+						content: string
+					},
+					{
+						internal: { type: "DatoCmsContactInfo" }
+						address: string
+						phone: string
+						email: string
+						facebook: string
+						instagram: string
+					},
+					{
+						internal: { type: "DatoCmsForm" }
+						form: string
+					},
+					{
+						internal: { type: "DatoCmsDivider" }
+						divider: string
+					},
+				]
+			}[]
+		}
 	}
 }
 
@@ -57,8 +60,8 @@ export interface ContactQuery_I extends Page_I {
 // component
 // ************
 
-export default function Contact(): ReactElement {
-	const { page, sections }: ContactQuery_I = useStaticQuery(query)
+export default function Contact({ data }: ContactQuery_I): ReactElement {
+	const { sections, page } = data
 
 	const contentSection: ReactElement[] = sections.nodes.map(
 		(section, index1): ReactElement => (
@@ -127,7 +130,7 @@ const Body = styled(ContentBody)`
 // query
 // ************
 
-const query = graphql`
+export const query = graphql`
 	{
 		page: datoCmsContactPage {
 			header

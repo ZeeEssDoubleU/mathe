@@ -2,49 +2,59 @@ import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
-import { Products_I } from "../../@types/query"
+import intersectionBy from "lodash/intersectionBy"
+import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import store
 import { useStore, setActiveCategory } from "../../store/useStore"
 // import utils
 import { convertGrams } from "../../utils/convertGrams"
+import { abbreviate } from "../../utils/abbreviate"
+
+// ************
+// types
+// ************
+
+export interface ProductListings_I {
+	categories: ProductsQuery_I["data"]["allCollections_datocms"]
+	category_selected: {
+		products_datocms: ProductsQuery_I["data"]["products_datocms"]
+		collection_shopify: ProductsQuery_I["data"]["collection_shopify"]
+	}
+}
 
 // ************
 // component
 // ************
 
-// TODO: figure out how to use parameter aliases
-export default function ProductsBody({ products }: Products_I): ReactElement {
-	const { state, dispatch } = useStore()
+export default function ProductsBody({
+	categories,
+	category_selected,
+}: ProductListings_I): ReactElement {
+	const { dispatch } = useStore()
+	const { products_datocms, collection_shopify } = category_selected
 
-	const productArray: ReactElement[] = products.nodes
-		// filter array on products that only match activeCategory
-		.filter((product) => {
-			const categories = product.categories
-			const categoryMap: string[] = categories.map((category) =>
-				category.title.toLowerCase(),
-			)
-
-			// filter on active category
-			return (
-				product.active === true &&
-				categoryMap.includes(state.activeCategory)
-			)
-		})
+	const productArray: ReactElement[] = collection_shopify.products
 		// sort array alphabetically
 		.sort((a, b) => {
 			if (a.title < b.title) return -1
 			if (a.title > b.title) return 1
 			return 0
 		})
-		.map((product, productIndex) => {
-			// turn categories into a tag map to be displayed with products
-			const tagArray = product.categories
+		.map((product_shopify, productIndex) => {
+			// turn categories into a relevant tag map to be displayed with products
+			const tagArray = product_shopify.tags.map((tag) => ({
+				title: tag.toLowerCase(),
+			}))
+			const categoryArray = categories.nodes.map((category) => ({
+				title: category.title.toLowerCase(),
+				slug: category.slug,
+			}))
+			// get intersection of category array and tag array by title prop
+			const relevantTags = intersectionBy(categoryArray, tagArray, "title")
 
-			const tagMap: ReactElement[] = tagArray.map((tag, tagIndex) => {
-				tag.title = tag.title.toLowerCase()
-
+			const tagMap: ReactElement[] = relevantTags.map((tag, tagIndex) => {
 				// DISPLAY category tags for each product
 				return (
 					<Link to={`/products/${tag.slug}`} key={tagIndex}>
@@ -61,46 +71,59 @@ export default function ProductsBody({ products }: Products_I): ReactElement {
 				)
 			})
 
+			const product_datocms = products_datocms.nodes.find(
+				(product) => product.slug === product_shopify.handle,
+			)
+
 			// DISPLAY each product
 			return (
 				<Listing key={productIndex}>
 					<HeaderBlock>
 						<TitleBlock>
-							<Title>{product.title}</Title>
-							{product.subtitle && (
-								<SubTitle>{product.subtitle}</SubTitle>
+							<Title>{product_datocms.title}</Title>
+							{product_datocms.subtitle && (
+								<SubTitle>{product_datocms.subtitle}</SubTitle>
 							)}
 						</TitleBlock>
 						<BuyBlock>
 							<Price>
-								${product.price.toFixed(2)} / {product.weight.amount}{" "}
-								{product.weight.units}
+								${product_shopify.variants[0].priceNumber.toFixed(2)} /{" "}
+								{product_shopify.variants[0].weight}{" "}
+								{abbreviate(product_shopify.variants[0].weightUnit)}
 							</Price>
 							<BuyButton
 								className="snipcart-add-item"
 								// required
-								data-item-id={`${product.slug}`}
-								data-item-price={product.price}
-								data-item-url={`/products/${product.categories[0].slug}`}
+								data-item-id={`${product_datocms.slug}`}
+								data-item-price={
+									product_shopify.variants[0].priceNumber
+								}
+								data-item-url={`/products/${collection_shopify.handle}`}
 								// optional
-								data-item-name={product.title}
-								data-item-description={product.description}
+								data-item-name={product_datocms.title}
+								data-item-description={product_datocms.description}
 								// TODO: make sure this works
-								data-item-size={`${product.weight.amount} ${product.weight.units}`}
+								data-item-size={`${
+									product_shopify.variants[0].weight
+								} ${abbreviate(
+									product_shopify.variants[0].weightUnit,
+								)}`}
 								data-item-weight={convertGrams(
-									product.weight.amount,
-									product.weight.units,
+									product_shopify.variants[0].weight,
+									abbreviate(product_shopify.variants[0].weightUnit),
 								)}
 							>
 								Add to Cart
 							</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>
-					<Description
-						dangerouslySetInnerHTML={{
-							__html: sanitizeHtml(product.description),
-						}}
-					/>
+					{product_datocms.description && (
+						<Description
+							dangerouslySetInnerHTML={{
+								__html: sanitizeHtml(product_datocms.description),
+							}}
+						/>
+					)}
 					<Tags>{tagMap}</Tags>
 				</Listing>
 			)
