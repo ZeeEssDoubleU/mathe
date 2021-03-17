@@ -6,6 +6,7 @@ import React, {
 } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
+import { random } from "lodash"
 import {
 	GatsbyImage,
 	GatsbyImageProps,
@@ -18,15 +19,18 @@ import { useStore } from "../../store/useStore"
 // types
 // ************
 
-interface Query_I {
-	allDatoCmsProductImage: {
+interface BackgroundQuery_I {
+	allCollections: {
 		nodes: {
+			slug: string
 			title: string
-			imageGallery: {
-				alt: string
-				title: string
-				gatsbyImageData: IGatsbyImageData
-			}[]
+			images: {
+				imageGallery: {
+					alt: string
+					title: string
+					gatsbyImageData: IGatsbyImageData
+				}[]
+			}
 		}[]
 	}
 }
@@ -42,45 +46,41 @@ interface Background_I {
 // ************
 
 export default function Background({ path }: Background_I): ReactElement {
-	const { allDatoCmsProductImage }: Query_I = useStaticQuery(query)
-	const categories = allDatoCmsProductImage.nodes
+	const { allCollections }: BackgroundQuery_I = useStaticQuery(query)
+	const categories = allCollections.nodes
 
 	const { state } = useStore()
 	const [categoryIndex, setCategoryIndex] = useState<number>(
-		activeCategoryIndex(),
+		selectedCategoryIndex(),
 	)
 	const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
 	const [initialImageLoaded, setInitialImageLoaded] = useState<boolean>(false)
 
-	// match activeCategoryIndex to product image category
-	function activeCategoryIndex(): number {
-		return categories.findIndex((item) =>
-			item.title
-				.toLowerCase()
-				.includes(
-					!path.includes("/products") || state.activeCategory === "tea"
-						? "all tea"
-						: state.activeCategory,
-				),
+	// match selectedCategoryIndex to product image category
+	function selectedCategoryIndex(): number {
+		return categories.findIndex(
+			(category) => category.slug === state.selectedCategory,
 		)
 	}
 
 	// data structure
-	// [category] = [img][img][img]
-	// [category] = [img][img][img]
-	// [category] = [img][img][img]
+	// [category] = [img, img, img, ...]
+	// [category] = [img, img, img, ...]
+	// [category] = [img, img, img, ...]
 	const backgroundMap: ReactElement[] = categories.map(
 		(category, index1): ReactElement => {
 			return (
 				<ToggleCategory
-					key={index1}
+					key={category.slug}
+					id={category.slug}
 					className={categoryIndex === index1 ? "active" : ""}
 				>
 					<Category
-						key={index1}
+						key={category.slug}
+						id={category.slug}
 						className={categoryIndex === index1 ? "active" : ""}
 					>
-						{category.imageGallery.map((img, index2) => {
+						{category.images.imageGallery.map((img, index2) => {
 							return (
 								<ToggleImage
 									key={index2}
@@ -114,16 +114,15 @@ export default function Background({ path }: Background_I): ReactElement {
 
 	// cycle through landing background
 	const cycleBg = useCallback(
-		(activeGalleryLength: number, categoryIndex: number): void => {
+		(selectedGalleryLength: number): void => {
 			// pick new random index
-			const randomIndex = Math.floor(
-				Math.random() * Math.floor(activeGalleryLength),
-			)
+			const randomIndex = random(0, selectedGalleryLength)
 
 			// check if new random index equals current index
 			const newIndex =
 				randomIndex === backgroundIndex
-					? (backgroundIndex + 1) % activeGalleryLength
+					? // shift background index +1
+					  (backgroundIndex + 1) % selectedGalleryLength
 					: randomIndex
 
 			setBackgroundIndex(newIndex)
@@ -132,28 +131,29 @@ export default function Background({ path }: Background_I): ReactElement {
 	)
 
 	// effect to set background category
-	// effect resets cycle upon changing activeCategory
+	// effect resets cycle upon changing selectedCategory
 	useLayoutEffect(() => {
-		const activeGalleryLength: number =
-			categories[activeCategoryIndex()].imageGallery.length
+		const storedIndex: number = selectedCategoryIndex()
+		const selectedGalleryLength: number =
+			categories[storedIndex].images.imageGallery.length
 
-		// set activeCategoryIndex() on page or activeCategory change
-		setCategoryIndex(activeCategoryIndex())
+		// set storedIndex on page or selectedCategory change
+		setCategoryIndex(storedIndex)
 
-		// set backgroundIndex if greater than or equal to new activeGalleryLength
+		// set backgroundIndex if greater than or equal to new selectedGalleryLength
 		// [x, y, z].length === 3.  Index of 3 does not exist.
-		if (backgroundIndex >= activeGalleryLength) {
-			cycleBg(activeGalleryLength, activeCategoryIndex())
+		if (backgroundIndex >= selectedGalleryLength) {
+			cycleBg(selectedGalleryLength)
 		}
 		// set cycle interval
 		const backgroundInterval = setInterval(
-			() => cycleBg(activeGalleryLength, activeCategoryIndex()),
+			() => cycleBg(selectedGalleryLength),
 			8000,
 		)
 
 		// clear interval upon changing product category
 		return () => clearInterval(backgroundInterval)
-	}, [path, state?.activeCategory, backgroundIndex, cycleBg, categories])
+	}, [path, state?.selectedCategory, backgroundIndex, cycleBg, categories])
 
 	return <Images>{backgroundMap}</Images>
 }
@@ -217,16 +217,19 @@ const Image = styled(GatsbyImage)<Image_I>`
 
 const query = graphql`
 	{
-		allDatoCmsProductImage {
+		allCollections: allDatoCmsCategory {
 			nodes {
+				slug
 				title
-				imageGallery {
-					alt
-					title
-					gatsbyImageData(
-						layout: FULL_WIDTH
-						imgixParams: { auto: "format, compress", maxW: 2560 }
-					)
+				images {
+					imageGallery {
+						alt
+						title
+						gatsbyImageData(
+							layout: FULL_WIDTH
+							imgixParams: { auto: "format, compress", maxW: 2560 }
+						)
+					}
 				}
 			}
 		}

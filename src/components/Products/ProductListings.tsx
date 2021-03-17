@@ -2,12 +2,13 @@ import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
-import intersectionBy from "lodash/intersectionBy"
+import { intersectionBy, sortBy } from "lodash"
+// import types
 import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import store
-import { useStore, setActiveCategory } from "../../store/useStore"
+import { useStore, setSelectedCategory } from "../../store/useStore"
 // import utils
 import { convertGrams } from "../../utils/convertGrams"
 import { abbreviate } from "../../utils/abbreviate"
@@ -35,14 +36,9 @@ export default function ProductsBody({
 	const { dispatch } = useStore()
 	const { products_datocms, collection_shopify } = category_selected
 
-	const productArray: ReactElement[] = collection_shopify.products
-		// sort array alphabetically
-		.sort((a, b) => {
-			if (a.title < b.title) return -1
-			if (a.title > b.title) return 1
-			return 0
-		})
-		.map((product_shopify, productIndex) => {
+	const productsSorted = sortBy(collection_shopify.products, "title")
+	const productArray: ReactElement[] = productsSorted.map(
+		(product_shopify, productIndex) => {
 			// turn categories into a relevant tag map to be displayed with products
 			const tagArray = product_shopify.tags.map((tag) => ({
 				title: tag.toLowerCase(),
@@ -52,7 +48,10 @@ export default function ProductsBody({
 				slug: category.slug,
 			}))
 			// get intersection of category array and tag array by title prop
-			const relevantTags = intersectionBy(categoryArray, tagArray, "title")
+			const relevantTags: {
+				title: string
+				slug: string
+			}[] = intersectionBy(categoryArray, tagArray, "title")
 
 			const tagMap: ReactElement[] = relevantTags.map((tag, tagIndex) => {
 				// DISPLAY category tags for each product
@@ -60,10 +59,8 @@ export default function ProductsBody({
 					<Link to={`/products/${tag.slug}`} key={tagIndex}>
 						<StyledButton
 							key={tagIndex}
-							onClick={() => {
-								// set active category when tag clicked
-								setActiveCategory(dispatch, tag.title)
-							}}
+							// set active category when tag clicked
+							onClick={() => setSelectedCategory(dispatch, tag.slug)}
 						>
 							{tag.title}
 						</StyledButton>
@@ -71,18 +68,24 @@ export default function ProductsBody({
 				)
 			})
 
+			// get matching product from datocms
 			const product_datocms = products_datocms.nodes.find(
-				(product) => product.slug === product_shopify.handle,
+				(product) => product.slug === "thing",
 			)
+			// consolidate matched product values
+			const product_slug = product_datocms?.slug || product_shopify.handle
+			const product_title = product_datocms?.title || product_shopify.title
+			const product_description =
+				product_datocms?.description || product_shopify.descriptionHtml
 
 			// DISPLAY each product
 			return (
 				<Listing key={productIndex}>
 					<HeaderBlock>
 						<TitleBlock>
-							<Title>{product_datocms.title}</Title>
-							{product_datocms.subtitle && (
-								<SubTitle>{product_datocms.subtitle}</SubTitle>
+							<Title>{product_title}</Title>
+							{product_datocms?.subtitle && (
+								<SubTitle>{product_datocms?.subtitle}</SubTitle>
 							)}
 						</TitleBlock>
 						<BuyBlock>
@@ -91,17 +94,18 @@ export default function ProductsBody({
 								{product_shopify.variants[0].weight}{" "}
 								{abbreviate(product_shopify.variants[0].weightUnit)}
 							</Price>
+							{/* // TODO: change this out for shopify buy button */}
 							<BuyButton
 								className="snipcart-add-item"
-								// required
-								data-item-id={`${product_datocms.slug}`}
+								// *** equired
+								data-item-id={`${product_slug}`}
 								data-item-price={
 									product_shopify.variants[0].priceNumber
 								}
 								data-item-url={`/products/${collection_shopify.handle}`}
-								// optional
-								data-item-name={product_datocms.title}
-								data-item-description={product_datocms.description}
+								// *** optional
+								data-item-name={product_title}
+								data-item-description={product_description}
 								// TODO: make sure this works
 								data-item-size={`${
 									product_shopify.variants[0].weight
@@ -117,17 +121,16 @@ export default function ProductsBody({
 							</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>
-					{product_datocms.description && (
-						<Description
-							dangerouslySetInnerHTML={{
-								__html: sanitizeHtml(product_datocms.description),
-							}}
-						/>
-					)}
+					<Description
+						dangerouslySetInnerHTML={{
+							__html: sanitizeHtml(product_description),
+						}}
+					/>
 					<Tags>{tagMap}</Tags>
 				</Listing>
 			)
-		})
+		},
+	)
 
 	// DISPLAY products
 	return (

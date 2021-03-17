@@ -13,7 +13,7 @@ import { useStaticQuery, graphql, PageProps } from "gatsby"
 // ************
 
 export interface InitState_I {
-	activeCategory: string
+	selectedCategory: string
 	transition_duration_page: number
 	transition_triggered_page: boolean
 	transition_duration_background: number
@@ -52,7 +52,7 @@ export interface StoreQuery_I {
 // action creators
 // ************
 
-export function setActiveCategory(
+export function setSelectedCategory(
 	dispatch: Dispatch<Action_Props>,
 	payload: string,
 ): void {
@@ -69,25 +69,28 @@ export function transitionTriggered(
 // initial state
 // ************
 
-// if not a product page, active category equals yerba mate
-// otherwise, active category equal product page category
-export function activeCategory({ categories, path }: Init_I): string {
-	return !path.includes("/products")
-		? "yerba mate"
-		: categories.nodes
-				.filter((category) => path.includes(category.slug))[0]
-				.title.toLowerCase()
+// if not a product page, selected category equals yerba-mate
+// otherwise, selected category equal product page category
+export function selectedCategory({ categories, path }: Init_I): string {
+	if (!path.includes("/products")) {
+		return "all-tea"
+	}
+
+	return (
+		categories.nodes.find((category) => path.includes(category.slug))?.slug ||
+		"yerba-mate"
+	)
 }
 
 const initState: InitState_I = {
-	activeCategory: "yerba mate",
+	selectedCategory: "yerba-mate",
 	transition_duration_page: 0.7,
 	transition_triggered_page: false,
 	transition_duration_background: 0.2,
 }
 function init({ categories, path }: Init_I): InitState_I {
 	return {
-		activeCategory: activeCategory({ categories, path }),
+		selectedCategory: selectedCategory({ categories, path }),
 		transition_duration_page: 0.7,
 		transition_triggered_page: false,
 		transition_duration_background: 0.2,
@@ -101,7 +104,7 @@ function init({ categories, path }: Init_I): InitState_I {
 function reducer(state: InitState_I, action: Action_Props) {
 	switch (action.type) {
 		case "SET_ACTIVE_PRODUCTS_CATEGORY":
-			return { ...state, activeCategory: action.payload }
+			return { ...state, selectedCategory: action.payload }
 		case "TRANSITION_TRIGGERED":
 			return { ...state, transition_triggered_page: action.payload }
 		default:
@@ -125,9 +128,9 @@ export function StoreProvider({ children, path }: Store_I): ReactElement {
 	// ie. computes state resulting from function
 	const [state, dispatch] = useReducer(reducer, { categories, path }, init)
 
-	// change active category on path change
+	// change selected category on path change
 	useEffect(() => {
-		setActiveCategory(dispatch, activeCategory({ categories, path }))
+		setSelectedCategory(dispatch, selectedCategory({ categories, path }))
 	}, [path])
 
 	return (

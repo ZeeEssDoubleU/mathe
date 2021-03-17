@@ -2,6 +2,8 @@ import React, { ReactElement, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
+import { sortBy } from "lodash"
+// import types
 import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import {
@@ -31,16 +33,9 @@ export default function ProductsHeader({
 	// toggle button text
 	const [expand, expand_set] = useState<boolean>(false)
 
-	const categoryArray: ReactElement[] = categories.nodes
-		.filter((category) => {
-			return category.noNavDisplay === false
-		})
-		// sort array alphabetically
-		.sort((a, b) => {
-			if (a.displayName < b.displayName) return -1
-			if (a.displayName > b.displayName) return 1
-			return 0
-		})
+	const categoriesSorted = sortBy(categories.nodes, "displayName")
+	const categoryArray: ReactElement[] = categoriesSorted
+		.filter((category) => category.noNavDisplay === false)
 		.map((category, categoryIndex) => {
 			// set all titles to lowercase for compare and sort
 			category.title = category.title?.toLowerCase()
@@ -62,13 +57,11 @@ export default function ProductsHeader({
 			)
 		})
 
-	console.log("categoryArray:", categoryArray)
-
 	// DISPLAY category buttons (plural)
 	return (
 		<>
 			<CategoryNav>{categoryArray}</CategoryNav>
-			<ActiveCategory>
+			<SelectedCategory>
 				<Header>
 					<h3>{category_selected.displayName}</h3>
 					{category_selected.subtitle && (
@@ -88,7 +81,7 @@ export default function ProductsHeader({
 						</Expand>
 					</>
 				)}
-			</ActiveCategory>
+			</SelectedCategory>
 		</>
 	)
 }
@@ -97,9 +90,6 @@ export default function ProductsHeader({
 // styles
 // ************
 
-const ActiveCategory = styled.div`
-	margin: 48px 0;
-`
 const Body = styled(ContentBody)<{ expand: boolean }>`
 	max-height: ${(props) => (props.expand === false ? "9em" : "100%")};
 	margin-bottom: 0;
@@ -126,6 +116,9 @@ const Expand = styled(CategoryButton)`
 `
 const Header = styled(ContentHeader)`
 	text-align: left;
+`
+const SelectedCategory = styled.div`
+	margin: 48px 0;
 `
 const StyledButton = styled(CategoryButton)`
 	&:hover {
