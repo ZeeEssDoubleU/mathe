@@ -73,8 +73,6 @@ async function createProduct(body) {
 		title: body.title,
 		subtitle: null,
 		description: body.body_html,
-		price: null, // TODO: remove
-		weight: null, // TODO: remove
 		categories: null,
 		image: null,
 		grade: null,

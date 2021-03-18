@@ -1,5 +1,3 @@
-import { GatsbyImageFluidProps } from "gatsby-plugin-image"
-
 export interface Page_I {
 	header: string
 	subHeader: string
@@ -14,7 +12,8 @@ export interface ProductsQuery_I {
 			nodes: {
 				slug: string
 				title: string
-				displayName: string
+				navDisplay: string
+				tagDisplay: string
 				description: string
 				noNavDisplay: boolean
 			}[]
@@ -23,7 +22,8 @@ export interface ProductsQuery_I {
 			slug: string
 			title: string
 			subtitle: string
-			displayName: string
+			navDisplay: string
+			tagDisplay: string
 			description: string
 		}
 		collection_shopify: {

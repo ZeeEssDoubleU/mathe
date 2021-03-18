@@ -2,12 +2,6 @@ const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 const helpers_collections = require("./helpers")
 
-// TODO: remove fields from datoCMS
-// price
-// weight
-// grade
-// categories ???
-
 // ************
 // controller
 // ************
@@ -32,35 +26,34 @@ const collections_get = async (req, res) => {
 
 const collection_create = async (req, res) => {
 	const { body } = req
-	console.log("req.body:", req.body) // ? debug
+	// console.log("req.body:", req.body) // ? debug
+	// res.status(200).send("OK") // ? debug
 
-	// try {
-	// 	// 1 - check if collection exists in DatoCMS
-	// 	const existingCollection = await helpers_collections.getCollection(body)
+	try {
+		// 1 - check if collection exists in DatoCMS
+		const existingCollection = await helpers_collections.getCollection(body)
 
-	// 	// 2 - check if collection exists on DatoCMS
-	// 	if (existingCollection) {
-	// 		console.log("...collection found.  Cancel creation.") // ? debug
+		// 2 - check if collection exists on DatoCMS
+		if (existingCollection) {
+			console.log("...collection found.  Cancel creation.") // ? debug
 
-	// 		// 2a - return duplicate error
-	// 		return res
-	// 			.status(409)
-	// 			.send(
-	// 				"Collection title already exists on DatoCMS.  Must be unique.",
-	// 			)
-	// 	} else {
-	// 		console.log("...collection NOT found.  Creating collection...") // ? debug
+			// 2a - return duplicate error
+			return res
+				.status(409)
+				.send(
+					"Collection title already exists on DatoCMS.  Slug and ShopifyID must be unique.",
+				)
+		} else {
+			console.log("...collection NOT found.  Creating collection...") // ? debug
 
-	// 		// 2b - create collection on DatoCMS
-	// 		await helpers_collections.createCollection(body)
-	// 		return res.status(200).send("Collection created on DatoCMS.")
-	// 	}
-	// } catch (err) {
-	// 	console.error(err)
-	// 	return res.status(500).send("Internal server error")
-	// }
-
-	res.status(200)
+			// 2b - create collection on DatoCMS
+			await helpers_collections.createCollection(body)
+			return res.status(200).send("Collection created on DatoCMS.")
+		}
+	} catch (err) {
+		console.error(err)
+		return res.status(500).send("Internal server error")
+	}
 }
 
 // ************
@@ -69,7 +62,8 @@ const collection_create = async (req, res) => {
 
 const collection_update = async (req, res) => {
 	const { body } = req
-	console.log("req.body:", req.body) // ? debug
+	// console.log("req.body:", req.body) // ? debug
+	// res.status(200).send("OK") // ? debug
 
 	try {
 		// 1 - check if collection exists on DatoCMS
@@ -81,7 +75,6 @@ const collection_update = async (req, res) => {
 
 			// 2a - update collection on DatoCMS
 			await datocms.items.update(existingCollection.id, {
-				active: body.status === "active" ? true : false,
 				shopifyId: String(body.id), // API specifies string
 				title: body.title,
 				description: body.body_html,
@@ -109,6 +102,7 @@ const collection_update = async (req, res) => {
 const collection_delete = async (req, res) => {
 	const { body } = req
 	// console.log("req.body:", req.body) // ? debug
+	// res.status(200).send("OK") // ? debug
 
 	try {
 		// 1 - check if collection exists on DatoCMS

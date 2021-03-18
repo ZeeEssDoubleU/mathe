@@ -68,15 +68,14 @@ async function createCollection(body) {
 
 	const res = await datocms.items.create({
 		itemType: String(COLLECTION_MODEL_ID), // API specifies string
+		noNavDisplay: false,
 		shopifyId: String(body.id), // API specifies string
 		title: body.title,
 		subtitle: null,
+		navDisplay: body.title,
+		tagDisplay: body.title,
 		description: body.body_html,
-		price: null, // TODO: remove
-		categories: null,
-		image: null,
-		grade: null,
-		ingredients: null,
+		images: null,
 		slug: body.handle,
 	})
 

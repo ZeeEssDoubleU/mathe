@@ -73,7 +73,8 @@ export const query = graphql`
 			nodes {
 				slug
 				title
-				displayName
+				navDisplay
+				tagDisplay
 				description
 				noNavDisplay
 			}
@@ -83,7 +84,8 @@ export const query = graphql`
 			slug
 			title
 			subtitle
-			displayName
+			navDisplay
+			tagDisplay
 			description
 		}
 		collection_shopify: shopifyCollection(handle: { eq: $collection_slug }) {

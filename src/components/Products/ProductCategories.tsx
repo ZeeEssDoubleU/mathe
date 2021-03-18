@@ -33,7 +33,7 @@ export default function ProductsHeader({
 	// toggle button text
 	const [expand, expand_set] = useState<boolean>(false)
 
-	const categoriesSorted = sortBy(categories.nodes, "displayName")
+	const categoriesSorted = sortBy(categories.nodes, "navDisplay")
 	const categoryArray: ReactElement[] = categoriesSorted
 		.filter((category) => category.noNavDisplay === false)
 		.map((category, categoryIndex) => {
@@ -50,8 +50,7 @@ export default function ProductsHeader({
 							category.slug === category_selected.slug ? "active" : ""
 						}
 					>
-						{/* change button display from 'tea' to 'all' */}
-						{category.title === "tea" ? "all" : category.title}
+						{category.navDisplay}
 					</StyledButton>
 				</Link>
 			)
@@ -63,7 +62,7 @@ export default function ProductsHeader({
 			<CategoryNav>{categoryArray}</CategoryNav>
 			<SelectedCategory>
 				<Header>
-					<h3>{category_selected.displayName}</h3>
+					<h3>{category_selected.title}</h3>
 					{category_selected.subtitle && (
 						<h5>{category_selected.subtitle}</h5>
 					)}

@@ -72,12 +72,11 @@ export default function Background({ path }: Background_I): ReactElement {
 			return (
 				<ToggleCategory
 					key={category.slug}
-					id={category.slug}
 					className={categoryIndex === index1 ? "active" : ""}
+					title={category.slug}
 				>
 					<Category
 						key={category.slug}
-						id={category.slug}
 						className={categoryIndex === index1 ? "active" : ""}
 					>
 						{category.images.imageGallery.map((img, index2) => {
@@ -87,6 +86,7 @@ export default function Background({ path }: Background_I): ReactElement {
 									className={
 										backgroundIndex === index2 ? "active" : ""
 									}
+									title={img.title}
 								>
 									<ImageWrapper
 										key={index2}

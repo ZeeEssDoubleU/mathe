@@ -44,9 +44,10 @@ export default function ProductsBody({
 				title: tag.toLowerCase(),
 			}))
 			const categoryArray = categories.nodes.map((category) => ({
-				title: category.title.toLowerCase(),
+				title: category.tagDisplay.toLowerCase(),
 				slug: category.slug,
 			}))
+
 			// get intersection of category array and tag array by title prop
 			const relevantTags: {
 				title: string

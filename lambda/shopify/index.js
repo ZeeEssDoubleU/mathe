@@ -20,8 +20,17 @@ router.get(`/`, async (req, res) => {
 router.get(`/sync`, async (req, res) => {
 	res.status(200).send(`Shopify sync awaiting data.`)
 })
+
 router.get("/sync/collections", controllers_collections.collections_get)
 router.post("/sync/collections", controllers_collections.collection_create)
+router.post(
+	"/sync/collections/update",
+	controllers_collections.collection_update,
+)
+router.post(
+	"/sync/collections/delete",
+	controllers_collections.collection_delete,
+)
 router.get("/sync/products", controllers_products.products_get)
 router.post("/sync/products", controllers_products.product_create)
 router.post("/sync/products/update", controllers_products.product_update)
