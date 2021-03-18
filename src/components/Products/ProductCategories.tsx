@@ -40,9 +40,11 @@ export default function ProductsHeader({
 			// set all titles to lowercase for compare and sort
 			category.title = category.title?.toLowerCase()
 
+			console.log("category.slug:", category.slug)
+			console.log("category_selected.slug:", category_selected.slug)
+
 			// DISPLAY category button
 			return (
-				// TODO: will need to modify filter when mobile nav is created
 				<Link to={`/products/${category.slug}`} key={categoryIndex}>
 					<StyledButton
 						key={categoryIndex}
