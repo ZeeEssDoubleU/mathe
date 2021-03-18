@@ -97,21 +97,20 @@ const Inner = styled.div`
 		}
 	}
 	.left {
-		transform: rotate(45deg) translateY(-50%);
-		transition: transform 0.3s, transform-origin 0.3s;
+		transform: translateY(-50%) rotate(45deg);
+		transition: transform 0.3s;
 	}
 	.right {
-		transform: rotate(-45deg) translateY(-50%);
-		transition: transform 0.3s, transform-origin 0.3s;
+		transform: translateY(-50%) rotate(-45deg);
+		transition: transform 0.3s;
 	}
+	// TODO: fix hover anim
 	&:hover {
 		.left {
-			transform-origin: calc(50% + 33%) center;
-			transform: rotate(45deg) translateY(-50%) translateX(33%);
+			transform: translateY(-50%) translateX(33%) rotate(45deg);
 		}
 		.right {
-			transform-origin: calc(50% - 33%) center;
-			transform: rotate(-45deg) translateY(-50%) translateX(-33%);
+			transform: translateY(-50%) translateX(-33%) rotate(-45deg);
 		}
 	}
 `
