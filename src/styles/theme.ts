@@ -1,39 +1,80 @@
-import "styled-components"
+import { DefaultTheme } from "styled-components"
 
 // merge theme (below) to DefaultTheme
 declare module "styled-components" {
-  type Theme = typeof theme
-  export interface DefaultTheme extends Theme {}
+	export interface DefaultTheme {
+		appGreen: string
+		appGreenPartial: string
+		appGold: string
+		shadow: string
+		background: string
+
+		// font families
+		fontMain: string
+		fontMainWeight: number
+		fontMainWeight_Bold: number
+		fontMainWeight_Heavy: number
+		fontMainWeight_Header: number
+		fontMainWeight_SubHeader: number
+		fontMainWeight_SectionHeader: number
+		fontMainWeight_Nav: number
+		fontMainWeight_Link: number
+		fontMainWeight_Cart: number
+
+		fontAccent: string
+		fontAccentWeight: number
+
+		// media queries (px) - width
+		mobile: number
+		tablet: number
+		desktop: number
+		wide: number
+		fullhd: number
+
+		// media queries (px) - height
+		short: number
+		med: number
+		tall: number
+		giant: number
+	}
 }
 
 // declare theme
-export const theme = {
-  // general
-  appGreen: "hsla(86, 48%, 48%, 1.0)",
-  appGreenPartial: "86, 48%, 48%",
-  appGold: "hsla(43, 47%, 35%, 1.0)",
-  shadow: "black 0 2px",
-  background: "hsla(0, 0%, 0%, 0.85)",
+export const theme: DefaultTheme = {
+	// general
+	appGreen: "hsla(86, 48%, 48%, 1.0)",
+	appGreenPartial: "86, 48%, 48%",
+	appGold: "hsla(43, 47%, 35%, 1.0)",
+	shadow: "black 0 2px",
+	background: "hsla(0, 0%, 0%, 0.85)",
 
-  // font families
-  fontMain: "Montserrat, Avenir, Arial, sans-serif",
-  fontMainWeight: 200,
-  fontItalic: "Merriweather, Garamond, serif",
-  fontCartWeight: 300,
-  fontCartLinkWeight: 400,
+	// font families
+	fontMain: "Montserrat, Avenir, Arial, sans-serif",
+	fontMainWeight: 200,
+	fontMainWeight_Bold: 300,
+	fontMainWeight_Heavy: 500,
+	fontMainWeight_Header: 400,
+	fontMainWeight_SubHeader: 300,
+	fontMainWeight_SectionHeader: 300,
+	fontMainWeight_Nav: 400,
+	fontMainWeight_Link: 400,
+	fontMainWeight_Cart: 300,
 
-  // media queries (px) - width
-  mobile: 320,
-  tablet: 768,
-  desktop: 1024,
-  wide: 1216,
-  fullhd: 1408,
+	fontAccent: "Merriweather, Garamond, serif",
+	fontAccentWeight: 300,
 
-  // media queries (px) - height
-  short: 480,
-  med: 720,
-  tall: 960,
-  giant: 1080,
+	// media queries (px) - width
+	mobile: 320,
+	tablet: 768,
+	desktop: 1024,
+	wide: 1216,
+	fullhd: 1408,
+
+	// media queries (px) - height
+	short: 480,
+	med: 720,
+	tall: 960,
+	giant: 1080,
 }
 
 // // Spacing and sizing guide

@@ -89,7 +89,7 @@ const List = styled.ul`
 		a {
 			color: ${({ theme }) => theme.appGreen};
 			font-size: 14px;
-			font-weight: 400;
+			font-weight: ${({ theme }) => theme.fontMainWeight_Link};
 			text-decoration: none;
 			transition: color 300ms;
 		}

@@ -109,7 +109,7 @@ const Header = styled(ContentHeader)`
 	margin-bottom: 16px;
 
 	font-size: 24px;
-	font-weight: 300;
+	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
 	text-align: left;
 	text-transform: uppercase;
 	color: ${({ theme }) => theme.appGreen};

@@ -6,7 +6,7 @@ export const CategoryButton = styled.button`
 	border-radius: 1em;
 	color: ${({ theme }) => theme.appGreen};
 	font-size: 14px;
-	font-weight: 300;
+	font-weight: ${({ theme }) => theme.fontMainWeight_Bold};
 	margin: 4px;
 	padding: 4px 16px;
 	text-transform: uppercase;
@@ -38,14 +38,14 @@ export const ContentHeader = styled.div`
 	text-align: center;
 	h3 {
 		font-size: 30px;
-		font-weight: 300;
+		font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
 	}
 	h5 {
 		color: ${({ theme }) => theme.appGreen};
-		font-family: ${({ theme }) => theme.fontItalic};
+		font-family: ${({ theme }) => theme.fontAccent};
 		font-style: italic;
 		font-size: 16px;
-		font-weight: 300;
+		font-weight: ${({ theme }) => theme.fontAccentWeight};
 		letter-spacing: 0.03em;
 		margin: 0;
 	}

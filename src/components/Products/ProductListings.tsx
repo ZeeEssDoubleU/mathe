@@ -71,7 +71,7 @@ export default function ProductsBody({
 
 			// get matching product from datocms
 			const product_datocms = products_datocms.nodes.find(
-				(product) => product.slug === "thing",
+				(product) => product.slug === product_shopify.handle,
 			)
 			// consolidate matched product values
 			const product_slug = product_datocms?.slug || product_shopify.handle
@@ -184,19 +184,19 @@ const Listing = styled.div`
 const Price = styled.p`
 	/* color: ${({ theme }) => theme.appGreen}; */
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: ${({ theme }) => theme.fontMainWeight_Heavy};
 `
 const ProductCount = styled.p`
 	margin: 48px 0;
 	.count {
-		font-weight: 500;
+		font-weight: ${({ theme }) => theme.fontMainWeight_Heavy};
 		color: ${({ theme }) => theme.appGreen};
 	}
 `
 const SubTitle = styled.h5`
 	font-size: 14px;
 	font-style: italic;
-	font-weight: 300;
+	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
 `
 const StyledButton = styled(CategoryButton)`
 	font-size: 12px;
@@ -210,6 +210,6 @@ const Tags = styled(CategoryNav)`
 const TitleBlock = styled.div``
 const Title = styled.h4`
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
 	text-transform: uppercase;
 `

@@ -104,16 +104,16 @@ const Quote = styled(ContentBody)`
 	}
 	.author {
 		font-size: 24px;
-		font-weight: 300;
+		font-weight: ${({ theme }) => theme.fontMainWeight_Bold};
 		text-align: right;
 	}
 	.title {
 		margin: 0;
 		text-align: right;
-		font-family: ${({ theme }) => theme.fontItalic};
+		font-family: ${({ theme }) => theme.fontAccent};
 		font-style: italic;
 		font-size: 16px;
-		font-weight: 300;
+		font-weight: ${({ theme }) => theme.fontAccentWeight};
 		letter-spacing: 0.03em;
 		color: ${({ theme }) => theme.appGreen};
 	}

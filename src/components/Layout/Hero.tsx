@@ -63,7 +63,7 @@ const Headers = styled.div`
 `
 const Header = styled.h1`
 	font-size: 24px;
-	font-weight: 400;
+	font-weight: ${({ theme }) => theme.fontMainWeight_Header};
 	text-shadow: ${({ theme }) => theme.shadow};
 	@media (min-width: ${({ theme }) => theme.tablet}px) {
 		font-size: 32px;
@@ -77,7 +77,7 @@ const SubHeader = styled.h1`
 	background: hsla(${({ theme }) => theme.appGreenPartial}, 0.85);
 	border-radius: 1em;
 	font-size: 16px;
-	font-weight: 300;
+	font-weight: ${({ theme }) => theme.fontMainWeight_SubHeader};
 	/* letter-spacing: 0.1em; */
 	margin: 12px 0;
 	padding: 4px 16px;

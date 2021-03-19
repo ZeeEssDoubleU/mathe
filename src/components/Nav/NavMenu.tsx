@@ -29,7 +29,7 @@ export default function NavMenu(): ReactElement {
 			// set navShift based on how many extra navLinks carry off the page.
 			// navShift sets the correct starting point for nav mouseMove effect
 			// ex: if each navLink is 25vw and there's 2 extra, navShift should equal 50
-			const navShift: number = 0
+			const navShift = 0
 
 			const moveX: number = navShift * (mouseX / navWidth)
 
@@ -170,7 +170,7 @@ const Container = styled.div`
 			transition: background 200ms;
 			h1 {
 				font-size: 24px;
-				font-weight: 400;
+				font-weight: ${({ theme }) => theme.fontMainWeight_Nav};
 				text-shadow: ${({ theme }) => theme.shadow};
 				white-space: normal;
 				@media (min-height: ${({ theme }) => theme.tall}px) {
@@ -190,10 +190,10 @@ const Container = styled.div`
 				transform: translateY(-2em);
 				padding: 0.5em 1em;
 				margin: 0.5em 0;
-				font-family: ${({ theme }) => theme.fontItalic};
+				font-family: ${({ theme }) => theme.fontAccent};
 				font-size: 12px;
 				font-style: italic;
-				font-weight: 300;
+				font-weight: ${({ theme }) => theme.fontAccentWeight};
 				letter-spacing: 0.6px;
 				line-height: 1em;
 				opacity: 0;

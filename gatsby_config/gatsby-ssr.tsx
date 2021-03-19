@@ -12,21 +12,22 @@ export const onRenderBody = ({
 }: RenderBodyArgs): void => {
 	const headComponents = [
 		<link
-			key="snipcart_preconnect_app"
+			key="snipcart_app_preconnect"
 			rel="preconnect"
 			href="https://app.snipcart.com"
 		/>,
 		<link
-			key="snipcart_preconnect_cdn"
+			key="snipcart_cdn_preconnect"
 			rel="preconnect"
 			href="https://cdn.snipcart.com"
 		/>,
-		// preload style per lighthouse recommendation
+		// ! preload style per lighthouse recommendation
 		<link
-			key="snipcart_preload_cdn"
+			key="snipcart_style_preload"
 			rel="preload"
-			as="style"
 			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
+			as="style"
+			media="screen"
 		/>,
 		<link
 			key="snipcart_style"
