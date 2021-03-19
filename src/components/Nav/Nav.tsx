@@ -29,6 +29,8 @@ export default function Nav(): ReactElement {
 	return (
 		<Container>
 			<h1 className="nav-logo">
+				{/* preload image per lighthouse recommendation */}
+				<link rel="preload" as="image" href={logo.image.url} />
 				<NavLogo
 					src={logo.image.url}
 					title={logo.image.title}
