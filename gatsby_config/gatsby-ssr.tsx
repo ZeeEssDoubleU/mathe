@@ -26,7 +26,7 @@ export const onRenderBody = ({
 			key="snipcart_preload_cdn"
 			rel="preload"
 			as="style"
-			href={logo.image.url}
+			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
 		/>,
 		<link
 			key="snipcart_style"
