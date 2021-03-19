@@ -33,6 +33,7 @@ export default function Nav(): ReactElement {
 					src={logo.image.url}
 					title={logo.image.title}
 					alt={logo.image.alt}
+					loading="eager"
 				/>
 			</h1>
 			<NavMenu />

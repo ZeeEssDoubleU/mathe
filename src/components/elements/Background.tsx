@@ -35,7 +35,7 @@ interface BackgroundQuery_I {
 	}
 }
 interface Image_I extends GatsbyImageProps {
-	initialImageLoaded: boolean
+	initialimageloaded: string
 }
 interface Background_I {
 	path: string
@@ -100,7 +100,7 @@ export default function Background({ path }: Background_I): ReactElement {
 											alt={img.alt}
 											image={img.gatsbyImageData}
 											onLoad={() => setInitialImageLoaded(true)}
-											initialImageLoaded={initialImageLoaded}
+											initialimageloaded={initialImageLoaded.toString()}
 										/>
 									</ImageWrapper>
 								</ToggleImage>
@@ -206,8 +206,8 @@ const Image = styled(GatsbyImage)<Image_I>`
 	height: 100%;
 	width: 100%;
 	visibility: ${(props) =>
-		props.initialImageLoaded === true ? "visible" : "hidden"};
-	opacity: ${(props) => (props.initialImageLoaded === true ? 1 : 0)};
+		props.initialimageloaded === "true" ? "visible" : "hidden"};
+	opacity: ${(props) => (props.initialimageloaded === "true" ? 1 : 0)};
 	transition: opacity 2000ms, visibility 2000ms;
 `
 
