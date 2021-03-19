@@ -47,7 +47,7 @@ export default {
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-sitemap",
-		`gatsby-plugin-preact`,
+		"gatsby-plugin-preact",
 		"gatsby-plugin-robots-txt",
 		"gatsby-transformer-sharp",
 		"gatsby-transformer-json",
@@ -63,6 +63,7 @@ export default {
 				},
 			},
 		},
+		"gatsby-plugin-preload-fonts",
 		{
 			resolve: "gatsby-plugin-manifest",
 			options: {

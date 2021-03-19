@@ -21,19 +21,14 @@ export const onRenderBody = ({
 			rel="preconnect"
 			href="https://cdn.snipcart.com"
 		/>,
-		// ! preload style per lighthouse recommendation
-		<link
-			key="snipcart_style_preload"
-			rel="preload"
-			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
-			as="style"
-			media="screen"
-		/>,
+		// load CSS async
+		// https://www.npmjs.com/package/fg-loadcss
 		<link
 			key="snipcart_style"
 			rel="stylesheet"
 			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
-			media="screen"
+			media="print"
+			onLoad="this.media='all'; this.onload=null;"
 		/>,
 	]
 
