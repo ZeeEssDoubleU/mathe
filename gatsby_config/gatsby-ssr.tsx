@@ -25,6 +25,7 @@ export const onRenderBody = ({
 			key="snipcart_style"
 			rel="stylesheet"
 			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
+			media="screen"
 		/>,
 	]
 
