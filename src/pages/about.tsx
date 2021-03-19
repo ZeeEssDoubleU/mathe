@@ -22,12 +22,15 @@ export interface AboutQuery_I {
 		page: {
 			header: string
 			subHeader: string
+			medallion: {
+				url: string
+			}
 			content: [
 				{
 					__typename: "DatoCmsContentBlock"
 					header: string
 					subHeader: string
-					content: string
+					htmlEditor: string
 				},
 				{
 					__typename: "DatoCmsQuote"
@@ -36,9 +39,6 @@ export interface AboutQuery_I {
 					title: string
 				},
 			]
-			medallion: {
-				url: string
-			}
 		}
 	}
 }
@@ -61,7 +61,7 @@ export default function About({ data }: AboutQuery_I): ReactElement {
 				</Header>
 				<Body
 					dangerouslySetInnerHTML={{
-						__html: sanitizeHtml(content.content),
+						__html: sanitizeHtml(content.htmlEditor),
 					}}
 				/>
 			</Section>
@@ -125,23 +125,24 @@ const Quote = styled(ContentBody)`
 
 export const query = graphql`
 	{
-		page: datoCmsAboutPage {
+		page: datoCmsPage(title: { eq: "About" }) {
 			header
 			subHeader
+			medallion {
+				url
+			}
 			content {
 				... on DatoCmsContentBlock {
+					id
 					header
 					subHeader
-					content
+					htmlEditor
 				}
 				... on DatoCmsQuote {
 					quote
 					author
 					title
 				}
-			}
-			medallion {
-				url
 			}
 		}
 	}

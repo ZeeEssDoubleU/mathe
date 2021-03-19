@@ -61,7 +61,7 @@ export default function Products({ data }: ProductsQuery_I): ReactElement {
 
 export const query = graphql`
 	query($collection_slug: String!, $collection_product_slugs: [String]) {
-		page: datoCmsProductsPage {
+		page: datoCmsPage(title: { eq: "Products" }) {
 			header
 			subHeader
 			medallion {

@@ -10,6 +10,10 @@ import ExternalLink from "../elements/CustomLink"
 
 export interface ContactDetails_I {
 	elem: {
+		internal: { type: "DatoCmsContactInfo" }
+		header: string
+		subHeader: string
+		htmlEditor: string
 		address: string
 		phone: string
 		email: string

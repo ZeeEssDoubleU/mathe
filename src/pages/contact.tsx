@@ -18,40 +18,38 @@ import {
 // ************
 // types
 // ************
-
 export interface ContactQuery_I {
 	data: {
-		page: Page_I
-		sections: {
-			nodes: {
-				header: string
-				contentSection: [
-					{
-						internal: { type: "DatoCmsSubHeader" }
-						subHeader: string
-					},
-					{
-						internal: { type: "DatoCmsContent" }
-						content: string
-					},
-					{
-						internal: { type: "DatoCmsContactInfo" }
-						address: string
-						phone: string
-						email: string
-						facebook: string
-						instagram: string
-					},
-					{
-						internal: { type: "DatoCmsForm" }
-						form: string
-					},
-					{
-						internal: { type: "DatoCmsDivider" }
-						divider: string
-					},
-				]
-			}[]
+		page: {
+			header: string
+			subHeader: string
+			medallion: {
+				url: string
+			}
+			content: [
+				{
+					internal: { type: "DatoCmsContactInfo" }
+					header: string
+					subHeader: string
+					htmlEditor: string
+					address: string
+					phone: string
+					email: string
+					facebook: string
+					instagram: string
+				},
+				{
+					internal: { type: "DatoCmsDivider" }
+					divider: boolean
+				},
+				{
+					internal: { type: "DatoCmsForm" }
+					header: string
+					subHeader: string
+					htmlEditor: string
+					form: boolean
+				},
+			]
 		}
 	}
 }
@@ -61,47 +59,41 @@ export interface ContactQuery_I {
 // ************
 
 export default function Contact({ data }: ContactQuery_I): ReactElement {
-	const { sections, page } = data
+	const { page } = data
 
-	const contentSection: ReactElement[] = sections.nodes.map(
-		(section, index1): ReactElement => (
-			<Section key={index1}>
-				<Header>
-					<h3>{section.header}</h3>
-					{section.contentSection.map(
-						(elem, index2): ReactElement | null => {
-							return "subHeader" in elem ? (
-								<h5 key={index2}>{elem.subHeader}</h5>
-							) : null
-						},
-					)}
-				</Header>
-				<Body>
-					{section.contentSection.map(
-						(elem, index3): ReactElement | null => {
-							if ("content" in elem) {
-								return (
-									<div
-										key={index3}
-										dangerouslySetInnerHTML={{
-											__html: sanitizeHtml(elem.content),
-										}}
-									/>
-								)
-							} else if ("address" in elem) {
-								return <ContactDetails elem={elem} key={index3} />
-							} else if ("form" in elem) {
-								return <ContactForm key={index3} />
-							} else if ("divider" in elem) {
-								return <Divider key={index3} />
-							} else {
-								return null
-							}
-						},
-					)}
-				</Body>
-			</Section>
-		),
+	const contentSection: ReactElement[] = page.content.map(
+		(section, index): ReactElement => {
+			if ("divider" in section && section.divider) {
+				return <Divider key={index} />
+			} else {
+				return (
+					<Section key={index}>
+						<Header>
+							{"header" in section && section.header && (
+								<h3>{section.header}</h3>
+							)}
+							{"subHeader" in section && section.subHeader && (
+								<h5>{section.subHeader}</h5>
+							)}
+						</Header>
+						<Body>
+							{"htmlEditor" in section && section.htmlEditor && (
+								<div
+									key={index}
+									dangerouslySetInnerHTML={{
+										__html: sanitizeHtml(section.htmlEditor),
+									}}
+								/>
+							)}
+							{"address" in section && section.address && (
+								<ContactDetails elem={section} />
+							)}
+							{"form" in section && section.form && <ContactForm />}
+						</Body>
+					</Section>
+				)
+			}
+		},
 	)
 
 	return (
@@ -132,50 +124,39 @@ const Body = styled(ContentBody)`
 
 export const query = graphql`
 	{
-		page: datoCmsContactPage {
+		page: datoCmsPage(title: { eq: "Contact" }) {
 			header
 			subHeader
 			medallion {
 				url
 			}
-		}
-		sections: allDatoCmsContactPageSection {
-			nodes {
-				header
-				contentSection {
-					... on DatoCmsSubHeader {
-						subHeader
-						internal {
-							type
-						}
+			content {
+				... on DatoCmsContactInfo {
+					header
+					subHeader
+					htmlEditor
+					address
+					phone
+					email
+					facebook
+					instagram
+					internal {
+						type
 					}
-					... on DatoCmsContent {
-						content
-						internal {
-							type
-						}
+				}
+				... on DatoCmsDivider {
+					divider
+					internal {
+						type
 					}
-					... on DatoCmsContactInfo {
-						address
-						email
-						facebook
-						instagram
-						phone
-						internal {
-							type
-						}
-					}
-					... on DatoCmsForm {
-						form
-						internal {
-							type
-						}
-					}
-					... on DatoCmsDivider {
-						divider
-						internal {
-							type
-						}
+				}
+				... on DatoCmsForm {
+					header
+					subHeader
+					htmlEditor
+					form
+					internal {
+						type
 					}
 				}
 			}

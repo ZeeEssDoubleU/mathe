@@ -40,7 +40,11 @@ export interface MemberQuery_I {
 			medallion: {
 				url: string
 			}
-			members: Member_I[]
+			content: [
+				{
+					members: Member_I[]
+				},
+			]
 		}
 	}
 }
@@ -51,7 +55,7 @@ export interface MemberQuery_I {
 
 export default function Team({ data }: MemberQuery_I): ReactElement {
 	const { page } = data
-	const { members } = page
+	const { members } = page.content[0]
 
 	const displayMembers: ReactElement[] = members.map(
 		(member): ReactElement => (
@@ -125,20 +129,24 @@ const Body = styled(ContentBody)`
 
 export const query = graphql`
 	{
-		page: datoCmsTeamPage {
+		page: datoCmsPage(title: { eq: "Team" }) {
 			header
 			subHeader
 			medallion {
 				url
 			}
-			members {
-				id
-				name
-				bio
-				picture {
-					alt
-					title
-					gatsbyImageData(layout: FULL_WIDTH)
+			content {
+				... on DatoCmsTeam {
+					members {
+						id
+						name
+						bio
+						picture {
+							alt
+							title
+							gatsbyImageData(layout: FULL_WIDTH)
+						}
+					}
 				}
 			}
 		}

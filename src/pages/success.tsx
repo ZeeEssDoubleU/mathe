@@ -27,7 +27,7 @@ export interface SuccessQuery_I {
 				__typename: "DatoCmsContentBlock"
 				header: string
 				subHeader: string
-				content: string
+				htmlEditor: string
 			}[]
 			medallion: {
 				url: string
@@ -60,7 +60,7 @@ export default function Success({ data }: SuccessQuery_I): ReactElement {
 					<Icon name="back-arrow" />
 					<div
 						dangerouslySetInnerHTML={{
-							__html: sanitizeHtml(content.content),
+							__html: sanitizeHtml(content.htmlEditor),
 						}}
 					/>
 				</Body>
@@ -112,14 +112,14 @@ const Body = styled(ContentBody)`
 
 export const query = graphql`
 	{
-		page: datoCmsSuccessPage {
+		page: datoCmsPage(title: { eq: "Success" }) {
 			header
 			subHeader
 			content {
 				... on DatoCmsContentBlock {
 					header
 					subHeader
-					content
+					htmlEditor
 				}
 			}
 			medallion {
