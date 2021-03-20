@@ -6,10 +6,7 @@ import WrapRoot from "../src/components/GatsbyAPI/WrapRoot"
 export const wrapRootElement = WrapRoot
 
 // render body
-export const onRenderBody = ({
-	setHeadComponents,
-	setPostBodyComponents,
-}: RenderBodyArgs): void => {
+export const onRenderBody = ({ setHeadComponents }: RenderBodyArgs): void => {
 	const headComponents = [
 		<link
 			key="snipcart_app_preconnect"
@@ -28,26 +25,26 @@ export const onRenderBody = ({
 			rel="stylesheet"
 			href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
 			media="print"
-			onLoad="this.media='all'; this.onload=null;"
+			onLoad="this.media='all'"
 		/>,
 	]
 
-	const bodyComponents = [
-		<script
-			async
-			key="snipcart_js"
-			src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"
-		/>,
-		<div
-			hidden
-			key="snipcart_div"
-			id="snipcart"
-			data-config-add-product-behavior="none"
-			data-config-modal-style="side"
-			data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
-		/>,
-	]
+	// const bodyComponents = [
+	// 	<script
+	// 		async
+	// 		key="snipcart_js"
+	// 		src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"
+	// 	/>,
+	// 	<div
+	// 		hidden
+	// 		key="snipcart_div"
+	// 		id="snipcart"
+	// 		data-config-add-product-behavior="none"
+	// 		data-config-modal-style="side"
+	// 		data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
+	// 	/>,
+	// ]
 
 	setHeadComponents(headComponents)
-	setPostBodyComponents(bodyComponents)
+	// setPostBodyComponents(bodyComponents)
 }
