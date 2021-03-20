@@ -1,10 +1,20 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { Helmet } from "react-helmet"
 
-const Cart = (props) => {
+export default function Cart(): ReactElement {
 	return (
 		<>
 			<Helmet>
+				{/* preconnect to below scripts / links in gatsby-ssr */}
+				{/* load CSS async */}
+				{/* https://www.npmjs.com/package/fg-loadcss */}
+				<link
+					key="snipcart_style"
+					rel="stylesheet"
+					href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css"
+					media="print"
+					onLoad="this.media='all'"
+				/>
 				<script
 					async
 					key="snipcart_js"
@@ -22,5 +32,3 @@ const Cart = (props) => {
 		</>
 	)
 }
-
-export default Cart
