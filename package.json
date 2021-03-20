@@ -13,8 +13,7 @@
 		"serve": "gatsby serve -o",
 		"serve-m": "gatsby serve -o -H $HOSTNAME -p 9000",
 		"test": "yarn run type-check",
-		"type-check": "tsc --watch",
-		"preload-fonts": "gatsby-preload-fonts"
+		"type-check": "tsc --watch"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
@@ -28,7 +27,6 @@
 		"gatsby-plugin-manifest": "^3.0.0",
 		"gatsby-plugin-offline": "^4.0.0",
 		"gatsby-plugin-preact": "^5.1.0",
-		"gatsby-plugin-preload-fonts": "^2.1.0",
 		"gatsby-plugin-purgecss": "^6.0.0",
 		"gatsby-plugin-react-helmet": "^4.0.0",
 		"gatsby-plugin-robots-txt": "^1.5.5",

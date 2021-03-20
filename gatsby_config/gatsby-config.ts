@@ -51,7 +51,6 @@ export default {
 		"gatsby-plugin-robots-txt",
 		"gatsby-transformer-sharp",
 		"gatsby-transformer-json",
-		// ! remove font loader due to resources showing not being used on devtools coverage
 		{
 			resolve: "gatsby-plugin-web-font-loader",
 			options: {
@@ -63,7 +62,6 @@ export default {
 				},
 			},
 		},
-		"gatsby-plugin-preload-fonts",
 		{
 			resolve: "gatsby-plugin-manifest",
 			options: {
@@ -76,7 +74,8 @@ export default {
 				icon: "./src/components/Icons/favicon.svg", // declared in globalSEO on DatoCMS,
 			},
 		},
-		"gatsby-plugin-offline", // load after manifest (above) so manifest can be cached
+		// load after manifest (above) so manifest can be cached
+		"gatsby-plugin-offline",
 		{
 			resolve: "gatsby-plugin-styled-components",
 			options: {
