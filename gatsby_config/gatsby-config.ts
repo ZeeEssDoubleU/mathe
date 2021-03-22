@@ -99,9 +99,9 @@ export default {
 		{
 			resolve: "gatsby-source-shopify",
 			options: {
-				shopName: "mathe-tea-dev",
+				shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
 				// See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
-				accessToken: "5f3c0b0ce36956255d9bdd61ba06ea97",
+				accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
 				apiVersion: "2021-01",
 				downloadImages: true,
 			},

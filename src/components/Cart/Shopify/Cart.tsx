@@ -1,11 +1,23 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect, useState, useRef } from "react"
 import { Helmet } from "react-helmet"
+// import shopify
+import Client from "shopify-buy"
 
 // ************
 // component
 // ************
 
 export default function Cart(): ReactElement {
+	const client = useRef(null)
+
+	useEffect(() => {
+		client.current = Client.buildClient({
+			domain: `${process.env.GATSBY_SHOPIFY_SHOP_NAME}.shopify.com`,
+			storefrontAccessToken:
+				process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+		})
+	}, [])
+
 	return (
 		<>
 			<Helmet>
