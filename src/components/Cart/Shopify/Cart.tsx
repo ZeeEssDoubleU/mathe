@@ -1,6 +1,10 @@
 import React, { ReactElement } from "react"
 import { Helmet } from "react-helmet"
 
+// ************
+// component
+// ************
+
 export default function Cart(): ReactElement {
 	return (
 		<>

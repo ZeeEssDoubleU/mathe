@@ -5,8 +5,7 @@ import styled from "styled-components"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
-import CartTab from "../Cart/CartTab"
-import Cart from "../Cart/Cart"
+import CartTab from "../Cart/Snipcart/CartTab"
 // impprt store
 import { useStore, transitionTriggered } from "../../store/useStore"
 // import utils
@@ -50,7 +49,6 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 				{children}
 			</PageTransition>
 			<CartTab />
-			<Cart />
 		</Container>
 	)
 }

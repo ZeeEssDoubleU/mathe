@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../Icons/Icon"
+import Icon from "../../Icons/Icon"
+import Cart from "./Cart"
 // import styles
-import { ModalButton } from "../../styles/elements"
+import { ModalButton } from "../../../styles/elements"
+import SnipcartStyle from "./style"
 
 // ************
 // component
@@ -11,10 +13,14 @@ import { ModalButton } from "../../styles/elements"
 
 export default function CartTab(): ReactElement {
 	return (
-		<Container className="snipcart-checkout">
-			<Icon name="cart-zoom" />
-			<ItemCount className="snipcart-items-count">0</ItemCount>
-		</Container>
+		<>
+			<SnipcartStyle />
+			<Container className="snipcart-checkout">
+				<Icon name="cart-zoom" />
+				<ItemCount className="snipcart-items-count" />
+			</Container>
+			<Cart />
+		</>
 	)
 }
 
