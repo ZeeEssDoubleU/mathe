@@ -99,9 +99,9 @@ export default {
 		{
 			resolve: "gatsby-source-shopify",
 			options: {
-				shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
+				shopName: `${process.env.GATSBY_SHOPIFY_SHOP_NAME}`,
 				// See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
-				accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+				accessToken: `${process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN}`,
 				apiVersion: "2021-01",
 				downloadImages: true,
 			},
