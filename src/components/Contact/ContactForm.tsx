@@ -87,7 +87,7 @@ const Form = styled.form`
 		&:focus {
 			transform: scale(1.02);
 			box-shadow: 0 0 0 1px
-				hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+				hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
 			&::placeholder {
 				opacity: 0;
 			}
@@ -121,7 +121,7 @@ const Form = styled.form`
 		}
 		&:hover {
 			cursor: pointer;
-			background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+			background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
 			svg {
 				fill: white;
 			}

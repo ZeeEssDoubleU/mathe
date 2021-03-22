@@ -3,11 +3,19 @@ import { DefaultTheme } from "styled-components"
 // merge theme (below) to DefaultTheme
 declare module "styled-components" {
 	export interface DefaultTheme {
+		// general
 		appGreen: string
-		appGreenPartial: string
+		appGreen_Partial: string
+		appGreenLight: string
+		appGreenLight_Partial: string
 		appGold: string
+
 		shadow: string
 		background: string
+
+		zTop: number
+		zMid: number
+		zBottom: number
 
 		// font families
 		fontMain: string
@@ -43,10 +51,17 @@ declare module "styled-components" {
 export const theme: DefaultTheme = {
 	// general
 	appGreen: "hsla(86, 48%, 48%, 1.0)",
-	appGreenPartial: "86, 48%, 48%",
+	appGreen_Partial: "86, 48%, 48%",
+	appGreenLight: "hsla(88, 41%, 54%, 1.0)",
+	appGreenLight_Partial: "88, 41%, 54%",
 	appGold: "hsla(43, 47%, 35%, 1.0)",
+
 	shadow: "black 0 2px",
 	background: "hsla(0, 0%, 0%, 0.85)",
+
+	zTop: 100,
+	zMid: 50,
+	zBottom: 0,
 
 	// font families
 	fontMain: "Montserrat, Avenir, Arial, sans-serif",

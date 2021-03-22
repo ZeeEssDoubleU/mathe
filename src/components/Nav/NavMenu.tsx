@@ -197,7 +197,7 @@ const Container = styled.div`
 				letter-spacing: 0.6px;
 				line-height: 1em;
 				opacity: 0;
-				background: hsla(${({ theme }) => theme.appGreenPartial}, 0.85);
+				background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.85);
 				border-radius: 1em;
 				transition: transform 300ms ease-out, opacity 300ms ease-out;
 				@media (min-width: ${({ theme }) => theme.tablet}px) {

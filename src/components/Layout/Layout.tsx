@@ -5,7 +5,7 @@ import styled from "styled-components"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
-import CartTab from "../Cart/Snipcart/CartTab"
+import Snipcart from "../Cart/Snipcart/Snipcart"
 // impprt store
 import { useStore, transitionTriggered } from "../../store/useStore"
 // import utils
@@ -48,7 +48,7 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 				{/* children are page elements */}
 				{children}
 			</PageTransition>
-			<CartTab />
+			<Snipcart />
 		</Container>
 	)
 }

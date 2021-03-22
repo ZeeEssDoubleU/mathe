@@ -67,7 +67,7 @@ export const MarginAuto = styled.div`
 `
 export const ModalButton = styled(CategoryButton)`
 	position: fixed;
-	z-index: 99;
+	z-index: ${({ theme }) => theme.zMid};
 	right: 0;
 	height: 3.5rem;
 	width: 3.5rem;
@@ -79,7 +79,7 @@ export const ModalButton = styled(CategoryButton)`
 	fill: ${({ theme }) => theme.appGreen};
 
 	&:hover {
-		background: hsla(${({ theme }) => theme.appGreenPartial}, 0.5);
+		background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
 		border: 1px solid ${({ theme }) => theme.appGreen};
 		border-right: 0;
 		color: white;

@@ -74,7 +74,7 @@ const Header = styled.h1`
 `
 const SubHeader = styled.h1`
 	display: inline-block;
-	background: hsla(${({ theme }) => theme.appGreenPartial}, 0.85);
+	background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.85);
 	border-radius: 1em;
 	font-size: 16px;
 	font-weight: ${({ theme }) => theme.fontMainWeight_SubHeader};
