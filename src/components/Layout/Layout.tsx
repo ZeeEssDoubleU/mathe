@@ -1,5 +1,5 @@
-import React, { ReactElement, useLayoutEffect } from "react"
-import { PageProps } from "gatsby"
+import React, { ReactElement, useEffect, useLayoutEffect } from "react"
+import { PageProps, useStaticQuery, graphql } from "gatsby"
 // import styles
 import styled from "styled-components"
 // import components
@@ -7,7 +7,7 @@ import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
 import Snipcart from "../Cart/Snipcart/Snipcart"
 // impprt store
-import { useStore, transitionTriggered } from "../../store/useStore"
+import { useCategory, useTransition } from "../../store"
 // import utils
 import * as anim from "../../utils/animations"
 
@@ -19,25 +19,40 @@ export interface Layout_I {
 	children?: ReactElement | ReactElement[]
 	path: PageProps["path"]
 }
+export interface LayoutQuery_I {
+	categories: {
+		nodes: {
+			title: string
+			slug: string
+		}[]
+	}
+}
 
 // ************
 // component
 // ************
 
 export default function Layout({ children, path }: Layout_I): ReactElement {
-	const { state, dispatch } = useStore()
+	const { categories }: LayoutQuery_I = useStaticQuery(query)
+	const state_category = useCategory()
+	const state_transition = useTransition()
 
 	// effect sets nav (actually whole app) position when mounted and when path changes
 	useLayoutEffect(() => {
 		// check if transition was triggered from button press (Link, BackButton, etc)
 		// if not, set page-transition elem position
-		if (state.transition_triggered_page === false) {
+		if (state_transition.inProgress === false) {
 			path === "/"
 				? anim.enter_top_set(".page-transition")
 				: anim.exit_top_set(".page-transition")
 		} else {
-			transitionTriggered(dispatch, false)
+			state_transition.setInProgress(false)
 		}
+	}, [path])
+
+	// change selected state_category on path change
+	useEffect(() => {
+		state_category.selectCategory({ categories, path })
 	}, [path])
 
 	return (
@@ -45,7 +60,6 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 			<Background path={path} />
 			<PageTransition className="page-transition">
 				<Nav />
-				{/* children are page elements */}
 				{children}
 			</PageTransition>
 			<Snipcart />
@@ -71,4 +85,19 @@ const PageTransition = styled.div`
 	position: relative;
 	height: 100%;
 	width: 100%; ;
+`
+
+// ************
+// query
+// ************
+
+const query = graphql`
+	{
+		categories: allDatoCmsCategory {
+			nodes {
+				title
+				slug
+			}
+		}
+	}
 `

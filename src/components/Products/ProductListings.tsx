@@ -7,8 +7,6 @@ import { intersectionBy, sortBy } from "lodash"
 import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
-// import store
-import { useStore, setSelectedCategory } from "../../store/useStore"
 // import utils
 import { convertGrams } from "../../utils/convertGrams"
 import { abbreviate } from "../../utils/abbreviate"
@@ -33,7 +31,6 @@ export default function ProductsBody({
 	categories,
 	category_selected,
 }: ProductListings_I): ReactElement {
-	const { dispatch } = useStore()
 	const { products_datocms, collection_shopify } = category_selected
 
 	const productsSorted = sortBy(collection_shopify.products, "title")
@@ -58,13 +55,7 @@ export default function ProductsBody({
 				// DISPLAY category tags for each product
 				return (
 					<Link to={`/products/${tag.slug}`} key={tagIndex}>
-						<StyledButton
-							key={tagIndex}
-							// set active category when tag clicked
-							onClick={() => setSelectedCategory(dispatch, tag.slug)}
-						>
-							{tag.title}
-						</StyledButton>
+						<StyledButton key={tagIndex}>{tag.title}</StyledButton>
 					</Link>
 				)
 			})

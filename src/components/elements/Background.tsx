@@ -12,8 +12,8 @@ import {
 	GatsbyImageProps,
 	IGatsbyImageData,
 } from "gatsby-plugin-image"
-// import store
-import { useStore } from "../../store/useStore"
+// impprt store
+import { useCategory } from "../../store"
 
 // ************
 // types
@@ -48,8 +48,8 @@ interface Background_I {
 export default function Background({ path }: Background_I): ReactElement {
 	const { allCollections }: BackgroundQuery_I = useStaticQuery(query)
 	const categories = allCollections.nodes
+	const state_category = useCategory()
 
-	const { state } = useStore()
 	const [categoryIndex, setCategoryIndex] = useState<number>(
 		selectedCategoryIndex(),
 	)
@@ -59,7 +59,7 @@ export default function Background({ path }: Background_I): ReactElement {
 	// match selectedCategoryIndex to product image category
 	function selectedCategoryIndex(): number {
 		return categories.findIndex(
-			(category) => category.slug === state.selectedCategory,
+			(category) => category.slug === state_category.selected,
 		)
 	}
 
@@ -153,7 +153,7 @@ export default function Background({ path }: Background_I): ReactElement {
 
 		// clear interval upon changing product category
 		return () => clearInterval(backgroundInterval)
-	}, [path, state?.selectedCategory, backgroundIndex, cycleBg, categories])
+	}, [path, state_category.selected, backgroundIndex, cycleBg, categories])
 
 	return <Images>{backgroundMap}</Images>
 }

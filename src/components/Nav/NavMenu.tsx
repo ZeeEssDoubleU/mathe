@@ -4,16 +4,16 @@ import { Link } from "gatsby"
 // import animations
 import * as anim from "../../utils/animations"
 // import store
-import { useStore, transitionTriggered } from "../../store/useStore"
+import { useTransition } from "../../store"
 
 // ************
 // component
 // ************
 
 export default function NavMenu(): ReactElement {
-	const { state, dispatch } = useStore()
 	const navRef = useRef<HTMLDivElement>(null)
 	const cycleRef = useRef<HTMLHeadingElement>(null)
+	const state_transition = useTransition()
 
 	useEffect(() => {
 		anim.nav_fadeIn()
@@ -37,39 +37,14 @@ export default function NavMenu(): ReactElement {
 		}
 	}
 
-	// ! disabled
-	// // function to cycle through text
-	// const cycleText = useCallback(() => {
-	//   setTextIndex((textIndex + 1) % textOptions.length)
-	// }, [textIndex, textOptions.length])
-	// // function to turn off text opacity
-	// const opacityOff = elem => {
-	//   elem.style.opacity = 0
-	// }
-
-	// // effect to cycle product text and fade in/out opacity
-	// useEffect(() => {
-	//   // set opacity 1
-	//   cycleRef.current.style.opacity = 1
-	//   // set cycle interval
-	//   const cycleInterval = 5000
-	//   // cycle product text
-	//   setTimeout(() => cycleText(cycleInterval), cycleInterval)
-	//   // set opacity 0
-	//   setTimeout(() => opacityOff(cycleRef.current), cycleInterval - 500)
-	// }, [textIndex, cycleText])
-
 	return (
 		<Container ref={navRef} onMouseMove={handleMouseMove}>
 			<Link
 				to="/about"
 				className="nav-link"
 				onClick={() => {
-					transitionTriggered(dispatch, true)
-					anim.exit_top(
-						".page-transition",
-						state.transition_duration_page!,
-					)
+					state_transition.setInProgress(true)
+					anim.exit_top(".page-transition", state_transition.duration_page)
 				}}
 			>
 				<div className="nav-item">
@@ -81,11 +56,8 @@ export default function NavMenu(): ReactElement {
 				to="/products/yerba-mate"
 				className="nav-link"
 				onClick={() => {
-					transitionTriggered(dispatch, true)
-					anim.exit_top(
-						".page-transition",
-						state.transition_duration_page!,
-					)
+					state_transition.setInProgress(true)
+					anim.exit_top(".page-transition", state_transition.duration_page)
 				}}
 			>
 				<div className="nav-item">
@@ -101,11 +73,8 @@ export default function NavMenu(): ReactElement {
 				to="/blog"
 				className="nav-link"
 				onClick={() => {
-					transitionTriggered(dispatch, true)
-					anim.exit_top(
-						".page-transition",
-						state.transition_duration_page!,
-					)
+					state_transition.setInProgress(true)
+					anim.exit_top(".page-transition", state_transition.duration_page)
 				}}
 			>
 				<div className="nav-item">
@@ -117,11 +86,8 @@ export default function NavMenu(): ReactElement {
 				to="/contact"
 				className="nav-link"
 				onClick={() => {
-					transitionTriggered(dispatch, true)
-					anim.exit_top(
-						".page-transition",
-						state.transition_duration_page!,
-					)
+					state_transition.setInProgress(true)
+					anim.exit_top(".page-transition", state_transition.duration_page)
 				}}
 			>
 				<div className="nav-item">

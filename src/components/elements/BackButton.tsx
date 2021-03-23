@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { navigate } from "@reach/router"
 // import store
-import { useStore, transitionTriggered } from "../../store/useStore"
+import { useTransition } from "../../store"
 // import animations
 import * as anim from "../../utils/animations"
 
@@ -23,8 +23,7 @@ export interface BackVars_I {
 // ************
 
 function BackButton(): ReactElement {
-	const { state, dispatch } = useStore()
-	const { transition_duration_page } = state
+	const state_transition = useTransition()
 
 	return (
 		<Link
@@ -32,12 +31,12 @@ function BackButton(): ReactElement {
 			aria-label="close page / back to home"
 			onClick={(e) => {
 				e.preventDefault()
-				transitionTriggered(dispatch, true)
-				anim.enter_top(".page-transition", transition_duration_page)
+				state_transition.setInProgress(true)
+				anim.enter_top(".page-transition", state_transition.duration_page)
 				setTimeout(() => {
 					navigate("/")
-					// multiply by 1000 for setTimeout to convert store's duration correctly
-				}, transition_duration_page * 1000)
+					// multiply by 1000 for setTimeout to convert store's state_transition.duration_page correctly
+				}, state_transition.duration_page * 1000)
 			}}
 		>
 			<Container>

@@ -1,7 +1,5 @@
 import React, { ReactElement } from "react"
 import { PageProps } from "gatsby"
-// import providers
-import { StoreProvider } from "../../store/useStore"
 // import components
 import Layout from "../Layout/Layout"
 
@@ -19,9 +17,5 @@ export interface WrapPage_I {
 // ************
 
 export default function WrapPage({ element, props }: WrapPage_I): ReactElement {
-	return (
-		<StoreProvider {...props}>
-			<Layout {...props}>{element}</Layout>
-		</StoreProvider>
-	)
+	return <Layout {...props}>{element}</Layout>
 }

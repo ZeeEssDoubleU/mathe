@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react"
 // import providers
 import { ThemeProvider } from "styled-components"
+import store from "../../store"
+import { Provider } from "react-redux"
 // import styles
 import ResetStyle from "../../styles/reset"
 import GlobalStyle from "../../styles/global"
@@ -21,9 +23,11 @@ export interface WrapRoot_I {
 export default function WrapRoot({ element }: WrapRoot_I): ReactElement {
 	return (
 		<ThemeProvider theme={theme}>
-			<ResetStyle />
-			<GlobalStyle />
-			{element}
+			<Provider store={store}>
+				<ResetStyle />
+				<GlobalStyle />
+				{element}
+			</Provider>
 		</ThemeProvider>
 	)
 }

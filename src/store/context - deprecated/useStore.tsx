@@ -58,7 +58,7 @@ export function setSelectedCategory(
 ): void {
 	dispatch({ type: "SET_ACTIVE_PRODUCTS_CATEGORY", payload })
 }
-export function transitionTriggered(
+export function transition_inProgress(
 	dispatch: Dispatch<Action_Props>,
 	payload: boolean,
 ): void {
