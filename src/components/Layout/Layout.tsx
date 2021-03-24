@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
 import Snipcart from "../Cart/Snipcart/Snipcart"
+import ShopifyCart from "../Cart/Shopify/Shopify"
 // impprt store
 import { useCategory, useTransition } from "../../store"
 // import utils
@@ -63,6 +64,7 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 				{children}
 			</PageTransition>
 			<Snipcart />
+			<ShopifyCart />
 		</Container>
 	)
 }

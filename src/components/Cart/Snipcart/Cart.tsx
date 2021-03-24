@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { ReactElement } from "react"
 import { Helmet } from "react-helmet"
 
@@ -6,6 +7,9 @@ import { Helmet } from "react-helmet"
 // ************
 
 export default function Cart(): ReactElement {
+	const securedByUrl =
+		"https://snipcart.com/security?utm_source=cart_referral&utm_medium=powered_by&utm_campaign=powered_by_ref&utm_term=mathetea.com"
+
 	return (
 		<>
 			<Helmet>
@@ -32,7 +36,68 @@ export default function Cart(): ReactElement {
 				data-config-add-product-behavior="none"
 				data-config-modal-style="side"
 				data-api-key={process.env.GATSBY_SNIPCART_API_KEY}
-			/>
+			>
+				<featured-payment-methods>
+					<div className="snipcart-featured-payment-methods">
+						<h3 className="snipcart__font--secondary snipcart__font--bold snipcart-featured-payment-methods__title">
+							<a
+								href={securedByUrl}
+								className="snipcart-featured-payment-methods__link"
+								target="_blank"
+								rel="nofollow noopener noreferrer"
+							>
+								<icon
+									name="lock"
+									className="snipcart-featured-payment-methods__title-icon"
+								></icon>
+								Secured by Snipcart
+							</a>
+						</h3>
+						<div className="snipcart-featured-payment-methods__list">
+							{/* visa */}
+							<li className="snipcart-featured-payment-methods__list-item">
+								<icon
+									name="card-visa"
+									alt="Visa"
+									className="snipcart__icon--brand"
+								></icon>
+							</li>
+							{/* mastercard */}
+							<li className="snipcart-featured-payment-methods__list-item">
+								<icon
+									name="card-mastercard"
+									alt="Mastercard"
+									className="snipcart__icon--brand"
+								></icon>
+							</li>
+							{/* discover */}
+							<li className="snipcart-featured-payment-methods__list-item">
+								<icon
+									name="card-discover"
+									alt="Discover"
+									className="snipcart__icon--brand"
+								></icon>
+							</li>
+							{/* amex */}
+							<li className="snipcart-featured-payment-methods__list-item">
+								<icon
+									name="card-amex"
+									alt="American Express"
+									className="snipcart__icon--brand"
+								></icon>
+							</li>
+							{/* paypal */}
+							<li className="snipcart-featured-payment-methods__list-item">
+								<icon
+									name="card-paypal"
+									alt="Paypal Express"
+									className="snipcart__icon--brand"
+								></icon>
+							</li>
+						</div>
+					</div>
+				</featured-payment-methods>
+			</div>
 		</>
 	)
 }

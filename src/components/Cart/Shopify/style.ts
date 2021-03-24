@@ -38,17 +38,6 @@ export default createGlobalStyle`
       }
 
       #snipcart .snipcart__icon--angled:hover {
-            cursor: pointer;
-      }
-      
-      #snipcart .snipcart-featured-payment-methods__list{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-      }
-
-      #snipcart .snipcart__icon--brand {
-            width: auto;
-            height: 3rem;
+            cursor: pointer
       }
 `

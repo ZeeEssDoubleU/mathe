@@ -17,8 +17,6 @@ export interface ShopifyState_I {
 	cartCount: number
 	checkout: unknown
 	products: []
-	featured: []
-	product: unknown
 	shop: unknown
 }
 
@@ -31,8 +29,6 @@ const initialState: ShopifyState_I = {
 	cartCount: 0,
 	checkout: {},
 	products: [],
-	featured: [],
-	product: {},
 	shop: {},
 }
 
@@ -43,7 +39,11 @@ const initialState: ShopifyState_I = {
 export const shopifySlice = createSlice({
 	name: "shopify",
 	initialState,
-	reducers: {},
+	reducers: {
+		toggleCart: (state, action: PayloadAction<boolean>) => {
+			state.isCartOpen = !action.payload
+		},
+	},
 })
 
 // ************
@@ -53,6 +53,9 @@ export const shopifySlice = createSlice({
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useShopify() {
 	const dispatch = useAppDispatch()
+	const { toggleCart } = shopifySlice.actions
 
-	return {}
+	return {
+		openCart: (action: boolean) => dispatch(toggleCart(action)),
+	}
 }
