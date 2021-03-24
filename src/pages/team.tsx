@@ -98,9 +98,9 @@ const Image = styled(GatsbyImage)<GatsbyImageProps>`
 	height: 200px;
 	width: 200px;
 	margin: 0 24px 24px 0;
-	border-radius: 0.25em;
+	border-radius: 04px;
 
-	@media (max-width: ${({ theme }) => theme.tablet}px) {
+	@media (max-width: ${({ theme }) => theme.media.tablet}) {
 		float: none;
 		margin: auto;
 	}
@@ -109,13 +109,13 @@ const Header = styled(ContentHeader)`
 	margin-bottom: 16px;
 
 	font-size: 24px;
-	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
+	font-weight: ${({ theme }) => theme.font.main_weight_sectionHeader};
 	text-align: left;
 	text-transform: uppercase;
-	color: ${({ theme }) => theme.appGreen};
+	color: ${({ theme }) => theme.color.app_green};
 
-	@media (max-width: ${({ theme }) => theme.tablet}px) {
-		margin: 1rem auto;
+	@media (max-width: ${({ theme }) => theme.media.tablet}) {
+		margin: 16px auto;
 		text-align: center;
 	}
 `

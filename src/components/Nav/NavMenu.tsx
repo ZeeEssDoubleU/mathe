@@ -109,7 +109,7 @@ const Container = styled.div`
 	top: 20%;
 	height: 80%;
 	width: 100%;
-	@media (min-width: ${({ theme }) => theme.tablet}px) {
+	@media (min-width: ${({ theme }) => theme.media.tablet}) {
 		top: 0;
 		height: 100%;
 		/* does not wrap nav elements down to next line */
@@ -120,7 +120,7 @@ const Container = styled.div`
 		display: inline-block;
 		height: 25%;
 		width: 100%;
-		@media (min-width: ${({ theme }) => theme.tablet}px),
+		@media (min-width: ${({ theme }) => theme.media.tablet}),
 			(orientation: landscape) {
 			height: 100%;
 			width: 25vw;
@@ -136,16 +136,16 @@ const Container = styled.div`
 			transition: background 200ms;
 			h1 {
 				font-size: 24px;
-				font-weight: ${({ theme }) => theme.fontMainWeight_Nav};
-				text-shadow: ${({ theme }) => theme.shadow};
+				font-weight: ${({ theme }) => theme.font.main_weight_nav};
+				text-shadow: ${({ theme }) => theme.element.shadow};
 				white-space: normal;
-				@media (min-height: ${({ theme }) => theme.tall}px) {
+				@media (min-height: ${({ theme }) => theme.media.tall}) {
 					font-size: 30px;
 				}
 				// min-width: desktop
 				// min-height: tall
-				@media (min-width: ${({ theme }) => theme.desktop}px),
-					(min-height: ${({ theme }) => theme.tall}px) {
+				@media (min-width: ${({ theme }) => theme.media.desktop}),
+					(min-height: ${({ theme }) => theme.media.tall}) {
 					font-size: 36px;
 				}
 				&.cycle {
@@ -156,17 +156,22 @@ const Container = styled.div`
 				transform: translateY(-2em);
 				padding: 0.5em 1em;
 				margin: 0.5em 0;
-				font-family: ${({ theme }) => theme.fontAccent};
+				border-radius: 1em;
+
+				font-family: ${({ theme }) => theme.font.accent};
 				font-size: 12px;
 				font-style: italic;
-				font-weight: ${({ theme }) => theme.fontAccentWeight};
+				font-weight: ${({ theme }) => theme.font.accent_weight};
 				letter-spacing: 0.6px;
 				line-height: 1em;
+
 				opacity: 0;
-				background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.85);
-				border-radius: 1em;
+				background: hsla(
+					${({ theme }) => theme.color.app_green_partial},
+					0.85
+				);
 				transition: transform 300ms ease-out, opacity 300ms ease-out;
-				@media (min-width: ${({ theme }) => theme.tablet}px) {
+				@media (min-width: ${({ theme }) => theme.media.tablet}) {
 					font-size: 16px;
 				}
 			}

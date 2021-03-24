@@ -148,11 +148,11 @@ const BuyBlock = styled.div`
 	margin: 12px 0;
 `
 const BuyButton = styled(CategoryButton)`
-	border: 1px solid ${({ theme }) => theme.appGreen};
+	border: 1px solid ${({ theme }) => theme.color.app_green};
 	color: white;
 	&:hover {
-		background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
-		border: 1px solid ${({ theme }) => theme.appGreen};
+		background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+		border: 1px solid ${({ theme }) => theme.color.app_green};
 		color: white;
 		cursor: pointer;
 	}
@@ -173,21 +173,21 @@ const Listing = styled.div`
 	margin: 64px 0;
 `
 const Price = styled.p`
-	/* color: ${({ theme }) => theme.appGreen}; */
+	/* color: ${({ theme }) => theme.color.app_green}; */
 	font-size: 14px;
-	font-weight: ${({ theme }) => theme.fontMainWeight_Heavy};
+	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
 `
 const ProductCount = styled.p`
 	margin: 48px 0;
 	.count {
-		font-weight: ${({ theme }) => theme.fontMainWeight_Heavy};
-		color: ${({ theme }) => theme.appGreen};
+		font-weight: ${({ theme }) => theme.font.main_weight_heavy};
+		color: ${({ theme }) => theme.color.app_green};
 	}
 `
 const SubTitle = styled.h5`
 	font-size: 14px;
 	font-style: italic;
-	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
+	font-weight: ${({ theme }) => theme.font.main_weight_sectionHeader};
 `
 const StyledButton = styled(CategoryButton)`
 	font-size: 12px;
@@ -201,6 +201,6 @@ const Tags = styled(CategoryNav)`
 const TitleBlock = styled.div``
 const Title = styled.h4`
 	font-size: 20px;
-	font-weight: ${({ theme }) => theme.fontMainWeight_SectionHeader};
+	font-weight: ${({ theme }) => theme.font.main_weight_sectionHeader};
 	text-transform: uppercase;
 `

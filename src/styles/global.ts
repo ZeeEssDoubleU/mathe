@@ -2,8 +2,8 @@ import { createGlobalStyle } from "styled-components"
 
 export default createGlobalStyle`
       html, body {
-         font-family: ${({ theme }) => theme.fontMain};
-         font-weight: ${({ theme }) => theme.fontMainWeight};
+         font-family: ${({ theme }) => theme.font.main};
+         font-weight: ${({ theme }) => theme.font.main_weight};
 
          height: 100%; 
          width: 100%;

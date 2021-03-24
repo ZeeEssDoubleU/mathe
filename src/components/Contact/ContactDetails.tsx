@@ -87,9 +87,9 @@ const List = styled.ul`
 			transition: color 300ms;
 		}
 		a {
-			color: ${({ theme }) => theme.appGreen};
+			color: ${({ theme }) => theme.color.app_green};
 			font-size: 14px;
-			font-weight: ${({ theme }) => theme.fontMainWeight_Link};
+			font-weight: ${({ theme }) => theme.font.main_weight_link};
 			text-decoration: none;
 			transition: color 300ms;
 		}

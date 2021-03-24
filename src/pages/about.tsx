@@ -10,13 +10,14 @@ import {
 	ContentBody,
 	Divider,
 	Section,
+	ContentTitle,
+	ContentSubtitle,
 } from "../styles/elements"
 
 // ************
 // types
 // ************
 
-// TODO: make sure type checks working
 export interface AboutQuery_I {
 	data: {
 		page: {
@@ -74,9 +75,9 @@ export default function About({ data }: AboutQuery_I): ReactElement {
 							__html: sanitizeHtml(quote.quote),
 						}}
 					/>
-					<h3 className="author">{quote.author}</h3>
-					<h5 className="title">{quote.title}</h5>
 				</Quote>
+				<Author>{quote.author}</Author>
+				<AuthorTitle>{quote.title}</AuthorTitle>
 			</Section>
 		</>
 	)
@@ -96,27 +97,17 @@ export default function About({ data }: AboutQuery_I): ReactElement {
 // styles
 // ************
 
+const Author = styled(ContentTitle)`
+	font-size: 24px;
+	text-align: right;
+`
 const Header = styled(ContentHeader)``
 const Body = styled(ContentBody)``
 const Quote = styled(ContentBody)`
-	.quote {
-		font-style: italic;
-	}
-	.author {
-		font-size: 24px;
-		font-weight: ${({ theme }) => theme.fontMainWeight_Bold};
-		text-align: right;
-	}
-	.title {
-		margin: 0;
-		text-align: right;
-		font-family: ${({ theme }) => theme.fontAccent};
-		font-style: italic;
-		font-size: 16px;
-		font-weight: ${({ theme }) => theme.fontAccentWeight};
-		letter-spacing: 0.03em;
-		color: ${({ theme }) => theme.appGreen};
-	}
+	font-style: italic;
+`
+const AuthorTitle = styled(ContentSubtitle)`
+	text-align: right;
 `
 
 // ************

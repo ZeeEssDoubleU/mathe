@@ -197,7 +197,7 @@ const ImageWrapper = styled(FadeAnim)`
 	top: 0;
 	height: 100%;
 	width: 100%;
-	z-index: ${({ theme }) => theme.zBottom};
+	z-index: ${({ theme }) => theme.z.bottom};
 `
 const Image = styled(GatsbyImage)<Image_I>`
 	position: absolute;

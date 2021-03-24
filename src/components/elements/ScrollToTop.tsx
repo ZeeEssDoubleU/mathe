@@ -50,6 +50,6 @@ export default function ScrollToTop({
 
 const Container = styled(ModalButton)<{ show: boolean }>`
 	/* TODO: eventually change this to be located on layout component */
-	bottom: calc(-100% + 1.5rem);
+	bottom: calc(-100% + 24px);
 	visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `

@@ -46,10 +46,10 @@ const Container = styled.header`
 	height: 100%;
 	width: 100%;
 	text-align: center;
-	@media (min-height: ${({ theme }) => theme.short}px) {
+	@media (min-height: ${({ theme }) => theme.media.short}) {
 		height: 75%;
 	}
-	@media (min-height: ${({ theme }) => theme.med}px) {
+	@media (min-height: ${({ theme }) => theme.media.med}) {
 		height: 45%;
 	}
 `
@@ -63,25 +63,25 @@ const Headers = styled.div`
 `
 const Header = styled.h1`
 	font-size: 24px;
-	font-weight: ${({ theme }) => theme.fontMainWeight_Header};
-	text-shadow: ${({ theme }) => theme.shadow};
-	@media (min-width: ${({ theme }) => theme.tablet}px) {
+	font-weight: ${({ theme }) => theme.font.main_weight_header};
+	text-shadow: ${({ theme }) => theme.element.shadow};
+	@media (min-width: ${({ theme }) => theme.media.tablet}) {
 		font-size: 32px;
 	}
-	@media (min-width: ${({ theme }) => theme.desktop}px) {
+	@media (min-width: ${({ theme }) => theme.media.desktop}) {
 		font-size: 48px;
 	}
 `
 const SubHeader = styled.h1`
 	display: inline-block;
-	background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.85);
+	padding: 0.25em 1em;
+	margin: 0.75em 0;
 	border-radius: 1em;
+
+	background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.85);
 	font-size: 16px;
-	font-weight: ${({ theme }) => theme.fontMainWeight_SubHeader};
-	/* letter-spacing: 0.1em; */
-	margin: 12px 0;
-	padding: 4px 16px;
-	@media (min-width: ${({ theme }) => theme.tablet}px) {
+	font-weight: ${({ theme }) => theme.font.main_weight_subheader};
+	@media (min-width: ${({ theme }) => theme.media.tablet}) {
 		font-size: 20px;
 	}
 `
@@ -99,7 +99,7 @@ const Medallion = styled.div`
 
 	border: none;
 	border-radius: 50%;
-	background: ${({ theme }) => theme.appGreen};
+	background: ${({ theme }) => theme.color.app_green};
 
 	svg {
 		height: 30px;

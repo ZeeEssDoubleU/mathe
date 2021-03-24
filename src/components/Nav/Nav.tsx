@@ -58,20 +58,20 @@ const NavLogo = styled.img`
 	position: absolute;
 	left: 50%;
 	height: 48px;
-	filter: drop-shadow(${({ theme }) => theme.shadow});
+	filter: drop-shadow(${({ theme }) => theme.element.shadow});
 	margin-top: 12px;
 	transform: translateX(-50%);
-	z-index: ${({ theme }) => theme.zMid};
+	z-index: ${({ theme }) => theme.z.mid};
 	// min-width: tablet
 	// min-height: med
-	@media (min-width: ${({ theme }) => theme.tablet}px),
-		(min-height: ${({ theme }) => theme.med}px) {
+	@media (min-width: ${({ theme }) => theme.media.tablet}),
+		(min-height: ${({ theme }) => theme.media.med}) {
 		height: 64px;
 	}
 	// min-width: desktop
 	// min-height: med
-	@media (min-width: ${({ theme }) => theme.desktop}px),
-		(min-height: ${({ theme }) => theme.med}px) {
+	@media (min-width: ${({ theme }) => theme.media.desktop}),
+		(min-height: ${({ theme }) => theme.media.med}) {
 		height: 96px;
 	}
 `

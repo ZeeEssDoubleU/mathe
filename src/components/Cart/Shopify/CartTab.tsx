@@ -23,9 +23,9 @@ export default function CartTab(): ReactElement {
 // ************
 
 const Container = styled(ModalButton)`
-	top: 1.5rem;
+	top: 24px;
 
-	@media (min-width: ${({ theme }) => theme.tablet}px) {
+	@media (min-width: ${({ theme }) => theme.media.tablet}) {
 		top: 7.5%;
 	}
 `

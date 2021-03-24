@@ -57,7 +57,7 @@ export default function NotFound({ data }: NotFoundQuery_I): ReactElement {
 						navigate(-1)
 					}}
 				>
-					<Icon name="back-arrow" />
+					<Icon name="back-chevron" />
 					<div
 						dangerouslySetInnerHTML={{
 							__html: sanitizeHtml(content.htmlEditor),
@@ -91,9 +91,9 @@ const Body = styled(ContentBody)`
 	cursor: pointer;
 
 	svg {
-		height: 1em;
-		width: 1em;
-		margin-right: 1em;
+		height: 16px;
+		width: 16px;
+		margin-right: 16px;
 		fill: white;
 		vertical-align: middle;
 	}

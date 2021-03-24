@@ -75,9 +75,9 @@ const Form = styled.form`
 	.contact-form-input {
 		flex-grow: 1;
 		background: none;
-		padding: 1em;
+		padding: 1rem;
 		border: 1px solid white;
-		border-radius: 0.25em;
+		border-radius: 04px;
 		color: white;
 		/* TODO: consider adding focus animation */
 		/* transition: transform 0.2s, box-shadow 0.2s;
@@ -87,7 +87,7 @@ const Form = styled.form`
 		&:focus {
 			transform: scale(1.02);
 			box-shadow: 0 0 0 1px
-				hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
+				hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
 			&::placeholder {
 				opacity: 0;
 			}
@@ -107,7 +107,7 @@ const Form = styled.form`
 
 		width: 64px;
 		height: 64px;
-		border: 1px solid ${({ theme }) => theme.appGreen};
+		border: 1px solid ${({ theme }) => theme.color.app_green};
 		margin: 16px auto;
 
 		background: none;
@@ -121,7 +121,7 @@ const Form = styled.form`
 		}
 		&:hover {
 			cursor: pointer;
-			background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
+			background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
 			svg {
 				fill: white;
 			}

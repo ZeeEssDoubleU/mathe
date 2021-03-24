@@ -101,7 +101,7 @@ const Body = styled(ContentBody)<{ expand: boolean }>`
 	-webkit-line-clamp: ${(props) => (props.expand === false ? 6 : null)};
 
 	p {
-		margin-bottom: 1.5em;
+		margin-bottom: 1.5rem;
 	}
 	p:last-child {
 		margin-bottom: 0;
@@ -120,8 +120,8 @@ const SelectedCategory = styled.div`
 `
 const StyledButton = styled(CategoryButton)`
 	&:hover {
-		background: hsla(${({ theme }) => theme.appGreen_Partial}, 0.5);
-		border: 1px solid ${({ theme }) => theme.appGreen};
+		background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+		border: 1px solid ${({ theme }) => theme.color.app_green};
 		color: white;
 		cursor: pointer;
 	}
