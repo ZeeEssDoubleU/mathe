@@ -97,6 +97,7 @@ export const query = graphql`
 				productType
 				tags
 				variants {
+					shopifyId
 					weight
 					weightUnit
 					priceNumber

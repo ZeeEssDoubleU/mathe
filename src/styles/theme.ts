@@ -10,8 +10,9 @@ declare module "styled-components" {
 			app_lightGreen_partial: string
 			app_gold: string
 
-			accent_light: string
 			background: string
+			accent_light: string
+			disabled: string
 
 			font_light: string
 			font_dark: string
@@ -80,12 +81,12 @@ export const theme: DefaultTheme = {
 		app_lightGreen_partial: "88, 41%, 54%",
 		app_gold: "hsla(43, 47%, 35%, 1.0)",
 
+		background: "hsla(0, 0%, 0%, 0.85)",
+		accent_light: "#F3F5F5",
+		disabled: "#909291",
+
 		font_light: "white",
 		font_dark: "#313332",
-
-		background: "hsla(0, 0%, 0%, 0.85)",
-
-		accent_light: "#F3F5F5",
 	},
 
 	// elements that have multiple types (color, size, etc)

@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icons/Icon"
 import CartItemHeader from "./CartItemHeader"
 import CartItemMain from "./CartItemMain"
 
@@ -9,11 +8,11 @@ import CartItemMain from "./CartItemMain"
 // component
 // ************
 
-export default function CartItem(): ReactElement {
+export default function CartItem(props): ReactElement {
 	return (
 		<Container>
-			<CartItemHeader />
-			<CartItemMain />
+			<CartItemHeader {...props} />
+			<CartItemMain {...props} />
 		</Container>
 	)
 }

@@ -2,16 +2,30 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
+// import store
+import { useShopify } from "../../../store"
 
 // ************
 // component
 // ************
 
-export default function CartItemHeader(): ReactElement {
+export default function CartItemHeader({ id, title }): ReactElement {
+	const state_shopify = useShopify()
+
+	// remove line item from cart
+	function removeLineItem() {
+		const checkoutId: string = state_shopify.checkoutId
+		const lineItems: string[] = [id]
+		state_shopify.removeLineItem({
+			checkoutId,
+			lineItems,
+		})
+	}
+
 	return (
 		<Container>
-			<Title>Item 1</Title>
-			<button className="remove-item">
+			<Title>{title}</Title>
+			<button className="remove-item" onClick={removeLineItem}>
 				<Icon name="trashcan" />
 			</button>
 		</Container>

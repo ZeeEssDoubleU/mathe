@@ -3,6 +3,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux"
 // import reducers / hooks
 import { categorySlice, useCategory } from "./categorySlice"
 import { transitionSlice, useTransition } from "./transitionSlice"
+import { shopifySlice, useShopify } from "./shopifySlice"
 
 // ************
 // store
@@ -13,6 +14,7 @@ const store = configureStore({
 	reducer: {
 		category: categorySlice.reducer,
 		transition: transitionSlice.reducer,
+		shopify: shopifySlice.reducer,
 	},
 })
 export default store
@@ -32,4 +34,4 @@ export const useAppSelector: TypedUseSelectorHook<RootState_Type> = useSelector
 // named exports
 // ************
 
-export { useCategory, useTransition }
+export { useCategory, useTransition, useShopify }

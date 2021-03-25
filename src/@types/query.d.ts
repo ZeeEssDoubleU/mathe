@@ -35,6 +35,7 @@ export interface ProductsQuery_I {
 				productType: string
 				tags: string[]
 				variants: {
+					shopifyId: string
 					weight: number
 					weightUnit: string
 					priceNumber: number

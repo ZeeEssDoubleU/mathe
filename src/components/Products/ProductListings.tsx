@@ -8,8 +8,9 @@ import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import utils
-import { convertGrams } from "../../utils/convertGrams"
 import { abbreviate } from "../../utils/abbreviate"
+// import store
+import { useShopify } from "../../store"
 
 // ************
 // types
@@ -31,6 +32,7 @@ export default function ProductsBody({
 	categories,
 	category_selected,
 }: ProductListings_I): ReactElement {
+	const state_shopify = useShopify()
 	const { products_datocms, collection_shopify } = category_selected
 
 	const productsSorted = sortBy(collection_shopify.products, "title")
@@ -65,10 +67,24 @@ export default function ProductsBody({
 				(product) => product.slug === product_shopify.handle,
 			)
 			// consolidate matched product values
-			const product_slug = product_datocms?.slug || product_shopify.handle
 			const product_title = product_datocms?.title || product_shopify.title
 			const product_description =
 				product_datocms?.description || product_shopify.descriptionHtml
+
+			// add line item to cart
+			function addLineItem() {
+				const checkoutId: string = state_shopify.checkoutId
+				const lineItems = [
+					{
+						variantId: product_shopify.variants[0].shopifyId,
+						quantity: 1,
+					},
+				]
+				state_shopify.addLineItem({
+					checkoutId,
+					lineItems,
+				})
+			}
 
 			// DISPLAY each product
 			return (
@@ -86,31 +102,7 @@ export default function ProductsBody({
 								{product_shopify.variants[0].weight}{" "}
 								{abbreviate(product_shopify.variants[0].weightUnit)}
 							</Price>
-							{/* // TODO: change this out for shopify buy button */}
-							<BuyButton
-								className="snipcart-add-item"
-								// *** equired
-								data-item-id={`${product_slug}`}
-								data-item-price={
-									product_shopify.variants[0].priceNumber
-								}
-								data-item-url={`/products/${collection_shopify.handle}`}
-								// *** optional
-								data-item-name={product_title}
-								data-item-description={product_description}
-								// TODO: make sure this works
-								data-item-size={`${
-									product_shopify.variants[0].weight
-								} ${abbreviate(
-									product_shopify.variants[0].weightUnit,
-								)}`}
-								data-item-weight={convertGrams(
-									product_shopify.variants[0].weight,
-									abbreviate(product_shopify.variants[0].weightUnit),
-								)}
-							>
-								Add to Cart
-							</BuyButton>
+							<BuyButton onClick={addLineItem}>Add to Cart</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>
 					<Description

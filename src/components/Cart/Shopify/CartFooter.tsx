@@ -2,27 +2,34 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
+// import store
+import { useShopify } from "../../../store"
 
 // ************
 // component
 // ************
 
 export default function CartFooter(): ReactElement {
+	const state_shopify = useShopify()
+	const { subtotalPrice, totalTax, totalPrice } = state_shopify
+
 	return (
 		<Container>
 			<Subtotal>
 				<span>Subtotal</span>
-				<span>$10.00</span>
+				<span>
+					{Number(subtotalPrice) === 0 ? "─" : `$${subtotalPrice}`}
+				</span>
 			</Subtotal>
 			<Tax>
 				<span>Tax</span>
-				<span>$1.00</span>
+				<span>{Number(totalTax) === 0 ? "─" : `$${totalTax}`}</span>
 			</Tax>
 			<Total>
 				<span>Total</span>
-				<span>$11.00</span>
+				<span>{Number(totalPrice) === 0 ? "──" : `$${totalPrice}`}</span>
 			</Total>
-			<Checkout>
+			<Checkout disabled={state_shopify.isCartEmpty}>
 				<span className="spacer" />
 				Checkout
 				<span className="spacer">
@@ -37,7 +44,7 @@ export default function CartFooter(): ReactElement {
 // styles
 // ************
 
-const Checkout = styled.button`
+const Checkout = styled.button<{ disabled: boolean }>`
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 
@@ -50,6 +57,8 @@ const Checkout = styled.button`
 	background: ${({ theme }) => theme.color.app_green};
 	color: white;
 	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
+
+	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 
 	svg {
 		height: 16px;
