@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components"
 export default createGlobalStyle`
       #snipcart,
       #snipcart .snipcart-modal__container {
-            z-index: ${({ theme }) => theme.z.top};
+            z-index: ${({ theme }) => theme.zIndex.top};
             box-shadow: none;
             font-weight: ${({ theme }) => theme.font.main_weight_cart};
       }

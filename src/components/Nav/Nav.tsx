@@ -61,7 +61,7 @@ const NavLogo = styled.img`
 	filter: drop-shadow(${({ theme }) => theme.element.shadow});
 	margin-top: 12px;
 	transform: translateX(-50%);
-	z-index: ${({ theme }) => theme.z.mid};
+	z-index: ${({ theme }) => theme.zIndex.mid};
 	// min-width: tablet
 	// min-height: med
 	@media (min-width: ${({ theme }) => theme.media.tablet}),

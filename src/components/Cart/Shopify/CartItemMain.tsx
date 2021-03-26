@@ -4,36 +4,25 @@ import styled from "styled-components"
 import Icon from "../../Icons/Icon"
 // import store
 import { useShopify } from "../../../store"
-
-// ************
-// types
-// ************
-
-export type UpdateLineItem_I = {
-	id: string
-	quantity: number
-}[]
+// import types
+import { CartItem_I } from "./CartItem"
 
 // ************
 // component
 // ************
 
-export default function CartItemMain({ id, quantity, price }): ReactElement {
+export default function CartItemMain({
+	id,
+	quantity,
+	price,
+}: CartItem_I): ReactElement {
 	const state_shopify = useShopify()
 
 	// update line item in cart
-	function updateLineItem(updateQuantity) {
-		const checkoutId: string = state_shopify.checkoutId
-		const lineItems: UpdateLineItem_I = [
-			{
-				id,
-				quantity: updateQuantity,
-			},
-		]
-		state_shopify.updateLineItem({
-			checkoutId,
-			lineItems,
-		})
+	function updateLineItem(updatedQuantity: number) {
+		const checkoutId = state_shopify.checkoutId
+		const lineItems = [{ id, quantity: updatedQuantity }]
+		state_shopify.updateLineItem({ checkoutId, lineItems })
 	}
 
 	return (
@@ -55,7 +44,7 @@ export default function CartItemMain({ id, quantity, price }): ReactElement {
 						<Icon name="plus" />
 					</button>
 				</Selector>
-				<Price>${Number(price * quantity).toFixed(2)}</Price>
+				<Price>${Number(Number(price) * quantity).toFixed(2)}</Price>
 			</Quantity>
 		</Container>
 	)

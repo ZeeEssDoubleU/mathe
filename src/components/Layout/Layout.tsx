@@ -5,12 +5,9 @@ import styled from "styled-components"
 // import components
 import Nav from "../Nav/Nav"
 import Background from "../elements/Background"
-// import Snipcart from "../Cart/Snipcart/Snipcart"
-import ShopifyCart from "../Cart/Shopify/Shopify"
+import ShopifyCart from "../Cart/Shopify"
 // impprt store
 import { useCategory, useTransition } from "../../store"
-// import utils
-import * as anim from "../../utils/animations"
 
 // ************
 // types
@@ -44,8 +41,8 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 		// if not, set page-transition elem position
 		if (state_transition.inProgress === false) {
 			path === "/"
-				? anim.enter_top_set(".page-transition")
-				: anim.exit_top_set(".page-transition")
+				? state_transition.translateDown_page_set()
+				: state_transition.translateUp_page_set()
 		} else {
 			state_transition.setInProgress(false)
 		}
@@ -63,7 +60,6 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 				<Nav />
 				{children}
 			</PageTransition>
-			{/* <Snipcart /> */}
 			<ShopifyCart />
 		</Container>
 	)

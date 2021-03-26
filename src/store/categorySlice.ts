@@ -56,11 +56,19 @@ export const categorySlice = createSlice({
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useCategory() {
 	const dispatch = useAppDispatch()
-	const { selectCategory } = categorySlice.actions
+
+	// ***  selectors
+	const selected = useAppSelector((state) => state.category.selected)
+
+	// ***  actions
+	function selectCategory(action: SelectedCategoryPayload_I): void {
+		dispatch(categorySlice.actions.selectCategory(action))
+	}
 
 	return {
-		selectCategory: (action: SelectedCategoryPayload_I) =>
-			dispatch(selectCategory(action)),
-		selected: useAppSelector((state) => state.category.selected),
+		// selectors
+		selected,
+		// actions
+		selectCategory,
 	}
 }

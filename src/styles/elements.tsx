@@ -90,7 +90,7 @@ export const MarginAuto = styled.div`
 
 export const ModalButton = styled(CategoryButton)`
 	position: fixed;
-	z-index: ${({ theme }) => theme.z.mid};
+	z-index: ${({ theme }) => theme.zIndex.mid};
 	right: 0;
 	height: 3.5rem;
 	width: 3.5rem;

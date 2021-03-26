@@ -11,7 +11,7 @@ import { useShopify } from "../../../store"
 
 export default function CartFooter(): ReactElement {
 	const state_shopify = useShopify()
-	const { subtotalPrice, totalTax, totalPrice } = state_shopify
+	const { checkoutUrl, subtotalPrice, totalTax, totalPrice } = state_shopify
 
 	return (
 		<Container>
@@ -29,7 +29,10 @@ export default function CartFooter(): ReactElement {
 				<span>Total</span>
 				<span>{Number(totalPrice) === 0 ? "──" : `$${totalPrice}`}</span>
 			</Total>
-			<Checkout disabled={state_shopify.isCartEmpty}>
+			<Checkout
+				disabled={state_shopify.isCartEmpty}
+				onClick={() => window.location.replace(checkoutUrl)}
+			>
 				<span className="spacer" />
 				Checkout
 				<span className="spacer">

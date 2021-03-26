@@ -14,7 +14,7 @@ import { useStaticQuery, graphql, PageProps } from "gatsby"
 
 export interface InitState_I {
 	selectedCategory: string
-	transition_duration_page: number
+	transition_duration_page_s: number
 	transition_triggered_page: boolean
 	transition_duration_background: number
 }
@@ -84,14 +84,14 @@ export function selectedCategory({ categories, path }: Init_I): string {
 
 const initState: InitState_I = {
 	selectedCategory: "yerba-mate",
-	transition_duration_page: 0.7,
+	transition_duration_page_s: 0.7,
 	transition_triggered_page: false,
 	transition_duration_background: 0.2,
 }
 function init({ categories, path }: Init_I): InitState_I {
 	return {
 		selectedCategory: selectedCategory({ categories, path }),
-		transition_duration_page: 0.7,
+		transition_duration_page_s: 0.7,
 		transition_triggered_page: false,
 		transition_duration_background: 0.2,
 	}

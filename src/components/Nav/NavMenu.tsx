@@ -1,8 +1,6 @@
 import React, { MouseEvent, ReactElement, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-// import animations
-import * as anim from "../../utils/animations"
 // import store
 import { useTransition } from "../../store"
 
@@ -16,7 +14,7 @@ export default function NavMenu(): ReactElement {
 	const state_transition = useTransition()
 
 	useEffect(() => {
-		anim.nav_fadeIn()
+		state_transition.nav_fadeIn()
 	}, [])
 
 	// tracks and handles nav animation.  No state used, so component is not re-rendered!  Score!
@@ -42,10 +40,7 @@ export default function NavMenu(): ReactElement {
 			<Link
 				to="/about"
 				className="nav-link"
-				onClick={() => {
-					state_transition.setInProgress(true)
-					anim.exit_top(".page-transition", state_transition.duration_page)
-				}}
+				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
 					<h1>About</h1>
@@ -55,16 +50,11 @@ export default function NavMenu(): ReactElement {
 			<Link
 				to="/products/yerba-mate"
 				className="nav-link"
-				onClick={() => {
-					state_transition.setInProgress(true)
-					anim.exit_top(".page-transition", state_transition.duration_page)
-				}}
+				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
 					<h1 ref={cycleRef} className="cycle">
 						Shop
-						{/* // ! disabled
-            {textOptions[textIndex]} */}
 					</h1>
 					<h5>Premium teas + yerba mate</h5>
 				</div>
@@ -72,10 +62,7 @@ export default function NavMenu(): ReactElement {
 			<Link
 				to="/blog"
 				className="nav-link"
-				onClick={() => {
-					state_transition.setInProgress(true)
-					anim.exit_top(".page-transition", state_transition.duration_page)
-				}}
+				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
 					<h1>Blog</h1>
@@ -85,10 +72,7 @@ export default function NavMenu(): ReactElement {
 			<Link
 				to="/contact"
 				className="nav-link"
-				onClick={() => {
-					state_transition.setInProgress(true)
-					anim.exit_top(".page-transition", state_transition.duration_page)
-				}}
+				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
 					<h1>Contact</h1>

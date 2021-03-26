@@ -16,11 +16,10 @@ export default function CartTab(): ReactElement {
 
 	return (
 		<Container
-			className="snipcart-checkout"
 			onClick={() => state_shopify.toggleCart(!state_shopify.isCartOpen)}
 		>
 			<Icon name="cart-zoom" />
-			<ItemCount className="snipcart-items-count" />
+			<span className="item-count">{state_shopify.totalItemCount}</span>
 		</Container>
 	)
 }
@@ -36,4 +35,3 @@ const Container = styled(ModalButton)`
 		top: 7.5%;
 	}
 `
-const ItemCount = styled.span``

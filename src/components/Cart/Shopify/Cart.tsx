@@ -1,9 +1,10 @@
-import React, { useEffect, ReactElement } from "react"
+import React, { useEffect, ReactElement, useRef } from "react"
 import styled from "styled-components"
 // import components
 import CartHeader from "./CartHeader"
 import CartFooter from "./CartFooter"
 import Item from "./CartItem"
+import useClickOutside from "../../../utils/useClickOutside"
 // import store
 import { useShopify } from "../../../store"
 
@@ -13,15 +14,13 @@ import { useShopify } from "../../../store"
 
 export default function Cart(): ReactElement {
 	const state_shopify = useShopify()
+	const cartRef = useRef(null)
+	useClickOutside(cartRef)
 
 	// create shopify checkout when cart mounts
 	useEffect(() => {
 		state_shopify.createCheckout()
 	}, [])
-
-	useEffect(() => {
-		console.log("thing", state_shopify.lineItems)
-	}, [state_shopify.lineItems])
 
 	// map cart line items
 	const lineItems = state_shopify.isCartEmpty ? (
@@ -41,7 +40,7 @@ export default function Cart(): ReactElement {
 	)
 
 	return (
-		<Container isOpen={state_shopify.isCartOpen}>
+		<Container ref={cartRef} isOpen={state_shopify.isCartOpen}>
 			<CartHeader />
 			{/* display line items */}
 			<Main>{lineItems}</Main>
@@ -60,16 +59,19 @@ const Container = styled.div<{ isOpen: boolean }>`
 
 	position: fixed;
 	top: 0;
-	right: ${(props) => (props.isOpen === true ? 0 : "-100%")};
+	right: 0;
 	width: 100%;
 	height: 100%;
 	overflow-y: scroll;
+	z-index: ${({ theme }) => theme.zIndex.top};
 
 	background: white;
 	color: ${({ theme }) => theme.color.font_dark};
 
+	transform: translateX(${(props) => (props.isOpen === true ? 0 : "100%")});
+	transition: transform 0.3s ease;
+
 	@media (min-width: ${({ theme }) => theme.media.tablet}) {
-		right: ${(props) => (props.isOpen === true ? 0 : "-35%")};
 		width: 35%;
 	}
 `

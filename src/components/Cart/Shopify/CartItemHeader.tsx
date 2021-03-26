@@ -4,22 +4,24 @@ import styled from "styled-components"
 import Icon from "../../Icons/Icon"
 // import store
 import { useShopify } from "../../../store"
+// import types
+import { CartItem_I } from "./CartItem"
 
 // ************
 // component
 // ************
 
-export default function CartItemHeader({ id, title }): ReactElement {
+export default function CartItemHeader({
+	id,
+	title,
+}: CartItem_I): ReactElement {
 	const state_shopify = useShopify()
 
 	// remove line item from cart
 	function removeLineItem() {
-		const checkoutId: string = state_shopify.checkoutId
-		const lineItems: string[] = [id]
-		state_shopify.removeLineItem({
-			checkoutId,
-			lineItems,
-		})
+		const checkoutId = state_shopify.checkoutId
+		const lineItemIds = [String(id)]
+		state_shopify.removeLineItem({ checkoutId, lineItemIds })
 	}
 
 	return (

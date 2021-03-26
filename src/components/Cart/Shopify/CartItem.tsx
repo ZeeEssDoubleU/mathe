@@ -3,12 +3,25 @@ import styled from "styled-components"
 // import components
 import CartItemHeader from "./CartItemHeader"
 import CartItemMain from "./CartItemMain"
+// import types
+import { LineItem } from "shopify-buy"
+
+// ************
+// types
+// ************
+
+export interface CartItem_I {
+	id: LineItem["id"]
+	title: LineItem["title"]
+	quantity: LineItem["quantity"]
+	price: LineItem["price"]
+}
 
 // ************
 // component
 // ************
 
-export default function CartItem(props): ReactElement {
+export default function CartItem(props: CartItem_I): ReactElement {
 	return (
 		<Container>
 			<CartItemHeader {...props} />

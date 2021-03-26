@@ -24,7 +24,7 @@ declare module "styled-components" {
 		}
 
 		// z-index
-		z: {
+		zIndex: {
 			top: number
 			mid: number
 			bottom: number
@@ -95,9 +95,9 @@ export const theme: DefaultTheme = {
 	},
 
 	// z-index
-	z: {
-		top: 100,
-		mid: 50,
+	zIndex: {
+		top: 99,
+		mid: 49,
 		bottom: 0,
 	},
 

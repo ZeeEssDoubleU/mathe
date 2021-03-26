@@ -73,17 +73,10 @@ export default function ProductsBody({
 
 			// add line item to cart
 			function addLineItem() {
-				const checkoutId: string = state_shopify.checkoutId
-				const lineItems = [
-					{
-						variantId: product_shopify.variants[0].shopifyId,
-						quantity: 1,
-					},
-				]
-				state_shopify.addLineItem({
-					checkoutId,
-					lineItems,
-				})
+				const checkoutId = state_shopify.checkoutId
+				const variantId = product_shopify.variants[0].shopifyId
+				const lineItemsToAdd = [{ variantId, quantity: 1 }]
+				state_shopify.addLineItem({ checkoutId, lineItemsToAdd })
 			}
 
 			// DISPLAY each product

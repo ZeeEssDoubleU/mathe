@@ -4,8 +4,6 @@ import styled from "styled-components"
 import { navigate } from "@reach/router"
 // import store
 import { useTransition } from "../../store"
-// import animations
-import * as anim from "../../utils/animations"
 
 // ************
 // types
@@ -30,13 +28,12 @@ function BackButton(): ReactElement {
 			to="/"
 			aria-label="close page / back to home"
 			onClick={(e) => {
-				e.preventDefault()
-				state_transition.setInProgress(true)
-				anim.enter_top(".page-transition", state_transition.duration_page)
+				e.preventDefault() // stop immediate navigation
+				state_transition.translateDown_page()
 				setTimeout(() => {
 					navigate("/")
-					// multiply by 1000 for setTimeout to convert store's state_transition.duration_page correctly
-				}, state_transition.duration_page * 1000)
+					// multiply by 1000 for setTimeout to convert store's state_transition.duration_page_s correctly
+				}, state_transition.duration_page_ms)
 			}}
 		>
 			<Container>
