@@ -34,8 +34,8 @@ export default function CartFooter(): ReactElement {
 				onClick={() => window.location.replace(checkoutUrl)}
 			>
 				<span className="spacer" />
-				Checkout
-				<span className="spacer">
+				<span className="shift">Checkout</span>
+				<span className="spacer shift">
 					<Icon name="forward-chevron" />
 				</span>
 			</Checkout>
@@ -68,6 +68,16 @@ const Checkout = styled.button<{ disabled: boolean }>`
 		width: 16px;
 		fill: white;
 		vertical-align: middle;
+	}
+
+	.shift {
+		transition: transform 300ms;
+	}
+
+	&:hover {
+		.shift {
+			transform: translateX(${(props) => (props.disabled ? 0 : "5px")});
+		}
 	}
 `
 const Container = styled.footer`

@@ -17,6 +17,7 @@ export default function CartHeader(): ReactElement {
 			<h2>Cart Summary</h2>
 			<button
 				className="close"
+				aria-label="close cart"
 				onClick={() => state_shopify.toggleCart(false)}
 			>
 				<Icon name="plus" />

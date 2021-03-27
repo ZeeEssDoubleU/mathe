@@ -44,7 +44,7 @@ export const ContentHeader = styled.div`
 		font-size: 30px;
 		font-weight: ${({ theme }) => theme.font.main_weight_sectionHeader};
 	}
-	h5 {
+	h4 {
 		margin: 0;
 		color: ${({ theme }) => theme.color.app_green};
 		font-family: ${({ theme }) => theme.font.accent};

@@ -11,12 +11,12 @@ export default function useClickOutside(ref: RefObject<HTMLElement>): void {
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
-			console.log("ref:", ref)
-			console.log("ref.current:", ref.current)
-			console.log("event.target:", event.target)
-
 			// TS cant assert.  Manually assert to event.target to node
-			if (ref.current && !ref.current.contains(event.target as Node)) {
+			if (
+				ref.current && // ref not null
+				event.target instanceof Node &&
+				!ref.current.contains(event.target) // ref node contains target node
+			) {
 				toggleCart(false)
 			}
 		}

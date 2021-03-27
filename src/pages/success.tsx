@@ -49,7 +49,7 @@ export default function Success({ data }: SuccessQuery_I): ReactElement {
 			<Section>
 				<Header>
 					<h3>{content.header}</h3>
-					<h5>{content.subHeader}</h5>
+					<h4>{content.subHeader}</h4>
 				</Header>
 				<Body
 					onClick={() => {
@@ -93,7 +93,7 @@ const Body = styled(ContentBody)`
 	svg {
 		height: 16px;
 		width: 16px;
-		margin-left: 16px;
+		margin-right: 16px;
 		fill: white;
 		vertical-align: middle;
 	}
@@ -102,7 +102,7 @@ const Body = styled(ContentBody)`
 		display: inline;
 	}
 	&:hover {
-		transform: translateX(-2.5%);
+		transform: translateX(-5px);
 	}
 `
 

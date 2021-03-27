@@ -2,7 +2,6 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
 import { graphql } from "gatsby"
-import { Page_I } from "../@types/query"
 // import components
 import ContactDetails from "../components/Contact/ContactDetails"
 import ContactForm from "../components/Contact/ContactForm"
@@ -73,7 +72,7 @@ export default function Contact({ data }: ContactQuery_I): ReactElement {
 								<h3>{section.header}</h3>
 							)}
 							{"subHeader" in section && section.subHeader && (
-								<h5>{section.subHeader}</h5>
+								<h4>{section.subHeader}</h4>
 							)}
 						</Header>
 						<Body>

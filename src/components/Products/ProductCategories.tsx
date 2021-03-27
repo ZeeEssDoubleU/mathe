@@ -63,7 +63,7 @@ export default function ProductsHeader({
 				<Header>
 					<h3>{category_selected.title}</h3>
 					{category_selected.subtitle && (
-						<h5>{category_selected.subtitle}</h5>
+						<h4>{category_selected.subtitle}</h4>
 					)}
 				</Header>
 				{category_selected.description && (

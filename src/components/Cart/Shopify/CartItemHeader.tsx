@@ -27,7 +27,11 @@ export default function CartItemHeader({
 	return (
 		<Container>
 			<Title>{title}</Title>
-			<button className="remove-item" onClick={removeLineItem}>
+			<button
+				aria-label="remove item"
+				className="remove-item"
+				onClick={removeLineItem}
+			>
 				<Icon name="trashcan" />
 			</button>
 		</Container>

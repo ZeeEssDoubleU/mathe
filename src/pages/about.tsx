@@ -58,7 +58,7 @@ export default function About({ data }: AboutQuery_I): ReactElement {
 			<Section>
 				<Header>
 					<h3>{content.header}</h3>
-					<h5>{content.subHeader}</h5>
+					<h4>{content.subHeader}</h4>
 				</Header>
 				<Body
 					dangerouslySetInnerHTML={{

@@ -1,5 +1,7 @@
-import React, { ReactElement } from "react"
+import React, { useState, ReactElement, FormEvent, ChangeEvent } from "react"
 import styled from "styled-components"
+import { navigate } from "gatsby"
+import axios from "axios"
 // import components
 import Icon from "../Icons/Icon"
 
@@ -8,6 +10,56 @@ import Icon from "../Icons/Icon"
 // ************
 
 export default function ContactForm(): ReactElement {
+	const [formData, setFormData] = useState({
+		"form-name": "contact-form",
+		name: "",
+		email: "",
+		subject: "",
+		message: "",
+	})
+
+	// encode form data
+	function encode(data: typeof formData) {
+		// use entries for better typing
+		return Object.entries(data)
+			.map((entry) => {
+				const key = entry[0]
+				const value = entry[1]
+				return encodeURIComponent(`${key}=${value}`)
+			})
+			.join("&")
+	}
+
+	// handle form submit
+	async function handleSubmit(event: FormEvent) {
+		event.preventDefault()
+
+		try {
+			await axios({
+				url: `/`,
+				method: "POST",
+				headers: { "Content-Type": "application/x-www-form-urlencoded" },
+				data: encode(formData),
+			})
+
+			navigate("/success")
+		} catch (error) {
+			alert(error)
+		}
+	}
+
+	// handle form change
+	function handleChange(
+		event: ChangeEvent<
+			HTMLFormElement | HTMLInputElement | HTMLTextAreaElement
+		>,
+	) {
+		setFormData({
+			...formData,
+			[event.target.name]: event.target.value,
+		})
+	}
+
 	return (
 		<Form
 			id="contact-form"
@@ -16,6 +68,7 @@ export default function ContactForm(): ReactElement {
 			action="/success"
 			data-netlify="true"
 			data-netlify-honeypot="honeypot-field"
+			onSubmit={handleSubmit}
 		>
 			{/* input required by netlify for SSGs like gatsby */}
 			<input type="hidden" name="form-name" value="contact-form" />
@@ -24,29 +77,31 @@ export default function ContactForm(): ReactElement {
 			<input
 				required
 				type="text"
-				id="name"
 				name="name"
 				className="contact-form-input"
 				placeholder="name"
+				value={formData["name"]}
+				onChange={handleChange}
 			/>
 			<input
 				required
 				type="email"
-				id="email"
 				name="email"
 				className="contact-form-input"
 				placeholder="email"
+				value={formData["email"]}
+				onChange={handleChange}
 			/>
 			<input
 				required
-				id="subject"
 				name="subject"
 				className="contact-form-input"
 				placeholder="subject"
+				value={formData["subject"]}
+				onChange={handleChange}
 			/>
 			<textarea
 				required
-				id="message"
 				name="message"
 				className="contact-form-input"
 				placeholder="message"
@@ -54,8 +109,10 @@ export default function ContactForm(): ReactElement {
 				spellCheck={true}
 				// TODO: May need to revise in future in case Grammarly needed
 				data-gramm_editor="false"
+				value={formData["message"]}
+				onChange={handleChange}
 			/>
-			<button type="submit">
+			<button type="submit" aria-label="submit form">
 				<Icon name="send" />
 			</button>
 		</Form>

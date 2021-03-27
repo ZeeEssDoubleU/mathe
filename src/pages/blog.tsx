@@ -40,7 +40,7 @@ export default function Blog({ data }: BlogQuery_I): ReactElement {
 			<Section>
 				<Header>
 					<h3>Coming soon</h3>
-					<h5>{null}</h5>
+					<h4>{null}</h4>
 				</Header>
 				<Body>
 					<p>

@@ -43,8 +43,8 @@ export default function NavMenu(): ReactElement {
 				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
-					<h1>About</h1>
-					<h5>What is Mathé?</h5>
+					<h1 className="nav-heading">About</h1>
+					<h2 className="nav-subheading">What is Mathé?</h2>
 				</div>
 			</Link>
 			<Link
@@ -53,10 +53,10 @@ export default function NavMenu(): ReactElement {
 				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
-					<h1 ref={cycleRef} className="cycle">
+					<h1 className="nav-heading cycle" ref={cycleRef}>
 						Shop
 					</h1>
-					<h5>Premium teas + yerba mate</h5>
+					<h2 className="nav-subheading">Premium teas + yerba mate</h2>
 				</div>
 			</Link>
 			<Link
@@ -65,8 +65,8 @@ export default function NavMenu(): ReactElement {
 				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
-					<h1>Blog</h1>
-					<h5>Our stories</h5>
+					<h1 className="nav-heading">Blog</h1>
+					<h2 className="nav-subheading">Our stories</h2>
 				</div>
 			</Link>
 			<Link
@@ -75,8 +75,8 @@ export default function NavMenu(): ReactElement {
 				onClick={state_transition.translateUp_page}
 			>
 				<div className="nav-item">
-					<h1>Contact</h1>
-					<h5>Get in touch</h5>
+					<h1 className="nav-heading">Contact</h1>
+					<h2 className="nav-subheading">Get in touch</h2>
 				</div>
 			</Link>
 		</Container>
@@ -136,7 +136,7 @@ const Container = styled.div`
 					transition: opacity 500ms;
 				}
 			}
-			h5 {
+			h2 {
 				transform: translateY(-2em);
 				padding: 0.5em 1em;
 				margin: 0.5em 0;
@@ -162,7 +162,7 @@ const Container = styled.div`
 			&:hover {
 				background: hsla(0, 0%, 0%, 0.5);
 				cursor: pointer;
-				h5 {
+				h2 {
 					transform: translateY(0);
 					opacity: 1;
 				}

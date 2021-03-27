@@ -31,6 +31,7 @@ export default function CartItemMain({
 			<Quantity>
 				<Selector>
 					<button
+						aria-label="decrement quantity"
 						className="change-quantity"
 						onClick={() => updateLineItem(quantity - 1)}
 					>
@@ -38,6 +39,7 @@ export default function CartItemMain({
 					</button>
 					<Count>{quantity}</Count>
 					<button
+						aria-label="increment quantity"
 						className="change-quantity"
 						onClick={() => updateLineItem(quantity + 1)}
 					>

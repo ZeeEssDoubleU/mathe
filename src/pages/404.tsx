@@ -49,7 +49,7 @@ export default function NotFound({ data }: NotFoundQuery_I): ReactElement {
 			<Section>
 				<Header>
 					<h3>{content.header}</h3>
-					<h5>{content.subHeader}</h5>
+					<h4>{content.subHeader}</h4>
 				</Header>
 				<Body
 					onClick={() => {
@@ -102,7 +102,7 @@ const Body = styled(ContentBody)`
 		display: inline;
 	}
 	&:hover {
-		transform: translateX(-2.5%);
+		transform: translateX(-5px);
 	}
 `
 
