@@ -11,24 +11,24 @@ import { useShopify } from "../../../store"
 
 export default function CartFooter(): ReactElement {
 	const state_shopify = useShopify()
-	const { checkoutUrl, subtotalPrice, totalTax, totalPrice } = state_shopify
+	const { checkoutUrl, subtotalPrice } = state_shopify
 
 	return (
 		<Container>
 			<Subtotal>
 				<span>Subtotal</span>
 				<span>
-					{Number(subtotalPrice) === 0 ? "─" : `$${subtotalPrice}`}
+					{Number(subtotalPrice) === 0 ? "──" : `$${subtotalPrice}`}
 				</span>
 			</Subtotal>
-			<Tax>
+			{/* <Tax>
 				<span>Tax</span>
 				<span>{Number(totalTax) === 0 ? "─" : `$${totalTax}`}</span>
 			</Tax>
 			<Total>
 				<span>Total</span>
 				<span>{Number(totalPrice) === 0 ? "──" : `$${totalPrice}`}</span>
-			</Total>
+			</Total> */}
 			<Checkout
 				disabled={state_shopify.isCartEmpty}
 				onClick={() => window.location.replace(checkoutUrl)}
@@ -39,6 +39,10 @@ export default function CartFooter(): ReactElement {
 					<Icon name="forward-chevron" />
 				</span>
 			</Checkout>
+
+			<span className="footnote">
+				* Taxes and shipping calculated at checkout
+			</span>
 		</Container>
 	)
 }
@@ -84,27 +88,31 @@ const Container = styled.footer`
 	display: grid;
 	grid-gap: 8px;
 	padding: ${({ theme }) => theme.spacing.cart_padding};
+
+	.footnote {
+		text-align: center;
+		font-size: 14px;
+	}
 `
 const Subtotal = styled.div`
 	display: grid;
 	grid-template-columns: auto auto;
 	justify-content: space-between;
 
-	font-family: ${({ theme }) => theme.font.accent_cart};
-	font-size: 14px;
-`
-const Tax = styled.div`
-	display: grid;
-	grid-template-columns: auto auto;
-	justify-content: space-between;
-
-	font-family: ${({ theme }) => theme.font.accent_cart};
-	font-size: 14px;
-`
-const Total = styled.div`
-	display: grid;
-	grid-template-columns: auto auto;
-	justify-content: space-between;
-
 	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
 `
+// const Tax = styled.div`
+// 	display: grid;
+// 	grid-template-columns: auto auto;
+// 	justify-content: space-between;
+
+// 	font-family: ${({ theme }) => theme.font.accent_cart};
+// 	font-size: 14px;
+// `
+// const Total = styled.div`
+// 	display: grid;
+// 	grid-template-columns: auto auto;
+// 	justify-content: space-between;
+
+// 	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
+// `
