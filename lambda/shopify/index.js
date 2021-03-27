@@ -20,7 +20,6 @@ router.get(`/`, async (req, res) => {
 router.get(`/sync`, async (req, res) => {
 	res.status(200).send(`Shopify sync awaiting data.`)
 })
-
 router.get("/sync/collections", controllers_collections.collections_get)
 router.post("/sync/collections", controllers_collections.collection_create)
 router.post(

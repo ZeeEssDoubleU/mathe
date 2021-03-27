@@ -35,12 +35,13 @@ export default function ContactForm(): ReactElement {
 		event.preventDefault()
 
 		try {
-			await axios({
-				url: `/`,
+			const response = await axios({
+				url: `/.netlify/functions/form`,
 				method: "POST",
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
 				data: encode(formData),
 			})
+			console.log(response.data) // ? debug
 
 			navigate("/success")
 		} catch (error) {
