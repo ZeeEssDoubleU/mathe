@@ -48,7 +48,7 @@ export default function ContactForm(): ReactElement {
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
 				data: encode(formData),
 			})
-			console.log(response.data) // ? debug
+			console.log("Form submission recieved! :D") // ? debug
 
 			navigate("/success")
 		} catch (error) {
