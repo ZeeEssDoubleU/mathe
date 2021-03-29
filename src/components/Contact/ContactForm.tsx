@@ -43,7 +43,7 @@ export default function ContactForm(): ReactElement {
 
 		try {
 			const response = await axios({
-				url: "/.netlify/functions/form",
+				url: "/",
 				method: "POST",
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
 				data: encode(formData),
