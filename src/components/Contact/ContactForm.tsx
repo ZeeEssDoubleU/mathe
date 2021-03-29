@@ -16,8 +16,8 @@ import Icon from "../Icons/Icon"
 // ************
 
 export default function ContactForm(): ReactElement {
-	const formRef = useRef(null)
 	const [formData, setFormData] = useState({
+		"form-name": "contact-form",
 		"honeypot-field": "",
 		name: "",
 		email: "",
@@ -40,17 +40,13 @@ export default function ContactForm(): ReactElement {
 	// handle form submit
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault()
-		const form = useRef.current
 
 		try {
 			const response = await axios({
 				url: "/.netlify/functions/form",
 				method: "POST",
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				data: encode({
-					"form-name": form.getAttribute("name"),
-					...formData,
-				}),
+				data: encode(formData),
 			})
 			console.log(response.data) // ? debug
 
@@ -74,7 +70,6 @@ export default function ContactForm(): ReactElement {
 
 	return (
 		<Form
-			ref={formRef}
 			id="contact-form"
 			name="contact-form"
 			method="POST"
