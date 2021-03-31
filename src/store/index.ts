@@ -4,6 +4,8 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux"
 import { categorySlice, useCategory } from "./categorySlice"
 import { transitionSlice, useTransition } from "./transitionSlice"
 import { shopifySlice, useShopify } from "./shopifySlice"
+// import apis
+import { shopifyApi } from "./shopifyApi"
 
 // ************
 // store
@@ -15,6 +17,7 @@ const store = configureStore({
 		category: categorySlice.reducer,
 		transition: transitionSlice.reducer,
 		shopify: shopifySlice.reducer,
+		[shopifyApi.reducerPath]: shopifyApi.reducer,
 	},
 })
 export default store
