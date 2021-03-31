@@ -3,6 +3,7 @@ import React, { ReactElement } from "react"
 import { ThemeProvider } from "styled-components"
 import store from "../../store"
 import { Provider } from "react-redux"
+import { QueryClient, QueryClientProvider } from "react-query"
 // import styles
 import ResetStyle from "../../styles/reset"
 import GlobalStyle from "../../styles/global"
@@ -20,14 +21,18 @@ export interface WrapRoot_I {
 // component
 // ************
 
+const clientQuery = new ClientQuery()
+
 export default function WrapRoot({ element }: WrapRoot_I): ReactElement {
 	return (
 		<ThemeProvider theme={theme}>
-			<Provider store={store}>
-				<ResetStyle />
-				<GlobalStyle />
-				{element}
-			</Provider>
+			<QueryClientProvider client={clientQuery}>
+				<Provider store={store}>
+					<ResetStyle />
+					<GlobalStyle />
+					{element}
+				</Provider>
+			</QueryClientProvider>
 		</ThemeProvider>
 	)
 }
