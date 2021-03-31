@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useAppDispatch, useAppSelector } from "./index"
+import { serialize } from "../utils"
 // import shopify client
 import Client, { Cart, LineItem } from "shopify-buy"
 
@@ -73,15 +74,6 @@ const initialState: ShopifyState_I = {
 // slice
 // ************
 
-export function countItems(
-	state: ShopifyState_I,
-	lineItems: LineItem_I[],
-): void {
-	state.lineItemCount = lineItems?.length || 0
-	state.totalItemCount =
-		lineItems?.reduce((acc, item) => acc + item.quantity, 0) || 0
-}
-
 export const shopifySlice = createSlice({
 	name: "shopify",
 	initialState,
@@ -121,6 +113,19 @@ export const shopifySlice = createSlice({
 })
 
 // ************
+// helpers
+// ************
+
+export function countItems(
+	state: ShopifyState_I,
+	lineItems: LineItem_I[],
+): void {
+	state.lineItemCount = lineItems?.length || 0
+	state.totalItemCount =
+		lineItems?.reduce((acc, item) => acc + item.quantity, 0) || 0
+}
+
+// ************
 // hook
 // ************
 
@@ -141,7 +146,7 @@ export function useShopify() {
 		try {
 			const response: unknown = await client.checkout.create()
 			// serialized to prevent dispatch error
-			const serializedResponse: Cart_I = JSON.parse(JSON.stringify(response))
+			const serializedResponse: Cart_I = serialize(response)
 			dispatch(createCheckout(serializedResponse))
 		} catch (error) {
 			console.error(error)
@@ -155,7 +160,7 @@ export function useShopify() {
 				action.lineItemsToAdd,
 			)
 			// serialized to prevent dispatch error
-			const serializedResponse: Cart_I = JSON.parse(JSON.stringify(response))
+			const serializedResponse: Cart_I = serialize(response)
 			dispatch(addLineItem(serializedResponse))
 		} catch (error) {
 			console.error(error)
@@ -169,7 +174,7 @@ export function useShopify() {
 				action.lineItems,
 			)
 			// serialized to prevent dispatch error
-			const serializedResponse: Cart_I = JSON.parse(JSON.stringify(response))
+			const serializedResponse: Cart_I = serialize(response)
 			dispatch(updateLineItem(serializedResponse))
 		} catch (error) {
 			console.error(error)
@@ -183,7 +188,7 @@ export function useShopify() {
 				action.lineItemIds,
 			)
 			// serialized to prevent dispatch error
-			const serializedResponse: Cart_I = JSON.parse(JSON.stringify(response))
+			const serializedResponse: Cart_I = serialize(response)
 			dispatch(removeLineItem(serializedResponse))
 		} catch (error) {
 			console.error(error)

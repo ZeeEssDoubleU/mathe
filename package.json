@@ -13,10 +13,13 @@
 		"serve": "gatsby serve -o",
 		"serve-m": "gatsby serve -o -H $HOSTNAME -p 9000",
 		"test": "yarn run type-check",
-		"type-check": "tsc --watch"
+		"type-check": "tsc --watch",
+		"clean": "gatsby clean && yarn dev",
+		"deep-clean": "gatsby clean && rm -R node_modules && yarn && yarn dev"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.5.0",
+		"@rtk-incubator/rtk-query": "^0.2.0",
 		"axios": "^0.21.1",
 		"body-parser": "^1.19.0",
 		"datocms-client": "^3.3.0",
@@ -39,6 +42,7 @@
 		"gatsby-source-shopify": "^4.0.0",
 		"gatsby-transformer-json": "^3.0.0",
 		"gatsby-transformer-sharp": "^3.0.0",
+		"graphql-request": "^3.4.0",
 		"gsap": "^3.5.1",
 		"html-react-parser": "^1.2.4",
 		"intersection-observer": "^0.12.0",

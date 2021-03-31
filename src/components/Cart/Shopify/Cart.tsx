@@ -4,7 +4,7 @@ import styled from "styled-components"
 import CartHeader from "./CartHeader"
 import CartFooter from "./CartFooter"
 import Item from "./CartItem"
-import useClickOutside from "../../../utils/useClickOutside"
+import { useClickOutside } from "../../../hooks"
 // import store
 import { useShopify } from "../../../store"
 

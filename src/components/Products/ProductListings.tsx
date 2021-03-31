@@ -8,7 +8,7 @@ import { ProductsQuery_I } from "../../@types/query"
 // import styles
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import utils
-import { abbreviate } from "../../utils/abbreviate"
+import { abbreviate } from "../../utils"
 // import store
 import { useShopify } from "../../store"
 

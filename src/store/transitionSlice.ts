@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useAppDispatch, useAppSelector } from "./index"
 // import animations
-import * as anim from "../utils/animations"
+import { animations as anim } from "../utils"
 
 // ************
 // types

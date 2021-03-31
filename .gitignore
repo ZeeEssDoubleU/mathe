@@ -73,3 +73,5 @@ yarn-error.log
 
 # temp folders
 temp
+
+shopifyApi.ts

@@ -6,7 +6,7 @@ import { useShopify } from "../store"
 // hook
 // ************
 
-export default function useClickOutside(ref: RefObject<HTMLElement>): void {
+export function useClickOutside(ref: RefObject<HTMLElement>): void {
 	const { toggleCart } = useShopify()
 
 	useEffect(() => {
