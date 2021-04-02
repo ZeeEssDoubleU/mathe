@@ -56,7 +56,6 @@
 		"react-scroll": "^1.8.1",
 		"sanitize-html": "^2.3.2",
 		"serverless-http": "^2.7.0",
-		"shopify-buy": "^2.11.0",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {
@@ -67,7 +66,6 @@
 		"@types/react-dom": "^17.0.0",
 		"@types/react-helmet": "^6.1.0",
 		"@types/sanitize-html": "^1.27.1",
-		"@types/shopify-buy": "^2.10.5",
 		"@types/styled-components": "^5.1.7",
 		"@types/webpack": "^4.41.26",
 		"@typescript-eslint/eslint-plugin": "^4.15.2",

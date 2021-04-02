@@ -12,14 +12,12 @@ import { useShopify } from "../../../store"
 // ************
 
 export default function CartTab(): ReactElement {
-	const state_shopify = useShopify()
+	const shopify = useShopify()
 
 	return (
-		<Container
-			onClick={() => state_shopify.toggleCart(!state_shopify.isCartOpen)}
-		>
+		<Container onClick={() => shopify.toggleCart(!shopify.isCartOpen)}>
 			<Icon name="cart-zoom" />
-			<span className="item-count">{state_shopify.totalItemCount}</span>
+			<span className="item-count">{shopify.queries.totalItemCount}</span>
 		</Container>
 	)
 }

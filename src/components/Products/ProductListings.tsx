@@ -9,7 +9,7 @@ import { ProductsQuery_I } from "../../@types/query"
 import { CategoryButton, CategoryNav } from "../../styles/elements"
 // import utils
 import { abbreviate } from "../../utils"
-// import store
+// import store / queries
 import { useShopify } from "../../store"
 
 // ************
@@ -32,7 +32,8 @@ export default function ProductsBody({
 	categories,
 	category_selected,
 }: ProductListings_I): ReactElement {
-	const state_shopify = useShopify()
+	const shopify = useShopify()
+
 	const { products_datocms, collection_shopify } = category_selected
 
 	const productsSorted = sortBy(collection_shopify.products, "title")
@@ -73,10 +74,15 @@ export default function ProductsBody({
 
 			// add line item to cart
 			function addLineItem() {
-				const checkoutId = state_shopify.checkoutId
+				const checkoutId = shopify.queries.checkout?.id
 				const variantId = product_shopify.variants[0].shopifyId
 				const lineItemsToAdd = [{ variantId, quantity: 1 }]
-				state_shopify.addLineItem({ checkoutId, lineItemsToAdd })
+
+				if (checkoutId)
+					shopify.queries.addLineItem.mutate({
+						checkoutId,
+						lineItemsToAdd,
+					})
 			}
 
 			// DISPLAY each product

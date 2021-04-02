@@ -13,34 +13,34 @@ import { useShopify } from "../../../store"
 // ************
 
 export default function Cart(): ReactElement {
-	const state_shopify = useShopify()
 	const cartRef = useRef(null)
+	const shopify = useShopify()
 	useClickOutside(cartRef)
 
 	// create shopify checkout when cart mounts
 	useEffect(() => {
-		state_shopify.createCheckout()
+		shopify.queries.createCheckout.mutate()
 	}, [])
 
-	// map cart line items
-	const lineItems = state_shopify.isCartEmpty ? (
+	const lineItems = shopify.queries.isCartEmpty ? (
 		<div className="empty">Your cart is empty.</div>
 	) : (
-		state_shopify.lineItems?.map((item) => {
+		shopify.queries.lineItems?.edges.map((edge) => {
+			const item = edge.node
 			return (
 				<Item
 					key={item.id}
 					id={item.id}
 					title={item.title}
 					quantity={item.quantity}
-					price={item.variant.price}
+					price={item.variant.priceV2.amount}
 				/>
 			)
 		})
 	)
 
 	return (
-		<Container ref={cartRef} isOpen={state_shopify.isCartOpen}>
+		<Container ref={cartRef} isOpen={shopify.isCartOpen}>
 			<CartHeader />
 			{/* display line items */}
 			<Main>{lineItems}</Main>

@@ -2,10 +2,9 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
-// import store
+// import store / types
 import { useShopify } from "../../../store"
-// import types
-import { CartItem_I } from "./CartItem"
+import { CartItem_I } from "shopify"
 
 // ************
 // component
@@ -16,13 +15,14 @@ export default function CartItemMain({
 	quantity,
 	price,
 }: CartItem_I): ReactElement {
-	const state_shopify = useShopify()
+	const shopify = useShopify()
 
 	// update line item in cart
 	function updateLineItem(updatedQuantity: number) {
-		const checkoutId = state_shopify.checkoutId
+		const checkoutId = shopify.queries.checkout?.id
 		const lineItems = [{ id, quantity: updatedQuantity }]
-		state_shopify.updateLineItem({ checkoutId, lineItems })
+		if (checkoutId)
+			shopify.queries.updateLineItem.mutate({ checkoutId, lineItems })
 	}
 
 	return (

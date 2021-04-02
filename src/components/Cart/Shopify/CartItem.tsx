@@ -4,18 +4,7 @@ import styled from "styled-components"
 import CartItemHeader from "./CartItemHeader"
 import CartItemMain from "./CartItemMain"
 // import types
-import { LineItem } from "shopify-buy"
-
-// ************
-// types
-// ************
-
-export interface CartItem_I {
-	id: LineItem["id"]
-	title: LineItem["title"]
-	quantity: LineItem["quantity"]
-	price: LineItem["price"]
-}
+import { CartItem_I } from "shopify"
 
 // ************
 // component
