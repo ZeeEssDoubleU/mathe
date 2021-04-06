@@ -74,14 +74,14 @@ export default function ProductsBody({
 
 			// add line item to cart
 			function addLineItem() {
-				const checkoutId = shopify.queries.checkout?.id
+				const checkoutId = shopify.checkout?.id
 				const variantId = product_shopify.variants[0].shopifyId
 				const lineItemsToAdd = [{ variantId, quantity: 1 }]
 
 				if (checkoutId)
-					shopify.queries.addLineItem.mutate({
+					shopify.addLineItem.mutate({
 						checkoutId,
-						lineItemsToAdd,
+						lineItems: lineItemsToAdd,
 					})
 			}
 

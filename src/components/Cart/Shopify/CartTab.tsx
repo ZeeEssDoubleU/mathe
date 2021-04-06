@@ -17,7 +17,7 @@ export default function CartTab(): ReactElement {
 	return (
 		<Container onClick={() => shopify.toggleCart(!shopify.isCartOpen)}>
 			<Icon name="cart-zoom" />
-			<span className="item-count">{shopify.queries.totalItemCount}</span>
+			<span className="item-count">{shopify.totalItemCount}</span>
 		</Container>
 	)
 }

@@ -6,16 +6,19 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "gatsby build",
-		"dev": "concurrently 'yarn run start -o' 'yarn run test'",
-		"dev-m": "concurrently 'yarn run start -o -H $HOSTNAME -p 8000' 'yarn run test'",
+		"dev": "concurrently 'yarn start -o' 'yarn test' 'yarn generate --watch'",
+		"dev-m": "concurrently 'yarn start -o -H $HOSTNAME -p 8000' 'yarn test' 'yarn generate --watch'",
+		"dev-codegen": "yarn get-schema && yarn dev",
 		"format": "prettier --write src/**/*.{js, jsx, ts, tsx}",
 		"start": "gatsby develop",
 		"serve": "gatsby serve -o",
 		"serve-m": "gatsby serve -o -H $HOSTNAME -p 9000",
-		"test": "yarn run type-check",
+		"test": "yarn type-check",
 		"type-check": "tsc --watch",
 		"clean": "gatsby clean && yarn dev",
-		"deep-clean": "gatsby clean && rm -R node_modules && yarn && yarn dev"
+		"deep-clean": "gatsby clean && rm -R node_modules && yarn && yarn dev",
+		"generate": "graphql-codegen --config codegen.yml",
+		"get-schema": "node -r esm src/store/shopifySlice/graphql/schema/getSchema.js"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.5.0",
@@ -60,6 +63,12 @@
 	},
 	"devDependencies": {
 		"@babel/preset-typescript": "^7.12.13",
+		"@graphql-codegen/cli": "1.21.3",
+		"@graphql-codegen/introspection": "1.18.1",
+		"@graphql-codegen/typescript": "1.21.1",
+		"@graphql-codegen/typescript-graphql-request": "^3.1.0",
+		"@graphql-codegen/typescript-operations": "1.17.15",
+		"@graphql-codegen/typescript-react-query": "^1.2.4",
 		"@types/aws-lambda": "^8.10.72",
 		"@types/node": "^14.14.24",
 		"@types/react": "^17.0.1",
@@ -76,6 +85,7 @@
 		"eslint": "^7.20.0",
 		"eslint-config-prettier": "^8.0.0",
 		"eslint-plugin-react": "^7.22.0",
+		"esm": "^3.2.25",
 		"gatsby-plugin-ts-config": "^1.1.5",
 		"type-coverage": "^2.14.9",
 		"typescript": "^4.1.5"

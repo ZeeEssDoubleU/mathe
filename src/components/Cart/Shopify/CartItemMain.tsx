@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Icon from "../../Icons/Icon"
 // import store / types
 import { useShopify } from "../../../store"
-import { CartItem_I } from "shopify"
+import { CartItem_I } from "../../../store/shopifySlice/graphql/@types"
 
 // ************
 // component
@@ -19,10 +19,11 @@ export default function CartItemMain({
 
 	// update line item in cart
 	function updateLineItem(updatedQuantity: number) {
-		const checkoutId = shopify.queries.checkout?.id
+		const checkoutId = shopify.checkout?.id
 		const lineItems = [{ id, quantity: updatedQuantity }]
-		if (checkoutId)
-			shopify.queries.updateLineItem.mutate({ checkoutId, lineItems })
+		if (checkoutId) {
+			shopify.updateLineItem.mutate({ checkoutId, lineItems })
+		}
 	}
 
 	return (

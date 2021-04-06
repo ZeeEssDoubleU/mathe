@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useAppDispatch, useAppSelector } from "../index"
-import { useShopifyQueries } from "./queries"
-import { CheckoutWithItemCount_I } from "shopify"
+import { useOperations } from "./hooks"
 
 // ************
 // types
@@ -47,6 +46,6 @@ export function useShopify() {
 		// actions
 		toggleCart: (action: boolean) => dispatch(toggleCart(action)),
 		// queries
-		queries: useShopifyQueries(),
+		...useOperations(),
 	}
 }

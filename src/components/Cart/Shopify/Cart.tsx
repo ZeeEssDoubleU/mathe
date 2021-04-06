@@ -19,15 +19,16 @@ export default function Cart(): ReactElement {
 
 	// create shopify checkout when cart mounts
 	useEffect(() => {
-		shopify.queries.createCheckout.mutate()
+		shopify.createCheckout.mutate({})
 	}, [])
 
-	const lineItems = shopify.queries.isCartEmpty ? (
+	const lineItems = shopify.isCartEmpty ? (
 		<div className="empty">Your cart is empty.</div>
 	) : (
-		shopify.queries.lineItems?.edges.map((edge) => {
+		shopify.lineItems?.edges.map((edge) => {
 			const item = edge.node
-			return (
+
+			return item.variant ? (
 				<Item
 					key={item.id}
 					id={item.id}
@@ -35,7 +36,7 @@ export default function Cart(): ReactElement {
 					quantity={item.quantity}
 					price={item.variant.priceV2.amount}
 				/>
-			)
+			) : null
 		})
 	)
 

@@ -1,0 +1,12 @@
+
+# ************
+# queries
+# ************
+
+query getCheckout($checkoutId: ID!) {
+	node(id: $checkoutId) {
+		... on Checkout {
+			...checkoutDetails
+		}
+	}
+}

@@ -1,0 +1,51 @@
+
+# ************
+# fragments
+# ************
+
+fragment currency on MoneyV2 {
+	amount
+	currencyCode
+}
+
+
+fragment lineItemDetails on CheckoutLineItem {
+	id
+	title
+	quantity
+	variant {
+		id
+		title
+		currentlyNotInStock
+		priceV2 {
+			amount
+			currencyCode
+		}
+	}
+}
+
+
+fragment checkoutDetails on Checkout {
+	id
+	webUrl
+	createdAt
+	updatedAt
+	completedAt
+	lineItems(first: 99) {
+		edges {
+			# line item
+			node {
+				...lineItemDetails
+			}
+		}
+	}
+	subtotalPriceV2 {
+		...currency
+	}
+	totalTaxV2 {
+		...currency
+	}
+	totalPriceV2 {
+		...currency
+	}
+}

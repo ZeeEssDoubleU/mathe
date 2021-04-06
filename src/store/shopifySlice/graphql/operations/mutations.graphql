@@ -1,0 +1,45 @@
+
+# ************
+# mutations
+# ************
+
+mutation checkoutCreate {
+	checkoutCreate(input: {}) {
+		checkout {
+			...checkoutDetails
+		}
+	}
+}
+
+mutation checkoutLineItemsAdd(
+	$checkoutId: ID!
+	$lineItems: [CheckoutLineItemInput!]!
+) {
+	checkoutLineItemsAdd(checkoutId: $checkoutId, lineItems: $lineItems) {
+		checkout {
+			...checkoutDetails
+		}
+	}
+}
+
+mutation checkoutLineItemsRemove($checkoutId: ID!, $lineItemIds: [ID!]!) {
+	checkoutLineItemsRemove(
+		checkoutId: $checkoutId
+		lineItemIds: $lineItemIds
+	) {
+		checkout {
+			...checkoutDetails
+		}
+	}
+}
+
+mutation checkoutLineItemsUpdate(
+	$checkoutId: ID!
+	$lineItems: [CheckoutLineItemUpdateInput!]!
+) {
+	checkoutLineItemsUpdate(checkoutId: $checkoutId, lineItems: $lineItems) {
+		checkout {
+			...checkoutDetails
+		}
+	}
+}

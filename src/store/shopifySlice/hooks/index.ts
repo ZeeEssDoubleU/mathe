@@ -1,12 +1,15 @@
 import { GraphQLClient } from "graphql-request"
 import { QueryClient, useQueryClient, useQuery } from "react-query"
-import { CheckoutWithItemCount_I, Checkout_I, LineItems_I } from "shopify"
-
 // import queries
 import { useCreateCheckout } from "./useCreateCheckout"
 import { useAddLineItem } from "./useAddLineItem"
 import { useRemoveLineItem } from "./useRemoveLineItem"
 import { useUpdateLineItem } from "./useUpdateLineItem"
+// import types
+import {
+	CheckoutDetailsFragment,
+	CheckoutWithItemCount_I,
+} from "../graphql/@types"
 
 // env vars
 const shopName = process.env.GATSBY_SHOPIFY_SHOP_NAME
@@ -30,15 +33,15 @@ shopifyClient.setHeaders({
 
 // count line items
 export function countItems(
-	lineItems: LineItems_I,
+	lineItems: CheckoutDetailsFragment["lineItems"]["edges"],
 ): {
 	lineItemCount: number
 	totalItemCount: number
 } {
 	// get item counts
-	const lineItemCount = lineItems.edges?.length || 0
+	const lineItemCount = lineItems.length || 0
 	const totalItemCount =
-		lineItems.edges?.reduce((acc, { node }) => acc + node.quantity, 0) || 0
+		lineItems.reduce((acc, { node }) => acc + node.quantity, 0) || 0
 
 	return { lineItemCount, totalItemCount }
 }
@@ -46,11 +49,12 @@ export function countItems(
 // add line item counts to 'checkout' cache
 export function addItemCountToCache(
 	queryClient: QueryClient,
-	data: Checkout_I,
+	data: CheckoutDetailsFragment,
 ): CheckoutWithItemCount_I {
-	const { lineItemCount, totalItemCount } = countItems(data.lineItems)
+	// console.log("data", data) // ? debug
+	const { lineItemCount, totalItemCount } = countItems(data.lineItems.edges)
 
-	return queryClient.setQueryData("checkout", {
+	return queryClient.setQueryData("getCheckout", {
 		...data,
 		lineItemCount,
 		totalItemCount,
@@ -62,12 +66,10 @@ export function addItemCountToCache(
 // ************
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useShopifyQueries() {
+export function useOperations() {
 	const queryClient = useQueryClient()
-	const { isLoading, isError, data, error } = useQuery<
-		CheckoutWithItemCount_I,
-		Error
-	>("checkout")
+
+	const { isLoading, data } = useQuery<CheckoutWithItemCount_I>("getCheckout")
 
 	return {
 		// queries

@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Icon from "../../Icons/Icon"
 // import store / queries / types
 import { useShopify } from "../../../store"
-import { CartItem_I } from "shopify"
+import { CartItem_I } from "../../../store/shopifySlice/graphql/@types"
 
 // ************
 // component
@@ -18,10 +18,11 @@ export default function CartItemHeader({
 
 	// remove line item from cart
 	function removeLineItem() {
-		const checkoutId = shopify.queries.checkout?.id
+		const checkoutId = shopify.checkout?.id
 		const lineItemIds = [String(id)]
-		if (checkoutId)
-			shopify.queries.removeLineItem.mutate({ checkoutId, lineItemIds })
+		if (checkoutId) {
+			shopify.removeLineItem.mutate({ checkoutId, lineItemIds })
+		}
 	}
 
 	return (
