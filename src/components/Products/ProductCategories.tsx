@@ -120,7 +120,7 @@ const SelectedCategory = styled.div`
 `
 const StyledButton = styled(CategoryButton)`
 	&:hover {
-		background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+		background: ${({ theme }) => theme.color.hover_bg};
 		border: 1px solid ${({ theme }) => theme.color.app_green};
 		color: white;
 		cursor: pointer;

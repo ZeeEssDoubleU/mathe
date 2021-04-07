@@ -34,6 +34,7 @@ export interface ProductsQuery_I {
 				descriptionHtml: string
 				productType: string
 				tags: string[]
+				availableForSale: boolean
 				variants: {
 					shopifyId: string
 					weight: number

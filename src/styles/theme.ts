@@ -5,14 +5,16 @@ declare module "styled-components" {
 	export interface DefaultTheme {
 		color: {
 			app_green: string
-			app_green_partial: string
+			app_green_hsl: string
 			app_lightGreen: string
-			app_lightGreen_partial: string
+			app_lightGreen_hsl: string
 			app_gold: string
 
 			background: string
 			accent_light: string
 			disabled: string
+			hover_bg: string
+			hover_disabled: string
 
 			font_light: string
 			font_dark: string
@@ -72,18 +74,25 @@ declare module "styled-components" {
 	}
 }
 
+// constants
+const app_green_hsl = "86, 48%, 48%"
+const app_lightGreen_hsl = "88, 41%, 54%"
+const disabled_hsl = "150, 1%, 57%"
+
 // declare theme
 export const theme: DefaultTheme = {
 	color: {
-		app_green: "hsla(86, 48%, 48%, 1.0)",
-		app_green_partial: "86, 48%, 48%",
-		app_lightGreen: "hsla(88, 41%, 54%, 1.0)",
-		app_lightGreen_partial: "88, 41%, 54%",
+		app_green: `hsla(${app_green_hsl}, 1.0)`,
+		app_green_hsl: app_green_hsl,
+		app_lightGreen: `hsla(${app_lightGreen_hsl}, 1.0)`,
+		app_lightGreen_hsl: app_lightGreen_hsl,
 		app_gold: "hsla(43, 47%, 35%, 1.0)",
 
 		background: "hsla(0, 0%, 0%, 0.85)",
 		accent_light: "#F3F5F5",
-		disabled: "#909291",
+		disabled: `hsla(${disabled_hsl}, 1.0)`,
+		hover_bg: `hsla(${app_lightGreen_hsl}, 0.5)`,
+		hover_disabled: `hsla(${disabled_hsl}, 0.3)`,
 
 		font_light: "white",
 		font_dark: "#313332",

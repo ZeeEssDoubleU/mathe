@@ -86,6 +86,9 @@ export default function ProductsBody({
 				}
 			}
 
+			const { availableForSale } = product_shopify
+			const { priceNumber, weight, weightUnit } = product_shopify.variants[0]
+
 			// DISPLAY each product
 			return (
 				<Listing key={productIndex}>
@@ -98,11 +101,15 @@ export default function ProductsBody({
 						</TitleBlock>
 						<BuyBlock>
 							<Price>
-								${product_shopify.variants[0].priceNumber.toFixed(2)} /{" "}
-								{product_shopify.variants[0].weight}{" "}
-								{abbreviate(product_shopify.variants[0].weightUnit)}
+								${priceNumber.toFixed(2)} / {weight}{" "}
+								{abbreviate(weightUnit)}
 							</Price>
-							<BuyButton onClick={addLineItem}>Add to Cart</BuyButton>
+							<BuyButton
+								disabled={!availableForSale}
+								onClick={addLineItem}
+							>
+								{availableForSale ? "Add to Cart" : "Coming Soon"}
+							</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>
 					<Description
@@ -139,19 +146,19 @@ const BuyBlock = styled.div`
 	grid-template-columns: auto auto;
 	margin: 12px 0;
 `
-const BuyButton = styled(CategoryButton)`
+const BuyButton = styled(CategoryButton)<{ disabled: boolean }>`
 	border: 1px solid ${({ theme }) => theme.color.app_green};
-	color: white;
+	color: ${(props) => (props.disabled ? props.theme.color.disabled : "white")};
+
 	&:hover {
-		background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
-		border: 1px solid ${({ theme }) => theme.color.app_green};
+		background: ${(props) =>
+			props.disabled ? null : props.theme.color.hover_bg};
 		color: white;
-		cursor: pointer;
+		cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
 	}
 	&.active {
 		background: none;
 		border: 1px solid white;
-		color: white;
 	}
 `
 const Description = styled.p`

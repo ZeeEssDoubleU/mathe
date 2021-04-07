@@ -96,6 +96,7 @@ export const query = graphql`
 				descriptionHtml
 				productType
 				tags
+				availableForSale
 				variants {
 					shopifyId
 					weight

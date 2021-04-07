@@ -103,7 +103,7 @@ export const ModalButton = styled(CategoryButton)`
 	fill: ${({ theme }) => theme.color.app_green};
 
 	&:hover {
-		background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+		background: ${({ theme }) => theme.color.hover_bg};
 		border: 1px solid ${({ theme }) => theme.color.app_green};
 		border-right: 0;
 		color: white;

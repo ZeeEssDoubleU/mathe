@@ -150,10 +150,7 @@ const Container = styled.div`
 				line-height: 1em;
 
 				opacity: 0;
-				background: hsla(
-					${({ theme }) => theme.color.app_green_partial},
-					0.85
-				);
+				background: hsla(${({ theme }) => theme.color.app_green_hsl}, 0.85);
 				transition: transform 300ms ease-out, opacity 300ms ease-out;
 				@media (min-width: ${({ theme }) => theme.media.tablet}) {
 					font-size: 16px;

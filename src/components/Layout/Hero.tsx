@@ -78,7 +78,7 @@ const SubHeader = styled.h1`
 	margin: 0.75em 0;
 	border-radius: 1em;
 
-	background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.85);
+	background: hsla(${({ theme }) => theme.color.app_green_hsl}, 0.85);
 	font-size: 16px;
 	font-weight: ${({ theme }) => theme.font.main_weight_subheader};
 	@media (min-width: ${({ theme }) => theme.media.tablet}) {

@@ -151,18 +151,17 @@ const Form = styled.form`
       border-radius: 04px;
       color: white;
       /* TODO: consider adding focus animation */
-      /* transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
       &:required {
          box-shadow: none;
       }
       &:focus {
          transform: scale(1.02);
-         box-shadow: 0 0 0 1px
-            hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+         box-shadow: 0 0 0 1px ${({ theme }) => theme.color.hover_bg};
          &::placeholder {
             opacity: 0;
          }
-      } */
+      }
    }
    .contact-form-response {
       width: 100%;
@@ -193,7 +192,7 @@ const Form = styled.form`
       }
       &:hover {
          cursor: pointer;
-         background: hsla(${({ theme }) => theme.color.app_green_partial}, 0.5);
+         background: ${({ theme }) => theme.color.hover_bg};
          svg {
             fill: white;
          }
