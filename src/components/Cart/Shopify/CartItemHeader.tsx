@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Icon from "../../Icons/Icon"
 // import store / queries / types
 import { useShopify } from "../../../store"
-import { CartItem_I } from "../../../store/shopifySlice/graphql/@types"
+import { CartItem_I } from "../../../store/shopifySlice/graphql/types"
 
 // ************
 // component

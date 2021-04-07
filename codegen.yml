@@ -3,7 +3,7 @@ schema: "src/store/shopifySlice/graphql/schema/index.gql"
 documents:
    - "src/store/shopifySlice/graphql/operations/*.graphql"
 generates:
-   src/store/shopifySlice/graphql/@types/generated.ts:
+   src/store/shopifySlice/graphql/types/generated.ts:
       # hooks:
       #    afterOneFileWrite:
       #       - prettier --write

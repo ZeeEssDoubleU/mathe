@@ -5,6 +5,7 @@ import { useOperations } from "./hooks"
 // ************
 // types
 // ************
+
 export interface ShopifyState_I {
 	isCartOpen: boolean
 }

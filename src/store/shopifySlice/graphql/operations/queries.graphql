@@ -3,7 +3,7 @@
 # queries
 # ************
 
-query getCheckout($checkoutId: ID!) {
+query checkout($checkoutId: ID!) {
 	node(id: $checkoutId) {
 		... on Checkout {
 			...checkoutDetails

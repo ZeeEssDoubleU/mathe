@@ -4990,12 +4990,12 @@ export type CheckoutLineItemsUpdateMutationVariables = Exact<{
 
 export type CheckoutLineItemsUpdateMutation = { checkoutLineItemsUpdate?: Maybe<{ checkout?: Maybe<CheckoutDetailsFragment> }> };
 
-export type GetCheckoutQueryVariables = Exact<{
+export type CheckoutQueryVariables = Exact<{
   checkoutId: Scalars['ID'];
 }>;
 
 
-export type GetCheckoutQuery = { node?: Maybe<CheckoutDetailsFragment> };
+export type CheckoutQuery = { node?: Maybe<CheckoutDetailsFragment> };
 
 export const LineItemDetailsFragment = `
     fragment lineItemDetails on CheckoutLineItem {
@@ -5125,8 +5125,8 @@ export const useCheckoutLineItemsUpdateMutation = <
       (variables?: CheckoutLineItemsUpdateMutationVariables) => fetcher<CheckoutLineItemsUpdateMutation, CheckoutLineItemsUpdateMutationVariables>(client, CheckoutLineItemsUpdateDocument, variables)(),
       options
     );
-export const GetCheckoutDocument = `
-    query getCheckout($checkoutId: ID!) {
+export const CheckoutDocument = `
+    query checkout($checkoutId: ID!) {
   node(id: $checkoutId) {
     ... on Checkout {
       ...checkoutDetails
@@ -5134,16 +5134,16 @@ export const GetCheckoutDocument = `
   }
 }
     ${CheckoutDetailsFragment}`;
-export const useGetCheckoutQuery = <
-      TData = GetCheckoutQuery,
+export const useCheckoutQuery = <
+      TData = CheckoutQuery,
       TError = unknown
     >(
       client: GraphQLClient, 
-      variables: GetCheckoutQueryVariables, 
-      options?: UseQueryOptions<GetCheckoutQuery, TError, TData>
+      variables: CheckoutQueryVariables, 
+      options?: UseQueryOptions<CheckoutQuery, TError, TData>
     ) => 
-    useQuery<GetCheckoutQuery, TError, TData>(
-      ['getCheckout', variables],
-      fetcher<GetCheckoutQuery, GetCheckoutQueryVariables>(client, GetCheckoutDocument, variables),
+    useQuery<CheckoutQuery, TError, TData>(
+      ['checkout', variables],
+      fetcher<CheckoutQuery, CheckoutQueryVariables>(client, CheckoutDocument, variables),
       options
     );

@@ -1,15 +1,13 @@
 import { GraphQLClient } from "graphql-request"
-import { QueryClient, useQueryClient, useQuery } from "react-query"
-// import queries
-import { useCreateCheckout } from "./useCreateCheckout"
-import { useAddLineItem } from "./useAddLineItem"
-import { useRemoveLineItem } from "./useRemoveLineItem"
-import { useUpdateLineItem } from "./useUpdateLineItem"
+import { QueryClient } from "react-query"
 // import types
 import {
 	CheckoutDetailsFragment,
 	CheckoutWithItemCount_I,
-} from "../graphql/@types"
+} from "../graphql/types"
+// import hooks
+import { useCheckout } from "./useCheckout"
+import { useCheckoutLineItems } from "./useCheckoutLineItems"
 
 // env vars
 const shopName = process.env.GATSBY_SHOPIFY_SHOP_NAME
@@ -46,15 +44,14 @@ export function countItems(
 	return { lineItemCount, totalItemCount }
 }
 
-// add line item counts to 'checkout' cache
-export function addItemCountToCache(
+// add additional data to 'checkout' cache
+export function appendDataToCache(
 	queryClient: QueryClient,
 	data: CheckoutDetailsFragment,
 ): CheckoutWithItemCount_I {
-	// console.log("data", data) // ? debug
 	const { lineItemCount, totalItemCount } = countItems(data.lineItems.edges)
 
-	return queryClient.setQueryData("getCheckout", {
+	return queryClient.setQueryData(["checkout"], {
 		...data,
 		lineItemCount,
 		totalItemCount,
@@ -67,20 +64,22 @@ export function addItemCountToCache(
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useOperations() {
-	const queryClient = useQueryClient()
-
-	const { isLoading, data } = useQuery<CheckoutWithItemCount_I>("getCheckout")
+	const { checkout, isLoading, createCheckout } = useCheckout()
+	const {
+		addLineItem,
+		removeLineItem,
+		updateLineItem,
+	} = useCheckoutLineItems()
 
 	return {
 		// queries
-		queryClient,
-		createCheckout: useCreateCheckout(),
-		addLineItem: useAddLineItem(),
-		removeLineItem: useRemoveLineItem(),
-		updateLineItem: useUpdateLineItem(),
-		checkout: data,
-		totalItemCount: isLoading ? "?" : data?.totalItemCount,
-		isCartEmpty: data?.lineItemCount === 0,
-		lineItems: data?.lineItems,
+		checkout,
+		createCheckout,
+		addLineItem,
+		removeLineItem,
+		updateLineItem,
+		totalItemCount: isLoading ? "?" : checkout?.totalItemCount,
+		isCartEmpty: checkout?.lineItemCount === 0,
+		lineItems: checkout?.lineItems,
 	}
 }

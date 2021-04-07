@@ -78,11 +78,12 @@ export default function ProductsBody({
 				const variantId = product_shopify.variants[0].shopifyId
 				const lineItemsToAdd = [{ variantId, quantity: 1 }]
 
-				if (checkoutId)
+				if (checkoutId) {
 					shopify.addLineItem.mutate({
 						checkoutId,
 						lineItems: lineItemsToAdd,
 					})
+				}
 			}
 
 			// DISPLAY each product
