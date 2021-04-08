@@ -87,8 +87,13 @@ export default function ProductsBody({
 			}
 
 			// product display info
-			const { priceNumber, weight, weightUnit } = product_shopify.variants[0]
-			const { availableForSale, quantityAvailable } = product_shopify
+			const { availableForSale } = product_shopify
+			const {
+				priceNumber,
+				weight,
+				weightUnit,
+				quantityAvailable,
+			} = product_shopify.variants[0]
 			const inStock = quantityAvailable > 0
 			function buyButtonText() {
 				if (!availableForSale) {
