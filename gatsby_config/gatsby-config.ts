@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from "axios"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"
-import { createRequire } from "node:module"
 
 // import override queries
 import { products } from "./queries/shopify"
