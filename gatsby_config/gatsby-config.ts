@@ -107,5 +107,6 @@ export default {
 				},
 			},
 		},
+		"gatsby-plugin-webpack-bundle-analyser-v2",
 	],
 }
