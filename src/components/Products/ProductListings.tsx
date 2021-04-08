@@ -86,8 +86,19 @@ export default function ProductsBody({
 				}
 			}
 
-			const { availableForSale } = product_shopify
+			// product display info
 			const { priceNumber, weight, weightUnit } = product_shopify.variants[0]
+			const { availableForSale, quantityAvailable } = product_shopify
+			const inStock = quantityAvailable > 0
+			function buyButtonText() {
+				if (!availableForSale) {
+					return "Coming Soon"
+				} else if (!inStock) {
+					return "Out of Stock"
+				} else {
+					return "Add to Cart"
+				}
+			}
 
 			// DISPLAY each product
 			return (
@@ -105,10 +116,10 @@ export default function ProductsBody({
 								{abbreviate(weightUnit)}
 							</Price>
 							<BuyButton
-								disabled={!availableForSale}
+								disabled={!availableForSale || !inStock}
 								onClick={addLineItem}
 							>
-								{availableForSale ? "Add to Cart" : "Coming Soon"}
+								{buyButtonText()}
 							</BuyButton>
 						</BuyBlock>
 					</HeaderBlock>

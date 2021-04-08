@@ -40,6 +40,7 @@ export interface ProductsQuery_I {
 					weight: number
 					weightUnit: string
 					priceNumber: number
+					quantityAvailable: number
 				}[]
 			}[]
 		}

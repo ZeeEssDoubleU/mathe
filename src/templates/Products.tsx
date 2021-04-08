@@ -102,6 +102,7 @@ export const query = graphql`
 					weight
 					weightUnit
 					priceNumber
+					quantityAvailable
 				}
 			}
 		}

@@ -3,6 +3,10 @@ import axios, { AxiosResponse } from "axios"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"
+import { createRequire } from "node:module"
+
+// import override queries
+import { products } from "./queries/shopify"
 
 // creates favicon.svg and faviconShare.svg file for gatsby-plugin-manifest
 const saveIcons = async (): Promise<void> => {
@@ -89,6 +93,9 @@ export default {
 				accessToken: `${process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN}`,
 				apiVersion: "2021-01",
 				downloadImages: true,
+				shopifyQueries: {
+					products: products,
+				},
 			},
 		},
 		{
