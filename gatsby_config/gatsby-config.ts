@@ -51,6 +51,7 @@ export default {
 		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-sitemap",
 		"gatsby-plugin-robots-txt",
+		"gatsby-plugin-preload-fonts",
 		"gatsby-transformer-sharp",
 		"gatsby-transformer-json",
 		{
@@ -107,6 +108,11 @@ export default {
 				},
 			},
 		},
-		"gatsby-plugin-webpack-bundle-analyser-v2",
+		{
+			resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+			options: {
+				devMode: true,
+			},
+		},
 	],
 }
