@@ -51,18 +51,27 @@ export default {
 		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-sitemap",
 		"gatsby-plugin-robots-txt",
-		"gatsby-plugin-preload-fonts",
 		"gatsby-transformer-sharp",
 		"gatsby-transformer-json",
 		{
-			resolve: "gatsby-plugin-web-font-loader",
+			resolve: `gatsby-plugin-webfonts`,
 			options: {
-				google: {
-					families: [
-						"Montserrat:200,200i,300,300i,400,500",
-						"Merriweather:300,300i",
+				fonts: {
+					google: [
+						{
+							family: "Montserrat",
+							variants: ["200", "200i", "300", "300i", "400", "500"],
+						},
+						{
+							family: "Merriweather",
+							variants: ["300", "300i"],
+						},
 					],
 				},
+				// formats: ['woff2', 'woff'],
+				// useMinify: true,
+				// usePreload: true,
+				// usePreconnect: false,
 			},
 		},
 		{
@@ -77,8 +86,6 @@ export default {
 				icon: "./src/components/Icons/favicon.svg", // declared in globalSEO on DatoCMS,
 			},
 		},
-		// load after manifest (above) so manifest can be cached
-		"gatsby-plugin-offline",
 		{
 			resolve: "gatsby-plugin-styled-components",
 			options: {
@@ -114,5 +121,7 @@ export default {
 				devMode: true,
 			},
 		},
+		// load after manifest (above) so manifest can be cached
+		"gatsby-plugin-offline",
 	],
 }
