@@ -1,36 +1,26 @@
-import { useState } from "react"
 import { useQueryClient } from "react-query"
 import { appendDataToCache, shopifyClient } from "./index"
 // import types / fragments
 import {
 	CheckoutQuery,
-	CheckoutWithItemCount_I,
-	useCheckoutCreateMutation,
+	CheckoutWithItemCountI,
 	useCheckoutQuery,
 } from "../graphql/types"
+import { useShopify } from "../.."
 
 // ************
 // hook
 // ************
 
 export function useCheckout() {
-	const [checkoutId, setCheckoutId] = useState<string>("")
+	const { checkoutId } = useShopify()
 	const queryClient = useQueryClient()
-
-	// create checkout
-	const createCheckout = useCheckoutCreateMutation(shopifyClient, {
-		onSuccess: (data) => {
-			const checkout = data.checkoutCreate?.checkout
-			checkout ? appendDataToCache(queryClient, checkout) : data
-			checkout && setCheckoutId(checkout?.id) // ! set checkoutId state
-		},
-	})
 
 	// get checkout
 	const {
 		data: checkout,
 		isLoading,
-	} = useCheckoutQuery<CheckoutWithItemCount_I>(
+	} = useCheckoutQuery<CheckoutWithItemCountI>(
 		shopifyClient,
 		{ checkoutId },
 		{
@@ -47,6 +37,8 @@ export function useCheckout() {
 	return {
 		checkout,
 		isLoading,
-		createCheckout,
+		totalItemCount: isLoading ? "?" : checkout?.totalItemCount,
+		isCartEmpty: checkout?.lineItemCount === 0,
+		lineItems: checkout?.lineItems,
 	}
 }

@@ -1,38 +1,35 @@
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
 import { sortBy } from "lodash"
+// import components
+import Description from "./CategoryDescription"
 // import types
-import { ProductsQuery_I } from "../../@types/query"
+import { ProductCollectionBySlugQuery } from "../../../graphql/types/gatsby-generated"
 // import styles
 import {
 	CategoryButton,
 	CategoryNav,
-	ContentBody,
 	ContentHeader,
-} from "../../styles/elements"
+} from "../../../styles/elements"
 
 // ************
 // types
 // ************
 
-export interface ProductCategories_I {
-	categories: ProductsQuery_I["data"]["allCollections_datocms"]
-	category_selected: ProductsQuery_I["data"]["collection_datocms"]
+export interface ProductCategoryI {
+	categories: ProductCollectionBySlugQuery["allCollections_datocms"]
+	category_selected: ProductCollectionBySlugQuery["collection_datocms"]
 }
 
 // ************
 // component
 // ************
 
-export default function ProductsHeader({
+export default function ProductCategory({
 	categories,
 	category_selected,
-}: ProductCategories_I): ReactElement {
-	// toggle button text
-	const [expand, expand_set] = useState<boolean>(false)
-
+}: ProductCategoryI): ReactElement {
 	const categoriesSorted = sortBy(categories.nodes, "navDisplay")
 	const categoryArray: ReactElement[] = categoriesSorted
 		.filter((category) => category.noNavDisplay === false)
@@ -67,17 +64,7 @@ export default function ProductsHeader({
 					)}
 				</Header>
 				{category_selected.description && (
-					<>
-						<Body
-							expand={expand}
-							dangerouslySetInnerHTML={{
-								__html: sanitizeHtml(category_selected.description),
-							}}
-						/>
-						<Expand onClick={() => expand_set(!expand)}>
-							{expand === true ? "show less" : "show more"}
-						</Expand>
-					</>
+					<Description description={category_selected.description} />
 				)}
 			</SelectedCategory>
 		</>
@@ -88,30 +75,6 @@ export default function ProductsHeader({
 // styles
 // ************
 
-const Body = styled(ContentBody)<{ expand: boolean }>`
-	max-height: ${(props) => (props.expand === false ? "9em" : "100%")};
-	margin-bottom: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	transition: height 0.2s;
-
-	/* allows body to collapse with ellipsis at line break */
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: ${(props) => (props.expand === false ? 6 : null)};
-
-	p {
-		margin-bottom: 1.5rem;
-	}
-	p:last-child {
-		margin-bottom: 0;
-	}
-`
-const Expand = styled(CategoryButton)`
-	margin: 18px 0 0 0;
-	padding: 0;
-	font-size: 12px;
-`
 const Header = styled(ContentHeader)`
 	text-align: left;
 `

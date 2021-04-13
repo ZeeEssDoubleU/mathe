@@ -1,5 +1,6 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
+const { trimEmptyTags } = require("../helpers")
 
 // constants
 const COLLECTION_MODEL_ID = 185182
@@ -74,7 +75,7 @@ async function createCollection(body) {
 		subtitle: null,
 		navDisplay: body.title,
 		tagDisplay: body.title,
-		description: body.body_html,
+		description: trimEmptyTags(body.body_html),
 		images: null,
 		slug: body.handle,
 	})

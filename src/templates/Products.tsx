@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { graphql } from "gatsby"
-import { ProductsQuery_I } from "../@types/query"
+import { ProductCollectionBySlugQuery } from "../graphql/types"
 // import components
 import ProductCategories from "../components/Products/ProductCategories"
 import ProductListings from "../components/Products/ProductListings"
@@ -9,10 +9,18 @@ import Main from "../components/Layout/Main"
 import { Divider, Section } from "../styles/elements"
 
 // ************
+// types
+// ************
+
+export interface ProductsI {
+	data: ProductCollectionBySlugQuery
+}
+
+// ************
 // component
 // ************
 
-export default function Products({ data }: ProductsQuery_I): ReactElement {
+export default function Products({ data }: ProductsI): ReactElement {
 	const {
 		page,
 		allCollections_datocms,
@@ -21,8 +29,12 @@ export default function Products({ data }: ProductsQuery_I): ReactElement {
 		products_datocms,
 	} = data
 
-	const contentSection = (
-		<>
+	return (
+		<Main
+			heroHeader={page.header}
+			heroSubheader={page.subHeader}
+			medallion={page.medallion}
+		>
 			<Section>
 				{/* all categories */}
 				<ProductCategories
@@ -41,16 +53,6 @@ export default function Products({ data }: ProductsQuery_I): ReactElement {
 					}}
 				/>
 			</Section>
-		</>
-	)
-
-	return (
-		<Main
-			heroHeader={page.header}
-			heroSubheader={page.subHeader}
-			medallion={page.medallion}
-		>
-			{contentSection}
 		</Main>
 	)
 }
@@ -60,8 +62,47 @@ export default function Products({ data }: ProductsQuery_I): ReactElement {
 // ************
 
 export const query = graphql`
-	query($collection_slug: String!, $collection_product_slugs: [String]) {
+	fragment ShopifyProductVariant on ShopifyProductVariant {
+		shopifyId
+		weight
+		weightUnit
+		priceNumber
+		quantityAvailable
+	}
+	fragment ShopifyProduct on ShopifyProduct {
+		handle
+		title
+		descriptionHtml
+		productType
+		tags
+		availableForSale
+		totalInventory
+		variants {
+			...ShopifyProductVariant
+		}
+	}
+	fragment DatoCmsProduct on DatoCmsProduct {
+		slug
+		title
+		subtitle
+		description
+	}
+	fragment DatoCmsCategory on DatoCmsCategory {
+		slug
+		title
+		subtitle
+		navDisplay
+		tagDisplay
+		description
+		noNavDisplay
+	}
+
+	query ProductCollectionBySlug(
+		$collection_slug: String!
+		$collection_product_slugs: [String]
+	) {
 		page: datoCmsPage(title: { eq: "Products" }) {
+			title
 			header
 			subHeader
 			medallion {
@@ -71,39 +112,17 @@ export const query = graphql`
 		# all collections
 		allCollections_datocms: allDatoCmsCategory {
 			nodes {
-				slug
-				title
-				navDisplay
-				tagDisplay
-				description
-				noNavDisplay
+				...DatoCmsCategory
 			}
 		}
 		# selected collection (filter on slug)
 		collection_datocms: datoCmsCategory(slug: { eq: $collection_slug }) {
-			slug
-			title
-			subtitle
-			navDisplay
-			tagDisplay
-			description
+			...DatoCmsCategory
 		}
 		collection_shopify: shopifyCollection(handle: { eq: $collection_slug }) {
 			handle
 			products {
-				handle
-				title
-				descriptionHtml
-				productType
-				tags
-				availableForSale
-				variants {
-					shopifyId
-					weight
-					weightUnit
-					priceNumber
-					quantityAvailable
-				}
+				...ShopifyProduct
 			}
 		}
 		# selected products (filter on array of slugs)
@@ -111,10 +130,7 @@ export const query = graphql`
 			filter: { slug: { in: $collection_product_slugs } }
 		) {
 			nodes {
-				slug
-				title
-				subtitle
-				description
+				...DatoCmsProduct
 			}
 		}
 	}

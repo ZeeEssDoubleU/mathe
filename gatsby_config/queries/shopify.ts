@@ -54,6 +54,7 @@ export const products = `
             publishedAt
             tags
             title
+            totalInventory
             updatedAt
             variants(first: 250) {
               edges {

@@ -90,7 +90,7 @@ const PageTransition = styled.div`
 // ************
 
 const query = graphql`
-	{
+	query LayoutComponent {
 		categories: allDatoCmsCategory {
 			nodes {
 				title

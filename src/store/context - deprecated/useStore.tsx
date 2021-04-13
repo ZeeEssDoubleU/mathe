@@ -154,7 +154,7 @@ export function useStore(): StoreContext_I {
 // ************
 
 const query = graphql`
-	{
+	query StoreComponent {
 		categories: allDatoCmsCategory {
 			nodes {
 				title

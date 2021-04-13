@@ -115,7 +115,7 @@ const AuthorTitle = styled(ContentSubtitle)`
 // ************
 
 export const query = graphql`
-	{
+	query AboutPage {
 		page: datoCmsPage(title: { eq: "About" }) {
 			header
 			subHeader

@@ -81,7 +81,7 @@ const NavLogo = styled.img`
 // ************
 
 const query = graphql`
-	{
+	query NavComponent {
 		logo: datoCmsAsset(title: { eq: "Landing Logo" }) {
 			title
 			image {

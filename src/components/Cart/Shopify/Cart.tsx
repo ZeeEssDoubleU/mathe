@@ -6,6 +6,10 @@ import CartFooter from "./CartFooter"
 import Item from "./CartItem"
 import { useClickOutside } from "../../../hooks"
 // import store
+import {
+	useCheckout,
+	useCheckoutMutation,
+} from "../../../store/shopifySlice/hooks"
 import { useShopify } from "../../../store"
 
 // ************
@@ -14,18 +18,20 @@ import { useShopify } from "../../../store"
 
 export default function Cart(): ReactElement {
 	const cartRef = useRef(null)
-	const shopify = useShopify()
 	useClickOutside(cartRef)
+	const shopifyState = useShopify()
+	const shopifyCheckoutQuery = useCheckout()
+	const shopifyCheckoutMutation = useCheckoutMutation()
 
 	// create shopify checkout when cart mounts
 	useEffect(() => {
-		shopify.createCheckout.mutate({})
+		shopifyCheckoutMutation.createCheckout.mutate({})
 	}, [])
 
-	const lineItems = shopify.isCartEmpty ? (
+	const lineItems = shopifyCheckoutQuery.isCartEmpty ? (
 		<div className="empty">Your cart is empty.</div>
 	) : (
-		shopify.lineItems?.edges.map((edge) => {
+		shopifyCheckoutQuery.lineItems?.edges.map((edge) => {
 			const item = edge.node
 
 			return item.variant ? (
@@ -41,7 +47,7 @@ export default function Cart(): ReactElement {
 	)
 
 	return (
-		<Container ref={cartRef} isOpen={shopify.isCartOpen}>
+		<Container ref={cartRef} isOpen={shopifyState.isCartOpen}>
 			<CartHeader />
 			{/* display line items */}
 			<Main>{lineItems}</Main>

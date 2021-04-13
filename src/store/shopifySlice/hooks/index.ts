@@ -3,11 +3,9 @@ import { QueryClient } from "react-query"
 // import types
 import {
 	CheckoutDetailsFragment,
-	CheckoutWithItemCount_I,
+	CheckoutWithItemCountI,
 } from "../graphql/types"
 // import hooks
-import { useCheckout } from "./useCheckout"
-import { useCheckoutLineItems } from "./useCheckoutLineItems"
 
 // env vars
 const shopName = process.env.GATSBY_SHOPIFY_SHOP_NAME
@@ -48,7 +46,7 @@ export function countItems(
 export function appendDataToCache(
 	queryClient: QueryClient,
 	data: CheckoutDetailsFragment,
-): CheckoutWithItemCount_I {
+): CheckoutWithItemCountI {
 	const { lineItemCount, totalItemCount } = countItems(data.lineItems.edges)
 
 	return queryClient.setQueryData(["checkout"], {
@@ -59,27 +57,9 @@ export function appendDataToCache(
 }
 
 // ************
-// hook
+// exports
 // ************
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useOperations() {
-	const { checkout, isLoading, createCheckout } = useCheckout()
-	const {
-		addLineItem,
-		removeLineItem,
-		updateLineItem,
-	} = useCheckoutLineItems()
-
-	return {
-		// queries
-		checkout,
-		createCheckout,
-		addLineItem,
-		removeLineItem,
-		updateLineItem,
-		totalItemCount: isLoading ? "?" : checkout?.totalItemCount,
-		isCartEmpty: checkout?.lineItemCount === 0,
-		lineItems: checkout?.lineItems,
-	}
-}
+export { useCheckout } from "./useCheckout"
+export { useCheckoutMutation } from "./useCheckoutMutation"
+export { useInventory } from "./useInventory"

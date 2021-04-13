@@ -10,3 +10,17 @@ query checkout($checkoutId: ID!) {
 		}
 	}
 }
+
+query collectionByHandle($handle: String!) {
+	collectionByHandle(handle: $handle) {
+    handle
+    products(first: 250) {
+      edges {
+        node {
+          handle
+          totalInventory
+        }
+      }
+    }
+  }
+}

@@ -3,8 +3,11 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store / types
-import { useShopify } from "../../../store"
-import { CartItem_I } from "../../../store/shopifySlice/graphql/types"
+import { CartItemI } from "../../../store/shopifySlice/graphql/types"
+import {
+	useCheckout,
+	useCheckoutMutation,
+} from "../../../store/shopifySlice/hooks"
 
 // ************
 // component
@@ -14,15 +17,19 @@ export default function CartItemMain({
 	id,
 	quantity,
 	price,
-}: CartItem_I): ReactElement {
-	const shopify = useShopify()
+}: CartItemI): ReactElement {
+	const shopifyCheckoutQuery = useCheckout()
+	const shopifyCheckoutMutation = useCheckoutMutation()
 
 	// update line item in cart
 	function updateLineItem(updatedQuantity: number) {
-		const checkoutId = shopify.checkout?.id
+		const checkoutId = shopifyCheckoutQuery.checkout?.id
 		const lineItems = [{ id, quantity: updatedQuantity }]
 		if (checkoutId) {
-			shopify.updateLineItem.mutate({ checkoutId, lineItems })
+			shopifyCheckoutMutation.updateLineItem.mutate({
+				checkoutId,
+				lineItems,
+			})
 		}
 	}
 

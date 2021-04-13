@@ -1,21 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useAppDispatch, useAppSelector } from "../index"
-import { useOperations } from "./hooks"
 
 // ************
 // types
 // ************
 
-export interface ShopifyState_I {
+export interface ShopifyStateI {
 	isCartOpen: boolean
+	checkoutId: string
+	inventory: Record<string, number>
 }
 
 // ************
 // init state
 // ************
 
-const initialState: ShopifyState_I = {
+const initialState: ShopifyStateI = {
 	isCartOpen: false,
+	checkoutId: "",
+	inventory: {},
 }
 
 // ************
@@ -26,8 +29,26 @@ export const shopifySlice = createSlice({
 	name: "shopify",
 	initialState,
 	reducers: {
-		toggleCart: (state, action: PayloadAction<boolean>) => {
+		toggleCart: (
+			state,
+			action: PayloadAction<ShopifyStateI["isCartOpen"]>,
+		) => {
 			state.isCartOpen = action.payload
+		},
+		setCheckoutId: (
+			state,
+			action: PayloadAction<ShopifyStateI["checkoutId"]>,
+		) => {
+			state.checkoutId = action.payload
+		},
+		updateInventory: (
+			state,
+			action: PayloadAction<ShopifyStateI["inventory"]>,
+		) => {
+			state.inventory = {
+				...state.inventory,
+				...action.payload,
+			}
 		},
 	},
 })
@@ -39,14 +60,20 @@ export const shopifySlice = createSlice({
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useShopify() {
 	const dispatch = useAppDispatch()
-	const { toggleCart } = shopifySlice.actions
+	const { toggleCart, setCheckoutId, updateInventory } = shopifySlice.actions
 
 	return {
 		// selectors
 		isCartOpen: useAppSelector((state) => state.shopify.isCartOpen),
+		checkoutId: useAppSelector((state) => state.shopify.checkoutId),
+		getInventoryByHandle: (handle: string) =>
+			useAppSelector((state) => state.shopify.inventory[handle]),
 		// actions
-		toggleCart: (action: boolean) => dispatch(toggleCart(action)),
-		// queries
-		...useOperations(),
+		toggleCart: (action: ShopifyStateI["isCartOpen"]) =>
+			dispatch(toggleCart(action)),
+		setCheckoutId: (action: ShopifyStateI["checkoutId"]) =>
+			dispatch(setCheckoutId(action)),
+		updateInventory: (action: ShopifyStateI["inventory"]) =>
+			dispatch(updateInventory(action)),
 	}
 }

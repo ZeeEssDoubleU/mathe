@@ -3,25 +3,29 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store / queries / types
-import { useShopify } from "../../../store"
-import { CartItem_I } from "../../../store/shopifySlice/graphql/types"
+import { CartItemI } from "../../../store/shopifySlice/graphql/types"
+import {
+	useCheckout,
+	useCheckoutMutation,
+} from "../../../store/shopifySlice/hooks"
 
 // ************
 // component
 // ************
 
-export default function CartItemHeader({
-	id,
-	title,
-}: CartItem_I): ReactElement {
-	const shopify = useShopify()
+export default function CartItemHeader({ id, title }: CartItemI): ReactElement {
+	const shopifyCheckoutQuery = useCheckout()
+	const shopifyCheckoutMutation = useCheckoutMutation()
 
 	// remove line item from cart
 	function removeLineItem() {
-		const checkoutId = shopify.checkout?.id
+		const checkoutId = shopifyCheckoutQuery.checkout?.id
 		const lineItemIds = [String(id)]
 		if (checkoutId) {
-			shopify.removeLineItem.mutate({ checkoutId, lineItemIds })
+			shopifyCheckoutMutation.removeLineItem.mutate({
+				checkoutId,
+				lineItemIds,
+			})
 		}
 	}
 

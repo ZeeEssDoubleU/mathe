@@ -2,11 +2,10 @@ import path from "path"
 import fs from "fs"
 import { GraphQLClient } from "graphql-request"
 import { getIntrospectionQuery, printSchema, buildClientSchema } from "graphql"
-import dotenv from "dotenv"
+import "dotenv/config"
 
 // TODO: make these script variables
 // env vars
-dotenv.config() // init env vars
 const shopName = process.env.GATSBY_SHOPIFY_SHOP_NAME
 const storefrontToken = process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN
 const apiVersion = process.env.GATSBY_SHOPIFY_API_VERSION
@@ -34,7 +33,7 @@ async function main() {
 		const schema = buildClientSchema(response)
 
 		const [, filepath] = process.argv // ! grabs filepath from script call
-		const outputFile = path.join(path.dirname(filepath), "index.gql")
+		const outputFile = path.join(path.dirname(filepath), "index.graphql")
 
 		await fs.promises.writeFile(outputFile, printSchema(schema))
 	} catch (error) {

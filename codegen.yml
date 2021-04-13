@@ -1,9 +1,10 @@
 overwrite: true
-schema: "src/store/shopifySlice/graphql/schema/index.gql"
-documents:
-   - "src/store/shopifySlice/graphql/operations/*.graphql"
 generates:
-   src/store/shopifySlice/graphql/types/generated.ts:
+   # shopify dynamic graphql types
+   ./src/store/shopifySlice/graphql/types/generated.ts:
+      schema: "./src/store/shopifySlice/graphql/schema/index.graphql"
+      documents:
+         - "./src/store/shopifySlice/graphql/operations/*.graphql"
       # hooks:
       #    afterOneFileWrite:
       #       - prettier --write
@@ -19,13 +20,35 @@ generates:
          fragmentVariableSuffix: Fragment
          # onlyOperationTypes: true # ! removed necessary types
          preResolveTypes: true
-         scalars: # ? scalars changed from any
-            DateTime: string
-            Decimal: string
-            HTML: string
-            Money: string
-            URL: string
+         # scalars: # ? scalars changed from any
+         #    DateTime: string
+         #    Decimal: string
+         #    HTML: string
+         #    Money: string
+         #    URL: string
          skipTypename: true
-   ./graphql.schema.json:
+   # gatsby static graphql types
+   # TODO: revert optionals and maybes if sources update schema
+   ./src/graphql/types/gatsby-generated.ts:
+      schema: http://localhost:8000/___graphql
+      documents:
+         - "./src/**/*.{ts,tsx}"
+         - "./gatsby_config/*.{ts,tsx}"
+         - "./node_modules/gatsby-source-*/!(node_modules)/**/*.js"
+         - "./src/graphql/!(types)"
+         - "./src/store/shopifySlice/!(graphql)"
+      hooks:
+         afterOneFileWrite:
+            - prettier --write
       plugins:
-         - introspection
+         - typescript
+         - typescript-operations
+      config:
+         avoidOptionals: true # ! sources need to update graphql schema
+         maybeValue: T # ! sources need to update graphql schema
+         declarationKind: interface
+         fragmentVariableSuffix: Fragment
+         preResolveTypes: true
+         skipTypename: true
+         namingConvention:
+            enumValues: keep # ? so that enums don't repeat

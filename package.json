@@ -18,8 +18,9 @@
 		"clean": "gatsby clean && yarn dev",
 		"deep-clean": "gatsby clean && rm -R node_modules && yarn && yarn dev",
 		"generate": "graphql-codegen --config codegen.yml",
+		"preload-fonts": "gatsby-preload-fonts",
 		"get-schema": "node -r esm src/store/shopifySlice/graphql/schema/getSchema.js",
-		"preload-fonts": "gatsby-preload-fonts"
+		"get-assets": "node -r esm src/utils/downloadAssets.js"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.5.0",

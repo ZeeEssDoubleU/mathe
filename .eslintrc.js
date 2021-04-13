@@ -28,6 +28,7 @@ module.exports = {
 			files: ["*.js"],
 			rules: {
 				"@typescript-eslint/no-var-requires": "off",
+				"@typescript-eslint/explicit-module-boundary-types": "off",
 			},
 		},
 		{
@@ -35,6 +36,12 @@ module.exports = {
 			rules: {
 				"@typescript-eslint/ban-ts-comment": "off",
 				"@typescript-eslint/explicit-module-boundary-types": "off",
+			},
+		},
+		{
+			files: ["generated.ts", "gatsby-generated.ts"],
+			rules: {
+				"@typescript-eslint/no-explicit-any": "off",
 			},
 		},
 	],

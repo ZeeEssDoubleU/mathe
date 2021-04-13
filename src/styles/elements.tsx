@@ -15,6 +15,7 @@ export const CategoryButton = styled.button`
 	transition: background 300ms, border 100ms, color 300ms;
 	&:hover {
 		cursor: pointer;
+		color: white;
 	}
 `
 

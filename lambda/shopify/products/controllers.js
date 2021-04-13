@@ -1,6 +1,7 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 const helpers_products = require("./helpers")
+const { trimEmptyTags } = require("../helpers")
 
 // ************
 // controller
@@ -78,7 +79,7 @@ const product_update = async (req, res) => {
 				active: body.status === "active" ? true : false,
 				shopifyId: String(body.id), // API specifies string
 				title: body.title,
-				description: body.body_html,
+				description: trimEmptyTags(body.body_html),
 				slug: body.handle,
 			})
 

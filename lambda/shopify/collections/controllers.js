@@ -1,6 +1,7 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 const helpers_collections = require("./helpers")
+const { trimEmptyTags } = require("../helpers")
 
 // ************
 // controller
@@ -77,7 +78,7 @@ const collection_update = async (req, res) => {
 			await datocms.items.update(existingCollection.id, {
 				shopifyId: String(body.id), // API specifies string
 				title: body.title,
-				description: body.body_html,
+				description: trimEmptyTags(body.body_html),
 				slug: body.handle,
 			})
 

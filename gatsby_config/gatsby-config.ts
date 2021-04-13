@@ -98,7 +98,7 @@ export default {
 				shopName: `${process.env.GATSBY_SHOPIFY_SHOP_NAME}`,
 				// See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
 				accessToken: `${process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN}`,
-				apiVersion: "2021-01",
+				apiVersion: "2021-04",
 				downloadImages: true,
 				shopifyQueries: {
 					products: products,
@@ -118,7 +118,7 @@ export default {
 		{
 			resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
 			options: {
-				devMode: true,
+				devMode: false, // ! change if you want to show
 			},
 		},
 		// load after manifest (above) so manifest can be cached

@@ -3,16 +3,16 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store
-import { useShopify } from "../../../store"
+import { useCheckout } from "../../../store/shopifySlice/hooks"
 
 // ************
 // component
 // ************
 
 export default function CartFooter(): ReactElement {
-	const shopify = useShopify()
-	const checkoutUrl = shopify.checkout?.webUrl
-	const subtotalPrice = shopify.checkout?.subtotalPriceV2?.amount
+	const shopifyCheckoutQuery = useCheckout()
+	const checkoutUrl = shopifyCheckoutQuery.checkout?.webUrl
+	const subtotalPrice = shopifyCheckoutQuery.checkout?.subtotalPriceV2?.amount
 
 	return (
 		<Container>
@@ -32,7 +32,7 @@ export default function CartFooter(): ReactElement {
 			</Total> */}
 			<Checkout
 				// TODO: QUERY: make is cart empty available
-				disabled={shopify.isCartEmpty}
+				disabled={shopifyCheckoutQuery.isCartEmpty}
 				onClick={() =>
 					!checkoutUrl ? null : window.location.replace(checkoutUrl)
 				}

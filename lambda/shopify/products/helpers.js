@@ -1,5 +1,6 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
+const { trimEmptyTags } = require("../helpers")
 
 // constants
 const PRODUCT_MODEL_ID = 148325
@@ -72,7 +73,7 @@ async function createProduct(body) {
 		shopifyId: String(body.id), // API specifies string
 		title: body.title,
 		subtitle: null,
-		description: body.body_html,
+		description: trimEmptyTags(body.body_html),
 		categories: null,
 		image: null,
 		grade: null,

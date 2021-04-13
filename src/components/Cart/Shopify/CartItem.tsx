@@ -4,13 +4,13 @@ import styled from "styled-components"
 import CartItemHeader from "./CartItemHeader"
 import CartItemMain from "./CartItemMain"
 // import types
-import { CartItem_I } from "../../../store/shopifySlice/graphql/types"
+import { CartItemI } from "../../../store/shopifySlice/graphql/types"
 
 // ************
 // component
 // ************
 
-export default function CartItem(props: CartItem_I): ReactElement {
+export default function CartItem(props: CartItemI): ReactElement {
 	return (
 		<Container>
 			<CartItemHeader {...props} />

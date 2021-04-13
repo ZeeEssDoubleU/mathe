@@ -111,7 +111,7 @@ const Body = styled(ContentBody)`
 // ************
 
 export const query = graphql`
-	{
+	query NotFoundPage {
 		page: datoCmsPage(title: { eq: "404" }) {
 			header
 			subHeader

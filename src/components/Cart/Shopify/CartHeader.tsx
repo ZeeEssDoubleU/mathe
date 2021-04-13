@@ -10,7 +10,7 @@ import { useShopify } from "../../../store"
 // ************
 
 export default function CartHeader(): ReactElement {
-	const state_shopify = useShopify()
+	const shopifyState = useShopify()
 
 	return (
 		<Container>
@@ -18,7 +18,7 @@ export default function CartHeader(): ReactElement {
 			<button
 				className="close"
 				aria-label="close cart"
-				onClick={() => state_shopify.toggleCart(false)}
+				onClick={() => shopifyState.toggleCart(false)}
 			>
 				<Icon name="plus" />
 			</button>

@@ -16,19 +16,19 @@ export interface Scalars {
   Int: number;
   Float: number;
   /** An ISO-8601 encoded UTC date time string. Example value: `"2019-07-03T20:47:55Z"`. */
-  DateTime: string;
+  DateTime: any;
   /** A signed decimal number, which supports arbitrary precision and is serialized as a string. Example value: `"29.99"`. */
-  Decimal: string;
+  Decimal: any;
   /** A string containing HTML code. Example value: `"<p>Grey cotton knit sweater.</p>"`. */
-  HTML: string;
+  HTML: any;
   /** A monetary value string. Example value: `"100.57"`. */
-  Money: string;
+  Money: any;
   /**
    * An RFC 3986 and RFC 3987 compliant URI string.
    *
    * Example value: `"https://johns-apparel.myshopify.com"`.
    */
-  URL: string;
+  URL: any;
 }
 
 
@@ -388,6 +388,8 @@ export interface Checkout extends Node {
   taxExempt: Scalars['Boolean'];
   /** Specifies if taxes are included in the line item and shipping line prices. */
   taxesIncluded: Scalars['Boolean'];
+  /** The sum of all the duties applied to the line items in the checkout. */
+  totalDuties?: Maybe<MoneyV2>;
   /**
    * The sum of all the prices of all the items in the checkout, taxes and discounts included.
    * @deprecated Use `totalPriceV2` instead
@@ -1621,7 +1623,9 @@ export enum CountryCode {
   /** Zambia. */
   Zm = 'ZM',
   /** Zimbabwe. */
-  Zw = 'ZW'
+  Zw = 'ZW',
+  /** Unknown Region. */
+  Zz = 'ZZ'
 }
 
 /** Credit card information used for a payment. */
@@ -2500,6 +2504,8 @@ export interface ExternalVideo extends Node, Media {
   alt?: Maybe<Scalars['String']>;
   /** The URL. */
   embeddedUrl: Scalars['URL'];
+  /** The host of the external video. */
+  host: MediaHost;
   /** Globally unique identifier. */
   id: Scalars['ID'];
   /** The media content type. */
@@ -2865,6 +2871,14 @@ export interface MediaEdge {
   cursor: Scalars['String'];
   /** The item at the end of MediaEdge. */
   node: Media;
+}
+
+/** Host for a Media Resource. */
+export enum MediaHost {
+  /** Host for YouTube embedded videos. */
+  Youtube = 'YOUTUBE',
+  /** Host for Vimeo embedded videos. */
+  Vimeo = 'VIMEO'
 }
 
 /** Represents a Shopify hosted image. */
@@ -3467,6 +3481,8 @@ export interface Order extends Node {
   currencyCode: CurrencyCode;
   /** The subtotal of line items and their discounts, excluding line items that have been removed. Does not contain order-level discounts, duties, shipping costs, or shipping discounts. Taxes are not included unless the order is a taxes-included order. */
   currentSubtotalPrice: MoneyV2;
+  /** The total cost of duties for the order, including refunds. */
+  currentTotalDuties?: Maybe<MoneyV2>;
   /** The total amount of the order, including duties, taxes and discounts, minus amounts for line items that have been removed. */
   currentTotalPrice: MoneyV2;
   /** The total of all taxes applied to the order, excluding taxes for returned line items. */
@@ -3496,6 +3512,8 @@ export interface Order extends Node {
   name: Scalars['String'];
   /** A unique numeric identifier for the order for use by shop owner and customer. */
   orderNumber: Scalars['Int'];
+  /** The total cost of duties charged at checkout. */
+  originalTotalDuties?: Maybe<MoneyV2>;
   /** The total price of the order before any applied edits. */
   originalTotalPrice: MoneyV2;
   /** The customer's phone number for receiving SMS notifications. */
@@ -4955,11 +4973,11 @@ export enum WeightUnit {
   Ounces = 'OUNCES'
 }
 
-export type CurrencyFragment = { amount: string, currencyCode: CurrencyCode };
+export type CurrencyFragment = { amount: any, currencyCode: CurrencyCode };
 
-export type LineItemDetailsFragment = { id: string, title: string, quantity: number, variant?: Maybe<{ id: string, title: string, currentlyNotInStock: boolean, priceV2: { amount: string, currencyCode: CurrencyCode } }> };
+export type LineItemDetailsFragment = { id: string, title: string, quantity: number, variant?: Maybe<{ id: string, title: string, currentlyNotInStock: boolean, priceV2: { amount: any, currencyCode: CurrencyCode } }> };
 
-export type CheckoutDetailsFragment = { id: string, webUrl: string, createdAt: string, updatedAt: string, completedAt?: Maybe<string>, lineItems: { edges: Array<{ node: LineItemDetailsFragment }> }, subtotalPriceV2: CurrencyFragment, totalTaxV2: CurrencyFragment, totalPriceV2: CurrencyFragment };
+export type CheckoutDetailsFragment = { id: string, webUrl: any, createdAt: any, updatedAt: any, completedAt?: Maybe<any>, lineItems: { edges: Array<{ node: LineItemDetailsFragment }> }, subtotalPriceV2: CurrencyFragment, totalTaxV2: CurrencyFragment, totalPriceV2: CurrencyFragment };
 
 export type CheckoutCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -4996,6 +5014,13 @@ export type CheckoutQueryVariables = Exact<{
 
 
 export type CheckoutQuery = { node?: Maybe<CheckoutDetailsFragment> };
+
+export type CollectionByHandleQueryVariables = Exact<{
+  handle: Scalars['String'];
+}>;
+
+
+export type CollectionByHandleQuery = { collectionByHandle?: Maybe<{ handle: string, products: { edges: Array<{ node: { handle: string, totalInventory?: Maybe<number> } }> } }> };
 
 export const LineItemDetailsFragment = `
     fragment lineItemDetails on CheckoutLineItem {
@@ -5145,5 +5170,33 @@ export const useCheckoutQuery = <
     useQuery<CheckoutQuery, TError, TData>(
       ['checkout', variables],
       fetcher<CheckoutQuery, CheckoutQueryVariables>(client, CheckoutDocument, variables),
+      options
+    );
+export const CollectionByHandleDocument = `
+    query collectionByHandle($handle: String!) {
+  collectionByHandle(handle: $handle) {
+    handle
+    products(first: 250) {
+      edges {
+        node {
+          handle
+          totalInventory
+        }
+      }
+    }
+  }
+}
+    `;
+export const useCollectionByHandleQuery = <
+      TData = CollectionByHandleQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: CollectionByHandleQueryVariables, 
+      options?: UseQueryOptions<CollectionByHandleQuery, TError, TData>
+    ) => 
+    useQuery<CollectionByHandleQuery, TError, TData>(
+      ['collectionByHandle', variables],
+      fetcher<CollectionByHandleQuery, CollectionByHandleQueryVariables>(client, CollectionByHandleDocument, variables),
       options
     );

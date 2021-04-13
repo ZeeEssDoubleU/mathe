@@ -1,7 +1,9 @@
 import { useQueryClient } from "react-query"
 import { appendDataToCache, shopifyClient } from "./index"
-// import types / fragments
+// import store / types / fragments
+import { useShopify } from "../.."
 import {
+	useCheckoutCreateMutation,
 	useCheckoutLineItemsAddMutation,
 	useCheckoutLineItemsRemoveMutation,
 	useCheckoutLineItemsUpdateMutation,
@@ -11,8 +13,18 @@ import {
 // hook
 // ************
 
-export function useCheckoutLineItems() {
+export function useCheckoutMutation() {
+	const { setCheckoutId } = useShopify()
 	const queryClient = useQueryClient()
+
+	// create checkout
+	const createCheckout = useCheckoutCreateMutation(shopifyClient, {
+		onSuccess: (data) => {
+			const checkout = data.checkoutCreate?.checkout
+			checkout ? appendDataToCache(queryClient, checkout) : data
+			checkout && setCheckoutId(checkout?.id) // ! set checkoutId state
+		},
+	})
 
 	const addLineItem = useCheckoutLineItemsAddMutation(shopifyClient, {
 		onSuccess: (data) => {
@@ -36,6 +48,7 @@ export function useCheckoutLineItems() {
 	})
 
 	return {
+		createCheckout,
 		addLineItem,
 		removeLineItem,
 		updateLineItem,

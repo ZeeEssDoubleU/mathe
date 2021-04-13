@@ -128,7 +128,7 @@ const Body = styled(ContentBody)`
 // ************
 
 export const query = graphql`
-	{
+	query TeamPage {
 		page: datoCmsPage(title: { eq: "Team" }) {
 			header
 			subHeader

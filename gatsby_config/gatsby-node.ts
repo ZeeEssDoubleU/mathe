@@ -4,7 +4,7 @@ import { CreatePagesArgs } from "gatsby"
 // types
 // ************
 
-export interface CreatePagesQuery_I {
+export interface CreatePagesI {
 	data?: {
 		allShopifyCollection: {
 			nodes: {
@@ -26,8 +26,8 @@ export async function createPages({
 	graphql,
 	reporter,
 }: CreatePagesArgs): Promise<void> {
-	const { data }: CreatePagesQuery_I = await graphql(`
-		{
+	const { data }: CreatePagesI = await graphql(`
+		query AllShopifyCollectionHandles {
 			allShopifyCollection {
 				nodes {
 					handle

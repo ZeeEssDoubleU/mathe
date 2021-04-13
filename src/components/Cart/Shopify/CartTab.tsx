@@ -6,18 +6,24 @@ import Icon from "../../Icons/Icon"
 import { ModalButton } from "../../../styles/elements"
 // import store
 import { useShopify } from "../../../store"
+import { useCheckout } from "../../../store/shopifySlice/hooks"
 
 // ************
 // component
 // ************
 
 export default function CartTab(): ReactElement {
-	const shopify = useShopify()
+	const shopifyState = useShopify()
+	const shopifyCheckoutQuery = useCheckout()
 
 	return (
-		<Container onClick={() => shopify.toggleCart(!shopify.isCartOpen)}>
+		<Container
+			onClick={() => shopifyState.toggleCart(!shopifyState.isCartOpen)}
+		>
 			<Icon name="cart-zoom" />
-			<span className="item-count">{shopify.totalItemCount}</span>
+			<span className="item-count">
+				{shopifyCheckoutQuery.totalItemCount}
+			</span>
 		</Container>
 	)
 }

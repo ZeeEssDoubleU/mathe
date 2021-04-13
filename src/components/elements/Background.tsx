@@ -216,7 +216,7 @@ const Image = styled(GatsbyImage)<Image_I>`
 // ************
 
 const query = graphql`
-	{
+	query BackgroundComponent {
 		allCollections: allDatoCmsCategory {
 			nodes {
 				slug
