@@ -11,7 +11,7 @@ import { CategoryButton } from "../../../styles/elements"
 // import store / queries / utils
 import { useShopify } from "../../../store"
 import { abbreviate } from "../../../utils"
-import { useCheckoutMutation } from "../../../store/shopifySlice/hooks"
+import { useCheckoutMutation } from "../../../api/shopify"
 
 // ************
 // types
@@ -36,7 +36,6 @@ export default function ProductListingHeader({
 }: ProductListingHeaderI): ReactElement {
 	const shopifyState = useShopify()
 	const shopifyCheckoutMutation = useCheckoutMutation()
-	// const { getInventoryByHandle } = useShopify()
 
 	// add line item to cart
 	function addLineItem() {
@@ -53,12 +52,12 @@ export default function ProductListingHeader({
 	}
 
 	// product display info
-	const { priceNumber, weight, weightUnit, quantityAvailable } = variant
-	// const quantityAvailable = getInventoryByHandle(handle)
+	const { priceNumber, weight, weightUnit } = variant
+	const quantityAvailable = shopifyState.getInventoryByHandle(handle)
 	const inStock = quantityAvailable > 0
 
 	// TODO: change readyToSell to true when products are ready to sell
-	const readyToSell = false
+	const readyToSell = true
 	function displayButtonText() {
 		if (!readyToSell) {
 			return "Coming Soon"

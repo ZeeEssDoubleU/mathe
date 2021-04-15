@@ -3,7 +3,7 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store
-import { useCheckout } from "../../../store/shopifySlice/hooks"
+import { useCheckout } from "../../../api/shopify"
 
 // ************
 // component
@@ -31,7 +31,6 @@ export default function CartFooter(): ReactElement {
 				<span>{Number(totalPrice) === 0 ? "──" : `$${totalPrice}`}</span>
 			</Total> */}
 			<Checkout
-				// TODO: QUERY: make is cart empty available
 				disabled={shopifyCheckoutQuery.isCartEmpty}
 				onClick={() =>
 					!checkoutUrl ? null : window.location.replace(checkoutUrl)

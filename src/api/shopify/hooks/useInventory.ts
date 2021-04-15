@@ -1,8 +1,7 @@
-import { shopifyClient } from "./index"
-
+import { shopifyClient } from "../graphql"
 // import types / fragments
 import { useCollectionByHandleQuery } from "../graphql/types"
-import { ShopifyStateI, useShopify } from ".."
+import { ShopifyStateI, useShopify } from "../../../store"
 
 // ************
 // hook

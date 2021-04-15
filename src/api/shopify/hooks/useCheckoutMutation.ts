@@ -1,7 +1,8 @@
 import { useQueryClient } from "react-query"
-import { appendDataToCache, shopifyClient } from "./index"
+import { shopifyClient } from "../graphql"
+import { appendDataToCache, usePersistCheckout } from ".."
 // import store / types / fragments
-import { useShopify } from "../.."
+import { useShopify } from "../../../store"
 import {
 	useCheckoutCreateMutation,
 	useCheckoutLineItemsAddMutation,
@@ -16,34 +17,47 @@ import {
 export function useCheckoutMutation() {
 	const { setCheckoutId } = useShopify()
 	const queryClient = useQueryClient()
+	const persistCheckout = usePersistCheckout()
 
 	// create checkout
 	const createCheckout = useCheckoutCreateMutation(shopifyClient, {
 		onSuccess: (data) => {
 			const checkout = data.checkoutCreate?.checkout
-			checkout ? appendDataToCache(queryClient, checkout) : data
-			checkout && setCheckoutId(checkout?.id) // ! set checkoutId state
+			if (checkout) {
+				appendDataToCache(queryClient, checkout)
+				setCheckoutId(checkout.id) // ! set checkoutId state
+				persistCheckout.set(checkout.id)
+			}
 		},
 	})
 
 	const addLineItem = useCheckoutLineItemsAddMutation(shopifyClient, {
 		onSuccess: (data) => {
 			const checkout = data.checkoutLineItemsAdd?.checkout
-			checkout ? appendDataToCache(queryClient, checkout) : data
+			if (checkout) {
+				appendDataToCache(queryClient, checkout)
+				persistCheckout.set(checkout.id)
+			}
 		},
 	})
 
 	const removeLineItem = useCheckoutLineItemsRemoveMutation(shopifyClient, {
 		onSuccess: (data) => {
 			const checkout = data.checkoutLineItemsRemove?.checkout
-			checkout ? appendDataToCache(queryClient, checkout) : data
+			if (checkout) {
+				appendDataToCache(queryClient, checkout)
+				persistCheckout.set(checkout.id)
+			}
 		},
 	})
 
 	const updateLineItem = useCheckoutLineItemsUpdateMutation(shopifyClient, {
 		onSuccess: (data) => {
 			const checkout = data.checkoutLineItemsUpdate?.checkout
-			checkout ? appendDataToCache(queryClient, checkout) : data
+			if (checkout) {
+				appendDataToCache(queryClient, checkout)
+				persistCheckout.set(checkout.id)
+			}
 		},
 	})
 

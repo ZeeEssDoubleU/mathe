@@ -6,9 +6,12 @@ declare module "styled-components" {
 		color: {
 			app_green: string
 			app_green_hsl: string
+			app_green_hex: string
 			app_lightGreen: string
 			app_lightGreen_hsl: string
 			app_gold: string
+			app_gold_hsl: string
+			app_gold_hex: string
 
 			background: string
 			accent_light: string
@@ -76,7 +79,10 @@ declare module "styled-components" {
 
 // constants
 const app_green_hsl = "86, 48%, 48%"
+const app_green_hex = "#82B540"
 const app_lightGreen_hsl = "88, 41%, 54%"
+const app_gold_hsl = "43, 47%, 35%"
+const app_gold_hex = "#836B2F"
 const disabled_hsl = "150, 1%, 57%"
 
 // declare theme
@@ -84,9 +90,12 @@ export const theme: DefaultTheme = {
 	color: {
 		app_green: `hsla(${app_green_hsl}, 1.0)`,
 		app_green_hsl: app_green_hsl,
+		app_green_hex: app_green_hex,
 		app_lightGreen: `hsla(${app_lightGreen_hsl}, 1.0)`,
 		app_lightGreen_hsl: app_lightGreen_hsl,
-		app_gold: "hsla(43, 47%, 35%, 1.0)",
+		app_gold: `hsla(${app_gold_hsl}, 1.0)`,
+		app_gold_hsl: app_gold_hsl,
+		app_gold_hex: app_gold_hex,
 
 		background: "hsla(0, 0%, 0%, 0.85)",
 		accent_light: "#F3F5F5",

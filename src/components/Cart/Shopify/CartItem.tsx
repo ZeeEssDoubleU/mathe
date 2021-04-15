@@ -4,7 +4,7 @@ import styled from "styled-components"
 import CartItemHeader from "./CartItemHeader"
 import CartItemMain from "./CartItemMain"
 // import types
-import { CartItemI } from "../../../store/shopifySlice/graphql/types"
+import { CartItemI } from "../../../api/shopify/graphql/types"
 
 // ************
 // component

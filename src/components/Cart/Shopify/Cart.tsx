@@ -9,7 +9,8 @@ import { useClickOutside } from "../../../hooks"
 import {
 	useCheckout,
 	useCheckoutMutation,
-} from "../../../store/shopifySlice/hooks"
+	usePersistCheckout,
+} from "../../../api/shopify"
 import { useShopify } from "../../../store"
 
 // ************
@@ -22,10 +23,16 @@ export default function Cart(): ReactElement {
 	const shopifyState = useShopify()
 	const shopifyCheckoutQuery = useCheckout()
 	const shopifyCheckoutMutation = useCheckoutMutation()
+	const persistCheckout = usePersistCheckout()
 
 	// create shopify checkout when cart mounts
 	useEffect(() => {
-		shopifyCheckoutMutation.createCheckout.mutate({})
+		const checkoutId = persistCheckout.get()
+		if (!checkoutId) {
+			shopifyCheckoutMutation.createCheckout.mutate({})
+		} else {
+			shopifyState.setCheckoutId(checkoutId)
+		}
 	}, [])
 
 	const lineItems = shopifyCheckoutQuery.isCartEmpty ? (

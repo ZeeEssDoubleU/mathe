@@ -14338,10 +14338,6 @@ export interface Query {
   allShopifyProduct: ShopifyProductConnection;
   shopifyCollection: Maybe<ShopifyCollection>;
   allShopifyCollection: ShopifyCollectionConnection;
-  shopifyBlog: Maybe<ShopifyBlog>;
-  allShopifyBlog: ShopifyBlogConnection;
-  shopifyPage: Maybe<ShopifyPage>;
-  allShopifyPage: ShopifyPageConnection;
   shopifyShop: Maybe<ShopifyShop>;
   allShopifyShop: ShopifyShopConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -15241,7 +15237,6 @@ export interface QueryShopifyProductArgs {
   description: Maybe<StringQueryOperatorInput>;
   descriptionHtml: Maybe<StringQueryOperatorInput>;
   handle: Maybe<StringQueryOperatorInput>;
-  onlineStoreUrl: Maybe<StringQueryOperatorInput>;
   priceRange: Maybe<ShopifyProductPriceRangeFilterInput>;
   productType: Maybe<StringQueryOperatorInput>;
   publishedAt: Maybe<DateQueryOperatorInput>;
@@ -15279,45 +15274,6 @@ export interface QueryShopifyCollectionArgs {
 export interface QueryAllShopifyCollectionArgs {
   filter: Maybe<ShopifyCollectionFilterInput>;
   sort: Maybe<ShopifyCollectionSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
-export interface QueryShopifyBlogArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  handle: Maybe<StringQueryOperatorInput>;
-  title: Maybe<StringQueryOperatorInput>;
-  url: Maybe<StringQueryOperatorInput>;
-  shopifyId: Maybe<StringQueryOperatorInput>;
-}
-
-export interface QueryAllShopifyBlogArgs {
-  filter: Maybe<ShopifyBlogFilterInput>;
-  sort: Maybe<ShopifyBlogSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
-export interface QueryShopifyPageArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  handle: Maybe<StringQueryOperatorInput>;
-  title: Maybe<StringQueryOperatorInput>;
-  body: Maybe<StringQueryOperatorInput>;
-  bodySummary: Maybe<StringQueryOperatorInput>;
-  updatedAt: Maybe<DateQueryOperatorInput>;
-  url: Maybe<StringQueryOperatorInput>;
-  shopifyId: Maybe<StringQueryOperatorInput>;
-}
-
-export interface QueryAllShopifyPageArgs {
-  filter: Maybe<ShopifyPageFilterInput>;
-  sort: Maybe<ShopifyPageSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -15375,160 +15331,6 @@ export interface QueryAllSitePluginArgs {
   sort: Maybe<SitePluginSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
-}
-
-export interface ShopifyBlog extends Node {
-  id: Scalars["ID"];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-  handle: Maybe<Scalars["String"]>;
-  title: Maybe<Scalars["String"]>;
-  url: Maybe<Scalars["String"]>;
-  shopifyId: Maybe<Scalars["String"]>;
-}
-
-export interface ShopifyBlogConnection {
-  totalCount: Scalars["Int"];
-  edges: Array<ShopifyBlogEdge>;
-  nodes: Array<ShopifyBlog>;
-  pageInfo: PageInfo;
-  distinct: Array<Scalars["String"]>;
-  group: Array<ShopifyBlogGroupConnection>;
-}
-
-export interface ShopifyBlogConnectionDistinctArgs {
-  field: ShopifyBlogFieldsEnum;
-}
-
-export interface ShopifyBlogConnectionGroupArgs {
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-  field: ShopifyBlogFieldsEnum;
-}
-
-export interface ShopifyBlogEdge {
-  next: Maybe<ShopifyBlog>;
-  node: ShopifyBlog;
-  previous: Maybe<ShopifyBlog>;
-}
-
-export enum ShopifyBlogFieldsEnum {
-  id = "id",
-  parent___id = "parent___id",
-  parent___parent___id = "parent___parent___id",
-  parent___parent___parent___id = "parent___parent___parent___id",
-  parent___parent___parent___children = "parent___parent___parent___children",
-  parent___parent___children = "parent___parent___children",
-  parent___parent___children___id = "parent___parent___children___id",
-  parent___parent___children___children = "parent___parent___children___children",
-  parent___parent___internal___content = "parent___parent___internal___content",
-  parent___parent___internal___contentDigest = "parent___parent___internal___contentDigest",
-  parent___parent___internal___description = "parent___parent___internal___description",
-  parent___parent___internal___fieldOwners = "parent___parent___internal___fieldOwners",
-  parent___parent___internal___ignoreType = "parent___parent___internal___ignoreType",
-  parent___parent___internal___mediaType = "parent___parent___internal___mediaType",
-  parent___parent___internal___owner = "parent___parent___internal___owner",
-  parent___parent___internal___type = "parent___parent___internal___type",
-  parent___children = "parent___children",
-  parent___children___id = "parent___children___id",
-  parent___children___parent___id = "parent___children___parent___id",
-  parent___children___parent___children = "parent___children___parent___children",
-  parent___children___children = "parent___children___children",
-  parent___children___children___id = "parent___children___children___id",
-  parent___children___children___children = "parent___children___children___children",
-  parent___children___internal___content = "parent___children___internal___content",
-  parent___children___internal___contentDigest = "parent___children___internal___contentDigest",
-  parent___children___internal___description = "parent___children___internal___description",
-  parent___children___internal___fieldOwners = "parent___children___internal___fieldOwners",
-  parent___children___internal___ignoreType = "parent___children___internal___ignoreType",
-  parent___children___internal___mediaType = "parent___children___internal___mediaType",
-  parent___children___internal___owner = "parent___children___internal___owner",
-  parent___children___internal___type = "parent___children___internal___type",
-  parent___internal___content = "parent___internal___content",
-  parent___internal___contentDigest = "parent___internal___contentDigest",
-  parent___internal___description = "parent___internal___description",
-  parent___internal___fieldOwners = "parent___internal___fieldOwners",
-  parent___internal___ignoreType = "parent___internal___ignoreType",
-  parent___internal___mediaType = "parent___internal___mediaType",
-  parent___internal___owner = "parent___internal___owner",
-  parent___internal___type = "parent___internal___type",
-  children = "children",
-  children___id = "children___id",
-  children___parent___id = "children___parent___id",
-  children___parent___parent___id = "children___parent___parent___id",
-  children___parent___parent___children = "children___parent___parent___children",
-  children___parent___children = "children___parent___children",
-  children___parent___children___id = "children___parent___children___id",
-  children___parent___children___children = "children___parent___children___children",
-  children___parent___internal___content = "children___parent___internal___content",
-  children___parent___internal___contentDigest = "children___parent___internal___contentDigest",
-  children___parent___internal___description = "children___parent___internal___description",
-  children___parent___internal___fieldOwners = "children___parent___internal___fieldOwners",
-  children___parent___internal___ignoreType = "children___parent___internal___ignoreType",
-  children___parent___internal___mediaType = "children___parent___internal___mediaType",
-  children___parent___internal___owner = "children___parent___internal___owner",
-  children___parent___internal___type = "children___parent___internal___type",
-  children___children = "children___children",
-  children___children___id = "children___children___id",
-  children___children___parent___id = "children___children___parent___id",
-  children___children___parent___children = "children___children___parent___children",
-  children___children___children = "children___children___children",
-  children___children___children___id = "children___children___children___id",
-  children___children___children___children = "children___children___children___children",
-  children___children___internal___content = "children___children___internal___content",
-  children___children___internal___contentDigest = "children___children___internal___contentDigest",
-  children___children___internal___description = "children___children___internal___description",
-  children___children___internal___fieldOwners = "children___children___internal___fieldOwners",
-  children___children___internal___ignoreType = "children___children___internal___ignoreType",
-  children___children___internal___mediaType = "children___children___internal___mediaType",
-  children___children___internal___owner = "children___children___internal___owner",
-  children___children___internal___type = "children___children___internal___type",
-  children___internal___content = "children___internal___content",
-  children___internal___contentDigest = "children___internal___contentDigest",
-  children___internal___description = "children___internal___description",
-  children___internal___fieldOwners = "children___internal___fieldOwners",
-  children___internal___ignoreType = "children___internal___ignoreType",
-  children___internal___mediaType = "children___internal___mediaType",
-  children___internal___owner = "children___internal___owner",
-  children___internal___type = "children___internal___type",
-  internal___content = "internal___content",
-  internal___contentDigest = "internal___contentDigest",
-  internal___description = "internal___description",
-  internal___fieldOwners = "internal___fieldOwners",
-  internal___ignoreType = "internal___ignoreType",
-  internal___mediaType = "internal___mediaType",
-  internal___owner = "internal___owner",
-  internal___type = "internal___type",
-  handle = "handle",
-  title = "title",
-  url = "url",
-  shopifyId = "shopifyId",
-}
-
-export interface ShopifyBlogFilterInput {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  handle: Maybe<StringQueryOperatorInput>;
-  title: Maybe<StringQueryOperatorInput>;
-  url: Maybe<StringQueryOperatorInput>;
-  shopifyId: Maybe<StringQueryOperatorInput>;
-}
-
-export interface ShopifyBlogGroupConnection {
-  totalCount: Scalars["Int"];
-  edges: Array<ShopifyBlogEdge>;
-  nodes: Array<ShopifyBlog>;
-  pageInfo: PageInfo;
-  field: Scalars["String"];
-  fieldValue: Maybe<Scalars["String"]>;
-}
-
-export interface ShopifyBlogSortInput {
-  fields: Maybe<Array<Maybe<ShopifyBlogFieldsEnum>>>;
-  order: Maybe<Array<Maybe<SortOrderEnum>>>;
 }
 
 export interface ShopifyCollection extends Node {
@@ -15714,7 +15516,6 @@ export enum ShopifyCollectionFieldsEnum {
   products___description = "products___description",
   products___descriptionHtml = "products___descriptionHtml",
   products___handle = "products___handle",
-  products___onlineStoreUrl = "products___onlineStoreUrl",
   products___priceRange___minVariantPrice___amount = "products___priceRange___minVariantPrice___amount",
   products___priceRange___minVariantPrice___currencyCode = "products___priceRange___minVariantPrice___currencyCode",
   products___priceRange___maxVariantPrice___amount = "products___priceRange___maxVariantPrice___amount",
@@ -15765,7 +15566,6 @@ export enum ShopifyCollectionFieldsEnum {
   products___variants___product___description = "products___variants___product___description",
   products___variants___product___descriptionHtml = "products___variants___product___descriptionHtml",
   products___variants___product___handle = "products___variants___product___handle",
-  products___variants___product___onlineStoreUrl = "products___variants___product___onlineStoreUrl",
   products___variants___product___productType = "products___variants___product___productType",
   products___variants___product___publishedAt = "products___variants___product___publishedAt",
   products___variants___product___tags = "products___variants___product___tags",
@@ -15824,176 +15624,6 @@ export interface ShopifyCollectionSortInput {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 }
 
-export interface ShopifyPage extends Node {
-  id: Scalars["ID"];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-  handle: Maybe<Scalars["String"]>;
-  title: Maybe<Scalars["String"]>;
-  body: Maybe<Scalars["String"]>;
-  bodySummary: Maybe<Scalars["String"]>;
-  updatedAt: Maybe<Scalars["Date"]>;
-  url: Maybe<Scalars["String"]>;
-  shopifyId: Maybe<Scalars["String"]>;
-}
-
-export interface ShopifyPageUpdatedAtArgs {
-  formatString: Maybe<Scalars["String"]>;
-  fromNow: Maybe<Scalars["Boolean"]>;
-  difference: Maybe<Scalars["String"]>;
-  locale: Maybe<Scalars["String"]>;
-}
-
-export interface ShopifyPageConnection {
-  totalCount: Scalars["Int"];
-  edges: Array<ShopifyPageEdge>;
-  nodes: Array<ShopifyPage>;
-  pageInfo: PageInfo;
-  distinct: Array<Scalars["String"]>;
-  group: Array<ShopifyPageGroupConnection>;
-}
-
-export interface ShopifyPageConnectionDistinctArgs {
-  field: ShopifyPageFieldsEnum;
-}
-
-export interface ShopifyPageConnectionGroupArgs {
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-  field: ShopifyPageFieldsEnum;
-}
-
-export interface ShopifyPageEdge {
-  next: Maybe<ShopifyPage>;
-  node: ShopifyPage;
-  previous: Maybe<ShopifyPage>;
-}
-
-export enum ShopifyPageFieldsEnum {
-  id = "id",
-  parent___id = "parent___id",
-  parent___parent___id = "parent___parent___id",
-  parent___parent___parent___id = "parent___parent___parent___id",
-  parent___parent___parent___children = "parent___parent___parent___children",
-  parent___parent___children = "parent___parent___children",
-  parent___parent___children___id = "parent___parent___children___id",
-  parent___parent___children___children = "parent___parent___children___children",
-  parent___parent___internal___content = "parent___parent___internal___content",
-  parent___parent___internal___contentDigest = "parent___parent___internal___contentDigest",
-  parent___parent___internal___description = "parent___parent___internal___description",
-  parent___parent___internal___fieldOwners = "parent___parent___internal___fieldOwners",
-  parent___parent___internal___ignoreType = "parent___parent___internal___ignoreType",
-  parent___parent___internal___mediaType = "parent___parent___internal___mediaType",
-  parent___parent___internal___owner = "parent___parent___internal___owner",
-  parent___parent___internal___type = "parent___parent___internal___type",
-  parent___children = "parent___children",
-  parent___children___id = "parent___children___id",
-  parent___children___parent___id = "parent___children___parent___id",
-  parent___children___parent___children = "parent___children___parent___children",
-  parent___children___children = "parent___children___children",
-  parent___children___children___id = "parent___children___children___id",
-  parent___children___children___children = "parent___children___children___children",
-  parent___children___internal___content = "parent___children___internal___content",
-  parent___children___internal___contentDigest = "parent___children___internal___contentDigest",
-  parent___children___internal___description = "parent___children___internal___description",
-  parent___children___internal___fieldOwners = "parent___children___internal___fieldOwners",
-  parent___children___internal___ignoreType = "parent___children___internal___ignoreType",
-  parent___children___internal___mediaType = "parent___children___internal___mediaType",
-  parent___children___internal___owner = "parent___children___internal___owner",
-  parent___children___internal___type = "parent___children___internal___type",
-  parent___internal___content = "parent___internal___content",
-  parent___internal___contentDigest = "parent___internal___contentDigest",
-  parent___internal___description = "parent___internal___description",
-  parent___internal___fieldOwners = "parent___internal___fieldOwners",
-  parent___internal___ignoreType = "parent___internal___ignoreType",
-  parent___internal___mediaType = "parent___internal___mediaType",
-  parent___internal___owner = "parent___internal___owner",
-  parent___internal___type = "parent___internal___type",
-  children = "children",
-  children___id = "children___id",
-  children___parent___id = "children___parent___id",
-  children___parent___parent___id = "children___parent___parent___id",
-  children___parent___parent___children = "children___parent___parent___children",
-  children___parent___children = "children___parent___children",
-  children___parent___children___id = "children___parent___children___id",
-  children___parent___children___children = "children___parent___children___children",
-  children___parent___internal___content = "children___parent___internal___content",
-  children___parent___internal___contentDigest = "children___parent___internal___contentDigest",
-  children___parent___internal___description = "children___parent___internal___description",
-  children___parent___internal___fieldOwners = "children___parent___internal___fieldOwners",
-  children___parent___internal___ignoreType = "children___parent___internal___ignoreType",
-  children___parent___internal___mediaType = "children___parent___internal___mediaType",
-  children___parent___internal___owner = "children___parent___internal___owner",
-  children___parent___internal___type = "children___parent___internal___type",
-  children___children = "children___children",
-  children___children___id = "children___children___id",
-  children___children___parent___id = "children___children___parent___id",
-  children___children___parent___children = "children___children___parent___children",
-  children___children___children = "children___children___children",
-  children___children___children___id = "children___children___children___id",
-  children___children___children___children = "children___children___children___children",
-  children___children___internal___content = "children___children___internal___content",
-  children___children___internal___contentDigest = "children___children___internal___contentDigest",
-  children___children___internal___description = "children___children___internal___description",
-  children___children___internal___fieldOwners = "children___children___internal___fieldOwners",
-  children___children___internal___ignoreType = "children___children___internal___ignoreType",
-  children___children___internal___mediaType = "children___children___internal___mediaType",
-  children___children___internal___owner = "children___children___internal___owner",
-  children___children___internal___type = "children___children___internal___type",
-  children___internal___content = "children___internal___content",
-  children___internal___contentDigest = "children___internal___contentDigest",
-  children___internal___description = "children___internal___description",
-  children___internal___fieldOwners = "children___internal___fieldOwners",
-  children___internal___ignoreType = "children___internal___ignoreType",
-  children___internal___mediaType = "children___internal___mediaType",
-  children___internal___owner = "children___internal___owner",
-  children___internal___type = "children___internal___type",
-  internal___content = "internal___content",
-  internal___contentDigest = "internal___contentDigest",
-  internal___description = "internal___description",
-  internal___fieldOwners = "internal___fieldOwners",
-  internal___ignoreType = "internal___ignoreType",
-  internal___mediaType = "internal___mediaType",
-  internal___owner = "internal___owner",
-  internal___type = "internal___type",
-  handle = "handle",
-  title = "title",
-  body = "body",
-  bodySummary = "bodySummary",
-  updatedAt = "updatedAt",
-  url = "url",
-  shopifyId = "shopifyId",
-}
-
-export interface ShopifyPageFilterInput {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  handle: Maybe<StringQueryOperatorInput>;
-  title: Maybe<StringQueryOperatorInput>;
-  body: Maybe<StringQueryOperatorInput>;
-  bodySummary: Maybe<StringQueryOperatorInput>;
-  updatedAt: Maybe<DateQueryOperatorInput>;
-  url: Maybe<StringQueryOperatorInput>;
-  shopifyId: Maybe<StringQueryOperatorInput>;
-}
-
-export interface ShopifyPageGroupConnection {
-  totalCount: Scalars["Int"];
-  edges: Array<ShopifyPageEdge>;
-  nodes: Array<ShopifyPage>;
-  pageInfo: PageInfo;
-  field: Scalars["String"];
-  fieldValue: Maybe<Scalars["String"]>;
-}
-
-export interface ShopifyPageSortInput {
-  fields: Maybe<Array<Maybe<ShopifyPageFieldsEnum>>>;
-  order: Maybe<Array<Maybe<SortOrderEnum>>>;
-}
-
 export interface ShopifyProduct extends Node {
   id: Scalars["ID"];
   parent: Maybe<Node>;
@@ -16004,7 +15634,6 @@ export interface ShopifyProduct extends Node {
   description: Maybe<Scalars["String"]>;
   descriptionHtml: Maybe<Scalars["String"]>;
   handle: Maybe<Scalars["String"]>;
-  onlineStoreUrl: Maybe<Scalars["String"]>;
   priceRange: Maybe<ShopifyProductPriceRange>;
   productType: Maybe<Scalars["String"]>;
   publishedAt: Maybe<Scalars["Date"]>;
@@ -16156,7 +15785,6 @@ export enum ShopifyProductFieldsEnum {
   description = "description",
   descriptionHtml = "descriptionHtml",
   handle = "handle",
-  onlineStoreUrl = "onlineStoreUrl",
   priceRange___minVariantPrice___amount = "priceRange___minVariantPrice___amount",
   priceRange___minVariantPrice___currencyCode = "priceRange___minVariantPrice___currencyCode",
   priceRange___maxVariantPrice___amount = "priceRange___maxVariantPrice___amount",
@@ -16243,7 +15871,6 @@ export enum ShopifyProductFieldsEnum {
   variants___product___description = "variants___product___description",
   variants___product___descriptionHtml = "variants___product___descriptionHtml",
   variants___product___handle = "variants___product___handle",
-  variants___product___onlineStoreUrl = "variants___product___onlineStoreUrl",
   variants___product___productType = "variants___product___productType",
   variants___product___publishedAt = "variants___product___publishedAt",
   variants___product___tags = "variants___product___tags",
@@ -16326,7 +15953,6 @@ export interface ShopifyProductFilterInput {
   description: Maybe<StringQueryOperatorInput>;
   descriptionHtml: Maybe<StringQueryOperatorInput>;
   handle: Maybe<StringQueryOperatorInput>;
-  onlineStoreUrl: Maybe<StringQueryOperatorInput>;
   priceRange: Maybe<ShopifyProductPriceRangeFilterInput>;
   productType: Maybe<StringQueryOperatorInput>;
   publishedAt: Maybe<DateQueryOperatorInput>;
@@ -16735,7 +16361,6 @@ export enum ShopifyProductVariantFieldsEnum {
   product___description = "product___description",
   product___descriptionHtml = "product___descriptionHtml",
   product___handle = "product___handle",
-  product___onlineStoreUrl = "product___onlineStoreUrl",
   product___priceRange___minVariantPrice___amount = "product___priceRange___minVariantPrice___amount",
   product___priceRange___minVariantPrice___currencyCode = "product___priceRange___minVariantPrice___currencyCode",
   product___priceRange___maxVariantPrice___amount = "product___priceRange___maxVariantPrice___amount",
@@ -16786,7 +16411,6 @@ export enum ShopifyProductVariantFieldsEnum {
   product___variants___product___description = "product___variants___product___description",
   product___variants___product___descriptionHtml = "product___variants___product___descriptionHtml",
   product___variants___product___handle = "product___variants___product___handle",
-  product___variants___product___onlineStoreUrl = "product___variants___product___onlineStoreUrl",
   product___variants___product___productType = "product___variants___product___productType",
   product___variants___product___publishedAt = "product___variants___product___publishedAt",
   product___variants___product___tags = "product___variants___product___tags",

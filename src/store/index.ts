@@ -34,4 +34,6 @@ export const useAppSelector: TypedUseSelectorHook<RootState_Type> = useSelector
 // named exports
 // ************
 
-export { useCategory, useTransition, useShopify }
+export * from "./categorySlice"
+export * from "./shopifySlice"
+export * from "./transitionSlice"

@@ -6,7 +6,7 @@ import Icon from "../../Icons/Icon"
 import { ModalButton } from "../../../styles/elements"
 // import store
 import { useShopify } from "../../../store"
-import { useCheckout } from "../../../store/shopifySlice/hooks"
+import { useCheckout } from "../../../api/shopify"
 
 // ************
 // component

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { useAppDispatch, useAppSelector } from "../index"
+import { useAppDispatch, useAppSelector } from "./index"
 
 // ************
 // types

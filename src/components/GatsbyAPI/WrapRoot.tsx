@@ -1,10 +1,14 @@
 import React, { ReactElement } from "react"
-import { ReactQueryDevtools } from "react-query/devtools"
 // import providers
 import { ThemeProvider } from "styled-components"
 import { Provider } from "react-redux"
 import store from "../../store"
-import { QueryClient, QueryClientProvider } from "react-query"
+// import react-query
+import {
+	QueryClientProvider,
+	queryClient,
+	ReactQueryDevtools,
+} from "../../api/reactQuery"
 // import styles
 import ResetStyle from "../../styles/reset"
 import GlobalStyle from "../../styles/global"
@@ -22,23 +26,18 @@ export interface WrapRoot_I {
 // component
 // ************
 
-// init query client
-export const clientQuery = new QueryClient()
-
 // component
 export default function WrapRoot({ element }: WrapRoot_I): ReactElement {
 	return (
-		<>
-			<ThemeProvider theme={theme}>
-				<QueryClientProvider client={clientQuery}>
-					<Provider store={store}>
-						<ResetStyle />
-						<GlobalStyle />
-						{element}
-					</Provider>
-					<ReactQueryDevtools initialIsOpen={false} />
-				</QueryClientProvider>
-			</ThemeProvider>
-		</>
+		<ThemeProvider theme={theme}>
+			<QueryClientProvider client={queryClient}>
+				<Provider store={store}>
+					<ResetStyle />
+					<GlobalStyle />
+					{element}
+				</Provider>
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
+		</ThemeProvider>
 	)
 }

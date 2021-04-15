@@ -1,12 +1,13 @@
 import { useQueryClient } from "react-query"
-import { appendDataToCache, shopifyClient } from "./index"
+import { shopifyClient } from "../graphql"
+import { appendDataToCache } from "../helpers"
 // import types / fragments
 import {
 	CheckoutQuery,
 	CheckoutWithItemCountI,
 	useCheckoutQuery,
 } from "../graphql/types"
-import { useShopify } from "../.."
+import { useShopify } from "../../../store"
 
 // ************
 // hook

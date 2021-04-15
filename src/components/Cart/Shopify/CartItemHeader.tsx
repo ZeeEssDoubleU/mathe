@@ -3,11 +3,8 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store / queries / types
-import { CartItemI } from "../../../store/shopifySlice/graphql/types"
-import {
-	useCheckout,
-	useCheckoutMutation,
-} from "../../../store/shopifySlice/hooks"
+import { CartItemI } from "../../../api/shopify/graphql/types"
+import { useCheckout, useCheckoutMutation } from "../../../api/shopify"
 
 // ************
 // component
