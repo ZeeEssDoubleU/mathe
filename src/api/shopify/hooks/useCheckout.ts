@@ -8,14 +8,16 @@ import {
 	useCheckoutQuery,
 } from "../graphql/types"
 import { useShopify } from "../../../store"
+import { useCheckoutMutation } from "./useCheckoutMutation"
 
 // ************
 // hook
 // ************
 
 export function useCheckout() {
-	const { checkoutId } = useShopify()
 	const queryClient = useQueryClient()
+	const shopifyState = useShopify()
+	const shopifyCheckoutMutation = useCheckoutMutation()
 
 	// get checkout
 	const {
@@ -23,14 +25,23 @@ export function useCheckout() {
 		isLoading,
 	} = useCheckoutQuery<CheckoutWithItemCountI>(
 		shopifyClient,
-		{ checkoutId },
+		{ checkoutId: shopifyState.checkoutId },
 		{
-			enabled: !!checkoutId,
+			enabled: !!shopifyState.checkoutId,
 			queryKeyHashFn: () => `["checkout"]`,
 			onSuccess: (data) => {
 				const newData = data as CheckoutQuery
 				const checkout = newData.node
-				checkout ? appendDataToCache(queryClient, checkout) : newData
+				if (checkout) {
+					// if checkout already completed, create new checkout
+					checkout.completedAt
+						? shopifyCheckoutMutation.createCheckout.mutate({})
+						: appendDataToCache(queryClient, checkout)
+				}
+			},
+			onError: () => {
+				// if checkout not found, create new checkout
+				shopifyCheckoutMutation.createCheckout.mutate({})
 			},
 		},
 	)
