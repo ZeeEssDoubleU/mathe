@@ -1,5 +1,6 @@
 import fs from "fs"
 import axios, { AxiosResponse } from "axios"
+import { app_green_hsl } from "../src/styles/theme"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"
@@ -81,7 +82,7 @@ export default {
 				short_name: "Mathé",
 				start_url: "/",
 				background_color: "black",
-				theme_color: "hsla(86, 48%, 48%, 1.0)",
+				theme_color: `hsla(${app_green_hsl}, 1.0)`,
 				display: "standalone",
 				icon: "./src/components/Icons/favicon.svg", // declared in globalSEO on DatoCMS,
 			},

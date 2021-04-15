@@ -19,7 +19,7 @@ export default createGlobalStyle`
       #snipcart .snipcart-cart-button--highlight {
             background-image: linear-gradient(90deg, 
                   ${({ theme }) => theme.color.app_green},
-                  ${({ theme }) => theme.color.app_lightGreen}
+                  ${({ theme }) => theme.color.app_logo}
             );
       }
 

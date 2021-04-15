@@ -7,8 +7,9 @@ declare module "styled-components" {
 			app_green: string
 			app_green_hsl: string
 			app_green_hex: string
-			app_lightGreen: string
-			app_lightGreen_hsl: string
+			app_logo: string
+			app_logo_hsl: string
+			app_logo_hex: string
 			app_gold: string
 			app_gold_hsl: string
 			app_gold_hex: string
@@ -78,12 +79,13 @@ declare module "styled-components" {
 }
 
 // constants
-const app_green_hsl = "86, 48%, 48%"
-const app_green_hex = "#82B540"
-const app_lightGreen_hsl = "88, 41%, 54%"
-const app_gold_hsl = "43, 47%, 35%"
-const app_gold_hex = "#836B2F"
-const disabled_hsl = "150, 1%, 57%"
+export const app_green_hsl = "86, 48%, 48%"
+export const app_green_hex = "#82B540"
+export const app_logo_hsl = "77, 60%, 52%"
+export const app_logo_hex = "#A5CE39"
+export const app_gold_hsl = "43, 47%, 35%"
+export const app_gold_hex = "#836B2F"
+export const disabled_hsl = "150, 1%, 57%"
 
 // declare theme
 export const theme: DefaultTheme = {
@@ -91,8 +93,9 @@ export const theme: DefaultTheme = {
 		app_green: `hsla(${app_green_hsl}, 1.0)`,
 		app_green_hsl: app_green_hsl,
 		app_green_hex: app_green_hex,
-		app_lightGreen: `hsla(${app_lightGreen_hsl}, 1.0)`,
-		app_lightGreen_hsl: app_lightGreen_hsl,
+		app_logo: `hsla(${app_logo_hsl}, 1.0)`,
+		app_logo_hsl: app_logo_hsl,
+		app_logo_hex: app_logo_hex,
 		app_gold: `hsla(${app_gold_hsl}, 1.0)`,
 		app_gold_hsl: app_gold_hsl,
 		app_gold_hex: app_gold_hex,
@@ -100,7 +103,7 @@ export const theme: DefaultTheme = {
 		background: "hsla(0, 0%, 0%, 0.85)",
 		accent_light: "#F3F5F5",
 		disabled: `hsla(${disabled_hsl}, 1.0)`,
-		hover_bg: `hsla(${app_lightGreen_hsl}, 0.5)`,
+		hover_bg: `hsla(${app_logo_hsl}, 0.5)`,
 		hover_disabled: `hsla(${disabled_hsl}, 0.3)`,
 
 		font_light: "white",
