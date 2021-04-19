@@ -1,10 +1,10 @@
 overwrite: true
 generates:
    # shopify dynamic graphql types
-   ./src/store/shopifySlice/graphql/types/generated.ts:
-      schema: "./src/store/shopifySlice/graphql/schema/index.graphql"
+   ./src/api/shopify/graphql/types/generated.ts:
+      schema: "./src/api/shopify/graphql/schema/index.graphql"
       documents:
-         - "./src/store/shopifySlice/graphql/operations/*.graphql"
+         - "./src/api/shopify/graphql/operations/*.graphql"
       # hooks:
       #    afterOneFileWrite:
       #       - prettier --write
@@ -36,7 +36,7 @@ generates:
          - "./gatsby_config/*.{ts,tsx}"
          - "./node_modules/gatsby-source-*/!(node_modules)/**/*.js"
          - "./src/graphql/!(types)"
-         - "./src/store/shopifySlice/!(graphql)"
+         - "./src/api/shopify/!(graphql)"
       hooks:
          afterOneFileWrite:
             - prettier --write

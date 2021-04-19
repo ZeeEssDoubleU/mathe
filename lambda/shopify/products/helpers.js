@@ -3,7 +3,7 @@ const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 const { trimEmptyTags } = require("../helpers")
 
 // constants
-const PRODUCT_MODEL_ID = 148325
+const PRODUCT_MODEL_ID = 148325 // DatoCMS product model
 
 // ************
 // helper
@@ -81,7 +81,26 @@ async function createProduct(body) {
 		slug: body.handle,
 	})
 
-	console.log("...product created") // ? debug
+	console.log(`...created product: ${body.handle}`) // ? debug
+	return res
+}
+
+// ************
+// helper
+// ************
+
+async function updateProduct(existingProduct, body) {
+	console.log("updating product on DatoCMS...") // ? debug
+
+	const res = await datocms.items.update(existingProduct.id, {
+		active: body.status === "active" ? true : false,
+		shopifyId: String(body.id), // API specifies string
+		title: body.title,
+		description: trimEmptyTags(body.body_html),
+		slug: body.handle,
+	})
+
+	console.log(`...updated product: ${body.handle}`) // ? debug
 	return res
 }
 
@@ -91,4 +110,5 @@ module.exports = {
 	getProduct_bySlug,
 	getProduct_byShopifyID,
 	createProduct,
+	updateProduct,
 }

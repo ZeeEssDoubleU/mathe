@@ -57,7 +57,7 @@ export default function ProductListingHeader({
 	const inStock = quantityAvailable > 0
 
 	// TODO: change readyToSell to true when products are ready to sell
-	const readyToSell = true
+	const readyToSell = false
 	function displayButtonText() {
 		if (!readyToSell) {
 			return "Coming Soon"
@@ -79,7 +79,10 @@ export default function ProductListingHeader({
 				<Price>
 					${priceNumber.toFixed(2)} / {weight} {abbreviate(weightUnit)}
 				</Price>
-				<BuyButton disabled={!inStock} onClick={addLineItem}>
+				<BuyButton
+					disabled={!readyToSell || !inStock}
+					onClick={addLineItem}
+				>
 					{displayButtonText()}
 				</BuyButton>
 			</BuyBlock>

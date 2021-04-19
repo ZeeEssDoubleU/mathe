@@ -12,7 +12,7 @@ import { useInventory } from "../../../api/shopify"
 // ************
 
 export interface ProductListingsI {
-	categories: ProductCollectionBySlugQuery["allCollections_datocms"]
+	categories: ProductCollectionBySlugQuery["allCategories_datocms"]
 	category_selected: {
 		products_datocms: ProductCollectionBySlugQuery["products_datocms"]
 		collection_shopify: ProductCollectionBySlugQuery["collection_shopify"]
@@ -32,14 +32,20 @@ export default function ProductListings({
 
 	const productsSorted = sortBy(collection_shopify.products, "title")
 	const productArray: ReactElement[] = productsSorted.map(
-		(product_shopify, productIndex) => (
-			<ProductListing
-				key={productIndex}
-				product_shopify={product_shopify}
-				categories={categories}
-				products_datocms={products_datocms}
-			/>
-		),
+		(product_shopify, productIndex) => {
+			// get matching product from datocms
+			const product_datocms = products_datocms.nodes.find(
+				(product) => product.slug === product_shopify.handle,
+			)
+			return (
+				<ProductListing
+					key={productIndex}
+					categories={categories}
+					product_datocms={product_datocms}
+					product_shopify={product_shopify}
+				/>
+			)
+		},
 	)
 
 	// DISPLAY products

@@ -80,7 +80,25 @@ async function createCollection(body) {
 		slug: body.handle,
 	})
 
-	console.log("...collection created") // ? debug
+	console.log(`...created collection: ${body.handle}`) // ? debug
+	return res
+}
+
+// ************
+// helper
+// ************
+
+async function updateCollection(existingCollection, body) {
+	console.log("creating collection on DatoCMS...") // ? debug
+
+	const res = await await datocms.items.update(existingCollection.id, {
+		shopifyId: String(body.id), // API specifies string
+		title: body.title,
+		description: trimEmptyTags(body.body_html),
+		slug: body.handle,
+	})
+
+	console.log(`...updated collection: ${body.handle}`) // ? debug
 	return res
 }
 
@@ -90,4 +108,5 @@ module.exports = {
 	getCollection_bySlug,
 	getCollection_byShopifyID,
 	createCollection,
+	updateCollection,
 }

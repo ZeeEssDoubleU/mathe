@@ -956,6 +956,7 @@ export interface DatoCmsBlogPostSortInput {
 }
 
 export interface DatoCmsCategory extends Node {
+  slug: Maybe<Scalars["String"]>;
   noNavDisplay: Maybe<Scalars["Boolean"]>;
   shopifyId: Maybe<Scalars["Int"]>;
   title: Maybe<Scalars["String"]>;
@@ -965,7 +966,6 @@ export interface DatoCmsCategory extends Node {
   description: Maybe<Scalars["String"]>;
   descriptionNode: Maybe<DatoCmsTextNode>;
   images: Maybe<DatoCmsProductImage>;
-  slug: Maybe<Scalars["String"]>;
   position: Maybe<Scalars["Int"]>;
   treeParent: Maybe<DatoCmsCategory>;
   treeChildren: Maybe<Array<Maybe<DatoCmsCategory>>>;
@@ -1007,6 +1007,7 @@ export interface DatoCmsCategoryEdge {
 }
 
 export enum DatoCmsCategoryFieldsEnum {
+  slug = "slug",
   noNavDisplay = "noNavDisplay",
   shopifyId = "shopifyId",
   title = "title",
@@ -1389,8 +1390,8 @@ export enum DatoCmsCategoryFieldsEnum {
   images___internal___mediaType = "images___internal___mediaType",
   images___internal___owner = "images___internal___owner",
   images___internal___type = "images___internal___type",
-  slug = "slug",
   position = "position",
+  treeParent___slug = "treeParent___slug",
   treeParent___noNavDisplay = "treeParent___noNavDisplay",
   treeParent___shopifyId = "treeParent___shopifyId",
   treeParent___title = "treeParent___title",
@@ -1498,8 +1499,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___images___internal___mediaType = "treeParent___images___internal___mediaType",
   treeParent___images___internal___owner = "treeParent___images___internal___owner",
   treeParent___images___internal___type = "treeParent___images___internal___type",
-  treeParent___slug = "treeParent___slug",
   treeParent___position = "treeParent___position",
+  treeParent___treeParent___slug = "treeParent___treeParent___slug",
   treeParent___treeParent___noNavDisplay = "treeParent___treeParent___noNavDisplay",
   treeParent___treeParent___shopifyId = "treeParent___treeParent___shopifyId",
   treeParent___treeParent___title = "treeParent___treeParent___title",
@@ -1518,8 +1519,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeParent___images___locale = "treeParent___treeParent___images___locale",
   treeParent___treeParent___images___id = "treeParent___treeParent___images___id",
   treeParent___treeParent___images___children = "treeParent___treeParent___images___children",
-  treeParent___treeParent___slug = "treeParent___treeParent___slug",
   treeParent___treeParent___position = "treeParent___treeParent___position",
+  treeParent___treeParent___treeParent___slug = "treeParent___treeParent___treeParent___slug",
   treeParent___treeParent___treeParent___noNavDisplay = "treeParent___treeParent___treeParent___noNavDisplay",
   treeParent___treeParent___treeParent___shopifyId = "treeParent___treeParent___treeParent___shopifyId",
   treeParent___treeParent___treeParent___title = "treeParent___treeParent___treeParent___title",
@@ -1527,7 +1528,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeParent___treeParent___navDisplay = "treeParent___treeParent___treeParent___navDisplay",
   treeParent___treeParent___treeParent___tagDisplay = "treeParent___treeParent___treeParent___tagDisplay",
   treeParent___treeParent___treeParent___description = "treeParent___treeParent___treeParent___description",
-  treeParent___treeParent___treeParent___slug = "treeParent___treeParent___treeParent___slug",
   treeParent___treeParent___treeParent___position = "treeParent___treeParent___treeParent___position",
   treeParent___treeParent___treeParent___treeChildren = "treeParent___treeParent___treeParent___treeChildren",
   treeParent___treeParent___treeParent___root = "treeParent___treeParent___treeParent___root",
@@ -1536,6 +1536,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeParent___treeParent___id = "treeParent___treeParent___treeParent___id",
   treeParent___treeParent___treeParent___children = "treeParent___treeParent___treeParent___children",
   treeParent___treeParent___treeChildren = "treeParent___treeParent___treeChildren",
+  treeParent___treeParent___treeChildren___slug = "treeParent___treeParent___treeChildren___slug",
   treeParent___treeParent___treeChildren___noNavDisplay = "treeParent___treeParent___treeChildren___noNavDisplay",
   treeParent___treeParent___treeChildren___shopifyId = "treeParent___treeParent___treeChildren___shopifyId",
   treeParent___treeParent___treeChildren___title = "treeParent___treeParent___treeChildren___title",
@@ -1543,7 +1544,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeParent___treeChildren___navDisplay = "treeParent___treeParent___treeChildren___navDisplay",
   treeParent___treeParent___treeChildren___tagDisplay = "treeParent___treeParent___treeChildren___tagDisplay",
   treeParent___treeParent___treeChildren___description = "treeParent___treeParent___treeChildren___description",
-  treeParent___treeParent___treeChildren___slug = "treeParent___treeParent___treeChildren___slug",
   treeParent___treeParent___treeChildren___position = "treeParent___treeParent___treeChildren___position",
   treeParent___treeParent___treeChildren___treeChildren = "treeParent___treeParent___treeChildren___treeChildren",
   treeParent___treeParent___treeChildren___root = "treeParent___treeParent___treeChildren___root",
@@ -1592,6 +1592,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeParent___internal___owner = "treeParent___treeParent___internal___owner",
   treeParent___treeParent___internal___type = "treeParent___treeParent___internal___type",
   treeParent___treeChildren = "treeParent___treeChildren",
+  treeParent___treeChildren___slug = "treeParent___treeChildren___slug",
   treeParent___treeChildren___noNavDisplay = "treeParent___treeChildren___noNavDisplay",
   treeParent___treeChildren___shopifyId = "treeParent___treeChildren___shopifyId",
   treeParent___treeChildren___title = "treeParent___treeChildren___title",
@@ -1610,8 +1611,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeChildren___images___locale = "treeParent___treeChildren___images___locale",
   treeParent___treeChildren___images___id = "treeParent___treeChildren___images___id",
   treeParent___treeChildren___images___children = "treeParent___treeChildren___images___children",
-  treeParent___treeChildren___slug = "treeParent___treeChildren___slug",
   treeParent___treeChildren___position = "treeParent___treeChildren___position",
+  treeParent___treeChildren___treeParent___slug = "treeParent___treeChildren___treeParent___slug",
   treeParent___treeChildren___treeParent___noNavDisplay = "treeParent___treeChildren___treeParent___noNavDisplay",
   treeParent___treeChildren___treeParent___shopifyId = "treeParent___treeChildren___treeParent___shopifyId",
   treeParent___treeChildren___treeParent___title = "treeParent___treeChildren___treeParent___title",
@@ -1619,7 +1620,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeChildren___treeParent___navDisplay = "treeParent___treeChildren___treeParent___navDisplay",
   treeParent___treeChildren___treeParent___tagDisplay = "treeParent___treeChildren___treeParent___tagDisplay",
   treeParent___treeChildren___treeParent___description = "treeParent___treeChildren___treeParent___description",
-  treeParent___treeChildren___treeParent___slug = "treeParent___treeChildren___treeParent___slug",
   treeParent___treeChildren___treeParent___position = "treeParent___treeChildren___treeParent___position",
   treeParent___treeChildren___treeParent___treeChildren = "treeParent___treeChildren___treeParent___treeChildren",
   treeParent___treeChildren___treeParent___root = "treeParent___treeChildren___treeParent___root",
@@ -1628,6 +1628,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeChildren___treeParent___id = "treeParent___treeChildren___treeParent___id",
   treeParent___treeChildren___treeParent___children = "treeParent___treeChildren___treeParent___children",
   treeParent___treeChildren___treeChildren = "treeParent___treeChildren___treeChildren",
+  treeParent___treeChildren___treeChildren___slug = "treeParent___treeChildren___treeChildren___slug",
   treeParent___treeChildren___treeChildren___noNavDisplay = "treeParent___treeChildren___treeChildren___noNavDisplay",
   treeParent___treeChildren___treeChildren___shopifyId = "treeParent___treeChildren___treeChildren___shopifyId",
   treeParent___treeChildren___treeChildren___title = "treeParent___treeChildren___treeChildren___title",
@@ -1635,7 +1636,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___treeChildren___treeChildren___navDisplay = "treeParent___treeChildren___treeChildren___navDisplay",
   treeParent___treeChildren___treeChildren___tagDisplay = "treeParent___treeChildren___treeChildren___tagDisplay",
   treeParent___treeChildren___treeChildren___description = "treeParent___treeChildren___treeChildren___description",
-  treeParent___treeChildren___treeChildren___slug = "treeParent___treeChildren___treeChildren___slug",
   treeParent___treeChildren___treeChildren___position = "treeParent___treeChildren___treeChildren___position",
   treeParent___treeChildren___treeChildren___treeChildren = "treeParent___treeChildren___treeChildren___treeChildren",
   treeParent___treeChildren___treeChildren___root = "treeParent___treeChildren___treeChildren___root",
@@ -1775,6 +1775,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeParent___internal___owner = "treeParent___internal___owner",
   treeParent___internal___type = "treeParent___internal___type",
   treeChildren = "treeChildren",
+  treeChildren___slug = "treeChildren___slug",
   treeChildren___noNavDisplay = "treeChildren___noNavDisplay",
   treeChildren___shopifyId = "treeChildren___shopifyId",
   treeChildren___title = "treeChildren___title",
@@ -1882,8 +1883,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___images___internal___mediaType = "treeChildren___images___internal___mediaType",
   treeChildren___images___internal___owner = "treeChildren___images___internal___owner",
   treeChildren___images___internal___type = "treeChildren___images___internal___type",
-  treeChildren___slug = "treeChildren___slug",
   treeChildren___position = "treeChildren___position",
+  treeChildren___treeParent___slug = "treeChildren___treeParent___slug",
   treeChildren___treeParent___noNavDisplay = "treeChildren___treeParent___noNavDisplay",
   treeChildren___treeParent___shopifyId = "treeChildren___treeParent___shopifyId",
   treeChildren___treeParent___title = "treeChildren___treeParent___title",
@@ -1902,8 +1903,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeParent___images___locale = "treeChildren___treeParent___images___locale",
   treeChildren___treeParent___images___id = "treeChildren___treeParent___images___id",
   treeChildren___treeParent___images___children = "treeChildren___treeParent___images___children",
-  treeChildren___treeParent___slug = "treeChildren___treeParent___slug",
   treeChildren___treeParent___position = "treeChildren___treeParent___position",
+  treeChildren___treeParent___treeParent___slug = "treeChildren___treeParent___treeParent___slug",
   treeChildren___treeParent___treeParent___noNavDisplay = "treeChildren___treeParent___treeParent___noNavDisplay",
   treeChildren___treeParent___treeParent___shopifyId = "treeChildren___treeParent___treeParent___shopifyId",
   treeChildren___treeParent___treeParent___title = "treeChildren___treeParent___treeParent___title",
@@ -1911,7 +1912,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeParent___treeParent___navDisplay = "treeChildren___treeParent___treeParent___navDisplay",
   treeChildren___treeParent___treeParent___tagDisplay = "treeChildren___treeParent___treeParent___tagDisplay",
   treeChildren___treeParent___treeParent___description = "treeChildren___treeParent___treeParent___description",
-  treeChildren___treeParent___treeParent___slug = "treeChildren___treeParent___treeParent___slug",
   treeChildren___treeParent___treeParent___position = "treeChildren___treeParent___treeParent___position",
   treeChildren___treeParent___treeParent___treeChildren = "treeChildren___treeParent___treeParent___treeChildren",
   treeChildren___treeParent___treeParent___root = "treeChildren___treeParent___treeParent___root",
@@ -1920,6 +1920,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeParent___treeParent___id = "treeChildren___treeParent___treeParent___id",
   treeChildren___treeParent___treeParent___children = "treeChildren___treeParent___treeParent___children",
   treeChildren___treeParent___treeChildren = "treeChildren___treeParent___treeChildren",
+  treeChildren___treeParent___treeChildren___slug = "treeChildren___treeParent___treeChildren___slug",
   treeChildren___treeParent___treeChildren___noNavDisplay = "treeChildren___treeParent___treeChildren___noNavDisplay",
   treeChildren___treeParent___treeChildren___shopifyId = "treeChildren___treeParent___treeChildren___shopifyId",
   treeChildren___treeParent___treeChildren___title = "treeChildren___treeParent___treeChildren___title",
@@ -1927,7 +1928,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeParent___treeChildren___navDisplay = "treeChildren___treeParent___treeChildren___navDisplay",
   treeChildren___treeParent___treeChildren___tagDisplay = "treeChildren___treeParent___treeChildren___tagDisplay",
   treeChildren___treeParent___treeChildren___description = "treeChildren___treeParent___treeChildren___description",
-  treeChildren___treeParent___treeChildren___slug = "treeChildren___treeParent___treeChildren___slug",
   treeChildren___treeParent___treeChildren___position = "treeChildren___treeParent___treeChildren___position",
   treeChildren___treeParent___treeChildren___treeChildren = "treeChildren___treeParent___treeChildren___treeChildren",
   treeChildren___treeParent___treeChildren___root = "treeChildren___treeParent___treeChildren___root",
@@ -1976,6 +1976,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeParent___internal___owner = "treeChildren___treeParent___internal___owner",
   treeChildren___treeParent___internal___type = "treeChildren___treeParent___internal___type",
   treeChildren___treeChildren = "treeChildren___treeChildren",
+  treeChildren___treeChildren___slug = "treeChildren___treeChildren___slug",
   treeChildren___treeChildren___noNavDisplay = "treeChildren___treeChildren___noNavDisplay",
   treeChildren___treeChildren___shopifyId = "treeChildren___treeChildren___shopifyId",
   treeChildren___treeChildren___title = "treeChildren___treeChildren___title",
@@ -1994,8 +1995,8 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeChildren___images___locale = "treeChildren___treeChildren___images___locale",
   treeChildren___treeChildren___images___id = "treeChildren___treeChildren___images___id",
   treeChildren___treeChildren___images___children = "treeChildren___treeChildren___images___children",
-  treeChildren___treeChildren___slug = "treeChildren___treeChildren___slug",
   treeChildren___treeChildren___position = "treeChildren___treeChildren___position",
+  treeChildren___treeChildren___treeParent___slug = "treeChildren___treeChildren___treeParent___slug",
   treeChildren___treeChildren___treeParent___noNavDisplay = "treeChildren___treeChildren___treeParent___noNavDisplay",
   treeChildren___treeChildren___treeParent___shopifyId = "treeChildren___treeChildren___treeParent___shopifyId",
   treeChildren___treeChildren___treeParent___title = "treeChildren___treeChildren___treeParent___title",
@@ -2003,7 +2004,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeChildren___treeParent___navDisplay = "treeChildren___treeChildren___treeParent___navDisplay",
   treeChildren___treeChildren___treeParent___tagDisplay = "treeChildren___treeChildren___treeParent___tagDisplay",
   treeChildren___treeChildren___treeParent___description = "treeChildren___treeChildren___treeParent___description",
-  treeChildren___treeChildren___treeParent___slug = "treeChildren___treeChildren___treeParent___slug",
   treeChildren___treeChildren___treeParent___position = "treeChildren___treeChildren___treeParent___position",
   treeChildren___treeChildren___treeParent___treeChildren = "treeChildren___treeChildren___treeParent___treeChildren",
   treeChildren___treeChildren___treeParent___root = "treeChildren___treeChildren___treeParent___root",
@@ -2012,6 +2012,7 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeChildren___treeParent___id = "treeChildren___treeChildren___treeParent___id",
   treeChildren___treeChildren___treeParent___children = "treeChildren___treeChildren___treeParent___children",
   treeChildren___treeChildren___treeChildren = "treeChildren___treeChildren___treeChildren",
+  treeChildren___treeChildren___treeChildren___slug = "treeChildren___treeChildren___treeChildren___slug",
   treeChildren___treeChildren___treeChildren___noNavDisplay = "treeChildren___treeChildren___treeChildren___noNavDisplay",
   treeChildren___treeChildren___treeChildren___shopifyId = "treeChildren___treeChildren___treeChildren___shopifyId",
   treeChildren___treeChildren___treeChildren___title = "treeChildren___treeChildren___treeChildren___title",
@@ -2019,7 +2020,6 @@ export enum DatoCmsCategoryFieldsEnum {
   treeChildren___treeChildren___treeChildren___navDisplay = "treeChildren___treeChildren___treeChildren___navDisplay",
   treeChildren___treeChildren___treeChildren___tagDisplay = "treeChildren___treeChildren___treeChildren___tagDisplay",
   treeChildren___treeChildren___treeChildren___description = "treeChildren___treeChildren___treeChildren___description",
-  treeChildren___treeChildren___treeChildren___slug = "treeChildren___treeChildren___treeChildren___slug",
   treeChildren___treeChildren___treeChildren___position = "treeChildren___treeChildren___treeChildren___position",
   treeChildren___treeChildren___treeChildren___treeChildren = "treeChildren___treeChildren___treeChildren___treeChildren",
   treeChildren___treeChildren___treeChildren___root = "treeChildren___treeChildren___treeChildren___root",
@@ -2360,6 +2360,7 @@ export enum DatoCmsCategoryFieldsEnum {
 }
 
 export interface DatoCmsCategoryFilterInput {
+  slug: Maybe<StringQueryOperatorInput>;
   noNavDisplay: Maybe<BooleanQueryOperatorInput>;
   shopifyId: Maybe<IntQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
@@ -2369,7 +2370,6 @@ export interface DatoCmsCategoryFilterInput {
   description: Maybe<StringQueryOperatorInput>;
   descriptionNode: Maybe<DatoCmsTextNodeFilterInput>;
   images: Maybe<DatoCmsProductImageFilterInput>;
-  slug: Maybe<StringQueryOperatorInput>;
   position: Maybe<IntQueryOperatorInput>;
   treeParent: Maybe<DatoCmsCategoryFilterInput>;
   treeChildren: Maybe<DatoCmsCategoryFilterListInput>;
@@ -7627,6 +7627,7 @@ export interface DatoCmsPageSortInput {
 }
 
 export interface DatoCmsProduct extends Node {
+  slug: Maybe<Scalars["String"]>;
   active: Maybe<Scalars["Boolean"]>;
   shopifyId: Maybe<Scalars["Int"]>;
   title: Maybe<Scalars["String"]>;
@@ -7638,7 +7639,6 @@ export interface DatoCmsProduct extends Node {
   grade: Maybe<DatoCmsTeaGrade>;
   ingredients: Maybe<Scalars["String"]>;
   ingredientsNode: Maybe<DatoCmsTextNode>;
-  slug: Maybe<Scalars["String"]>;
   position: Maybe<Scalars["Int"]>;
   meta: Maybe<DatoCmsMetaField>;
   originalId: Maybe<Scalars["String"]>;
@@ -7677,6 +7677,7 @@ export interface DatoCmsProductEdge {
 }
 
 export enum DatoCmsProductFieldsEnum {
+  slug = "slug",
   active = "active",
   shopifyId = "shopifyId",
   title = "title",
@@ -7721,6 +7722,7 @@ export enum DatoCmsProductFieldsEnum {
   descriptionNode___internal___owner = "descriptionNode___internal___owner",
   descriptionNode___internal___type = "descriptionNode___internal___type",
   categories = "categories",
+  categories___slug = "categories___slug",
   categories___noNavDisplay = "categories___noNavDisplay",
   categories___shopifyId = "categories___shopifyId",
   categories___title = "categories___title",
@@ -7828,8 +7830,8 @@ export enum DatoCmsProductFieldsEnum {
   categories___images___internal___mediaType = "categories___images___internal___mediaType",
   categories___images___internal___owner = "categories___images___internal___owner",
   categories___images___internal___type = "categories___images___internal___type",
-  categories___slug = "categories___slug",
   categories___position = "categories___position",
+  categories___treeParent___slug = "categories___treeParent___slug",
   categories___treeParent___noNavDisplay = "categories___treeParent___noNavDisplay",
   categories___treeParent___shopifyId = "categories___treeParent___shopifyId",
   categories___treeParent___title = "categories___treeParent___title",
@@ -7848,8 +7850,8 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeParent___images___locale = "categories___treeParent___images___locale",
   categories___treeParent___images___id = "categories___treeParent___images___id",
   categories___treeParent___images___children = "categories___treeParent___images___children",
-  categories___treeParent___slug = "categories___treeParent___slug",
   categories___treeParent___position = "categories___treeParent___position",
+  categories___treeParent___treeParent___slug = "categories___treeParent___treeParent___slug",
   categories___treeParent___treeParent___noNavDisplay = "categories___treeParent___treeParent___noNavDisplay",
   categories___treeParent___treeParent___shopifyId = "categories___treeParent___treeParent___shopifyId",
   categories___treeParent___treeParent___title = "categories___treeParent___treeParent___title",
@@ -7857,7 +7859,6 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeParent___treeParent___navDisplay = "categories___treeParent___treeParent___navDisplay",
   categories___treeParent___treeParent___tagDisplay = "categories___treeParent___treeParent___tagDisplay",
   categories___treeParent___treeParent___description = "categories___treeParent___treeParent___description",
-  categories___treeParent___treeParent___slug = "categories___treeParent___treeParent___slug",
   categories___treeParent___treeParent___position = "categories___treeParent___treeParent___position",
   categories___treeParent___treeParent___treeChildren = "categories___treeParent___treeParent___treeChildren",
   categories___treeParent___treeParent___root = "categories___treeParent___treeParent___root",
@@ -7866,6 +7867,7 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeParent___treeParent___id = "categories___treeParent___treeParent___id",
   categories___treeParent___treeParent___children = "categories___treeParent___treeParent___children",
   categories___treeParent___treeChildren = "categories___treeParent___treeChildren",
+  categories___treeParent___treeChildren___slug = "categories___treeParent___treeChildren___slug",
   categories___treeParent___treeChildren___noNavDisplay = "categories___treeParent___treeChildren___noNavDisplay",
   categories___treeParent___treeChildren___shopifyId = "categories___treeParent___treeChildren___shopifyId",
   categories___treeParent___treeChildren___title = "categories___treeParent___treeChildren___title",
@@ -7873,7 +7875,6 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeParent___treeChildren___navDisplay = "categories___treeParent___treeChildren___navDisplay",
   categories___treeParent___treeChildren___tagDisplay = "categories___treeParent___treeChildren___tagDisplay",
   categories___treeParent___treeChildren___description = "categories___treeParent___treeChildren___description",
-  categories___treeParent___treeChildren___slug = "categories___treeParent___treeChildren___slug",
   categories___treeParent___treeChildren___position = "categories___treeParent___treeChildren___position",
   categories___treeParent___treeChildren___treeChildren = "categories___treeParent___treeChildren___treeChildren",
   categories___treeParent___treeChildren___root = "categories___treeParent___treeChildren___root",
@@ -7922,6 +7923,7 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeParent___internal___owner = "categories___treeParent___internal___owner",
   categories___treeParent___internal___type = "categories___treeParent___internal___type",
   categories___treeChildren = "categories___treeChildren",
+  categories___treeChildren___slug = "categories___treeChildren___slug",
   categories___treeChildren___noNavDisplay = "categories___treeChildren___noNavDisplay",
   categories___treeChildren___shopifyId = "categories___treeChildren___shopifyId",
   categories___treeChildren___title = "categories___treeChildren___title",
@@ -7940,8 +7942,8 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeChildren___images___locale = "categories___treeChildren___images___locale",
   categories___treeChildren___images___id = "categories___treeChildren___images___id",
   categories___treeChildren___images___children = "categories___treeChildren___images___children",
-  categories___treeChildren___slug = "categories___treeChildren___slug",
   categories___treeChildren___position = "categories___treeChildren___position",
+  categories___treeChildren___treeParent___slug = "categories___treeChildren___treeParent___slug",
   categories___treeChildren___treeParent___noNavDisplay = "categories___treeChildren___treeParent___noNavDisplay",
   categories___treeChildren___treeParent___shopifyId = "categories___treeChildren___treeParent___shopifyId",
   categories___treeChildren___treeParent___title = "categories___treeChildren___treeParent___title",
@@ -7949,7 +7951,6 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeChildren___treeParent___navDisplay = "categories___treeChildren___treeParent___navDisplay",
   categories___treeChildren___treeParent___tagDisplay = "categories___treeChildren___treeParent___tagDisplay",
   categories___treeChildren___treeParent___description = "categories___treeChildren___treeParent___description",
-  categories___treeChildren___treeParent___slug = "categories___treeChildren___treeParent___slug",
   categories___treeChildren___treeParent___position = "categories___treeChildren___treeParent___position",
   categories___treeChildren___treeParent___treeChildren = "categories___treeChildren___treeParent___treeChildren",
   categories___treeChildren___treeParent___root = "categories___treeChildren___treeParent___root",
@@ -7958,6 +7959,7 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeChildren___treeParent___id = "categories___treeChildren___treeParent___id",
   categories___treeChildren___treeParent___children = "categories___treeChildren___treeParent___children",
   categories___treeChildren___treeChildren = "categories___treeChildren___treeChildren",
+  categories___treeChildren___treeChildren___slug = "categories___treeChildren___treeChildren___slug",
   categories___treeChildren___treeChildren___noNavDisplay = "categories___treeChildren___treeChildren___noNavDisplay",
   categories___treeChildren___treeChildren___shopifyId = "categories___treeChildren___treeChildren___shopifyId",
   categories___treeChildren___treeChildren___title = "categories___treeChildren___treeChildren___title",
@@ -7965,7 +7967,6 @@ export enum DatoCmsProductFieldsEnum {
   categories___treeChildren___treeChildren___navDisplay = "categories___treeChildren___treeChildren___navDisplay",
   categories___treeChildren___treeChildren___tagDisplay = "categories___treeChildren___treeChildren___tagDisplay",
   categories___treeChildren___treeChildren___description = "categories___treeChildren___treeChildren___description",
-  categories___treeChildren___treeChildren___slug = "categories___treeChildren___treeChildren___slug",
   categories___treeChildren___treeChildren___position = "categories___treeChildren___treeChildren___position",
   categories___treeChildren___treeChildren___treeChildren = "categories___treeChildren___treeChildren___treeChildren",
   categories___treeChildren___treeChildren___root = "categories___treeChildren___treeChildren___root",
@@ -8730,7 +8731,6 @@ export enum DatoCmsProductFieldsEnum {
   ingredientsNode___internal___mediaType = "ingredientsNode___internal___mediaType",
   ingredientsNode___internal___owner = "ingredientsNode___internal___owner",
   ingredientsNode___internal___type = "ingredientsNode___internal___type",
-  slug = "slug",
   position = "position",
   meta___createdAt = "meta___createdAt",
   meta___updatedAt = "meta___updatedAt",
@@ -8933,6 +8933,7 @@ export enum DatoCmsProductFieldsEnum {
 }
 
 export interface DatoCmsProductFilterInput {
+  slug: Maybe<StringQueryOperatorInput>;
   active: Maybe<BooleanQueryOperatorInput>;
   shopifyId: Maybe<IntQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
@@ -8944,7 +8945,6 @@ export interface DatoCmsProductFilterInput {
   grade: Maybe<DatoCmsTeaGradeFilterInput>;
   ingredients: Maybe<StringQueryOperatorInput>;
   ingredientsNode: Maybe<DatoCmsTextNodeFilterInput>;
-  slug: Maybe<StringQueryOperatorInput>;
   position: Maybe<IntQueryOperatorInput>;
   meta: Maybe<DatoCmsMetaFieldFilterInput>;
   originalId: Maybe<StringQueryOperatorInput>;
@@ -13336,6 +13336,9 @@ export interface File extends Node {
   birthtime: Maybe<Scalars["Date"]>;
   /** @deprecated Use `birthTime` instead */
   birthtimeMs: Maybe<Scalars["Float"]>;
+  blksize: Maybe<Scalars["Int"]>;
+  blocks: Maybe<Scalars["Int"]>;
+  url: Maybe<Scalars["String"]>;
   /** Returns all children nodes filtered by type ImageSharp */
   childrenImageSharp: Maybe<Array<Maybe<ImageSharp>>>;
   /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
@@ -13452,6 +13455,9 @@ export enum FileFieldsEnum {
   ctime = "ctime",
   birthtime = "birthtime",
   birthtimeMs = "birthtimeMs",
+  blksize = "blksize",
+  blocks = "blocks",
+  url = "url",
   childrenImageSharp = "childrenImageSharp",
   childrenImageSharp___fixed___base64 = "childrenImageSharp___fixed___base64",
   childrenImageSharp___fixed___tracedSVG = "childrenImageSharp___fixed___tracedSVG",
@@ -13713,6 +13719,9 @@ export interface FileFilterInput {
   ctime: Maybe<DateQueryOperatorInput>;
   birthtime: Maybe<DateQueryOperatorInput>;
   birthtimeMs: Maybe<FloatQueryOperatorInput>;
+  blksize: Maybe<IntQueryOperatorInput>;
+  blocks: Maybe<IntQueryOperatorInput>;
+  url: Maybe<StringQueryOperatorInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -14336,10 +14345,10 @@ export interface Query {
   allShopifyProductVariant: ShopifyProductVariantConnection;
   shopifyProduct: Maybe<ShopifyProduct>;
   allShopifyProduct: ShopifyProductConnection;
-  shopifyCollection: Maybe<ShopifyCollection>;
-  allShopifyCollection: ShopifyCollectionConnection;
   shopifyShop: Maybe<ShopifyShop>;
   allShopifyShop: ShopifyShopConnection;
+  shopifyCollection: Maybe<ShopifyCollection>;
+  allShopifyCollection: ShopifyCollectionConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin: Maybe<SitePlugin>;
@@ -14378,6 +14387,9 @@ export interface QueryFileArgs {
   ctime: Maybe<DateQueryOperatorInput>;
   birthtime: Maybe<DateQueryOperatorInput>;
   birthtimeMs: Maybe<FloatQueryOperatorInput>;
+  blksize: Maybe<IntQueryOperatorInput>;
+  blocks: Maybe<IntQueryOperatorInput>;
+  url: Maybe<StringQueryOperatorInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -14532,6 +14544,7 @@ export interface QueryAllDatoCmsTextNodeArgs {
 }
 
 export interface QueryDatoCmsProductArgs {
+  slug: Maybe<StringQueryOperatorInput>;
   active: Maybe<BooleanQueryOperatorInput>;
   shopifyId: Maybe<IntQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
@@ -14543,7 +14556,6 @@ export interface QueryDatoCmsProductArgs {
   grade: Maybe<DatoCmsTeaGradeFilterInput>;
   ingredients: Maybe<StringQueryOperatorInput>;
   ingredientsNode: Maybe<DatoCmsTextNodeFilterInput>;
-  slug: Maybe<StringQueryOperatorInput>;
   position: Maybe<IntQueryOperatorInput>;
   meta: Maybe<DatoCmsMetaFieldFilterInput>;
   originalId: Maybe<StringQueryOperatorInput>;
@@ -14741,6 +14753,7 @@ export interface QueryAllDatoCmsBlogPostArgs {
 }
 
 export interface QueryDatoCmsCategoryArgs {
+  slug: Maybe<StringQueryOperatorInput>;
   noNavDisplay: Maybe<BooleanQueryOperatorInput>;
   shopifyId: Maybe<IntQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
@@ -14750,7 +14763,6 @@ export interface QueryDatoCmsCategoryArgs {
   description: Maybe<StringQueryOperatorInput>;
   descriptionNode: Maybe<DatoCmsTextNodeFilterInput>;
   images: Maybe<DatoCmsProductImageFilterInput>;
-  slug: Maybe<StringQueryOperatorInput>;
   position: Maybe<IntQueryOperatorInput>;
   treeParent: Maybe<DatoCmsCategoryFilterInput>;
   treeChildren: Maybe<DatoCmsCategoryFilterListInput>;
@@ -15205,6 +15217,7 @@ export interface QueryShopifyProductVariantArgs {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   availableForSale: Maybe<BooleanQueryOperatorInput>;
+  image: Maybe<ShopifyProductVariantImageFilterInput>;
   price: Maybe<StringQueryOperatorInput>;
   priceV2: Maybe<ShopifyProductVariantPriceV2FilterInput>;
   quantityAvailable: Maybe<IntQueryOperatorInput>;
@@ -15237,6 +15250,7 @@ export interface QueryShopifyProductArgs {
   description: Maybe<StringQueryOperatorInput>;
   descriptionHtml: Maybe<StringQueryOperatorInput>;
   handle: Maybe<StringQueryOperatorInput>;
+  images: Maybe<ShopifyProductImagesFilterListInput>;
   priceRange: Maybe<ShopifyProductPriceRangeFilterInput>;
   productType: Maybe<StringQueryOperatorInput>;
   publishedAt: Maybe<DateQueryOperatorInput>;
@@ -15253,6 +15267,23 @@ export interface QueryShopifyProductArgs {
 export interface QueryAllShopifyProductArgs {
   filter: Maybe<ShopifyProductFilterInput>;
   sort: Maybe<ShopifyProductSortInput>;
+  skip: Maybe<Scalars["Int"]>;
+  limit: Maybe<Scalars["Int"]>;
+}
+
+export interface QueryShopifyShopArgs {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  moneyFormat: Maybe<StringQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+}
+
+export interface QueryAllShopifyShopArgs {
+  filter: Maybe<ShopifyShopFilterInput>;
+  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -15274,23 +15305,6 @@ export interface QueryShopifyCollectionArgs {
 export interface QueryAllShopifyCollectionArgs {
   filter: Maybe<ShopifyCollectionFilterInput>;
   sort: Maybe<ShopifyCollectionSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
-export interface QueryShopifyShopArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  description: Maybe<StringQueryOperatorInput>;
-  moneyFormat: Maybe<StringQueryOperatorInput>;
-  name: Maybe<StringQueryOperatorInput>;
-}
-
-export interface QueryAllShopifyShopArgs {
-  filter: Maybe<ShopifyShopFilterInput>;
-  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -15516,6 +15530,46 @@ export enum ShopifyCollectionFieldsEnum {
   products___description = "products___description",
   products___descriptionHtml = "products___descriptionHtml",
   products___handle = "products___handle",
+  products___images = "products___images",
+  products___images___id = "products___images___id",
+  products___images___originalSrc = "products___images___originalSrc",
+  products___images___localFile___sourceInstanceName = "products___images___localFile___sourceInstanceName",
+  products___images___localFile___absolutePath = "products___images___localFile___absolutePath",
+  products___images___localFile___relativePath = "products___images___localFile___relativePath",
+  products___images___localFile___extension = "products___images___localFile___extension",
+  products___images___localFile___size = "products___images___localFile___size",
+  products___images___localFile___prettySize = "products___images___localFile___prettySize",
+  products___images___localFile___modifiedTime = "products___images___localFile___modifiedTime",
+  products___images___localFile___accessTime = "products___images___localFile___accessTime",
+  products___images___localFile___changeTime = "products___images___localFile___changeTime",
+  products___images___localFile___birthTime = "products___images___localFile___birthTime",
+  products___images___localFile___root = "products___images___localFile___root",
+  products___images___localFile___dir = "products___images___localFile___dir",
+  products___images___localFile___base = "products___images___localFile___base",
+  products___images___localFile___ext = "products___images___localFile___ext",
+  products___images___localFile___name = "products___images___localFile___name",
+  products___images___localFile___relativeDirectory = "products___images___localFile___relativeDirectory",
+  products___images___localFile___dev = "products___images___localFile___dev",
+  products___images___localFile___mode = "products___images___localFile___mode",
+  products___images___localFile___nlink = "products___images___localFile___nlink",
+  products___images___localFile___uid = "products___images___localFile___uid",
+  products___images___localFile___gid = "products___images___localFile___gid",
+  products___images___localFile___rdev = "products___images___localFile___rdev",
+  products___images___localFile___ino = "products___images___localFile___ino",
+  products___images___localFile___atimeMs = "products___images___localFile___atimeMs",
+  products___images___localFile___mtimeMs = "products___images___localFile___mtimeMs",
+  products___images___localFile___ctimeMs = "products___images___localFile___ctimeMs",
+  products___images___localFile___atime = "products___images___localFile___atime",
+  products___images___localFile___mtime = "products___images___localFile___mtime",
+  products___images___localFile___ctime = "products___images___localFile___ctime",
+  products___images___localFile___birthtime = "products___images___localFile___birthtime",
+  products___images___localFile___birthtimeMs = "products___images___localFile___birthtimeMs",
+  products___images___localFile___blksize = "products___images___localFile___blksize",
+  products___images___localFile___blocks = "products___images___localFile___blocks",
+  products___images___localFile___url = "products___images___localFile___url",
+  products___images___localFile___childrenImageSharp = "products___images___localFile___childrenImageSharp",
+  products___images___localFile___id = "products___images___localFile___id",
+  products___images___localFile___children = "products___images___localFile___children",
   products___priceRange___minVariantPrice___amount = "products___priceRange___minVariantPrice___amount",
   products___priceRange___minVariantPrice___currencyCode = "products___priceRange___minVariantPrice___currencyCode",
   products___priceRange___maxVariantPrice___amount = "products___priceRange___maxVariantPrice___amount",
@@ -15544,6 +15598,8 @@ export enum ShopifyCollectionFieldsEnum {
   products___variants___internal___owner = "products___variants___internal___owner",
   products___variants___internal___type = "products___variants___internal___type",
   products___variants___availableForSale = "products___variants___availableForSale",
+  products___variants___image___id = "products___variants___image___id",
+  products___variants___image___originalSrc = "products___variants___image___originalSrc",
   products___variants___price = "products___variants___price",
   products___variants___priceV2___amount = "products___variants___priceV2___amount",
   products___variants___priceV2___currencyCode = "products___variants___priceV2___currencyCode",
@@ -15566,6 +15622,7 @@ export enum ShopifyCollectionFieldsEnum {
   products___variants___product___description = "products___variants___product___description",
   products___variants___product___descriptionHtml = "products___variants___product___descriptionHtml",
   products___variants___product___handle = "products___variants___product___handle",
+  products___variants___product___images = "products___variants___product___images",
   products___variants___product___productType = "products___variants___product___productType",
   products___variants___product___publishedAt = "products___variants___product___publishedAt",
   products___variants___product___tags = "products___variants___product___tags",
@@ -15634,6 +15691,7 @@ export interface ShopifyProduct extends Node {
   description: Maybe<Scalars["String"]>;
   descriptionHtml: Maybe<Scalars["String"]>;
   handle: Maybe<Scalars["String"]>;
+  images: Maybe<Array<Maybe<ShopifyProductImages>>>;
   priceRange: Maybe<ShopifyProductPriceRange>;
   productType: Maybe<Scalars["String"]>;
   publishedAt: Maybe<Scalars["Date"]>;
@@ -15785,6 +15843,64 @@ export enum ShopifyProductFieldsEnum {
   description = "description",
   descriptionHtml = "descriptionHtml",
   handle = "handle",
+  images = "images",
+  images___id = "images___id",
+  images___originalSrc = "images___originalSrc",
+  images___localFile___sourceInstanceName = "images___localFile___sourceInstanceName",
+  images___localFile___absolutePath = "images___localFile___absolutePath",
+  images___localFile___relativePath = "images___localFile___relativePath",
+  images___localFile___extension = "images___localFile___extension",
+  images___localFile___size = "images___localFile___size",
+  images___localFile___prettySize = "images___localFile___prettySize",
+  images___localFile___modifiedTime = "images___localFile___modifiedTime",
+  images___localFile___accessTime = "images___localFile___accessTime",
+  images___localFile___changeTime = "images___localFile___changeTime",
+  images___localFile___birthTime = "images___localFile___birthTime",
+  images___localFile___root = "images___localFile___root",
+  images___localFile___dir = "images___localFile___dir",
+  images___localFile___base = "images___localFile___base",
+  images___localFile___ext = "images___localFile___ext",
+  images___localFile___name = "images___localFile___name",
+  images___localFile___relativeDirectory = "images___localFile___relativeDirectory",
+  images___localFile___dev = "images___localFile___dev",
+  images___localFile___mode = "images___localFile___mode",
+  images___localFile___nlink = "images___localFile___nlink",
+  images___localFile___uid = "images___localFile___uid",
+  images___localFile___gid = "images___localFile___gid",
+  images___localFile___rdev = "images___localFile___rdev",
+  images___localFile___ino = "images___localFile___ino",
+  images___localFile___atimeMs = "images___localFile___atimeMs",
+  images___localFile___mtimeMs = "images___localFile___mtimeMs",
+  images___localFile___ctimeMs = "images___localFile___ctimeMs",
+  images___localFile___atime = "images___localFile___atime",
+  images___localFile___mtime = "images___localFile___mtime",
+  images___localFile___ctime = "images___localFile___ctime",
+  images___localFile___birthtime = "images___localFile___birthtime",
+  images___localFile___birthtimeMs = "images___localFile___birthtimeMs",
+  images___localFile___blksize = "images___localFile___blksize",
+  images___localFile___blocks = "images___localFile___blocks",
+  images___localFile___url = "images___localFile___url",
+  images___localFile___childrenImageSharp = "images___localFile___childrenImageSharp",
+  images___localFile___childrenImageSharp___gatsbyImageData = "images___localFile___childrenImageSharp___gatsbyImageData",
+  images___localFile___childrenImageSharp___id = "images___localFile___childrenImageSharp___id",
+  images___localFile___childrenImageSharp___children = "images___localFile___childrenImageSharp___children",
+  images___localFile___childImageSharp___gatsbyImageData = "images___localFile___childImageSharp___gatsbyImageData",
+  images___localFile___childImageSharp___id = "images___localFile___childImageSharp___id",
+  images___localFile___childImageSharp___children = "images___localFile___childImageSharp___children",
+  images___localFile___id = "images___localFile___id",
+  images___localFile___parent___id = "images___localFile___parent___id",
+  images___localFile___parent___children = "images___localFile___parent___children",
+  images___localFile___children = "images___localFile___children",
+  images___localFile___children___id = "images___localFile___children___id",
+  images___localFile___children___children = "images___localFile___children___children",
+  images___localFile___internal___content = "images___localFile___internal___content",
+  images___localFile___internal___contentDigest = "images___localFile___internal___contentDigest",
+  images___localFile___internal___description = "images___localFile___internal___description",
+  images___localFile___internal___fieldOwners = "images___localFile___internal___fieldOwners",
+  images___localFile___internal___ignoreType = "images___localFile___internal___ignoreType",
+  images___localFile___internal___mediaType = "images___localFile___internal___mediaType",
+  images___localFile___internal___owner = "images___localFile___internal___owner",
+  images___localFile___internal___type = "images___localFile___internal___type",
   priceRange___minVariantPrice___amount = "priceRange___minVariantPrice___amount",
   priceRange___minVariantPrice___currencyCode = "priceRange___minVariantPrice___currencyCode",
   priceRange___maxVariantPrice___amount = "priceRange___maxVariantPrice___amount",
@@ -15837,6 +15953,45 @@ export enum ShopifyProductFieldsEnum {
   variants___internal___owner = "variants___internal___owner",
   variants___internal___type = "variants___internal___type",
   variants___availableForSale = "variants___availableForSale",
+  variants___image___id = "variants___image___id",
+  variants___image___originalSrc = "variants___image___originalSrc",
+  variants___image___localFile___sourceInstanceName = "variants___image___localFile___sourceInstanceName",
+  variants___image___localFile___absolutePath = "variants___image___localFile___absolutePath",
+  variants___image___localFile___relativePath = "variants___image___localFile___relativePath",
+  variants___image___localFile___extension = "variants___image___localFile___extension",
+  variants___image___localFile___size = "variants___image___localFile___size",
+  variants___image___localFile___prettySize = "variants___image___localFile___prettySize",
+  variants___image___localFile___modifiedTime = "variants___image___localFile___modifiedTime",
+  variants___image___localFile___accessTime = "variants___image___localFile___accessTime",
+  variants___image___localFile___changeTime = "variants___image___localFile___changeTime",
+  variants___image___localFile___birthTime = "variants___image___localFile___birthTime",
+  variants___image___localFile___root = "variants___image___localFile___root",
+  variants___image___localFile___dir = "variants___image___localFile___dir",
+  variants___image___localFile___base = "variants___image___localFile___base",
+  variants___image___localFile___ext = "variants___image___localFile___ext",
+  variants___image___localFile___name = "variants___image___localFile___name",
+  variants___image___localFile___relativeDirectory = "variants___image___localFile___relativeDirectory",
+  variants___image___localFile___dev = "variants___image___localFile___dev",
+  variants___image___localFile___mode = "variants___image___localFile___mode",
+  variants___image___localFile___nlink = "variants___image___localFile___nlink",
+  variants___image___localFile___uid = "variants___image___localFile___uid",
+  variants___image___localFile___gid = "variants___image___localFile___gid",
+  variants___image___localFile___rdev = "variants___image___localFile___rdev",
+  variants___image___localFile___ino = "variants___image___localFile___ino",
+  variants___image___localFile___atimeMs = "variants___image___localFile___atimeMs",
+  variants___image___localFile___mtimeMs = "variants___image___localFile___mtimeMs",
+  variants___image___localFile___ctimeMs = "variants___image___localFile___ctimeMs",
+  variants___image___localFile___atime = "variants___image___localFile___atime",
+  variants___image___localFile___mtime = "variants___image___localFile___mtime",
+  variants___image___localFile___ctime = "variants___image___localFile___ctime",
+  variants___image___localFile___birthtime = "variants___image___localFile___birthtime",
+  variants___image___localFile___birthtimeMs = "variants___image___localFile___birthtimeMs",
+  variants___image___localFile___blksize = "variants___image___localFile___blksize",
+  variants___image___localFile___blocks = "variants___image___localFile___blocks",
+  variants___image___localFile___url = "variants___image___localFile___url",
+  variants___image___localFile___childrenImageSharp = "variants___image___localFile___childrenImageSharp",
+  variants___image___localFile___id = "variants___image___localFile___id",
+  variants___image___localFile___children = "variants___image___localFile___children",
   variants___price = "variants___price",
   variants___priceV2___amount = "variants___priceV2___amount",
   variants___priceV2___currencyCode = "variants___priceV2___currencyCode",
@@ -15871,6 +16026,9 @@ export enum ShopifyProductFieldsEnum {
   variants___product___description = "variants___product___description",
   variants___product___descriptionHtml = "variants___product___descriptionHtml",
   variants___product___handle = "variants___product___handle",
+  variants___product___images = "variants___product___images",
+  variants___product___images___id = "variants___product___images___id",
+  variants___product___images___originalSrc = "variants___product___images___originalSrc",
   variants___product___productType = "variants___product___productType",
   variants___product___publishedAt = "variants___product___publishedAt",
   variants___product___tags = "variants___product___tags",
@@ -15953,6 +16111,7 @@ export interface ShopifyProductFilterInput {
   description: Maybe<StringQueryOperatorInput>;
   descriptionHtml: Maybe<StringQueryOperatorInput>;
   handle: Maybe<StringQueryOperatorInput>;
+  images: Maybe<ShopifyProductImagesFilterListInput>;
   priceRange: Maybe<ShopifyProductPriceRangeFilterInput>;
   productType: Maybe<StringQueryOperatorInput>;
   publishedAt: Maybe<DateQueryOperatorInput>;
@@ -15977,6 +16136,22 @@ export interface ShopifyProductGroupConnection {
   pageInfo: PageInfo;
   field: Scalars["String"];
   fieldValue: Maybe<Scalars["String"]>;
+}
+
+export interface ShopifyProductImages {
+  id: Maybe<Scalars["String"]>;
+  originalSrc: Maybe<Scalars["String"]>;
+  localFile: Maybe<File>;
+}
+
+export interface ShopifyProductImagesFilterInput {
+  id: Maybe<StringQueryOperatorInput>;
+  originalSrc: Maybe<StringQueryOperatorInput>;
+  localFile: Maybe<FileFilterInput>;
+}
+
+export interface ShopifyProductImagesFilterListInput {
+  elemMatch: Maybe<ShopifyProductImagesFilterInput>;
 }
 
 export interface ShopifyProductOption extends Node {
@@ -16175,6 +16350,7 @@ export interface ShopifyProductVariant extends Node {
   children: Array<Node>;
   internal: Internal;
   availableForSale: Maybe<Scalars["Boolean"]>;
+  image: Maybe<ShopifyProductVariantImage>;
   price: Maybe<Scalars["String"]>;
   priceV2: Maybe<ShopifyProductVariantPriceV2>;
   quantityAvailable: Maybe<Scalars["Int"]>;
@@ -16303,6 +16479,63 @@ export enum ShopifyProductVariantFieldsEnum {
   internal___owner = "internal___owner",
   internal___type = "internal___type",
   availableForSale = "availableForSale",
+  image___id = "image___id",
+  image___originalSrc = "image___originalSrc",
+  image___localFile___sourceInstanceName = "image___localFile___sourceInstanceName",
+  image___localFile___absolutePath = "image___localFile___absolutePath",
+  image___localFile___relativePath = "image___localFile___relativePath",
+  image___localFile___extension = "image___localFile___extension",
+  image___localFile___size = "image___localFile___size",
+  image___localFile___prettySize = "image___localFile___prettySize",
+  image___localFile___modifiedTime = "image___localFile___modifiedTime",
+  image___localFile___accessTime = "image___localFile___accessTime",
+  image___localFile___changeTime = "image___localFile___changeTime",
+  image___localFile___birthTime = "image___localFile___birthTime",
+  image___localFile___root = "image___localFile___root",
+  image___localFile___dir = "image___localFile___dir",
+  image___localFile___base = "image___localFile___base",
+  image___localFile___ext = "image___localFile___ext",
+  image___localFile___name = "image___localFile___name",
+  image___localFile___relativeDirectory = "image___localFile___relativeDirectory",
+  image___localFile___dev = "image___localFile___dev",
+  image___localFile___mode = "image___localFile___mode",
+  image___localFile___nlink = "image___localFile___nlink",
+  image___localFile___uid = "image___localFile___uid",
+  image___localFile___gid = "image___localFile___gid",
+  image___localFile___rdev = "image___localFile___rdev",
+  image___localFile___ino = "image___localFile___ino",
+  image___localFile___atimeMs = "image___localFile___atimeMs",
+  image___localFile___mtimeMs = "image___localFile___mtimeMs",
+  image___localFile___ctimeMs = "image___localFile___ctimeMs",
+  image___localFile___atime = "image___localFile___atime",
+  image___localFile___mtime = "image___localFile___mtime",
+  image___localFile___ctime = "image___localFile___ctime",
+  image___localFile___birthtime = "image___localFile___birthtime",
+  image___localFile___birthtimeMs = "image___localFile___birthtimeMs",
+  image___localFile___blksize = "image___localFile___blksize",
+  image___localFile___blocks = "image___localFile___blocks",
+  image___localFile___url = "image___localFile___url",
+  image___localFile___childrenImageSharp = "image___localFile___childrenImageSharp",
+  image___localFile___childrenImageSharp___gatsbyImageData = "image___localFile___childrenImageSharp___gatsbyImageData",
+  image___localFile___childrenImageSharp___id = "image___localFile___childrenImageSharp___id",
+  image___localFile___childrenImageSharp___children = "image___localFile___childrenImageSharp___children",
+  image___localFile___childImageSharp___gatsbyImageData = "image___localFile___childImageSharp___gatsbyImageData",
+  image___localFile___childImageSharp___id = "image___localFile___childImageSharp___id",
+  image___localFile___childImageSharp___children = "image___localFile___childImageSharp___children",
+  image___localFile___id = "image___localFile___id",
+  image___localFile___parent___id = "image___localFile___parent___id",
+  image___localFile___parent___children = "image___localFile___parent___children",
+  image___localFile___children = "image___localFile___children",
+  image___localFile___children___id = "image___localFile___children___id",
+  image___localFile___children___children = "image___localFile___children___children",
+  image___localFile___internal___content = "image___localFile___internal___content",
+  image___localFile___internal___contentDigest = "image___localFile___internal___contentDigest",
+  image___localFile___internal___description = "image___localFile___internal___description",
+  image___localFile___internal___fieldOwners = "image___localFile___internal___fieldOwners",
+  image___localFile___internal___ignoreType = "image___localFile___internal___ignoreType",
+  image___localFile___internal___mediaType = "image___localFile___internal___mediaType",
+  image___localFile___internal___owner = "image___localFile___internal___owner",
+  image___localFile___internal___type = "image___localFile___internal___type",
   price = "price",
   priceV2___amount = "priceV2___amount",
   priceV2___currencyCode = "priceV2___currencyCode",
@@ -16361,6 +16594,46 @@ export enum ShopifyProductVariantFieldsEnum {
   product___description = "product___description",
   product___descriptionHtml = "product___descriptionHtml",
   product___handle = "product___handle",
+  product___images = "product___images",
+  product___images___id = "product___images___id",
+  product___images___originalSrc = "product___images___originalSrc",
+  product___images___localFile___sourceInstanceName = "product___images___localFile___sourceInstanceName",
+  product___images___localFile___absolutePath = "product___images___localFile___absolutePath",
+  product___images___localFile___relativePath = "product___images___localFile___relativePath",
+  product___images___localFile___extension = "product___images___localFile___extension",
+  product___images___localFile___size = "product___images___localFile___size",
+  product___images___localFile___prettySize = "product___images___localFile___prettySize",
+  product___images___localFile___modifiedTime = "product___images___localFile___modifiedTime",
+  product___images___localFile___accessTime = "product___images___localFile___accessTime",
+  product___images___localFile___changeTime = "product___images___localFile___changeTime",
+  product___images___localFile___birthTime = "product___images___localFile___birthTime",
+  product___images___localFile___root = "product___images___localFile___root",
+  product___images___localFile___dir = "product___images___localFile___dir",
+  product___images___localFile___base = "product___images___localFile___base",
+  product___images___localFile___ext = "product___images___localFile___ext",
+  product___images___localFile___name = "product___images___localFile___name",
+  product___images___localFile___relativeDirectory = "product___images___localFile___relativeDirectory",
+  product___images___localFile___dev = "product___images___localFile___dev",
+  product___images___localFile___mode = "product___images___localFile___mode",
+  product___images___localFile___nlink = "product___images___localFile___nlink",
+  product___images___localFile___uid = "product___images___localFile___uid",
+  product___images___localFile___gid = "product___images___localFile___gid",
+  product___images___localFile___rdev = "product___images___localFile___rdev",
+  product___images___localFile___ino = "product___images___localFile___ino",
+  product___images___localFile___atimeMs = "product___images___localFile___atimeMs",
+  product___images___localFile___mtimeMs = "product___images___localFile___mtimeMs",
+  product___images___localFile___ctimeMs = "product___images___localFile___ctimeMs",
+  product___images___localFile___atime = "product___images___localFile___atime",
+  product___images___localFile___mtime = "product___images___localFile___mtime",
+  product___images___localFile___ctime = "product___images___localFile___ctime",
+  product___images___localFile___birthtime = "product___images___localFile___birthtime",
+  product___images___localFile___birthtimeMs = "product___images___localFile___birthtimeMs",
+  product___images___localFile___blksize = "product___images___localFile___blksize",
+  product___images___localFile___blocks = "product___images___localFile___blocks",
+  product___images___localFile___url = "product___images___localFile___url",
+  product___images___localFile___childrenImageSharp = "product___images___localFile___childrenImageSharp",
+  product___images___localFile___id = "product___images___localFile___id",
+  product___images___localFile___children = "product___images___localFile___children",
   product___priceRange___minVariantPrice___amount = "product___priceRange___minVariantPrice___amount",
   product___priceRange___minVariantPrice___currencyCode = "product___priceRange___minVariantPrice___currencyCode",
   product___priceRange___maxVariantPrice___amount = "product___priceRange___maxVariantPrice___amount",
@@ -16389,6 +16662,8 @@ export enum ShopifyProductVariantFieldsEnum {
   product___variants___internal___owner = "product___variants___internal___owner",
   product___variants___internal___type = "product___variants___internal___type",
   product___variants___availableForSale = "product___variants___availableForSale",
+  product___variants___image___id = "product___variants___image___id",
+  product___variants___image___originalSrc = "product___variants___image___originalSrc",
   product___variants___price = "product___variants___price",
   product___variants___priceV2___amount = "product___variants___priceV2___amount",
   product___variants___priceV2___currencyCode = "product___variants___priceV2___currencyCode",
@@ -16411,6 +16686,7 @@ export enum ShopifyProductVariantFieldsEnum {
   product___variants___product___description = "product___variants___product___description",
   product___variants___product___descriptionHtml = "product___variants___product___descriptionHtml",
   product___variants___product___handle = "product___variants___product___handle",
+  product___variants___product___images = "product___variants___product___images",
   product___variants___product___productType = "product___variants___product___productType",
   product___variants___product___publishedAt = "product___variants___product___publishedAt",
   product___variants___product___tags = "product___variants___product___tags",
@@ -16447,6 +16723,7 @@ export interface ShopifyProductVariantFilterInput {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   availableForSale: Maybe<BooleanQueryOperatorInput>;
+  image: Maybe<ShopifyProductVariantImageFilterInput>;
   price: Maybe<StringQueryOperatorInput>;
   priceV2: Maybe<ShopifyProductVariantPriceV2FilterInput>;
   quantityAvailable: Maybe<IntQueryOperatorInput>;
@@ -16473,6 +16750,18 @@ export interface ShopifyProductVariantGroupConnection {
   pageInfo: PageInfo;
   field: Scalars["String"];
   fieldValue: Maybe<Scalars["String"]>;
+}
+
+export interface ShopifyProductVariantImage {
+  id: Maybe<Scalars["String"]>;
+  originalSrc: Maybe<Scalars["String"]>;
+  localFile: Maybe<File>;
+}
+
+export interface ShopifyProductVariantImageFilterInput {
+  id: Maybe<StringQueryOperatorInput>;
+  originalSrc: Maybe<StringQueryOperatorInput>;
+  localFile: Maybe<FileFilterInput>;
 }
 
 export interface ShopifyProductVariantPresentmentPrices {
@@ -18080,12 +18369,6 @@ export type TeamPageQuery = {
   }>;
 };
 
-export type StoreComponentQueryVariables = Exact<{ [key: string]: never }>;
-
-export type StoreComponentQuery = {
-  categories: { nodes: Array<{ title: Maybe<string>; slug: Maybe<string> }> };
-};
-
 export type ShopifyProductVariantFragment = {
   shopifyId: Maybe<string>;
   weight: Maybe<number>;
@@ -18136,11 +18419,11 @@ export type ProductCollectionBySlugQuery = {
     subHeader: Maybe<string>;
     medallion: Maybe<{ url: Maybe<string> }>;
   }>;
-  allCollections_datocms: { nodes: Array<DatoCmsCategoryFragment> };
-  collection_datocms: Maybe<DatoCmsCategoryFragment>;
+  allCategories_datocms: { nodes: Array<DatoCmsCategoryFragment> };
   collection_shopify: Maybe<{
     handle: Maybe<string>;
     products: Maybe<Array<Maybe<ShopifyProductFragment>>>;
   }>;
+  category_datocms: Maybe<DatoCmsCategoryFragment>;
   products_datocms: { nodes: Array<DatoCmsProductFragment> };
 };

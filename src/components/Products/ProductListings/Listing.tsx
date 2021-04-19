@@ -7,8 +7,9 @@ import { intersectionBy } from "lodash"
 import Header from "./ListingHeader"
 // import types
 import {
-	ShopifyProductFragment,
 	ProductCollectionBySlugQuery,
+	DatoCmsProductFragment,
+	ShopifyProductFragment,
 } from "../../../graphql/types"
 // import styles
 import { CategoryButton, CategoryNav } from "../../../styles/elements"
@@ -18,8 +19,8 @@ import { CategoryButton, CategoryNav } from "../../../styles/elements"
 // ************
 
 export interface ProductListingI {
-	categories: ProductCollectionBySlugQuery["allCollections_datocms"]
-	products_datocms: ProductCollectionBySlugQuery["products_datocms"]
+	categories: ProductCollectionBySlugQuery["allCategories_datocms"]
+	product_datocms?: DatoCmsProductFragment
 	product_shopify: ShopifyProductFragment
 }
 
@@ -29,7 +30,7 @@ export interface ProductListingI {
 
 export default function ProductListing({
 	categories,
-	products_datocms,
+	product_datocms,
 	product_shopify,
 }: ProductListingI): ReactElement {
 	// turn categories into a relevant tag map to be displayed with products
@@ -56,10 +57,6 @@ export default function ProductListing({
 		)
 	})
 
-	// get matching product from datocms
-	const product_datocms = products_datocms.nodes.find(
-		(product) => product.slug === product_shopify.handle,
-	)
 	// consolidate matched product values
 	const product_title = product_datocms?.title || product_shopify.title
 	const product_description =

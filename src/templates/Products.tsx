@@ -23,9 +23,9 @@ export interface ProductsI {
 export default function Products({ data }: ProductsI): ReactElement {
 	const {
 		page,
-		allCollections_datocms,
-		collection_datocms,
 		collection_shopify,
+		allCategories_datocms,
+		category_datocms,
 		products_datocms,
 	} = data
 
@@ -38,18 +38,18 @@ export default function Products({ data }: ProductsI): ReactElement {
 			<Section>
 				{/* all categories */}
 				<ProductCategories
-					categories={allCollections_datocms}
-					category_selected={collection_datocms}
+					categories={allCategories_datocms}
+					category_selected={category_datocms}
 				/>
 			</Section>
 			<Divider />
 			<Section>
 				{/* all products */}
 				<ProductListings
-					categories={allCollections_datocms}
+					categories={allCategories_datocms}
 					category_selected={{
-						products_datocms,
 						collection_shopify,
+						products_datocms,
 					}}
 				/>
 			</Section>
@@ -110,20 +110,21 @@ export const query = graphql`
 			}
 		}
 		# all collections
-		allCollections_datocms: allDatoCmsCategory {
+		allCategories_datocms: allDatoCmsCategory {
 			nodes {
 				...DatoCmsCategory
 			}
 		}
 		# selected collection (filter on slug)
-		collection_datocms: datoCmsCategory(slug: { eq: $collection_slug }) {
-			...DatoCmsCategory
-		}
 		collection_shopify: shopifyCollection(handle: { eq: $collection_slug }) {
 			handle
 			products {
 				...ShopifyProduct
 			}
+		}
+		# selected category (filter on slug)
+		category_datocms: datoCmsCategory(slug: { eq: $collection_slug }) {
+			...DatoCmsCategory
 		}
 		# selected products (filter on array of slugs)
 		products_datocms: allDatoCmsProduct(

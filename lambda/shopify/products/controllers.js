@@ -1,7 +1,6 @@
 const { SiteClient } = require("datocms-client")
 const datocms = new SiteClient(process.env.DATOCMS_API_TOKEN)
 const helpers_products = require("./helpers")
-const { trimEmptyTags } = require("../helpers")
 
 // ************
 // controller
@@ -75,13 +74,7 @@ const product_update = async (req, res) => {
 			console.log("...product found.  Updating product...") // ? debug
 
 			// 2a - update product on DatoCMS
-			await datocms.items.update(existingProduct.id, {
-				active: body.status === "active" ? true : false,
-				shopifyId: String(body.id), // API specifies string
-				title: body.title,
-				description: trimEmptyTags(body.body_html),
-				slug: body.handle,
-			})
+			await helpers_products.updateProduct(existingProduct, body)
 
 			return res.status(200).send("Product updated on DatoCMS.")
 		} else {
@@ -111,22 +104,20 @@ const product_delete = async (req, res) => {
 		const existingProduct = await helpers_products.getProduct_byShopifyID(
 			body,
 		)
-		console.log("...Product found.  Deleting product from DatoCMS...") // ? debug
+		console.log("...product found.  Deleting product from DatoCMS...") // ? debug
 
 		await datocms.items.destroy(String(existingProduct.id)) // API specifies string
 		console.log(
-			`Product deleted.`,
-			`Shopify ID: ${body.id}`,
-			`DatoCMS ID: ${existingProduct.id}`,
+			`...product deleted.
+				Shopify ID: ${body.id}
+				DatoCMS ID: ${existingProduct.id}`,
 		) // ? debug
 
-		return res
-			.status(200)
-			.send(
-				`Product deleted.`,
-				`Shopify ID: ${body.id}`,
-				`DatoCMS ID: ${existingProduct.id}`,
-			)
+		return res.status(200).send(
+			`Product deleted.
+				Shopify ID: ${body.id}
+				DatoCMS ID: ${existingProduct.id}`,
+		)
 	} catch (error) {
 		console.error(error)
 		return res.status(404).send("Record not found.")

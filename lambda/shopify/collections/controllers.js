@@ -75,12 +75,7 @@ const collection_update = async (req, res) => {
 			console.log("...collection found.  Updating collection...") // ? debug
 
 			// 2a - update collection on DatoCMS
-			await datocms.items.update(existingCollection.id, {
-				shopifyId: String(body.id), // API specifies string
-				title: body.title,
-				description: trimEmptyTags(body.body_html),
-				slug: body.handle,
-			})
+			await helpers_collections.updateCollection(existingCollection, body)
 
 			return res.status(200).send("Collection updated on DatoCMS.")
 		} else {
@@ -110,22 +105,20 @@ const collection_delete = async (req, res) => {
 		const existingCollection = await helpers_collections.getCollection_byShopifyID(
 			body,
 		)
-		console.log("...Collection found.  Deleting collection from DatoCMS...") // ? debug
+		console.log("...collection found.  Deleting collection from DatoCMS...") // ? debug
 
 		await datocms.items.destroy(String(existingCollection.id)) // API specifies string
 		console.log(
-			`Collection deleted.`,
-			`Shopify ID: ${body.id}`,
-			`DatoCMS ID: ${existingCollection.id}`,
+			`...collection deleted.
+				Shopify ID: ${body.id}
+				DatoCMS ID: ${existingCollection.id}`,
 		) // ? debug
 
-		return res
-			.status(200)
-			.send(
-				`Collection deleted.`,
-				`Shopify ID: ${body.id}`,
-				`DatoCMS ID: ${existingCollection.id}`,
-			)
+		return res.status(200).send(
+			`Collection deleted.
+				Shopify ID: ${body.id}
+				DatoCMS ID: ${existingCollection.id}`,
+		)
 	} catch (error) {
 		console.error(error)
 		return res.status(404).send("Record not found.")

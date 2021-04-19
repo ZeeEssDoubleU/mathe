@@ -18,8 +18,8 @@ import {
 // ************
 
 export interface ProductCategoryI {
-	categories: ProductCollectionBySlugQuery["allCollections_datocms"]
-	category_selected: ProductCollectionBySlugQuery["collection_datocms"]
+	categories: ProductCollectionBySlugQuery["allCategories_datocms"]
+	category_selected: ProductCollectionBySlugQuery["category_datocms"]
 }
 
 // ************
