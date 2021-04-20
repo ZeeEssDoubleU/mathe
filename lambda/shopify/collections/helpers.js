@@ -80,7 +80,10 @@ async function createCollection(body) {
 		slug: body.handle,
 	})
 
-	console.log(`...created collection: ${body.handle}`) // ? debug
+	console.log(
+		`...created collection.
+			slug: ${body.handle}`,
+	) // ? debug
 	return res
 }
 
@@ -98,7 +101,10 @@ async function updateCollection(existingCollection, body) {
 		slug: body.handle,
 	})
 
-	console.log(`...updated collection: ${body.handle}`) // ? debug
+	console.log(
+		`...updated collection.
+			slug: ${body.handle}`,
+	) // ? debug
 	return res
 }
 

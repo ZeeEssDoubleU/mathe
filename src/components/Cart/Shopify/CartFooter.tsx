@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icons/Icon"
+import CheckoutButton from "./CheckoutButton"
+import AcceptedPayments from "./AcceptedPayments"
 // import store
 import { useCheckout } from "../../../api/shopify"
 
@@ -11,7 +12,6 @@ import { useCheckout } from "../../../api/shopify"
 
 export default function CartFooter(): ReactElement {
 	const shopifyCheckoutQuery = useCheckout()
-	const checkoutUrl = shopifyCheckoutQuery.checkout?.webUrl
 	const subtotalPrice = shopifyCheckoutQuery.checkout?.subtotalPriceV2?.amount
 
 	return (
@@ -30,22 +30,12 @@ export default function CartFooter(): ReactElement {
 				<span>Total</span>
 				<span>{Number(totalPrice) === 0 ? "──" : `$${totalPrice}`}</span>
 			</Total> */}
-			<Checkout
-				disabled={shopifyCheckoutQuery.isCartEmpty}
-				onClick={() =>
-					!checkoutUrl ? null : window.location.replace(checkoutUrl)
-				}
-			>
-				<span className="spacer" />
-				<span className="shift">Checkout</span>
-				<span className="spacer shift">
-					<Icon name="forward-chevron" />
-				</span>
-			</Checkout>
+			<CheckoutButton />
 
 			<span className="footnote">
 				* Taxes and shipping calculated at checkout
 			</span>
+			<AcceptedPayments />
 		</Container>
 	)
 }
@@ -54,43 +44,11 @@ export default function CartFooter(): ReactElement {
 // styles
 // ************
 
-const Checkout = styled.button<{ disabled: boolean }>`
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-
-	width: 100%;
-	padding: 16px 32px;
-	margin-top: 8px;
-	border: none;
-	border-radius: 0.25em;
-
-	background: ${({ theme }) => theme.color.app_green};
-	color: white;
-	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
-
-	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-
-	svg {
-		height: 16px;
-		width: 16px;
-		fill: white;
-		vertical-align: middle;
-	}
-
-	.shift {
-		transition: transform 300ms;
-	}
-
-	&:hover {
-		.shift {
-			transform: translateX(${(props) => (props.disabled ? 0 : "5px")});
-		}
-	}
-`
 const Container = styled.footer`
 	display: grid;
 	grid-gap: 8px;
 	padding: ${({ theme }) => theme.spacing.cart_padding};
+	padding-bottom: calc(${({ theme }) => theme.spacing.cart_padding} / 2);
 
 	.footnote {
 		text-align: center;

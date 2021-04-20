@@ -14339,14 +14339,14 @@ export interface Query {
   allDatoCmsField: DatoCmsFieldConnection;
   datoCmsModel: Maybe<DatoCmsModel>;
   allDatoCmsModel: DatoCmsModelConnection;
+  shopifyShop: Maybe<ShopifyShop>;
+  allShopifyShop: ShopifyShopConnection;
   shopifyProductOption: Maybe<ShopifyProductOption>;
   allShopifyProductOption: ShopifyProductOptionConnection;
   shopifyProductVariant: Maybe<ShopifyProductVariant>;
   allShopifyProductVariant: ShopifyProductVariantConnection;
   shopifyProduct: Maybe<ShopifyProduct>;
   allShopifyProduct: ShopifyProductConnection;
-  shopifyShop: Maybe<ShopifyShop>;
-  allShopifyShop: ShopifyShopConnection;
   shopifyCollection: Maybe<ShopifyCollection>;
   allShopifyCollection: ShopifyCollectionConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -15194,6 +15194,24 @@ export interface QueryAllDatoCmsModelArgs {
   limit: Maybe<Scalars["Int"]>;
 }
 
+export interface QueryShopifyShopArgs {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  moneyFormat: Maybe<StringQueryOperatorInput>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
+}
+
+export interface QueryAllShopifyShopArgs {
+  filter: Maybe<ShopifyShopFilterInput>;
+  sort: Maybe<ShopifyShopSortInput>;
+  skip: Maybe<Scalars["Int"]>;
+  limit: Maybe<Scalars["Int"]>;
+}
+
 export interface QueryShopifyProductOptionArgs {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -15267,23 +15285,6 @@ export interface QueryShopifyProductArgs {
 export interface QueryAllShopifyProductArgs {
   filter: Maybe<ShopifyProductFilterInput>;
   sort: Maybe<ShopifyProductSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
-export interface QueryShopifyShopArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  description: Maybe<StringQueryOperatorInput>;
-  moneyFormat: Maybe<StringQueryOperatorInput>;
-  name: Maybe<StringQueryOperatorInput>;
-}
-
-export interface QueryAllShopifyShopArgs {
-  filter: Maybe<ShopifyShopFilterInput>;
-  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -16836,9 +16837,10 @@ export interface ShopifyShop extends Node {
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
+  name: Maybe<Scalars["String"]>;
   description: Maybe<Scalars["String"]>;
   moneyFormat: Maybe<Scalars["String"]>;
-  name: Maybe<Scalars["String"]>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettings>;
 }
 
 export interface ShopifyShopConnection {
@@ -16953,9 +16955,11 @@ export enum ShopifyShopFieldsEnum {
   internal___mediaType = "internal___mediaType",
   internal___owner = "internal___owner",
   internal___type = "internal___type",
+  name = "name",
   description = "description",
   moneyFormat = "moneyFormat",
-  name = "name",
+  paymentSettings___acceptedCardBrands = "paymentSettings___acceptedCardBrands",
+  paymentSettings___supportedDigitalWallets = "paymentSettings___supportedDigitalWallets",
 }
 
 export interface ShopifyShopFilterInput {
@@ -16963,9 +16967,10 @@ export interface ShopifyShopFilterInput {
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
   description: Maybe<StringQueryOperatorInput>;
   moneyFormat: Maybe<StringQueryOperatorInput>;
-  name: Maybe<StringQueryOperatorInput>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
 }
 
 export interface ShopifyShopGroupConnection {
@@ -16975,6 +16980,16 @@ export interface ShopifyShopGroupConnection {
   pageInfo: PageInfo;
   field: Scalars["String"];
   fieldValue: Maybe<Scalars["String"]>;
+}
+
+export interface ShopifyShopPaymentSettings {
+  acceptedCardBrands: Maybe<Array<Maybe<Scalars["String"]>>>;
+  supportedDigitalWallets: Maybe<Array<Maybe<Scalars["String"]>>>;
+}
+
+export interface ShopifyShopPaymentSettingsFilterInput {
+  acceptedCardBrands: Maybe<StringQueryOperatorInput>;
+  supportedDigitalWallets: Maybe<StringQueryOperatorInput>;
 }
 
 export interface ShopifyShopSortInput {
@@ -17516,11 +17531,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator___pluginOptions___theme_color_in_head",
   pluginCreator___pluginOptions___cacheDigest = "pluginCreator___pluginOptions___cacheDigest",
   pluginCreator___pluginOptions___pure = "pluginCreator___pluginOptions___pure",
-  pluginCreator___pluginOptions___shopName = "pluginCreator___pluginOptions___shopName",
-  pluginCreator___pluginOptions___accessToken = "pluginCreator___pluginOptions___accessToken",
-  pluginCreator___pluginOptions___apiVersion = "pluginCreator___pluginOptions___apiVersion",
-  pluginCreator___pluginOptions___downloadImages = "pluginCreator___pluginOptions___downloadImages",
-  pluginCreator___pluginOptions___shopifyQueries___products = "pluginCreator___pluginOptions___shopifyQueries___products",
   pluginCreator___pluginOptions___apiToken = "pluginCreator___pluginOptions___apiToken",
   pluginCreator___pluginOptions___disableLiveReload = "pluginCreator___pluginOptions___disableLiveReload",
   pluginCreator___pluginOptions___localeFallbacks___it = "pluginCreator___pluginOptions___localeFallbacks___it",
@@ -17532,6 +17542,12 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___allExtensions = "pluginCreator___pluginOptions___allExtensions",
   pluginCreator___pluginOptions___isTSX = "pluginCreator___pluginOptions___isTSX",
   pluginCreator___pluginOptions___jsxPragma = "pluginCreator___pluginOptions___jsxPragma",
+  pluginCreator___pluginOptions___shopName = "pluginCreator___pluginOptions___shopName",
+  pluginCreator___pluginOptions___accessToken = "pluginCreator___pluginOptions___accessToken",
+  pluginCreator___pluginOptions___apiVersion = "pluginCreator___pluginOptions___apiVersion",
+  pluginCreator___pluginOptions___downloadImages = "pluginCreator___pluginOptions___downloadImages",
+  pluginCreator___pluginOptions___shopifyQueries___shopDetails = "pluginCreator___pluginOptions___shopifyQueries___shopDetails",
+  pluginCreator___pluginOptions___shopifyQueries___products = "pluginCreator___pluginOptions___shopifyQueries___products",
   pluginCreator___nodeAPIs = "pluginCreator___nodeAPIs",
   pluginCreator___browserAPIs = "pluginCreator___browserAPIs",
   pluginCreator___ssrAPIs = "pluginCreator___ssrAPIs",
@@ -17734,11 +17750,6 @@ export enum SitePluginFieldsEnum {
   pluginOptions___theme_color_in_head = "pluginOptions___theme_color_in_head",
   pluginOptions___cacheDigest = "pluginOptions___cacheDigest",
   pluginOptions___pure = "pluginOptions___pure",
-  pluginOptions___shopName = "pluginOptions___shopName",
-  pluginOptions___accessToken = "pluginOptions___accessToken",
-  pluginOptions___apiVersion = "pluginOptions___apiVersion",
-  pluginOptions___downloadImages = "pluginOptions___downloadImages",
-  pluginOptions___shopifyQueries___products = "pluginOptions___shopifyQueries___products",
   pluginOptions___apiToken = "pluginOptions___apiToken",
   pluginOptions___disableLiveReload = "pluginOptions___disableLiveReload",
   pluginOptions___localeFallbacks___it = "pluginOptions___localeFallbacks___it",
@@ -17750,6 +17761,12 @@ export enum SitePluginFieldsEnum {
   pluginOptions___allExtensions = "pluginOptions___allExtensions",
   pluginOptions___isTSX = "pluginOptions___isTSX",
   pluginOptions___jsxPragma = "pluginOptions___jsxPragma",
+  pluginOptions___shopName = "pluginOptions___shopName",
+  pluginOptions___accessToken = "pluginOptions___accessToken",
+  pluginOptions___apiVersion = "pluginOptions___apiVersion",
+  pluginOptions___downloadImages = "pluginOptions___downloadImages",
+  pluginOptions___shopifyQueries___shopDetails = "pluginOptions___shopifyQueries___shopDetails",
+  pluginOptions___shopifyQueries___products = "pluginOptions___shopifyQueries___products",
   nodeAPIs = "nodeAPIs",
   browserAPIs = "browserAPIs",
   ssrAPIs = "ssrAPIs",
@@ -17880,11 +17897,6 @@ export interface SitePluginPluginOptions {
   theme_color_in_head: Maybe<Scalars["Boolean"]>;
   cacheDigest: Maybe<Scalars["String"]>;
   pure: Maybe<Scalars["Boolean"]>;
-  shopName: Maybe<Scalars["String"]>;
-  accessToken: Maybe<Scalars["String"]>;
-  apiVersion: Maybe<Scalars["Date"]>;
-  downloadImages: Maybe<Scalars["Boolean"]>;
-  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueries>;
   apiToken: Maybe<Scalars["String"]>;
   disableLiveReload: Maybe<Scalars["Boolean"]>;
   localeFallbacks: Maybe<SitePluginPluginOptionsLocaleFallbacks>;
@@ -17896,6 +17908,11 @@ export interface SitePluginPluginOptions {
   allExtensions: Maybe<Scalars["Boolean"]>;
   isTSX: Maybe<Scalars["Boolean"]>;
   jsxPragma: Maybe<Scalars["String"]>;
+  shopName: Maybe<Scalars["String"]>;
+  accessToken: Maybe<Scalars["String"]>;
+  apiVersion: Maybe<Scalars["Date"]>;
+  downloadImages: Maybe<Scalars["Boolean"]>;
+  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueries>;
 }
 
 export interface SitePluginPluginOptionsApiVersionArgs {
@@ -17920,11 +17937,6 @@ export interface SitePluginPluginOptionsFilterInput {
   theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
   cacheDigest: Maybe<StringQueryOperatorInput>;
   pure: Maybe<BooleanQueryOperatorInput>;
-  shopName: Maybe<StringQueryOperatorInput>;
-  accessToken: Maybe<StringQueryOperatorInput>;
-  apiVersion: Maybe<DateQueryOperatorInput>;
-  downloadImages: Maybe<BooleanQueryOperatorInput>;
-  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueriesFilterInput>;
   apiToken: Maybe<StringQueryOperatorInput>;
   disableLiveReload: Maybe<BooleanQueryOperatorInput>;
   localeFallbacks: Maybe<SitePluginPluginOptionsLocaleFallbacksFilterInput>;
@@ -17936,6 +17948,11 @@ export interface SitePluginPluginOptionsFilterInput {
   allExtensions: Maybe<BooleanQueryOperatorInput>;
   isTSX: Maybe<BooleanQueryOperatorInput>;
   jsxPragma: Maybe<StringQueryOperatorInput>;
+  shopName: Maybe<StringQueryOperatorInput>;
+  accessToken: Maybe<StringQueryOperatorInput>;
+  apiVersion: Maybe<DateQueryOperatorInput>;
+  downloadImages: Maybe<BooleanQueryOperatorInput>;
+  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueriesFilterInput>;
 }
 
 export interface SitePluginPluginOptionsFonts {
@@ -17969,10 +17986,12 @@ export interface SitePluginPluginOptionsLocaleFallbacksFilterInput {
 }
 
 export interface SitePluginPluginOptionsShopifyQueries {
+  shopDetails: Maybe<Scalars["String"]>;
   products: Maybe<Scalars["String"]>;
 }
 
 export interface SitePluginPluginOptionsShopifyQueriesFilterInput {
+  shopDetails: Maybe<StringQueryOperatorInput>;
   products: Maybe<StringQueryOperatorInput>;
 }
 
@@ -18146,6 +18165,17 @@ export type GatsbyDatoCmsFluid_NoBase64Fragment = {
 export type GatsbyDatoCmsFaviconMetaTagsFragment = { tags: Maybe<any> };
 
 export type GatsbyDatoCmsSeoMetaTagsFragment = { tags: Maybe<any> };
+
+export type GetPaymentSettingsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPaymentSettingsQuery = {
+  shop: Maybe<{
+    paymentSettings: Maybe<{
+      acceptedCardBrands: Maybe<Array<Maybe<string>>>;
+      supportedDigitalWallets: Maybe<Array<Maybe<string>>>;
+    }>;
+  }>;
+};
 
 export type LayoutComponentQueryVariables = Exact<{ [key: string]: never }>;
 

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "./index"
 // ************
 
 export interface ShopifyStateI {
+	shopReady: boolean
 	isCartOpen: boolean
 	checkoutId: string
 	inventory: Record<string, number>
@@ -16,6 +17,7 @@ export interface ShopifyStateI {
 // ************
 
 const initialState: ShopifyStateI = {
+	shopReady: false, // TODO: change readyToSell to true when products are ready to sell
 	isCartOpen: false,
 	checkoutId: "",
 	inventory: {},
@@ -64,6 +66,7 @@ export function useShopify() {
 
 	return {
 		// selectors
+		shopReady: useAppSelector((state) => state.shopify.shopReady),
 		isCartOpen: useAppSelector((state) => state.shopify.isCartOpen),
 		checkoutId: useAppSelector((state) => state.shopify.checkoutId),
 		getInventoryByHandle: (handle: string) =>

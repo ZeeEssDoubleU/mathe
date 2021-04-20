@@ -6,7 +6,8 @@ import { app_green_hsl } from "../src/styles/theme"
 import "dotenv/config"
 
 // import override queries
-import { products } from "./queries/shopify"
+import shop from "./queries/shopify/shop"
+import products from "./queries/shopify/products"
 
 // creates favicon.svg and faviconShare.svg file for gatsby-plugin-manifest
 const saveIcons = async (): Promise<void> => {
@@ -102,6 +103,7 @@ export default {
 				apiVersion: "2021-04",
 				downloadImages: true,
 				shopifyQueries: {
+					shopDetails: shop,
 					products: products,
 				},
 			},

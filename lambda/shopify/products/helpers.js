@@ -81,7 +81,10 @@ async function createProduct(body) {
 		slug: body.handle,
 	})
 
-	console.log(`...created product: ${body.handle}`) // ? debug
+	console.log(
+		`...created product.
+			slug: ${body.handle}`,
+	) // ? debug
 	return res
 }
 
@@ -100,7 +103,10 @@ async function updateProduct(existingProduct, body) {
 		slug: body.handle,
 	})
 
-	console.log(`...updated product: ${body.handle}`) // ? debug
+	console.log(
+		`...updated product.
+			slug: ${body.handle}`,
+	) // ? debug
 	return res
 }
 

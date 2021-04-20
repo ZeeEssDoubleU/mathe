@@ -56,10 +56,8 @@ export default function ProductListingHeader({
 	const quantityAvailable = shopifyState.getInventoryByHandle(handle)
 	const inStock = quantityAvailable > 0
 
-	// TODO: change readyToSell to true when products are ready to sell
-	const readyToSell = false
 	function displayButtonText() {
-		if (!readyToSell) {
+		if (!shopifyState.shopReady) {
 			return "Coming Soon"
 		} else if (!inStock) {
 			return "Out of Stock"
@@ -80,7 +78,7 @@ export default function ProductListingHeader({
 					${priceNumber.toFixed(2)} / {weight} {abbreviate(weightUnit)}
 				</Price>
 				<BuyButton
-					disabled={!readyToSell || !inStock}
+					disabled={!shopifyState.shopReady || !inStock}
 					onClick={addLineItem}
 				>
 					{displayButtonText()}
