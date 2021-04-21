@@ -32,11 +32,8 @@ export default function ScrollToTop({
 	}
 
 	return (
-		<Container show={show}>
-			<Icon
-				name="up-chevron"
-				onClick={() => scroll_top(scrollElem.current)}
-			/>
+		<Container show={show} onClick={() => scroll_top(scrollElem.current)}>
+			<Icon name="up-chevron" />
 		</Container>
 	)
 }

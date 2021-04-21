@@ -55,6 +55,21 @@ export default {
 		"gatsby-plugin-robots-txt",
 		"gatsby-transformer-sharp",
 		"gatsby-transformer-json",
+		"gatsby-plugin-loadable-components-ssr",
+		"gatsby-plugin-svgr",
+		// {
+		// 	resolve: "gatsby-plugin-google-tagmanager",
+		// 	options: {
+		// 		id: process.env.GATSBY_GTM_ID,
+		// 		includeInDevelopment: false,
+		// 		defaultDataLayer: function () {
+		// 			return {
+		// 				platform: "gatsby",
+		// 				pageType: window.pageType,
+		// 			}
+		// 		},
+		// 	},
+		// },
 		{
 			resolve: `gatsby-plugin-webfonts`,
 			options: {

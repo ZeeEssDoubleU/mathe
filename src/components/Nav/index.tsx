@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 // import components
-import NavMenu from "./NavMenu"
+import NavMenu from "./Menu"
 
 // ************
 // types

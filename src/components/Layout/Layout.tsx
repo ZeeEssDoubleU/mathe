@@ -3,8 +3,8 @@ import { PageProps, useStaticQuery, graphql } from "gatsby"
 // import styles
 import styled from "styled-components"
 // import components
-import Nav from "../Nav/Nav"
-import Background from "../elements/Background"
+import Nav from "../Nav"
+import Background from "../Background"
 import ShopifyCart from "../Cart/Shopify"
 // impprt store
 import { useCategory, useTransition } from "../../store"

@@ -14339,14 +14339,14 @@ export interface Query {
   allDatoCmsField: DatoCmsFieldConnection;
   datoCmsModel: Maybe<DatoCmsModel>;
   allDatoCmsModel: DatoCmsModelConnection;
-  shopifyShop: Maybe<ShopifyShop>;
-  allShopifyShop: ShopifyShopConnection;
   shopifyProductOption: Maybe<ShopifyProductOption>;
   allShopifyProductOption: ShopifyProductOptionConnection;
   shopifyProductVariant: Maybe<ShopifyProductVariant>;
   allShopifyProductVariant: ShopifyProductVariantConnection;
   shopifyProduct: Maybe<ShopifyProduct>;
   allShopifyProduct: ShopifyProductConnection;
+  shopifyShop: Maybe<ShopifyShop>;
+  allShopifyShop: ShopifyShopConnection;
   shopifyCollection: Maybe<ShopifyCollection>;
   allShopifyCollection: ShopifyCollectionConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -15194,24 +15194,6 @@ export interface QueryAllDatoCmsModelArgs {
   limit: Maybe<Scalars["Int"]>;
 }
 
-export interface QueryShopifyShopArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  name: Maybe<StringQueryOperatorInput>;
-  description: Maybe<StringQueryOperatorInput>;
-  moneyFormat: Maybe<StringQueryOperatorInput>;
-  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
-}
-
-export interface QueryAllShopifyShopArgs {
-  filter: Maybe<ShopifyShopFilterInput>;
-  sort: Maybe<ShopifyShopSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
 export interface QueryShopifyProductOptionArgs {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -15285,6 +15267,24 @@ export interface QueryShopifyProductArgs {
 export interface QueryAllShopifyProductArgs {
   filter: Maybe<ShopifyProductFilterInput>;
   sort: Maybe<ShopifyProductSortInput>;
+  skip: Maybe<Scalars["Int"]>;
+  limit: Maybe<Scalars["Int"]>;
+}
+
+export interface QueryShopifyShopArgs {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  moneyFormat: Maybe<StringQueryOperatorInput>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
+}
+
+export interface QueryAllShopifyShopArgs {
+  filter: Maybe<ShopifyShopFilterInput>;
+  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -17531,6 +17531,12 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator___pluginOptions___theme_color_in_head",
   pluginCreator___pluginOptions___cacheDigest = "pluginCreator___pluginOptions___cacheDigest",
   pluginCreator___pluginOptions___pure = "pluginCreator___pluginOptions___pure",
+  pluginCreator___pluginOptions___shopName = "pluginCreator___pluginOptions___shopName",
+  pluginCreator___pluginOptions___accessToken = "pluginCreator___pluginOptions___accessToken",
+  pluginCreator___pluginOptions___apiVersion = "pluginCreator___pluginOptions___apiVersion",
+  pluginCreator___pluginOptions___downloadImages = "pluginCreator___pluginOptions___downloadImages",
+  pluginCreator___pluginOptions___shopifyQueries___shopDetails = "pluginCreator___pluginOptions___shopifyQueries___shopDetails",
+  pluginCreator___pluginOptions___shopifyQueries___products = "pluginCreator___pluginOptions___shopifyQueries___products",
   pluginCreator___pluginOptions___apiToken = "pluginCreator___pluginOptions___apiToken",
   pluginCreator___pluginOptions___disableLiveReload = "pluginCreator___pluginOptions___disableLiveReload",
   pluginCreator___pluginOptions___localeFallbacks___it = "pluginCreator___pluginOptions___localeFallbacks___it",
@@ -17542,12 +17548,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___allExtensions = "pluginCreator___pluginOptions___allExtensions",
   pluginCreator___pluginOptions___isTSX = "pluginCreator___pluginOptions___isTSX",
   pluginCreator___pluginOptions___jsxPragma = "pluginCreator___pluginOptions___jsxPragma",
-  pluginCreator___pluginOptions___shopName = "pluginCreator___pluginOptions___shopName",
-  pluginCreator___pluginOptions___accessToken = "pluginCreator___pluginOptions___accessToken",
-  pluginCreator___pluginOptions___apiVersion = "pluginCreator___pluginOptions___apiVersion",
-  pluginCreator___pluginOptions___downloadImages = "pluginCreator___pluginOptions___downloadImages",
-  pluginCreator___pluginOptions___shopifyQueries___shopDetails = "pluginCreator___pluginOptions___shopifyQueries___shopDetails",
-  pluginCreator___pluginOptions___shopifyQueries___products = "pluginCreator___pluginOptions___shopifyQueries___products",
   pluginCreator___nodeAPIs = "pluginCreator___nodeAPIs",
   pluginCreator___browserAPIs = "pluginCreator___browserAPIs",
   pluginCreator___ssrAPIs = "pluginCreator___ssrAPIs",
@@ -17556,7 +17556,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___packageJson___description = "pluginCreator___packageJson___description",
   pluginCreator___packageJson___version = "pluginCreator___packageJson___version",
   pluginCreator___packageJson___main = "pluginCreator___packageJson___main",
-  pluginCreator___packageJson___author = "pluginCreator___packageJson___author",
   pluginCreator___packageJson___license = "pluginCreator___packageJson___license",
   pluginCreator___packageJson___dependencies = "pluginCreator___packageJson___dependencies",
   pluginCreator___packageJson___dependencies___name = "pluginCreator___packageJson___dependencies___name",
@@ -17750,6 +17749,12 @@ export enum SitePluginFieldsEnum {
   pluginOptions___theme_color_in_head = "pluginOptions___theme_color_in_head",
   pluginOptions___cacheDigest = "pluginOptions___cacheDigest",
   pluginOptions___pure = "pluginOptions___pure",
+  pluginOptions___shopName = "pluginOptions___shopName",
+  pluginOptions___accessToken = "pluginOptions___accessToken",
+  pluginOptions___apiVersion = "pluginOptions___apiVersion",
+  pluginOptions___downloadImages = "pluginOptions___downloadImages",
+  pluginOptions___shopifyQueries___shopDetails = "pluginOptions___shopifyQueries___shopDetails",
+  pluginOptions___shopifyQueries___products = "pluginOptions___shopifyQueries___products",
   pluginOptions___apiToken = "pluginOptions___apiToken",
   pluginOptions___disableLiveReload = "pluginOptions___disableLiveReload",
   pluginOptions___localeFallbacks___it = "pluginOptions___localeFallbacks___it",
@@ -17761,12 +17766,6 @@ export enum SitePluginFieldsEnum {
   pluginOptions___allExtensions = "pluginOptions___allExtensions",
   pluginOptions___isTSX = "pluginOptions___isTSX",
   pluginOptions___jsxPragma = "pluginOptions___jsxPragma",
-  pluginOptions___shopName = "pluginOptions___shopName",
-  pluginOptions___accessToken = "pluginOptions___accessToken",
-  pluginOptions___apiVersion = "pluginOptions___apiVersion",
-  pluginOptions___downloadImages = "pluginOptions___downloadImages",
-  pluginOptions___shopifyQueries___shopDetails = "pluginOptions___shopifyQueries___shopDetails",
-  pluginOptions___shopifyQueries___products = "pluginOptions___shopifyQueries___products",
   nodeAPIs = "nodeAPIs",
   browserAPIs = "browserAPIs",
   ssrAPIs = "ssrAPIs",
@@ -17775,7 +17774,6 @@ export enum SitePluginFieldsEnum {
   packageJson___description = "packageJson___description",
   packageJson___version = "packageJson___version",
   packageJson___main = "packageJson___main",
-  packageJson___author = "packageJson___author",
   packageJson___license = "packageJson___license",
   packageJson___dependencies = "packageJson___dependencies",
   packageJson___dependencies___name = "packageJson___dependencies___name",
@@ -17819,7 +17817,6 @@ export interface SitePluginPackageJson {
   description: Maybe<Scalars["String"]>;
   version: Maybe<Scalars["String"]>;
   main: Maybe<Scalars["String"]>;
-  author: Maybe<Scalars["String"]>;
   license: Maybe<Scalars["String"]>;
   dependencies: Maybe<Array<Maybe<SitePluginPackageJsonDependencies>>>;
   devDependencies: Maybe<Array<Maybe<SitePluginPackageJsonDevDependencies>>>;
@@ -17860,7 +17857,6 @@ export interface SitePluginPackageJsonFilterInput {
   description: Maybe<StringQueryOperatorInput>;
   version: Maybe<StringQueryOperatorInput>;
   main: Maybe<StringQueryOperatorInput>;
-  author: Maybe<StringQueryOperatorInput>;
   license: Maybe<StringQueryOperatorInput>;
   dependencies: Maybe<SitePluginPackageJsonDependenciesFilterListInput>;
   devDependencies: Maybe<SitePluginPackageJsonDevDependenciesFilterListInput>;
@@ -17897,6 +17893,11 @@ export interface SitePluginPluginOptions {
   theme_color_in_head: Maybe<Scalars["Boolean"]>;
   cacheDigest: Maybe<Scalars["String"]>;
   pure: Maybe<Scalars["Boolean"]>;
+  shopName: Maybe<Scalars["String"]>;
+  accessToken: Maybe<Scalars["String"]>;
+  apiVersion: Maybe<Scalars["Date"]>;
+  downloadImages: Maybe<Scalars["Boolean"]>;
+  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueries>;
   apiToken: Maybe<Scalars["String"]>;
   disableLiveReload: Maybe<Scalars["Boolean"]>;
   localeFallbacks: Maybe<SitePluginPluginOptionsLocaleFallbacks>;
@@ -17908,11 +17909,6 @@ export interface SitePluginPluginOptions {
   allExtensions: Maybe<Scalars["Boolean"]>;
   isTSX: Maybe<Scalars["Boolean"]>;
   jsxPragma: Maybe<Scalars["String"]>;
-  shopName: Maybe<Scalars["String"]>;
-  accessToken: Maybe<Scalars["String"]>;
-  apiVersion: Maybe<Scalars["Date"]>;
-  downloadImages: Maybe<Scalars["Boolean"]>;
-  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueries>;
 }
 
 export interface SitePluginPluginOptionsApiVersionArgs {
@@ -17937,6 +17933,11 @@ export interface SitePluginPluginOptionsFilterInput {
   theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
   cacheDigest: Maybe<StringQueryOperatorInput>;
   pure: Maybe<BooleanQueryOperatorInput>;
+  shopName: Maybe<StringQueryOperatorInput>;
+  accessToken: Maybe<StringQueryOperatorInput>;
+  apiVersion: Maybe<DateQueryOperatorInput>;
+  downloadImages: Maybe<BooleanQueryOperatorInput>;
+  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueriesFilterInput>;
   apiToken: Maybe<StringQueryOperatorInput>;
   disableLiveReload: Maybe<BooleanQueryOperatorInput>;
   localeFallbacks: Maybe<SitePluginPluginOptionsLocaleFallbacksFilterInput>;
@@ -17948,11 +17949,6 @@ export interface SitePluginPluginOptionsFilterInput {
   allExtensions: Maybe<BooleanQueryOperatorInput>;
   isTSX: Maybe<BooleanQueryOperatorInput>;
   jsxPragma: Maybe<StringQueryOperatorInput>;
-  shopName: Maybe<StringQueryOperatorInput>;
-  accessToken: Maybe<StringQueryOperatorInput>;
-  apiVersion: Maybe<DateQueryOperatorInput>;
-  downloadImages: Maybe<BooleanQueryOperatorInput>;
-  shopifyQueries: Maybe<SitePluginPluginOptionsShopifyQueriesFilterInput>;
 }
 
 export interface SitePluginPluginOptionsFonts {
@@ -18166,6 +18162,28 @@ export type GatsbyDatoCmsFaviconMetaTagsFragment = { tags: Maybe<any> };
 
 export type GatsbyDatoCmsSeoMetaTagsFragment = { tags: Maybe<any> };
 
+export type BackgroundComponentQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BackgroundComponentQuery = {
+  allCategories_datocms: {
+    nodes: Array<{
+      slug: Maybe<string>;
+      title: Maybe<string>;
+      images: Maybe<{
+        imageGallery: Maybe<
+          Array<
+            Maybe<{
+              alt: Maybe<string>;
+              title: Maybe<string>;
+              gatsbyImageData: Maybe<any>;
+            }>
+          >
+        >;
+      }>;
+    }>;
+  };
+};
+
 export type GetPaymentSettingsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetPaymentSettingsQuery = {
@@ -18226,28 +18244,6 @@ export type SeoComponentQuery = {
       }>;
     }>;
   }>;
-};
-
-export type BackgroundComponentQueryVariables = Exact<{ [key: string]: never }>;
-
-export type BackgroundComponentQuery = {
-  allCollections: {
-    nodes: Array<{
-      slug: Maybe<string>;
-      title: Maybe<string>;
-      images: Maybe<{
-        imageGallery: Maybe<
-          Array<
-            Maybe<{
-              alt: Maybe<string>;
-              title: Maybe<string>;
-              gatsbyImageData: Maybe<any>;
-            }>
-          >
-        >;
-      }>;
-    }>;
-  };
 };
 
 export type NotFoundPageQueryVariables = Exact<{ [key: string]: never }>;

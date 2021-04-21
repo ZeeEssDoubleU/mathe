@@ -1,41 +1,51 @@
 import React, { ReactElement } from "react"
-import SVG from "react-inlinesvg"
+import loadable from "@loadable/component"
 
 // import icons (from icons folder - local file system)
-import back from "./back.svg"
-import backArrow from "./left.svg"
-import backChevron from "./left-chevron.svg"
-import cart from "./cart-checkered.svg"
-import cartZoom from "./cart-zoom.svg"
-import email from "./envelope-neat.svg"
-import instagram from "./instagram-simple.svg"
-import facebook from "./facebook.svg"
-import forwardArrow from "./right.svg"
-import forwardChevron from "./right-chevron.svg"
-import globe from "./globe.svg"
-import message from "./smartphone-text.svg"
-import messenger from "./messenger-rect.svg"
-import minus from "./minus.svg"
-import plus from "./plus.svg"
-import pencil from "./pencil.svg"
-import phone from "./phone-ring.svg"
-import send from "./forward.svg"
-import tea from "./tea.svg"
-import trashcan from "./trashcan.svg"
-import upArrow from "./up-arrow.svg"
-import upChevron from "./up-chevron.svg"
-import upChevronDouble from "./up-chevron-double.svg"
-// import shopify icons
-import card_amex from "./shopify/card-amex.svg"
-import card_dinersclub from "./shopify/card-dinersclub.svg"
-import card_discover from "./shopify/card-discover.svg"
-import card_elo from "./shopify/card-elo.svg"
-import card_jcb from "./shopify/card-jcb.svg"
-import card_mastercard from "./shopify/card-mastercard.svg"
-import card_visa from "./shopify/card-visa.svg"
-import wallet_applepay from "./shopify/wallet-applypay.svg"
-import wallet_googlepay from "./shopify/wallet-googlepay.svg"
-import wallet_shopifypay from "./shopify/wallet-shopifypay.svg"
+const Back = loadable.lib(() => import("./back.svg"))
+const BackArrow = loadable.lib(() => import("./left.svg"))
+const BackChevron = loadable.lib(() => import("./left-chevron.svg"))
+const Cart = loadable.lib(() => import("./cart-checkered.svg"))
+const CartZoom = loadable.lib(() => import("./cart-zoom.svg"))
+const Email = loadable.lib(() => import("./envelope-neat.svg"))
+const Instagram = loadable.lib(() => import("./instagram-simple.svg"))
+const Facebook = loadable.lib(() => import("./facebook.svg"))
+const ForwardArrow = loadable.lib(() => import("./right.svg"))
+const ForwardChevron = loadable.lib(() => import("./right-chevron.svg"))
+const Globe = loadable.lib(() => import("./globe.svg"))
+const Message = loadable.lib(() => import("./smartphone-text.svg"))
+const Messenger = loadable.lib(() => import("./messenger-rect.svg"))
+const Minus = loadable.lib(() => import("./minus.svg"))
+const Plus = loadable.lib(() => import("./plus.svg"))
+const Pencil = loadable.lib(() => import("./pencil.svg"))
+const Phone = loadable.lib(() => import("./phone-ring.svg"))
+const Send = loadable.lib(() => import("./forward.svg"))
+const Tea = loadable.lib(() => import("./tea.svg"))
+const Trashcan = loadable.lib(() => import("./trashcan.svg"))
+const UpArrow = loadable.lib(() => import("./up-arrow.svg"))
+const UpChevron = loadable.lib(() => import("./up-chevron.svg"))
+const UpChevronDouble = loadable.lib(() => import("./up-chevron-double.svg"))
+// import {ReactComponent as shopify } icons
+const CardAmex = loadable.lib(() => import("./shopify/card-amex.svg"))
+const CardDinersClub = loadable.lib(
+	() => import("./shopify/card-dinersclub.svg"),
+)
+const CardDiscover = loadable.lib(() => import("./shopify/card-discover.svg"))
+const CardElo = loadable.lib(() => import("./shopify/card-elo.svg"))
+const CardJcb = loadable.lib(() => import("./shopify/card-jcb.svg"))
+const CardMastercard = loadable.lib(
+	() => import("./shopify/card-mastercard.svg"),
+)
+const CardVisa = loadable.lib(() => import("./shopify/card-visa.svg"))
+const WalletApplePay = loadable.lib(
+	() => import("./shopify/wallet-applypay.svg"),
+)
+const WalletGooglePay = loadable.lib(
+	() => import("./shopify/wallet-googlepay.svg"),
+)
+const WalletShopifyPay = loadable.lib(
+	() => import("./shopify/wallet-shopifypay.svg"),
+)
 
 // ************
 // types
@@ -53,76 +63,78 @@ export interface Icon_I {
 // ************
 
 export default function Icon(props: Icon_I): ReactElement | null {
-	const alt = props.name.replace(/_|-/g, " ")
+	const SVGContent = ({ ReactComponent }: typeof import("*.svg")) => (
+		<ReactComponent />
+	)
 
 	switch (props.name) {
 		case "back":
-			return <SVG src={back} alt={alt} {...props} />
+			return <Back {...props}>{SVGContent}</Back>
 		case "back-arrow":
-			return <SVG src={backArrow} alt={alt} {...props} />
+			return <BackArrow {...props}>{SVGContent}</BackArrow>
 		case "back-chevron":
-			return <SVG src={backChevron} alt={alt} {...props} />
+			return <BackChevron {...props}>{SVGContent}</BackChevron>
 		case "cart":
-			return <SVG src={cart} alt={alt} {...props} />
+			return <Cart {...props}>{SVGContent}</Cart>
 		case "cart-zoom":
-			return <SVG src={cartZoom} alt={alt} {...props} />
+			return <CartZoom {...props}>{SVGContent}</CartZoom>
 		case "email":
-			return <SVG src={email} alt={alt} {...props} />
+			return <Email {...props}>{SVGContent}</Email>
 		case "facebook":
-			return <SVG src={facebook} alt={alt} {...props} />
+			return <Facebook {...props}>{SVGContent}</Facebook>
 		case "forward-arrow":
-			return <SVG src={forwardArrow} alt={alt} {...props} />
+			return <ForwardArrow {...props}>{SVGContent}</ForwardArrow>
 		case "forward-chevron":
-			return <SVG src={forwardChevron} alt={alt} {...props} />
+			return <ForwardChevron {...props}>{SVGContent}</ForwardChevron>
 		case "instagram":
-			return <SVG src={instagram} alt={alt} {...props} />
+			return <Instagram {...props}>{SVGContent}</Instagram>
 		case "location":
-			return <SVG src={globe} alt={alt} {...props} />
+			return <Globe {...props}>{SVGContent}</Globe>
 		case "message":
-			return <SVG src={message} alt={alt} {...props} />
+			return <Message {...props}>{SVGContent}</Message>
 		case "messenger":
-			return <SVG src={messenger} alt={alt} {...props} />
+			return <Messenger {...props}>{SVGContent}</Messenger>
 		case "minus":
-			return <SVG src={minus} alt={alt} {...props} />
+			return <Minus {...props}>{SVGContent}</Minus>
 		case "pencil":
-			return <SVG src={pencil} alt={alt} {...props} />
+			return <Pencil {...props}>{SVGContent}</Pencil>
 		case "phone":
-			return <SVG src={phone} alt={alt} {...props} />
+			return <Phone {...props}>{SVGContent}</Phone>
 		case "plus":
-			return <SVG src={plus} alt={alt} {...props} />
+			return <Plus {...props}>{SVGContent}</Plus>
 		case "send":
-			return <SVG src={send} alt={alt} {...props} />
+			return <Send {...props}>{SVGContent}</Send>
 		case "tea":
-			return <SVG src={tea} alt={alt} {...props} />
+			return <Tea {...props}>{SVGContent}</Tea>
 		case "trashcan":
-			return <SVG src={trashcan} alt={alt} {...props} />
+			return <Trashcan {...props}>{SVGContent}</Trashcan>
 		case "up-arrow":
-			return <SVG src={upArrow} alt={alt} {...props} />
+			return <UpArrow {...props}>{SVGContent}</UpArrow>
 		case "up-chevron":
-			return <SVG src={upChevron} alt={alt} {...props} />
+			return <UpChevron {...props}>{SVGContent}</UpChevron>
 		case "up-chevron-double":
-			return <SVG src={upChevronDouble} alt={alt} {...props} />
+			return <UpChevronDouble {...props}>{SVGContent}</UpChevronDouble>
 		// ! shopify payments
 		case "visa":
-			return <SVG src={card_visa} alt={alt} {...props} />
+			return <CardVisa {...props}>{SVGContent}</CardVisa>
 		case "mastercard":
-			return <SVG src={card_mastercard} alt={alt} {...props} />
+			return <CardMastercard {...props}>{SVGContent}</CardMastercard>
 		case "american_express":
-			return <SVG src={card_amex} alt={alt} {...props} />
+			return <CardAmex {...props}>{SVGContent}</CardAmex>
 		case "discover":
-			return <SVG src={card_discover} alt={alt} {...props} />
+			return <CardDiscover {...props}>{SVGContent}</CardDiscover>
 		case "elo":
-			return <SVG src={card_elo} alt={alt} {...props} />
+			return <CardElo {...props}>{SVGContent}</CardElo>
 		case "jcb":
-			return <SVG src={card_jcb} alt={alt} {...props} />
+			return <CardJcb {...props}>{SVGContent}</CardJcb>
 		case "diners_club":
-			return <SVG src={card_dinersclub} alt={alt} {...props} />
+			return <CardDinersClub {...props}>{SVGContent}</CardDinersClub>
 		case "shopify_pay":
-			return <SVG src={wallet_shopifypay} alt={alt} {...props} />
+			return <WalletShopifyPay {...props}>{SVGContent}</WalletShopifyPay>
 		case "apple_pay":
-			return <SVG src={wallet_applepay} alt={alt} {...props} />
+			return <WalletApplePay {...props}>{SVGContent}</WalletApplePay>
 		case "google_pay":
-			return <SVG src={wallet_googlepay} alt={alt} {...props} />
+			return <WalletGooglePay {...props}>{SVGContent}</WalletGooglePay>
 		default:
 			return null
 	}
