@@ -1,7 +1,7 @@
 import { shopifyClient } from "../graphql"
 // import types / fragments
 import { useCollectionByHandleQuery } from "../graphql/types"
-import { ShopifyStateI, useShopify } from "../../../store"
+import { ShopifyStateI, useShopify } from "../../../redux"
 
 // ************
 // hook

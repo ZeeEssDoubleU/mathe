@@ -1,9 +1,17 @@
+import React from "react"
 import { configureStore } from "@reduxjs/toolkit"
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux"
+import {
+	Provider,
+	useDispatch,
+	useSelector,
+	TypedUseSelectorHook,
+} from "react-redux"
 // import reducers / hooks
-import { categorySlice, useCategory } from "./categorySlice"
-import { transitionSlice, useTransition } from "./transitionSlice"
-import { shopifySlice, useShopify } from "./shopifySlice"
+import { categorySlice } from "./categorySlice"
+import { transitionSlice } from "./transitionSlice"
+import { shopifySlice } from "./shopifySlice"
+// import types
+import { Provider_I } from "../@types/custom"
 
 // ************
 // store
@@ -17,7 +25,6 @@ const store = configureStore({
 		shopify: shopifySlice.reducer,
 	},
 })
-export default store
 
 // ************
 // types
@@ -31,7 +38,15 @@ export const useAppDispatch = (): Dispatch_Type => useDispatch<Dispatch_Type>()
 export const useAppSelector: TypedUseSelectorHook<RootState_Type> = useSelector
 
 // ************
-// named exports
+// provider
+// ************
+
+export default function ReduxProvider({ children }: Provider_I) {
+	return <Provider store={store}>{children}</Provider>
+}
+
+// ************
+//  exports
 // ************
 
 export * from "./categorySlice"

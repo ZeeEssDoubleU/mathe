@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { navigate } from "@reach/router"
 // import store
-import { useTransition } from "../../store"
+import { useTransition } from "../../redux"
 
 // ************
 // types

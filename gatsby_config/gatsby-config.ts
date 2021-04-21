@@ -1,6 +1,6 @@
 import fs from "fs"
 import axios, { AxiosResponse } from "axios"
-import { app_green_hsl } from "../src/styles/theme"
+import { app_green_hsl } from "../src/styles/styled-components/theme"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"

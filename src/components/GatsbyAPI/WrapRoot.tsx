@@ -1,43 +1,29 @@
 import React, { ReactElement } from "react"
 // import providers
-import { ThemeProvider } from "styled-components"
-import { Provider } from "react-redux"
-import store from "../../store"
-// import react-query
-import {
-	QueryClientProvider,
-	queryClient,
-	ReactQueryDevtools,
-} from "../../api/reactQuery"
+import SCProvider from "../../styles/styled-components"
+import ReactQueryProvider from "../../api/reactQuery"
+import ReduxProvider from "../../redux"
 // import styles
 import ResetStyle from "../../styles/reset"
 import GlobalStyle from "../../styles/global"
-import { theme } from "../../styles/theme"
-
-// ************
-// types
-// ************
-
-export interface WrapRoot_I {
-	element: ReactElement | ReactElement[]
-}
+// import types
+import { WrapElement_I } from "../../@types/custom"
 
 // ************
 // component
 // ************
 
 // component
-export default function WrapRoot({ element }: WrapRoot_I): ReactElement {
+export default function WrapRoot({ element }: WrapElement_I): ReactElement {
 	return (
-		<ThemeProvider theme={theme}>
-			<QueryClientProvider client={queryClient}>
-				<Provider store={store}>
+		<SCProvider>
+			<ReactQueryProvider>
+				<ReduxProvider>
 					<ResetStyle />
 					<GlobalStyle />
 					{element}
-				</Provider>
-				<ReactQueryDevtools initialIsOpen={false} />
-			</QueryClientProvider>
-		</ThemeProvider>
+				</ReduxProvider>
+			</ReactQueryProvider>
+		</SCProvider>
 	)
 }

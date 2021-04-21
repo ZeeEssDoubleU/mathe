@@ -1,83 +1,3 @@
-import { DefaultTheme } from "styled-components"
-
-// merge theme (below) to DefaultTheme
-declare module "styled-components" {
-	export interface DefaultTheme {
-		color: {
-			app_green: string
-			app_green_hsl: string
-			app_green_hex: string
-			app_logo: string
-			app_logo_hsl: string
-			app_logo_hex: string
-			app_gold: string
-			app_gold_hsl: string
-			app_gold_hex: string
-
-			background: string
-			accent_light: string
-			disabled: string
-			hover_bg: string
-			hover_disabled: string
-
-			font_light: string
-			font_dark: string
-		}
-
-		// elements that have multiple types (color, size, etc)
-		element: {
-			shadow: string
-		}
-
-		// z-index
-		zIndex: {
-			top: number
-			mid: number
-			bottom: number
-		}
-
-		// fonts
-		font: {
-			main: string
-			main_weight: number
-			main_weight_bold: number
-			main_weight_heavy: number
-			main_weight_header: number
-			main_weight_subheader: number
-			main_weight_sectionHeader: number
-			main_weight_nav: number
-			main_weight_link: number
-			main_weight_cart: number
-
-			accent: string
-			accent_weight: number
-
-			accent_cart: string
-		}
-
-		// media queries
-		media: {
-			// width
-			mobile: string
-			tablet: string
-			desktop: string
-			wide: string
-			fullhd: string
-
-			// height
-			short: string
-			med: string
-			tall: string
-			giant: string
-		}
-
-		// layout spacings
-		spacing: {
-			cart_padding: string
-		}
-	}
-}
-
 // constants
 export const app_green_hsl = "86, 48%, 48%"
 export const app_green_hex = "#82B540"
@@ -88,7 +8,7 @@ export const app_gold_hex = "#836B2F"
 export const disabled_hsl = "150, 1%, 57%"
 
 // declare theme
-export const theme: DefaultTheme = {
+export const theme = {
 	color: {
 		app_green: `hsla(${app_green_hsl}, 1.0)`,
 		app_green_hsl: app_green_hsl,

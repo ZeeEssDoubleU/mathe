@@ -1,21 +1,16 @@
 import React, { ReactElement } from "react"
-import { PageProps } from "gatsby"
 // import components
 import Layout from "../Layout/Layout"
-
-// ************
-// types
-// ************
-
-export interface WrapPage_I {
-	element: ReactElement | ReactElement[]
-	props: PageProps
-}
+// import types
+import { WrapElementWithProps_I } from "../../@types/custom"
 
 // ************
 // component
 // ************
 
-export default function WrapPage({ element, props }: WrapPage_I): ReactElement {
+export default function WrapPage({
+	element,
+	props,
+}: WrapElementWithProps_I): ReactElement {
 	return <Layout {...props}>{element}</Layout>
 }

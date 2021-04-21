@@ -27,6 +27,9 @@ export default function BackgroundMap({
 	backgroundIndex,
 }: BackgroundMap_I): ReactElement {
 	const [initialImageLoaded, setInitialImageLoaded] = useState<boolean>(false)
+	console.log("initialImageLoaded:", initialImageLoaded) // ? debug
+	console.log("categoryIndex:", categoryIndex) // ? debug
+	console.log("backgroundIndex:", backgroundIndex) // ? debug
 
 	// data structure
 	// [category] = [img, img, img, ...]
@@ -66,7 +69,7 @@ export default function BackgroundMap({
 											image={img.gatsbyImageData}
 											onLoad={() => setInitialImageLoaded(true)}
 											initialimageloaded={initialImageLoaded.toString()}
-											loading={initialImageLoaded ? "lazy" : "eager"}
+											// loading={initialImageLoaded ? "lazy" : "eager"}
 										/>
 									</ImageWrapper>
 								</ToggleImage>

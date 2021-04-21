@@ -10,7 +10,7 @@ import { IGatsbyImageData } from "gatsby-plugin-image"
 // import components
 import BackgroundMap from "./BackgroundMap"
 // import store
-import { useCategory } from "../../store"
+import { useCategory } from "../../redux"
 
 // ************
 // types

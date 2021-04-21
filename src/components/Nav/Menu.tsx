@@ -2,7 +2,7 @@ import React, { MouseEvent, ReactElement, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 // import store
-import { useTransition } from "../../store"
+import { useTransition } from "../../redux"
 
 // ************
 // component

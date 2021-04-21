@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react"
 // import store
-import { useShopify } from "../store"
+import { useShopify } from "../redux"
 
 // ************
 // hook

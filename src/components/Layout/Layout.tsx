@@ -7,7 +7,7 @@ import Nav from "../Nav"
 import Background from "../Background"
 import ShopifyCart from "../Cart/Shopify"
 // impprt store
-import { useCategory, useTransition } from "../../store"
+import { useCategory, useTransition } from "../../redux"
 
 // ************
 // types

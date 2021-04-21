@@ -9,7 +9,7 @@ import {
 // import styles
 import { CategoryButton } from "../../../styles/elements"
 // import store / queries / utils
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 import { abbreviate } from "../../../utils"
 import { useCheckoutMutation } from "../../../api/shopify"
 

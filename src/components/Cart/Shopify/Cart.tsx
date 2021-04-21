@@ -11,7 +11,7 @@ import {
 	useCheckoutMutation,
 	usePersistCheckout,
 } from "../../../api/shopify"
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 
 // ************
 // component

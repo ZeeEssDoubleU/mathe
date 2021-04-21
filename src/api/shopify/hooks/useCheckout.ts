@@ -7,7 +7,7 @@ import {
 	CheckoutWithItemCountI,
 	useCheckoutQuery,
 } from "../graphql/types"
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 import { useCheckoutMutation } from "./useCheckoutMutation"
 
 // ************

@@ -3,7 +3,7 @@ import styled from "styled-components"
 // import components
 import Icon from "../../Icons/Icon"
 // import store
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 
 // ************
 // component

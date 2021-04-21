@@ -2,7 +2,7 @@ import { useQueryClient } from "react-query"
 import { shopifyClient } from "../graphql"
 import { appendDataToCache, usePersistCheckout } from ".."
 // import store / types / fragments
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 import {
 	useCheckoutCreateMutation,
 	useCheckoutLineItemsAddMutation,

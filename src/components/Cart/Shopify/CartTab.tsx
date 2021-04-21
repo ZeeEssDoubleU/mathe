@@ -5,7 +5,7 @@ import Icon from "../../Icons/Icon"
 // import styles
 import { ModalButton } from "../../../styles/elements"
 // import store
-import { useShopify } from "../../../store"
+import { useShopify } from "../../../redux"
 import { useCheckout } from "../../../api/shopify"
 
 // ************

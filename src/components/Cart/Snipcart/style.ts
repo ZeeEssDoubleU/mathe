@@ -1,11 +1,12 @@
 import { createGlobalStyle } from "styled-components"
+import { theme } from "../../../styles/styled-components/theme"
 
 export default createGlobalStyle`
       #snipcart,
       #snipcart .snipcart-modal__container {
-            z-index: ${({ theme }) => theme.zIndex.top};
+            z-index: ${theme.zIndex.top};
             box-shadow: none;
-            font-weight: ${({ theme }) => theme.font.main_weight_cart};
+            font-weight: ${theme.font.main_weight_cart};
       }
 
       /* 
@@ -18,15 +19,15 @@ export default createGlobalStyle`
 
       #snipcart .snipcart-cart-button--highlight {
             background-image: linear-gradient(90deg, 
-                  ${({ theme }) => theme.color.app_green},
-                  ${({ theme }) => theme.color.app_logo}
+                  ${theme.color.app_green},
+                  ${theme.color.app_logo}
             );
       }
 
       #snipcart .snipcart__actions--link {
-            color: ${({ theme }) => theme.color.app_green};
-            font-family: ${({ theme }) => theme.font.main};
-            font-weight: ${({ theme }) => theme.font.main_weight_link};
+            color: ${theme.color.app_green};
+            font-family: ${theme.font.main};
+            font-weight: ${theme.font.main_weight_link};
       }
 
       #snipcart .snipcart-item-quantity__button:hover path, 
@@ -34,7 +35,7 @@ export default createGlobalStyle`
       #snipcart .snipcart-item-quantity__button:focus path,
       #snipcart .snipcart-modal__close-icon path, 
       #snipcart .snipcart-cart-header__icon path {
-            fill: ${({ theme }) => theme.color.app_green};
+            fill: ${theme.color.app_green};
       }
 
       #snipcart .snipcart__icon--angled:hover {
