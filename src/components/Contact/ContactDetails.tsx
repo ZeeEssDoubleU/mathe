@@ -32,32 +32,32 @@ export default function ContactDetails(props: ContactDetails_I): ReactElement {
 	return (
 		<List>
 			{address && (
-				<li>
-					<Icon className="social" name="location" />
+				<li className="social">
+					<Icon name="location" />
 					<ExternalLink address href={address} />
 				</li>
 			)}
 			{phone && (
-				<li>
-					<Icon className="social" name="phone" />
+				<li className="social">
+					<Icon name="phone" />
 					<ExternalLink phone href={phone} />
 				</li>
 			)}
 			{email && (
-				<li>
-					<Icon className="social" name="email" />
+				<li className="social">
+					<Icon name="email" />
 					<ExternalLink email href={email} />
 				</li>
 			)}
 			{facebook && (
-				<li>
-					<Icon className="social" name="facebook" />
+				<li className="social">
+					<Icon name="facebook" />
 					<ExternalLink facebook href={facebook} />
 				</li>
 			)}
 			{instagram && (
-				<li>
-					<Icon className="social" name="instagram" />
+				<li className="social">
+					<Icon name="instagram" />
 					<ExternalLink instagram href={instagram} />
 				</li>
 			)}
@@ -80,9 +80,9 @@ const List = styled.ul`
 		margin: 8px 0;
 		text-align: left;
 		white-space: pre-wrap;
-		.social {
+		svg {
 			height: 20px;
-			width: 20px;
+			/* width: 20px; */
 			fill: white;
 			transition: color 300ms;
 		}
@@ -94,7 +94,7 @@ const List = styled.ul`
 			transition: color 300ms;
 		}
 		&:hover {
-			.social,
+			svg,
 			a {
 				color: white;
 			}
