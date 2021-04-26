@@ -1,7 +1,8 @@
 import React, { ReactElement, useEffect } from "react"
+import styled from "styled-components"
 // import component
 import BackgroundImage from "./BackgroundImage"
-// import store
+// import store / types
 import { useCategory } from "../../redux"
 import { BackgroundComponentQuery } from "../../graphql/types"
 
@@ -50,5 +51,17 @@ export default function BackgroundMap({
 			),
 	)
 
-	return <>{displayBackgrounds}</>
+	return <Backgrounds>{displayBackgrounds}</Backgrounds>
 }
+
+// ************
+// component
+// ************
+
+const Backgrounds = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+`

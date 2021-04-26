@@ -7,7 +7,7 @@ import Nav from "../Nav"
 import Background from "../Background"
 import ShopifyCart from "../Cart/Shopify"
 // impprt store
-import { useCategory, useTransition } from "../../redux"
+import { AnimationState_I, useCategory, useAnimation } from "../../redux"
 import { LayoutComponentQuery } from "../../graphql/types"
 
 // ************
@@ -26,20 +26,14 @@ export interface Layout_I {
 export default function Layout({ children, path }: Layout_I): ReactElement {
 	const { categories }: LayoutComponentQuery = useStaticQuery(query)
 	const state_category = useCategory()
-	const state_transition = useTransition()
+	const state_animation = useAnimation()
 
 	// effect sets nav (actually whole app) position when mounted and when path changes
 	useLayoutEffect(() => {
-		// check if transition was triggered from button press (Link, BackButton, etc)
-		// if not, set page-transition elem position
-		if (state_transition.inProgress === false) {
-			path === "/"
-				? state_transition.translateDown_page_set()
-				: state_transition.translateUp_page_set()
-		} else {
-			state_transition.setInProgress(false)
-		}
-	}, [path])
+		path === "/"
+			? state_animation.setTranslate_page("down")
+			: state_animation.setTranslate_page("up")
+	}, [])
 
 	// change selected state_category on path change
 	useEffect(() => {
@@ -49,7 +43,7 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 	return (
 		<Container>
 			<Background />
-			<PageTransition className="page-transition">
+			<PageTransition translatePage={state_animation.translate_page}>
 				<Nav />
 				{children}
 			</PageTransition>
@@ -71,11 +65,17 @@ const Container = styled.div`
 	/* so nav isn't visible when pulling down */
 	overflow: hidden;
 `
-const PageTransition = styled.div`
+const PageTransition = styled.div<{
+	translatePage: AnimationState_I["translate_page"]
+}>`
 	/* moves up/down when nav link clicked */
 	position: relative;
 	height: 100%;
-	width: 100%; ;
+	width: 100%;
+	transform: ${({ translatePage }) =>
+		`translateY(${translatePage === "up" ? "-100%" : 0})`};
+	transition: ${({ theme }) =>
+		`transform ${theme.animation.page_translateY}ms`};
 `
 
 // ************

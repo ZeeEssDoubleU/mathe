@@ -1,11 +1,10 @@
 import React, { ReactElement, RefObject } from "react"
 import styled from "styled-components"
-import { gsap } from "gsap"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 // import components
 import Icon from "../Icons/Icon"
-// import styles
+// import styles / anim
 import { ModalButton } from "../../styles/elements"
+import { scroll_top } from "../../utils/animations"
 
 // ************
 // types
@@ -24,13 +23,6 @@ export default function ScrollToTop({
 	show,
 	scrollElem,
 }: ScrollToTop_I): ReactElement {
-	gsap.registerPlugin(ScrollToPlugin)
-
-	// scroll animation
-	function scroll_top(targetElem: HTMLElement | null): void {
-		gsap.to(targetElem, { scrollTo: 0 })
-	}
-
 	return (
 		<Container show={show} onClick={() => scroll_top(scrollElem.current)}>
 			<Icon name="up-chevron" />

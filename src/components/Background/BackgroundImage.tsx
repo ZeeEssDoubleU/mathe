@@ -22,7 +22,7 @@ export default function BackgroundImage({
 	bgIndex,
 	imageData,
 }: BackgroundImage_I): ReactElement {
-	const { transition } = useTheme()
+	const { animation } = useTheme()
 	const { backgroundQueue } = useCategory()
 	// component state
 	const [hidden, setHidden] = useState<boolean>(true)
@@ -31,7 +31,7 @@ export default function BackgroundImage({
 
 	// effect sets hidden state, which sets hidden attribute
 	useEffect(() => {
-		setTimeout(() => setHidden(!showBg), hidden ? 0 : transition.bgFade)
+		setTimeout(() => setHidden(!showBg), hidden ? 0 : animation.bg_fade)
 	}, [showBg])
 
 	return (
@@ -67,8 +67,8 @@ export default function BackgroundImage({
 const FadeAnim = styled.div<{ show: boolean }>`
 	visibility: ${(props) => (props.show ? "visible" : "hidden")};
 	opacity: ${(props) => (props.show ? 1 : 0)};
-	transition: ${({ theme: { transition } }) =>
-		`opacity ${transition.bgFade}ms, visibility ${transition.bgFade}ms`};
+	transition: ${({ theme: { animation } }) =>
+		`opacity ${animation.bg_fade}ms, visibility ${animation.bg_fade}ms`};
 `
 const Container = styled.div`
 	position: fixed;
@@ -87,6 +87,6 @@ const Image = styled(GatsbyImage)<{ imageLoaded: string }>`
 	// only fade in once image loaded
 	visibility: ${(props) => (props.imageLoaded ? "visible" : "hidden")};
 	opacity: ${(props) => (props.imageLoaded === "true" ? 1 : 0)};
-	transition: ${({ theme: { transition } }) =>
-		`opacity ${transition.bgFade}ms, visibility ${transition.bgFade}ms`};
+	transition: ${({ theme: { animation } }) =>
+		`opacity ${animation.bg_fade}ms, visibility ${animation.bg_fade}ms`};
 `

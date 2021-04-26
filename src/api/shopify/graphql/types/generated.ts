@@ -375,7 +375,7 @@ export interface Checkout extends Node {
   shippingAddress?: Maybe<MailingAddress>;
   /** The discounts that have been allocated onto the shipping line by discount applications. */
   shippingDiscountAllocations: Array<DiscountAllocation>;
-  /** Once a shipping rate is selected by the customer it is transitioned to a `shipping_line` object. */
+  /** Once a shipping rate is selected by the customer it is animationed to a `shipping_line` object. */
   shippingLine?: Maybe<ShippingRate>;
   /**
    * Price of the checkout before shipping and taxes.

@@ -9,7 +9,7 @@ import {
 // import reducers / hooks
 import { categorySlice } from "./categorySlice"
 import { shopifySlice } from "./shopifySlice"
-import { transitionSlice } from "./transitionSlice"
+import { animationSlice } from "./animationSlice"
 // import types
 import { Provider_I } from "../@types/custom"
 
@@ -22,7 +22,7 @@ const store = configureStore({
 	reducer: {
 		category: categorySlice.reducer,
 		shopify: shopifySlice.reducer,
-		transition: transitionSlice.reducer,
+		animation: animationSlice.reducer,
 	},
 })
 
@@ -51,4 +51,4 @@ export default function ReduxProvider({ children }: Provider_I) {
 
 export * from "./categorySlice"
 export * from "./shopifySlice"
-export * from "./transitionSlice"
+export * from "./animationSlice"

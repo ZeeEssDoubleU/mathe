@@ -522,7 +522,7 @@ type Checkout implements Node {
   shippingDiscountAllocations: [DiscountAllocation!]!
 
   """
-  Once a shipping rate is selected by the customer it is transitioned to a `shipping_line` object.
+  Once a shipping rate is selected by the customer it is animationed to a `shipping_line` object.
   """
   shippingLine: ShippingRate
 

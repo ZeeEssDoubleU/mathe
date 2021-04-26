@@ -1,16 +1,10 @@
 import { gsap } from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+gsap.registerPlugin(ScrollToPlugin)
 
 // ************
 // animations
 // ************
-
-// page transition animations
-export function translateUp_set(targetElem: string): void {
-	gsap.set(targetElem, { y: "-100%" })
-}
-export function translateDown_set(targetElem: string): void {
-	gsap.set(targetElem, { y: 0 })
-}
 
 export function translateUp(targetElem: string, duration: number): void {
 	gsap.fromTo(

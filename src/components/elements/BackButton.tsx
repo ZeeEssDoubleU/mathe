@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { navigate } from "@reach/router"
 // import store
-import { useTransition } from "../../redux"
+import { useAnimation } from "../../redux"
 
 // ************
 // types
@@ -21,7 +21,7 @@ export interface BackVars_I {
 // ************
 
 function BackButton(): ReactElement {
-	const state_transition = useTransition()
+	const state_animation = useAnimation()
 
 	return (
 		<Link
@@ -29,11 +29,11 @@ function BackButton(): ReactElement {
 			aria-label="close page / back to home"
 			onClick={(e) => {
 				e.preventDefault() // stop immediate navigation
-				state_transition.translateDown_page()
+				state_animation.setTranslate_page("down")
 				setTimeout(() => {
 					navigate("/")
-					// multiply by 1000 for setTimeout to convert store's state_transition.duration_page_s correctly
-				}, state_transition.duration_page_ms)
+					// multiply by 1000 for setTimeout to convert store's state_animation.duration_page correctly
+				}, state_animation.duration_page_ms)
 			}}
 		>
 			<Container>

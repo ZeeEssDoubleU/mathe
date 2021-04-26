@@ -42,8 +42,9 @@ export const theme = {
 		bottom: 0,
 	},
 
-	transition: {
-		bgFade: 2000,
+	animation: {
+		bg_fade: 2000,
+		page_translateY: 700,
 	},
 
 	// fonts
