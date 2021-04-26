@@ -75,7 +75,7 @@ const PageTransition = styled.div<{
 	transform: ${({ translatePage }) =>
 		`translateY(${translatePage === "up" ? "-100%" : 0})`};
 	transition: ${({ theme }) =>
-		`transform ${theme.animation.page_translateY}ms`};
+		`transform ${theme.duration.page_translateY}ms`};
 `
 
 // ************

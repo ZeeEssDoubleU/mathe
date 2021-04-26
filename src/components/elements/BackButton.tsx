@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { navigate } from "@reach/router"
 // import store
 import { useAnimation } from "../../redux"
@@ -22,6 +22,9 @@ export interface BackVars_I {
 
 function BackButton(): ReactElement {
 	const state_animation = useAnimation()
+	const {
+		duration: { page_translateY },
+	} = useTheme()
 
 	return (
 		<Link
@@ -33,7 +36,7 @@ function BackButton(): ReactElement {
 				setTimeout(() => {
 					navigate("/")
 					// multiply by 1000 for setTimeout to convert store's state_animation.duration_page correctly
-				}, state_animation.duration_page_ms)
+				}, page_translateY)
 			}}
 		>
 			<Container>

@@ -7,8 +7,6 @@ import { useAppDispatch, useAppSelector } from "./index"
 
 export interface AnimationState_I {
 	translate_page: "up" | "down"
-	duration_page: number
-	duration_bg: number
 }
 
 // ************
@@ -17,8 +15,6 @@ export interface AnimationState_I {
 
 const initialState: AnimationState_I = {
 	translate_page: "down",
-	duration_page: 0.7, // seconds
-	duration_bg: 0.2, // seconds
 }
 
 // ************
@@ -50,10 +46,6 @@ export function useAnimation() {
 	const translate_page = useAppSelector(
 		(state) => state.animation.translate_page,
 	)
-	const duration_page = useAppSelector(
-		(state) => state.animation.duration_page,
-	)
-	const duration_bg = useAppSelector((state) => state.animation.duration_bg)
 
 	// *** actions
 	function setTranslate_page(action: AnimationState_I["translate_page"]) {
@@ -63,8 +55,6 @@ export function useAnimation() {
 	return {
 		// selectors
 		translate_page,
-		duration_page_ms: duration_page * 1000, // ms
-		duration_bg_ms: duration_bg * 1000, // ms
 		// actions
 		setTranslate_page,
 	}

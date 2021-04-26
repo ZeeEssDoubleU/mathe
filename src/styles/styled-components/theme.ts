@@ -42,8 +42,11 @@ export const theme = {
 		bottom: 0,
 	},
 
-	animation: {
+	// durations - ms
+	duration: {
 		bg_fade: 2000,
+		nav_fadeIn: 1000,
+		nav_fadeIn_delay: 250,
 		page_translateY: 700,
 	},
 

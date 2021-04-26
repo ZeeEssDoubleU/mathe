@@ -100,8 +100,9 @@ const fadeInAnim = keyframes`
 `
 const FadeInStagger = styled.div<{ order: number }>`
 	animation-name: ${fadeInAnim};
-	animation-delay: ${({ order }) => `calc(${order} * 300ms)`};
-	animation-duration: 1500ms;
+	animation-delay: ${(props) =>
+		`calc(${props.order} * ${props.theme.duration.nav_fadeIn_delay}ms)`};
+	animation-duration: ${({ theme }) => `${theme.duration.nav_fadeIn}ms`};
 	animation-fill-mode: both;
 `
 const NavLink = styled(Link)`
