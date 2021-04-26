@@ -49,3 +49,10 @@ fragment checkoutDetails on Checkout {
 		...currency
 	}
 }
+
+fragment product_collectionByHandle on ProductEdge {
+	node {
+		handle
+		totalInventory
+	}
+}

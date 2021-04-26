@@ -42,6 +42,10 @@ export const theme = {
 		bottom: 0,
 	},
 
+	transition: {
+		bgFade: 2000,
+	},
+
 	// fonts
 	font: {
 		main: "Montserrat, Avenir, Arial, sans-serif",

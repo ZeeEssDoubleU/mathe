@@ -8,6 +8,7 @@ import Background from "../Background"
 import ShopifyCart from "../Cart/Shopify"
 // impprt store
 import { useCategory, useTransition } from "../../redux"
+import { LayoutComponentQuery } from "../../graphql/types"
 
 // ************
 // types
@@ -17,21 +18,13 @@ export interface Layout_I {
 	children?: ReactElement | ReactElement[]
 	path: PageProps["path"]
 }
-export interface LayoutQuery_I {
-	categories: {
-		nodes: {
-			title: string
-			slug: string
-		}[]
-	}
-}
 
 // ************
 // component
 // ************
 
 export default function Layout({ children, path }: Layout_I): ReactElement {
-	const { categories }: LayoutQuery_I = useStaticQuery(query)
+	const { categories }: LayoutComponentQuery = useStaticQuery(query)
 	const state_category = useCategory()
 	const state_transition = useTransition()
 
@@ -55,7 +48,7 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 
 	return (
 		<Container>
-			<Background path={path} />
+			<Background />
 			<PageTransition className="page-transition">
 				<Nav />
 				{children}

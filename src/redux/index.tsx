@@ -8,8 +8,8 @@ import {
 } from "react-redux"
 // import reducers / hooks
 import { categorySlice } from "./categorySlice"
-import { transitionSlice } from "./transitionSlice"
 import { shopifySlice } from "./shopifySlice"
+import { transitionSlice } from "./transitionSlice"
 // import types
 import { Provider_I } from "../@types/custom"
 
@@ -21,8 +21,8 @@ import { Provider_I } from "../@types/custom"
 const store = configureStore({
 	reducer: {
 		category: categorySlice.reducer,
-		transition: transitionSlice.reducer,
 		shopify: shopifySlice.reducer,
+		transition: transitionSlice.reducer,
 	},
 })
 

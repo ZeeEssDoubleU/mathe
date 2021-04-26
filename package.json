@@ -16,6 +16,7 @@
 		"test": "yarn type-check",
 		"type-check": "tsc --watch",
 		"clean": "gatsby clean && yarn dev",
+		"clean-build": "gatsby clean && gatsby build && gatsby serve",
 		"deep-clean": "gatsby clean && rm -R node_modules && yarn && yarn dev",
 		"generate": "graphql-codegen --config codegen.yml",
 		"preload-fonts": "gatsby-preload-fonts",

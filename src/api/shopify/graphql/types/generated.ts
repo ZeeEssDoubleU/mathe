@@ -4979,6 +4979,8 @@ export type LineItemDetailsFragment = { id: string, title: string, quantity: num
 
 export type CheckoutDetailsFragment = { id: string, webUrl: any, createdAt: any, updatedAt: any, completedAt?: Maybe<any>, lineItems: { edges: Array<{ node: LineItemDetailsFragment }> }, subtotalPriceV2: CurrencyFragment, totalTaxV2: CurrencyFragment, totalPriceV2: CurrencyFragment };
 
+export type Product_CollectionByHandleFragment = { node: { handle: string, totalInventory?: Maybe<number> } };
+
 export type CheckoutCreateMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5020,7 +5022,7 @@ export type CollectionByHandleQueryVariables = Exact<{
 }>;
 
 
-export type CollectionByHandleQuery = { collectionByHandle?: Maybe<{ handle: string, products: { edges: Array<{ node: { handle: string, totalInventory?: Maybe<number> } }> } }> };
+export type CollectionByHandleQuery = { collectionByHandle?: Maybe<{ handle: string, products: { edges: Array<Product_CollectionByHandleFragment> } }> };
 
 export const LineItemDetailsFragment = `
     fragment lineItemDetails on CheckoutLineItem {
@@ -5070,6 +5072,14 @@ export const CheckoutDetailsFragment = `
 }
     ${LineItemDetailsFragment}
 ${CurrencyFragment}`;
+export const Product_CollectionByHandleFragment = `
+    fragment product_collectionByHandle on ProductEdge {
+  node {
+    handle
+    totalInventory
+  }
+}
+    `;
 export const CheckoutCreateDocument = `
     mutation checkoutCreate {
   checkoutCreate(input: {}) {
@@ -5178,15 +5188,12 @@ export const CollectionByHandleDocument = `
     handle
     products(first: 250) {
       edges {
-        node {
-          handle
-          totalInventory
-        }
+        ...product_collectionByHandle
       }
     }
   }
 }
-    `;
+    ${Product_CollectionByHandleFragment}`;
 export const useCollectionByHandleQuery = <
       TData = CollectionByHandleQuery,
       TError = unknown

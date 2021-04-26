@@ -18162,26 +18162,22 @@ export type GatsbyDatoCmsFaviconMetaTagsFragment = { tags: Maybe<any> };
 
 export type GatsbyDatoCmsSeoMetaTagsFragment = { tags: Maybe<any> };
 
+export type BackgroundImageFragment = {
+  alt: Maybe<string>;
+  title: Maybe<string>;
+  gatsbyImageData: Maybe<any>;
+};
+
+export type BackgroundCategoryFragment = {
+  slug: Maybe<string>;
+  title: Maybe<string>;
+  images: Maybe<{ imageGallery: Maybe<Array<Maybe<BackgroundImageFragment>>> }>;
+};
+
 export type BackgroundComponentQueryVariables = Exact<{ [key: string]: never }>;
 
 export type BackgroundComponentQuery = {
-  allCategories_datocms: {
-    nodes: Array<{
-      slug: Maybe<string>;
-      title: Maybe<string>;
-      images: Maybe<{
-        imageGallery: Maybe<
-          Array<
-            Maybe<{
-              alt: Maybe<string>;
-              title: Maybe<string>;
-              gatsbyImageData: Maybe<any>;
-            }>
-          >
-        >;
-      }>;
-    }>;
-  };
+  allCategories_datocms: { nodes: Array<BackgroundCategoryFragment> };
 };
 
 export type GetPaymentSettingsQueryVariables = Exact<{ [key: string]: never }>;

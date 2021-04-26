@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { useAppDispatch, useAppSelector } from "./index"
+// import types
+import { Product_CollectionByHandleFragment } from "../api/shopify/graphql/types"
 
 // ************
 // types
@@ -45,11 +47,25 @@ export const shopifySlice = createSlice({
 		},
 		updateInventory: (
 			state,
-			action: PayloadAction<ShopifyStateI["inventory"]>,
+			action: PayloadAction<Product_CollectionByHandleFragment[]>,
 		) => {
+			const products = action.payload
+
+			// map product counts by handle into hash table
+			const inventoryMap = products?.reduce<ShopifyStateI["inventory"]>(
+				(table, product) => {
+					const handle = product.node.handle
+					const totalInventory = product.node.totalInventory || 0
+
+					table[handle] = totalInventory
+					return table
+				},
+				{},
+			)
+
 			state.inventory = {
 				...state.inventory,
-				...action.payload,
+				...inventoryMap,
 			}
 		},
 	},
@@ -76,7 +92,7 @@ export function useShopify() {
 			dispatch(toggleCart(action)),
 		setCheckoutId: (action: ShopifyStateI["checkoutId"]) =>
 			dispatch(setCheckoutId(action)),
-		updateInventory: (action: ShopifyStateI["inventory"]) =>
+		updateInventory: (action: Product_CollectionByHandleFragment[]) =>
 			dispatch(updateInventory(action)),
 	}
 }

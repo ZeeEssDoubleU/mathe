@@ -1,62 +1,39 @@
 import React, {
 	useCallback,
-	useState,
 	useLayoutEffect,
 	ReactElement,
+	useEffect,
 } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { random } from "lodash"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 // import components
 import BackgroundMap from "./BackgroundMap"
 // import store
 import { useCategory } from "../../redux"
-
-// ************
-// types
-// ************
-
-export interface BackgroundQuery_I {
-	allCategories_datocms: {
-		nodes: {
-			slug: string
-			title: string
-			images: {
-				imageGallery: {
-					alt: string
-					title: string
-					gatsbyImageData: IGatsbyImageData
-				}[]
-			}
-		}[]
-	}
-}
-export interface Background_I {
-	path: string
-}
+import { BackgroundComponentQuery } from "../../graphql/types"
 
 // ************
 // component
 // ************
 
-export default function Background({ path }: Background_I): ReactElement {
-	const { allCategories_datocms }: BackgroundQuery_I = useStaticQuery(query)
-	const categories = allCategories_datocms.nodes
-	const state_category = useCategory()
-
-	const [categoryIndex, setCategoryIndex] = useState<number>(
-		selectedCategoryIndex(),
+export default function Background(): ReactElement {
+	const { allCategories_datocms }: BackgroundComponentQuery = useStaticQuery(
+		query,
 	)
-	const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
+	const categories = allCategories_datocms.nodes
+	const {
+		selectedCategory,
+		selectedCategoryGallery,
+		setBackgroundMap,
+		backgroundIndex,
+		setBackgroundIndex,
+	} = useCategory()
 
-	// match selectedCategoryIndex to product image category
-	function selectedCategoryIndex(): number {
-		return categories.findIndex(
-			(category) => category.slug === state_category.selected,
-		)
-	}
+	useLayoutEffect(() => {
+		setBackgroundMap(categories)
+	}, [])
 
-	// cycle through landing background
+	// cycle through selected category background images
 	const cycleBg = useCallback(
 		(selectedGalleryLength: number): void => {
 			// pick new random index
@@ -74,38 +51,24 @@ export default function Background({ path }: Background_I): ReactElement {
 		[backgroundIndex],
 	)
 
-	// effect to set background category
+	// effect cycles through category background images
 	// effect resets cycle upon changing selectedCategory
-	useLayoutEffect(() => {
-		const storedIndex: number = selectedCategoryIndex()
-		const selectedGalleryLength: number =
-			categories[storedIndex].images.imageGallery.length
-
-		// set storedIndex on page or selectedCategory change
-		setCategoryIndex(storedIndex)
-
-		// set backgroundIndex if greater than or equal to new selectedGalleryLength
-		// [x, y, z].length === 3.  Index of 3 does not exist.
-		if (backgroundIndex >= selectedGalleryLength) {
-			cycleBg(selectedGalleryLength)
+	useEffect(() => {
+		// if backgroundIndex >= new selectedCategoryGallery.length, reset backgroundIndex
+		if (backgroundIndex >= selectedCategoryGallery?.length) {
+			cycleBg(selectedCategoryGallery.length)
 		}
 		// set cycle interval
 		const backgroundInterval = setInterval(
-			() => cycleBg(selectedGalleryLength),
+			() => cycleBg(selectedCategoryGallery.length),
 			8000,
 		)
 
 		// clear interval upon changing product category
 		return () => clearInterval(backgroundInterval)
-	}, [path, state_category.selected, backgroundIndex, cycleBg, categories])
+	}, [selectedCategory, selectedCategoryGallery, backgroundIndex, cycleBg])
 
-	return (
-		<BackgroundMap
-			categories={categories}
-			categoryIndex={categoryIndex}
-			backgroundIndex={backgroundIndex}
-		/>
-	)
+	return <BackgroundMap categories={categories} />
 }
 
 // ************
@@ -113,21 +76,27 @@ export default function Background({ path }: Background_I): ReactElement {
 // ************
 
 const query = graphql`
+	fragment BackgroundImage on DatoCmsFileField {
+		alt
+		title
+		gatsbyImageData(
+			layout: FULL_WIDTH
+			imgixParams: { auto: "format, compress", maxW: 2560 }
+		)
+	}
+	fragment BackgroundCategory on DatoCmsCategory {
+		slug
+		title
+		images {
+			imageGallery {
+				...BackgroundImage
+			}
+		}
+	}
 	query BackgroundComponent {
 		allCategories_datocms: allDatoCmsCategory {
 			nodes {
-				slug
-				title
-				images {
-					imageGallery {
-						alt
-						title
-						gatsbyImageData(
-							layout: FULL_WIDTH
-							imgixParams: { auto: "format, compress", maxW: 2560 }
-						)
-					}
-				}
+				...BackgroundCategory
 			}
 		}
 	}
