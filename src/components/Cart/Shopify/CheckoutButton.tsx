@@ -58,7 +58,6 @@ const Container = styled.button<{ disabled: boolean }>`
 		color: white;
 
 		cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-		pointer-events: auto;
 
 		svg {
 			height: 16px;
