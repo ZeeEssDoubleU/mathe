@@ -61,7 +61,7 @@ export default {
 			resolve: "gatsby-plugin-google-tagmanager",
 			options: {
 				id: process.env.GATSBY_GTM_ID,
-				includeInDevelopment: true,
+				includeInDevelopment: false,
 				defaultDataLayer: { platform: "gatsby" },
 			},
 		},
