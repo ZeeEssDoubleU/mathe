@@ -14345,10 +14345,10 @@ export interface Query {
   allShopifyProductVariant: ShopifyProductVariantConnection;
   shopifyProduct: Maybe<ShopifyProduct>;
   allShopifyProduct: ShopifyProductConnection;
-  shopifyShop: Maybe<ShopifyShop>;
-  allShopifyShop: ShopifyShopConnection;
   shopifyCollection: Maybe<ShopifyCollection>;
   allShopifyCollection: ShopifyCollectionConnection;
+  shopifyShop: Maybe<ShopifyShop>;
+  allShopifyShop: ShopifyShopConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin: Maybe<SitePlugin>;
@@ -15271,24 +15271,6 @@ export interface QueryAllShopifyProductArgs {
   limit: Maybe<Scalars["Int"]>;
 }
 
-export interface QueryShopifyShopArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  name: Maybe<StringQueryOperatorInput>;
-  description: Maybe<StringQueryOperatorInput>;
-  moneyFormat: Maybe<StringQueryOperatorInput>;
-  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
-}
-
-export interface QueryAllShopifyShopArgs {
-  filter: Maybe<ShopifyShopFilterInput>;
-  sort: Maybe<ShopifyShopSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
 export interface QueryShopifyCollectionArgs {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -15306,6 +15288,24 @@ export interface QueryShopifyCollectionArgs {
 export interface QueryAllShopifyCollectionArgs {
   filter: Maybe<ShopifyCollectionFilterInput>;
   sort: Maybe<ShopifyCollectionSortInput>;
+  skip: Maybe<Scalars["Int"]>;
+  limit: Maybe<Scalars["Int"]>;
+}
+
+export interface QueryShopifyShopArgs {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  moneyFormat: Maybe<StringQueryOperatorInput>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
+}
+
+export interface QueryAllShopifyShopArgs {
+  filter: Maybe<ShopifyShopFilterInput>;
+  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }

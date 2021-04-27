@@ -12,26 +12,20 @@ import { useCheckout } from "../../../api/shopify"
 export default function CheckoutButton(): ReactElement {
 	const shopifyCheckoutQuery = useCheckout()
 	const checkoutUrl = shopifyCheckoutQuery.checkout?.webUrl
+	const checkoutDisabled = !checkoutUrl || shopifyCheckoutQuery.isCartEmpty
 
 	return (
 		<Container
-			disabled={!checkoutUrl || shopifyCheckoutQuery.isCartEmpty}
+			disabled={checkoutDisabled}
+			onClick={(e) => checkoutDisabled && e.preventDefault()}
+			href={checkoutUrl}
 			className="gtm checkout-link"
 		>
-			<a
-				href={
-					!checkoutUrl || shopifyCheckoutQuery.isCartEmpty
-						? null
-						: checkoutUrl
-				}
-				className="gtm checkout-link"
-			>
-				<span className="spacer" />
-				<span className="shift">Checkout</span>
-				<span className="spacer shift">
-					<Icon name="forward-chevron" />
-				</span>
-			</a>
+			<span className="spacer" />
+			<span className="shift">Checkout</span>
+			<span className="spacer shift">
+				<Icon name="forward-chevron" />
+			</span>
 		</Container>
 	)
 }
@@ -40,7 +34,12 @@ export default function CheckoutButton(): ReactElement {
 // styles
 // ************
 
-const Container = styled.button<{ disabled: boolean }>`
+const Container = styled.a<{ disabled: boolean }>`
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	justify-items: center;
+	color: white;
+
 	width: 100%;
 	padding: 16px 32px;
 	margin-top: 8px;
@@ -50,30 +49,23 @@ const Container = styled.button<{ disabled: boolean }>`
 	background: ${({ theme }) => theme.color.app_green};
 	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
 
-	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+	cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+	pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
-	a {
-		display: grid;
-		grid-template-columns: 1fr auto 1fr;
-		color: white;
+	svg {
+		height: 16px;
+		width: 16px;
+		fill: white;
+		vertical-align: middle;
+	}
 
-		cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-
-		svg {
-			height: 16px;
-			width: 16px;
-			fill: white;
-			vertical-align: middle;
-		}
-
-		.shift {
-			transition: transform 300ms;
-		}
+	.shift {
+		transition: transform 300ms;
 	}
 
 	&:hover {
 		.shift {
-			transform: translateX(${(props) => (props.disabled ? 0 : "5px")});
+			transform: translateX(${({ disabled }) => (disabled ? 0 : "5px")});
 		}
 	}
 `
