@@ -57,19 +57,14 @@ export default {
 		"gatsby-transformer-json",
 		"gatsby-plugin-loadable-components-ssr",
 		"gatsby-plugin-svgr",
-		// {
-		// 	resolve: "gatsby-plugin-google-tagmanager",
-		// 	options: {
-		// 		id: process.env.GATSBY_GTM_ID,
-		// 		includeInDevelopment: false,
-		// 		defaultDataLayer: function () {
-		// 			return {
-		// 				platform: "gatsby",
-		// 				pageType: window.pageType,
-		// 			}
-		// 		},
-		// 	},
-		// },
+		{
+			resolve: "gatsby-plugin-google-tagmanager",
+			options: {
+				id: process.env.GATSBY_GTM_ID,
+				includeInDevelopment: true,
+				defaultDataLayer: { platform: "gatsby" },
+			},
+		},
 		{
 			resolve: `gatsby-plugin-webfonts`,
 			options: {

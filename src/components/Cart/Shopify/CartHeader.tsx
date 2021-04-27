@@ -16,7 +16,7 @@ export default function CartHeader(): ReactElement {
 		<Container>
 			<h2>Cart Summary</h2>
 			<button
-				className="close"
+				className="gtm close-cart"
 				aria-label="close cart"
 				onClick={() => shopifyState.toggleCart(false)}
 			>
@@ -45,7 +45,7 @@ const Container = styled.header`
 		font-size: 18px;
 	}
 
-	.close {
+	.close-cart {
 		display: grid;
 		align-items: center;
 

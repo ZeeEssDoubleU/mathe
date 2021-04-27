@@ -77,12 +77,14 @@ export default function ProductListingHeader({
 				<Price>
 					${priceNumber.toFixed(2)} / {weight} {abbreviate(weightUnit)}
 				</Price>
-				<BuyButton
+				<AddToCart
 					disabled={!shopifyState.shopReady || !inStock}
 					onClick={addLineItem}
+					className="gtm add-to-cart"
+					product={handle}
 				>
 					{displayButtonText()}
-				</BuyButton>
+				</AddToCart>
 			</BuyBlock>
 		</HeaderBlock>
 	)
@@ -99,7 +101,10 @@ const BuyBlock = styled.div`
 	grid-template-columns: auto auto;
 	margin: 12px 0;
 `
-const BuyButton = styled(CategoryButton)<{ disabled: boolean }>`
+const AddToCart = styled(CategoryButton)<{
+	disabled: boolean
+	product: string
+}>`
 	border: 1px solid ${({ theme }) => theme.color.app_green};
 	color: ${(props) => (props.disabled ? props.theme.color.disabled : "white")};
 

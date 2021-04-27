@@ -24,7 +24,11 @@ export default function ScrollToTop({
 	scrollElem,
 }: ScrollToTop_I): ReactElement {
 	return (
-		<Container show={show} onClick={() => scroll_top(scrollElem.current)}>
+		<Container
+			show={show}
+			onClick={() => scroll_top(scrollElem.current)}
+			className="gtm scroll-top"
+		>
 			<Icon name="up-chevron" />
 		</Container>
 	)

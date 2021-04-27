@@ -14345,10 +14345,10 @@ export interface Query {
   allShopifyProductVariant: ShopifyProductVariantConnection;
   shopifyProduct: Maybe<ShopifyProduct>;
   allShopifyProduct: ShopifyProductConnection;
-  shopifyCollection: Maybe<ShopifyCollection>;
-  allShopifyCollection: ShopifyCollectionConnection;
   shopifyShop: Maybe<ShopifyShop>;
   allShopifyShop: ShopifyShopConnection;
+  shopifyCollection: Maybe<ShopifyCollection>;
+  allShopifyCollection: ShopifyCollectionConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin: Maybe<SitePlugin>;
@@ -15271,6 +15271,24 @@ export interface QueryAllShopifyProductArgs {
   limit: Maybe<Scalars["Int"]>;
 }
 
+export interface QueryShopifyShopArgs {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  moneyFormat: Maybe<StringQueryOperatorInput>;
+  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
+}
+
+export interface QueryAllShopifyShopArgs {
+  filter: Maybe<ShopifyShopFilterInput>;
+  sort: Maybe<ShopifyShopSortInput>;
+  skip: Maybe<Scalars["Int"]>;
+  limit: Maybe<Scalars["Int"]>;
+}
+
 export interface QueryShopifyCollectionArgs {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -15288,24 +15306,6 @@ export interface QueryShopifyCollectionArgs {
 export interface QueryAllShopifyCollectionArgs {
   filter: Maybe<ShopifyCollectionFilterInput>;
   sort: Maybe<ShopifyCollectionSortInput>;
-  skip: Maybe<Scalars["Int"]>;
-  limit: Maybe<Scalars["Int"]>;
-}
-
-export interface QueryShopifyShopArgs {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  name: Maybe<StringQueryOperatorInput>;
-  description: Maybe<StringQueryOperatorInput>;
-  moneyFormat: Maybe<StringQueryOperatorInput>;
-  paymentSettings: Maybe<ShopifyShopPaymentSettingsFilterInput>;
-}
-
-export interface QueryAllShopifyShopArgs {
-  filter: Maybe<ShopifyShopFilterInput>;
-  sort: Maybe<ShopifyShopSortInput>;
   skip: Maybe<Scalars["Int"]>;
   limit: Maybe<Scalars["Int"]>;
 }
@@ -17517,6 +17517,9 @@ export enum SitePageFieldsEnum {
   pluginCreator___resolve = "pluginCreator___resolve",
   pluginCreator___name = "pluginCreator___name",
   pluginCreator___version = "pluginCreator___version",
+  pluginCreator___pluginOptions___id = "pluginCreator___pluginOptions___id",
+  pluginCreator___pluginOptions___includeInDevelopment = "pluginCreator___pluginOptions___includeInDevelopment",
+  pluginCreator___pluginOptions___defaultDataLayer___type = "pluginCreator___pluginOptions___defaultDataLayer___type",
   pluginCreator___pluginOptions___fonts___google = "pluginCreator___pluginOptions___fonts___google",
   pluginCreator___pluginOptions___name = "pluginCreator___pluginOptions___name",
   pluginCreator___pluginOptions___short_name = "pluginCreator___pluginOptions___short_name",
@@ -17733,6 +17736,10 @@ export enum SitePluginFieldsEnum {
   resolve = "resolve",
   name = "name",
   version = "version",
+  pluginOptions___id = "pluginOptions___id",
+  pluginOptions___includeInDevelopment = "pluginOptions___includeInDevelopment",
+  pluginOptions___defaultDataLayer___type = "pluginOptions___defaultDataLayer___type",
+  pluginOptions___defaultDataLayer___value___platform = "pluginOptions___defaultDataLayer___value___platform",
   pluginOptions___fonts___google = "pluginOptions___fonts___google",
   pluginOptions___fonts___google___family = "pluginOptions___fonts___google___family",
   pluginOptions___fonts___google___variants = "pluginOptions___fonts___google___variants",
@@ -17879,6 +17886,9 @@ export interface SitePluginPackageJsonPeerDependenciesFilterListInput {
 }
 
 export interface SitePluginPluginOptions {
+  id: Maybe<Scalars["String"]>;
+  includeInDevelopment: Maybe<Scalars["Boolean"]>;
+  defaultDataLayer: Maybe<SitePluginPluginOptionsDefaultDataLayer>;
   fonts: Maybe<SitePluginPluginOptionsFonts>;
   name: Maybe<Scalars["String"]>;
   short_name: Maybe<Scalars["String"]>;
@@ -17918,7 +17928,28 @@ export interface SitePluginPluginOptionsApiVersionArgs {
   locale: Maybe<Scalars["String"]>;
 }
 
+export interface SitePluginPluginOptionsDefaultDataLayer {
+  type: Maybe<Scalars["String"]>;
+  value: Maybe<SitePluginPluginOptionsDefaultDataLayerValue>;
+}
+
+export interface SitePluginPluginOptionsDefaultDataLayerFilterInput {
+  type: Maybe<StringQueryOperatorInput>;
+  value: Maybe<SitePluginPluginOptionsDefaultDataLayerValueFilterInput>;
+}
+
+export interface SitePluginPluginOptionsDefaultDataLayerValue {
+  platform: Maybe<Scalars["String"]>;
+}
+
+export interface SitePluginPluginOptionsDefaultDataLayerValueFilterInput {
+  platform: Maybe<StringQueryOperatorInput>;
+}
+
 export interface SitePluginPluginOptionsFilterInput {
+  id: Maybe<StringQueryOperatorInput>;
+  includeInDevelopment: Maybe<BooleanQueryOperatorInput>;
+  defaultDataLayer: Maybe<SitePluginPluginOptionsDefaultDataLayerFilterInput>;
   fonts: Maybe<SitePluginPluginOptionsFontsFilterInput>;
   name: Maybe<StringQueryOperatorInput>;
   short_name: Maybe<StringQueryOperatorInput>;

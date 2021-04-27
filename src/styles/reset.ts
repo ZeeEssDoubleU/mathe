@@ -73,8 +73,14 @@ export default createGlobalStyle`
    button,
    textarea,
    select {
-   font: inherit;
+      font: inherit;
    }
+
+   /* // Prevent link and button descendants from being target of click events (for GTM)
+   a *, 
+   button * {
+      pointer-events: none;
+   } */
 
    /* Remove all animations and transitions for people that prefer not to see them */
    @media (prefers-reduced-motion: reduce) {

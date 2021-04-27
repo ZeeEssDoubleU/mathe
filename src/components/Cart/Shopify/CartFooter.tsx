@@ -12,14 +12,16 @@ import { useCheckout } from "../../../api/shopify"
 
 export default function CartFooter(): ReactElement {
 	const shopifyCheckoutQuery = useCheckout()
-	const subtotalPrice = shopifyCheckoutQuery.checkout?.subtotalPriceV2?.amount
+	const subtotalPrice = Number(
+		shopifyCheckoutQuery.checkout?.subtotalPriceV2?.amount,
+	)
 
 	return (
 		<Container>
 			<Subtotal>
 				<span>Subtotal</span>
 				<span>
-					{Number(subtotalPrice) === 0 ? "──" : `$${subtotalPrice}`}
+					{subtotalPrice === 0 ? "──" : `$${subtotalPrice.toFixed(2)}`}
 				</span>
 			</Subtotal>
 			{/* <Tax>

@@ -12,12 +12,13 @@ import { useCheckout } from "../../../api/shopify"
 // component
 // ************
 
-export default function CartTab(): ReactElement {
+export default function CartToggle(): ReactElement {
 	const shopifyState = useShopify()
 	const shopifyCheckoutQuery = useCheckout()
 
 	return (
 		<Container
+			className="gtm toggle-cart"
 			onClick={() => shopifyState.toggleCart(!shopifyState.isCartOpen)}
 		>
 			<Icon name="cart-zoom" />

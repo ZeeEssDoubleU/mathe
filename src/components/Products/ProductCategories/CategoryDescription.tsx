@@ -33,7 +33,10 @@ export default function ProductCategoryDescription({
 					__html: sanitizeHtml(description),
 				}}
 			/>
-			<Expand onClick={() => expand_set(!expand)}>
+			<Expand
+				onClick={() => expand_set(!expand)}
+				className="gtm category show-more"
+			>
 				{expand === true ? "show less" : "show more"}
 			</Expand>
 		</>

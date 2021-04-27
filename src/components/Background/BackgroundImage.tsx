@@ -26,7 +26,7 @@ export default function BackgroundImage({
 	const { backgroundQueue } = useCategory()
 	// component state
 	const [hidden, setHidden] = useState<boolean>(true)
-	const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+	const [imageloaded, setImageLoaded] = useState<boolean>(false)
 	const showBg = backgroundQueue[0] === bgIndex
 
 	// effect sets hidden state, which sets hidden attribute
@@ -38,12 +38,12 @@ export default function BackgroundImage({
 		<FadeAnim
 			title={imageData.title}
 			show={showBg}
-			data-bgIndex={bgIndex}
+			data-bgindex={bgIndex}
 			data-hidden={hidden}
 		>
 			<Container
 				title={imageData.title}
-				data-bgIndex={bgIndex}
+				data-bgindex={bgIndex}
 				hidden={hidden}
 			>
 				<Image
@@ -51,7 +51,7 @@ export default function BackgroundImage({
 					alt={imageData.alt}
 					image={imageData.gatsbyImageData}
 					onLoad={() => setImageLoaded(true)}
-					imageLoaded={String(imageLoaded)}
+					imageloaded={String(imageloaded)}
 					loading={showBg ? "eager" : "lazy"}
 					hidden={hidden}
 				/>
@@ -78,15 +78,15 @@ const Container = styled.div`
 	width: 100%;
 	z-index: ${({ theme }) => theme.zIndex.bottom};
 `
-const Image = styled(GatsbyImage)<{ imageLoaded: string }>`
+const Image = styled(GatsbyImage)<{ imageloaded: string }>`
 	position: absolute;
 	left: 0;
 	top: 0;
 	height: 100%;
 	width: 100%;
 	// only fade in once image loaded
-	visibility: ${(props) => (props.imageLoaded ? "visible" : "hidden")};
-	opacity: ${(props) => (props.imageLoaded === "true" ? 1 : 0)};
+	visibility: ${(props) => (props.imageloaded ? "visible" : "hidden")};
+	opacity: ${(props) => (props.imageloaded === "true" ? 1 : 0)};
 	transition: ${({ theme: { duration } }) =>
 		`opacity ${duration.bg_fade}ms, visibility ${duration.bg_fade}ms`};
 `

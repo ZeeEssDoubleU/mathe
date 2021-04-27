@@ -51,7 +51,11 @@ export default function ProductListing({
 	const tagMap: ReactElement[] = relevantTags.map((tag, tagIndex) => {
 		// DISPLAY category tags for each product
 		return (
-			<Link to={`/products/${tag.slug}`} key={tagIndex}>
+			<Link
+				key={tagIndex}
+				to={`/products/${tag.slug}`}
+				className="gtm listing-tag"
+			>
 				<StyledButton key={tagIndex}>{tag.title}</StyledButton>
 			</Link>
 		)
