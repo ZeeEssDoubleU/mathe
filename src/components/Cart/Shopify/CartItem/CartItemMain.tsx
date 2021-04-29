@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icons/Icon"
+import Icon from "../../../Icon"
 // import store / types
-import { CartItemI } from "../../../api/shopify/graphql/types"
-import { useCheckout, useCheckoutMutation } from "../../../api/shopify"
+import { CartItemI } from "../../../../api/shopify/graphql/types"
+import { useCheckout, useCheckoutMutation } from "../../../../api/shopify"
 
 // ************
 // component

@@ -5,13 +5,13 @@ import { sortBy } from "lodash"
 // import components
 import Description from "./CategoryDescription"
 // import types
-import { ProductCollectionBySlugQuery } from "../../../graphql/types/gatsby-generated"
+import { ProductCollectionBySlugQuery } from "../../../../graphql/types/gatsby-generated"
 // import styles
 import {
 	CategoryButton,
 	CategoryNav,
 	ContentHeader,
-} from "../../../styles/elements"
+} from "../../../../styles/elements"
 
 // ************
 // types

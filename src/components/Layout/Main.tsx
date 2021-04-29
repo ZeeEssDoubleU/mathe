@@ -1,7 +1,7 @@
 import React, { useRef, useState, ReactElement, ReactChild } from "react"
 import styled from "styled-components"
 // import components
-import SEO from "../SEO"
+import SEO from "../elements/SEO"
 import Hero from "./Hero"
 import ScrollToTop from "../elements/ScrollToTop"
 // import styles

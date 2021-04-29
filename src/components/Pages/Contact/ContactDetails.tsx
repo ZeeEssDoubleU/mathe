@@ -1,34 +1,21 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../Icons/Icon"
-import ExternalLink from "../elements/CustomLink"
-
-// ************
-// types
-// ************
-
-export interface ContactDetails_I {
-	elem: {
-		internal: { type: "DatoCmsContactInfo" }
-		header: string
-		subHeader: string
-		htmlEditor: string
-		address: string
-		phone: string
-		email: string
-		facebook: string
-		instagram: string
-	}
-}
+import Icon from "../../Icon"
+import ExternalLink from "../../elements/CustomLink"
+import { ContactInfoFragment } from "../../../graphql/types"
 
 // ************
 // component
 // ************
 
-export default function ContactDetails(props: ContactDetails_I): ReactElement {
-	const { address, phone, email, facebook, instagram } = props.elem
-
+export default function ContactDetails({
+	address,
+	phone,
+	email,
+	facebook,
+	instagram,
+}: ContactInfoFragment): ReactElement {
 	return (
 		<List>
 			{address && (

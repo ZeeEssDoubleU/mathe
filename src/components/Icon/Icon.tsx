@@ -2,49 +2,53 @@ import React, { ReactElement } from "react"
 import loadable from "@loadable/component"
 
 // import icons (from icons folder - local file system)
-const Back = loadable.lib(() => import("./back.svg"))
-const BackArrow = loadable.lib(() => import("./left.svg"))
-const BackChevron = loadable.lib(() => import("./left-chevron.svg"))
-const Cart = loadable.lib(() => import("./cart-checkered.svg"))
-const CartZoom = loadable.lib(() => import("./cart-zoom.svg"))
-const Email = loadable.lib(() => import("./envelope-neat.svg"))
-const Instagram = loadable.lib(() => import("./instagram-simple.svg"))
-const Facebook = loadable.lib(() => import("./facebook.svg"))
-const ForwardArrow = loadable.lib(() => import("./right.svg"))
-const ForwardChevron = loadable.lib(() => import("./right-chevron.svg"))
-const Globe = loadable.lib(() => import("./globe.svg"))
-const Message = loadable.lib(() => import("./smartphone-text.svg"))
-const Messenger = loadable.lib(() => import("./messenger-rect.svg"))
-const Minus = loadable.lib(() => import("./minus.svg"))
-const Plus = loadable.lib(() => import("./plus.svg"))
-const Pencil = loadable.lib(() => import("./pencil.svg"))
-const Phone = loadable.lib(() => import("./phone-ring.svg"))
-const Send = loadable.lib(() => import("./forward.svg"))
-const Tea = loadable.lib(() => import("./tea.svg"))
-const Trashcan = loadable.lib(() => import("./trashcan.svg"))
-const UpArrow = loadable.lib(() => import("./up-arrow.svg"))
-const UpChevron = loadable.lib(() => import("./up-chevron.svg"))
-const UpChevronDouble = loadable.lib(() => import("./up-chevron-double.svg"))
+const Back = loadable.lib(() => import("./icons/back.svg"))
+const BackArrow = loadable.lib(() => import("./icons/left.svg"))
+const BackChevron = loadable.lib(() => import("./icons/left-chevron.svg"))
+const Cart = loadable.lib(() => import("./icons/cart-checkered.svg"))
+const CartZoom = loadable.lib(() => import("./icons/cart-zoom.svg"))
+const Email = loadable.lib(() => import("./icons/envelope-neat.svg"))
+const Instagram = loadable.lib(() => import("./icons/instagram-simple.svg"))
+const Facebook = loadable.lib(() => import("./icons/facebook.svg"))
+const ForwardArrow = loadable.lib(() => import("./icons/right.svg"))
+const ForwardChevron = loadable.lib(() => import("./icons/right-chevron.svg"))
+const Globe = loadable.lib(() => import("./icons/globe.svg"))
+const Message = loadable.lib(() => import("./icons/smartphone-text.svg"))
+const Messenger = loadable.lib(() => import("./icons/messenger-rect.svg"))
+const Minus = loadable.lib(() => import("./icons/minus.svg"))
+const Plus = loadable.lib(() => import("./icons/plus.svg"))
+const Pencil = loadable.lib(() => import("./icons/pencil.svg"))
+const Phone = loadable.lib(() => import("./icons/phone-ring.svg"))
+const Send = loadable.lib(() => import("./icons/forward.svg"))
+const Tea = loadable.lib(() => import("./icons/tea.svg"))
+const Trashcan = loadable.lib(() => import("./icons/trashcan.svg"))
+const UpArrow = loadable.lib(() => import("./icons/up-arrow.svg"))
+const UpChevron = loadable.lib(() => import("./icons/up-chevron.svg"))
+const UpChevronDouble = loadable.lib(
+	() => import("./icons/up-chevron-double.svg"),
+)
 // import {ReactComponent as shopify } icons
-const CardAmex = loadable.lib(() => import("./shopify/card-amex.svg"))
+const CardAmex = loadable.lib(() => import("./icons/shopify/card-amex.svg"))
 const CardDinersClub = loadable.lib(
-	() => import("./shopify/card-dinersclub.svg"),
+	() => import("./icons/shopify/card-dinersclub.svg"),
 )
-const CardDiscover = loadable.lib(() => import("./shopify/card-discover.svg"))
-const CardElo = loadable.lib(() => import("./shopify/card-elo.svg"))
-const CardJcb = loadable.lib(() => import("./shopify/card-jcb.svg"))
+const CardDiscover = loadable.lib(
+	() => import("./icons/shopify/card-discover.svg"),
+)
+const CardElo = loadable.lib(() => import("./icons/shopify/card-elo.svg"))
+const CardJcb = loadable.lib(() => import("./icons/shopify/card-jcb.svg"))
 const CardMastercard = loadable.lib(
-	() => import("./shopify/card-mastercard.svg"),
+	() => import("./icons/shopify/card-mastercard.svg"),
 )
-const CardVisa = loadable.lib(() => import("./shopify/card-visa.svg"))
+const CardVisa = loadable.lib(() => import("./icons/shopify/card-visa.svg"))
 const WalletApplePay = loadable.lib(
-	() => import("./shopify/wallet-applypay.svg"),
+	() => import("./icons/shopify/wallet-applypay.svg"),
 )
 const WalletGooglePay = loadable.lib(
-	() => import("./shopify/wallet-googlepay.svg"),
+	() => import("./icons/shopify/wallet-googlepay.svg"),
 )
 const WalletShopifyPay = loadable.lib(
-	() => import("./shopify/wallet-shopifypay.svg"),
+	() => import("./icons/shopify/wallet-shopifypay.svg"),
 )
 
 // ************

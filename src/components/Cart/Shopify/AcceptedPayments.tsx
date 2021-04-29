@@ -2,7 +2,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icons/Icon"
+import Icon from "../../Icon"
 // import types
 import { GetPaymentSettingsQuery } from "../../../graphql/types"
 

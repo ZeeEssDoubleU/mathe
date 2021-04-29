@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icons/Icon"
+import Icon from "../../Icon"
 // import store
 import { useCheckout } from "../../../api/shopify"
 

@@ -106,10 +106,10 @@ const Inner = styled.div`
 	// TODO: fix hover anim
 	&:hover {
 		.left {
-			transform: translateY(-50%) translateX(33%) rotate(45deg);
+			transform: translateY(-50%) translateX(34.5%) rotate(45deg);
 		}
 		.right {
-			transform: translateY(-50%) translateX(-33%) rotate(-45deg);
+			transform: translateY(-50%) translateX(-34.5%) rotate(-45deg);
 		}
 	}
 `

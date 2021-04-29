@@ -2,9 +2,9 @@ import React, { ReactElement, useState } from "react"
 import styled from "styled-components"
 import sanitizeHtml from "sanitize-html"
 // import types
-import { DatoCmsCategoryFragment } from "../../../graphql/types"
+import { DatoCmsCategoryFragment } from "../../../../graphql/types"
 // import styles
-import { CategoryButton, ContentBody } from "../../../styles/elements"
+import { CategoryButton, ContentBody } from "../../../../styles/elements"
 
 // ************
 // types

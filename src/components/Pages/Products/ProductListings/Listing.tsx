@@ -10,9 +10,9 @@ import {
 	ProductCollectionBySlugQuery,
 	DatoCmsProductFragment,
 	ShopifyProductFragment,
-} from "../../../graphql/types"
+} from "../../../../graphql/types"
 // import styles
-import { CategoryButton, CategoryNav } from "../../../styles/elements"
+import { CategoryButton, CategoryNav } from "../../../../styles/elements"
 
 // ************
 // types

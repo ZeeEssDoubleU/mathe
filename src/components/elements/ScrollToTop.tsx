@@ -1,7 +1,7 @@
 import React, { ReactElement, RefObject } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../Icons/Icon"
+import Icon from "../Icon"
 // import styles / anim
 import { ModalButton } from "../../styles/elements"
 import { scroll_top } from "../../utils/animations"

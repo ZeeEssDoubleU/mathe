@@ -5,13 +5,13 @@ import {
 	DatoCmsCategoryFragment,
 	ShopifyProductFragment,
 	ShopifyProductVariantFragment,
-} from "../../../graphql/types"
+} from "../../../../graphql/types"
 // import styles
-import { CategoryButton } from "../../../styles/elements"
+import { CategoryButton } from "../../../../styles/elements"
 // import store / queries / utils
-import { useShopify } from "../../../redux"
-import { abbreviate } from "../../../utils"
-import { useCheckoutMutation } from "../../../api/shopify"
+import { useShopify } from "../../../../redux"
+import { abbreviate } from "../../../../utils"
+import { useCheckoutMutation } from "../../../../api/shopify"
 
 // ************
 // types

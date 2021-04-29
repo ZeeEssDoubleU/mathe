@@ -1,15 +1,9 @@
-import React, {
-	useState,
-	ReactElement,
-	FormEvent,
-	ChangeEvent,
-	useRef,
-} from "react"
+import React, { useState, ReactElement, FormEvent, ChangeEvent } from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 import axios from "axios"
 // import components
-import Icon from "../Icons/Icon"
+import Icon from "../../Icon"
 
 // ************
 // component

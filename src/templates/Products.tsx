@@ -2,58 +2,33 @@ import React, { ReactElement } from "react"
 import { graphql } from "gatsby"
 import { ProductCollectionBySlugQuery } from "../graphql/types"
 // import components
-import ProductCategories from "../components/Products/ProductCategories"
-import ProductListings from "../components/Products/ProductListings"
-import Main from "../components/Layout/Main"
-// import styles
-import { Divider, Section } from "../styles/elements"
-
-// ************
-// types
-// ************
-
-export interface ProductsI {
-	data: ProductCollectionBySlugQuery
-}
+import Products from "../components/Pages/Products"
 
 // ************
 // component
 // ************
 
-export default function Products({ data }: ProductsI): ReactElement {
-	const {
+export default function ProductsPage({
+	data: {
 		page,
 		collection_shopify,
 		allCategories_datocms,
 		category_datocms,
 		products_datocms,
-	} = data
-
+	},
+}: {
+	data: ProductCollectionBySlugQuery
+}): ReactElement {
 	return (
-		<Main
-			heroHeader={page.header}
-			heroSubheader={page.subHeader}
-			medallion={page.medallion}
-		>
-			<Section>
-				{/* all categories */}
-				<ProductCategories
-					categories={allCategories_datocms}
-					category_selected={category_datocms}
-				/>
-			</Section>
-			<Divider />
-			<Section>
-				{/* all products */}
-				<ProductListings
-					categories={allCategories_datocms}
-					category_selected={{
-						collection_shopify,
-						products_datocms,
-					}}
-				/>
-			</Section>
-		</Main>
+		<Products
+			{...{
+				page,
+				collection_shopify,
+				allCategories_datocms,
+				category_datocms,
+				products_datocms,
+			}}
+		/>
 	)
 }
 

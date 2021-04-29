@@ -4,8 +4,8 @@ import { sortBy } from "lodash"
 // import components
 import ProductListing from "./Listing"
 // import queries / types
-import { ProductCollectionBySlugQuery } from "../../../graphql/types"
-import { useInventory } from "../../../api/shopify"
+import { ProductCollectionBySlugQuery } from "../../../../graphql/types"
+import { useInventory } from "../../../../api/shopify"
 
 // ************
 // types

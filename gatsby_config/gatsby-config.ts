@@ -10,6 +10,8 @@ import shop from "./queries/shopify/shop"
 import products from "./queries/shopify/products"
 
 // creates favicon.svg and faviconShare.svg file for gatsby-plugin-manifest
+const faviconPath = "src/components/Icon/icons/favicon.svg"
+const faviconSharePath = "src/components/Icon/icons/faviconShare.svg"
 const saveIcons = async (): Promise<void> => {
 	const favicon: AxiosResponse = await axios.get(
 		"https://www.datocms-assets.com/16917/1575087444-favicon.svg",
@@ -17,18 +19,14 @@ const saveIcons = async (): Promise<void> => {
 	const faviconShare: AxiosResponse = await axios.get(
 		"https://www.datocms-assets.com/16917/1575087312-favicon-share.svg",
 	)
-	fs.writeFile("./src/components/Icons/favicon.svg", favicon.data, (err) => {
+	fs.writeFile(faviconPath, favicon.data, (err) => {
 		if (err) console.log(err)
 		else console.log("Favicon was saved!")
 	})
-	fs.writeFile(
-		"./src/components/Icons/faviconShare.svg",
-		faviconShare.data,
-		(err) => {
-			if (err) console.log(err)
-			else console.log("Shareable favicon was saved!")
-		},
-	)
+	fs.writeFile(faviconSharePath, faviconShare.data, (err) => {
+		if (err) console.log(err)
+		else console.log("Shareable favicon was saved!")
+	})
 }
 saveIcons()
 
@@ -38,7 +36,7 @@ export default {
 		titleTemplate: " | Mathé", // declared in globalSEO on DatoCMS
 		description: "Premium yerba mate and tea blends.", // declared in globalSEO on DatoCMS
 		siteUrl: "https://www.mathetea.com", // No trailing slash allowed!
-		image: "./src/components/Icons/faviconShare.svg", // declared in globalSEO on DatoCMS
+		image: "src/components/Icon/icons/faviconShare.svg", // declared in globalSEO on DatoCMS
 		themeColor: "",
 		keywords:
 			"yerba mate, tea, premium tea, premium yerba mate, healthy drink, antioxidant, organic, organic yerba mate",
@@ -95,7 +93,7 @@ export default {
 				background_color: "black",
 				theme_color: `hsla(${app_green_hsl}, 1.0)`,
 				display: "standalone",
-				icon: "./src/components/Icons/favicon.svg", // declared in globalSEO on DatoCMS,
+				icon: faviconPath, // declared in globalSEO on DatoCMS,
 			},
 		},
 		{
