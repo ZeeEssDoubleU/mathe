@@ -54,7 +54,8 @@ export default function ProductListing({
 			<Link
 				key={tagIndex}
 				to={`/products/${tag.slug}`}
-				className="gtm listing-tag"
+				className="listing-tag"
+				data-class="listing-tag"
 			>
 				<StyledButton key={tagIndex}>{tag.title}</StyledButton>
 			</Link>

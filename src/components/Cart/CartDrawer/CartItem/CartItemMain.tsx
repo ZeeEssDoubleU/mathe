@@ -37,16 +37,18 @@ export default function CartItemMain({
 				<Selector>
 					<button
 						aria-label="decrement quantity"
-						className="gtm change-quantity decrement"
 						onClick={() => updateLineItem(quantity - 1)}
+						className="change-quantity decrement"
+						data-class="change-quantity decrement"
 					>
 						<Icon name="minus" />
 					</button>
 					<Count>{quantity}</Count>
 					<button
 						aria-label="increment quantity"
-						className=" gtm change-quantity increment"
 						onClick={() => updateLineItem(quantity + 1)}
+						className="change-quantity increment"
+						data-class="change-quantity increment"
 					>
 						<Icon name="plus" />
 					</button>
@@ -95,6 +97,7 @@ const Selector = styled.div`
 
 	height: 48px;
 	width: 50%;
+	min-width: 134px;
 	max-width: 160px;
 	border: 1px solid ${({ theme }) => theme.color.accent_light};
 	border-radius: 0.25em;

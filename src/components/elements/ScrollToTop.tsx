@@ -27,7 +27,8 @@ export default function ScrollToTop({
 		<Container
 			show={show}
 			onClick={() => scroll_top(scrollElem.current)}
-			className="gtm scroll-top"
+			className="scroll-top"
+			data-class="scroll-top"
 		>
 			<Icon name="up-chevron" />
 		</Container>

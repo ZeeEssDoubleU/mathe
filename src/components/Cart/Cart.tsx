@@ -1,17 +1,17 @@
 import React, { ReactElement } from "react"
 // import components
-import Cart from "./Cart"
+import CartDrawer from "./CartDrawer"
 import CartToggle from "./CartToggle"
 
 // ************
 // component
 // ************
 
-export default function Snipcart(): ReactElement {
+export default function Cart(): ReactElement {
 	return (
 		<>
 			<CartToggle />
-			<Cart />
+			<CartDrawer />
 		</>
 	)
 }

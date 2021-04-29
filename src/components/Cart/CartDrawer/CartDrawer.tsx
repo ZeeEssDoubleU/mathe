@@ -17,7 +17,7 @@ import { useShopify } from "../../../redux"
 // component
 // ************
 
-export default function Cart(): ReactElement {
+export default function CartDrawer(): ReactElement {
 	const cartRef = useRef(null)
 	useClickOutside(cartRef)
 	const shopifyState = useShopify()

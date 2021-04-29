@@ -16,10 +16,12 @@ export default function CheckoutButton(): ReactElement {
 
 	return (
 		<Container
-			disabled={checkoutDisabled}
+			className="checkout-link"
+			data-class="checkout-link"
+			disabled={checkoutDisabled} // a tag can't actually be disabled, using for styled below
+			data-disabled={checkoutDisabled}
 			onClick={(e) => checkoutDisabled && e.preventDefault()}
 			href={checkoutUrl}
-			className="gtm checkout-link"
 		>
 			<span className="spacer" />
 			<span className="shift">Checkout</span>
@@ -50,7 +52,7 @@ const Container = styled.a<{ disabled: boolean }>`
 	font-weight: ${({ theme }) => theme.font.main_weight_heavy};
 
 	cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-	pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+	/* pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")}; */
 
 	svg {
 		height: 16px;

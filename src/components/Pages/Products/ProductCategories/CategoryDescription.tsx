@@ -35,7 +35,8 @@ export default function ProductCategoryDescription({
 			/>
 			<Expand
 				onClick={() => expand_set(!expand)}
-				className="gtm category show-more"
+				className="category show-more"
+				data-class="category show-more"
 			>
 				{expand === true ? "show less" : "show more"}
 			</Expand>

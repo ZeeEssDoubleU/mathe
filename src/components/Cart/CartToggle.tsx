@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 // import components
-import Icon from "../../Icon"
+import Icon from "../Icon"
 // import styles
-import { ModalButton } from "../../../styles/elements"
+import { ModalButton } from "../../styles/elements"
 // import store
-import { useShopify } from "../../../redux"
-import { useCheckout } from "../../../api/shopify"
+import { useShopify } from "../../redux"
+import { useCheckout } from "../../api/shopify"
 
 // ************
 // component
@@ -18,7 +18,9 @@ export default function CartToggle(): ReactElement {
 
 	return (
 		<Container
-			className="gtm toggle-cart"
+			className="toggle-cart"
+			data-class="toggle-cart"
+			aria-label="toggle cart"
 			onClick={() => shopifyState.toggleCart(!shopifyState.isCartOpen)}
 		>
 			<Icon name="cart-zoom" />

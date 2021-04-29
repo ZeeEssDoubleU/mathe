@@ -5,7 +5,7 @@ import styled from "styled-components"
 // import components
 import Nav from "../Nav"
 import Background from "../Background"
-import ShopifyCart from "../Cart/Shopify"
+import Cart from "../Cart"
 // impprt store
 import { AnimationState_I, useCategory, useAnimation } from "../../redux"
 import { LayoutComponentQuery } from "../../graphql/types"
@@ -47,7 +47,7 @@ export default function Layout({ children, path }: Layout_I): ReactElement {
 				<Nav />
 				{children}
 			</PageTransition>
-			<ShopifyCart />
+			<Cart />
 		</Container>
 	)
 }

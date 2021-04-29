@@ -16,7 +16,8 @@ export default function CartHeader(): ReactElement {
 		<Container>
 			<h2>Cart Summary</h2>
 			<button
-				className="gtm close-cart"
+				className="close-cart"
+				data-class="close-cart"
 				aria-label="close cart"
 				onClick={() => shopifyState.toggleCart(false)}
 			>

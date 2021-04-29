@@ -66,6 +66,8 @@ export default function ProductListingHeader({
 		}
 	}
 
+	const isDisabled = !shopifyState.shopReady || !inStock
+
 	// DISPLAY each product
 	return (
 		<HeaderBlock>
@@ -78,10 +80,16 @@ export default function ProductListingHeader({
 					${priceNumber.toFixed(2)} / {weight} {abbreviate(weightUnit)}
 				</Price>
 				<AddToCart
-					disabled={!shopifyState.shopReady || !inStock}
-					onClick={addLineItem}
-					className="gtm add-to-cart"
+					// not using 'disabled' so click tracking remains enabled
+					isDisabled={isDisabled}
+					data-disabled={isDisabled}
+					onClick={(e) => {
+						isDisabled ? e.preventDefault() : addLineItem
+					}}
+					className="add-to-cart"
+					data-class="add-to-cart"
 					product={handle}
+					data-product={handle}
 				>
 					{displayButtonText()}
 				</AddToCart>
@@ -102,17 +110,18 @@ const BuyBlock = styled.div`
 	margin: 12px 0;
 `
 const AddToCart = styled(CategoryButton)<{
-	disabled: boolean
+	isDisabled: boolean
 	product: string
 }>`
 	border: 1px solid ${({ theme }) => theme.color.app_green};
-	color: ${(props) => (props.disabled ? props.theme.color.disabled : "white")};
+	color: ${(props) =>
+		props.isDisabled ? props.theme.color.disabled : "white"};
 
 	&:hover {
 		background: ${(props) =>
-			props.disabled ? null : props.theme.color.hover_bg};
+			props.isDisabled ? null : props.theme.color.hover_bg};
 		color: white;
-		cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+		cursor: ${({ isDisabled }) => (isDisabled ? "default" : "pointer")};
 	}
 	&.active {
 		background: none;

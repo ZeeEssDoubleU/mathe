@@ -17532,6 +17532,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___include_favicon = "pluginCreator___pluginOptions___include_favicon",
   pluginCreator___pluginOptions___legacy = "pluginCreator___pluginOptions___legacy",
   pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator___pluginOptions___theme_color_in_head",
+  pluginCreator___pluginOptions___cacheDigest = "pluginCreator___pluginOptions___cacheDigest",
   pluginCreator___pluginOptions___pure = "pluginCreator___pluginOptions___pure",
   pluginCreator___pluginOptions___shopName = "pluginCreator___pluginOptions___shopName",
   pluginCreator___pluginOptions___accessToken = "pluginCreator___pluginOptions___accessToken",
@@ -17753,6 +17754,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___include_favicon = "pluginOptions___include_favicon",
   pluginOptions___legacy = "pluginOptions___legacy",
   pluginOptions___theme_color_in_head = "pluginOptions___theme_color_in_head",
+  pluginOptions___cacheDigest = "pluginOptions___cacheDigest",
   pluginOptions___pure = "pluginOptions___pure",
   pluginOptions___shopName = "pluginOptions___shopName",
   pluginOptions___accessToken = "pluginOptions___accessToken",
@@ -17899,6 +17901,7 @@ export interface SitePluginPluginOptions {
   include_favicon: Maybe<Scalars["Boolean"]>;
   legacy: Maybe<Scalars["Boolean"]>;
   theme_color_in_head: Maybe<Scalars["Boolean"]>;
+  cacheDigest: Maybe<Scalars["String"]>;
   pure: Maybe<Scalars["Boolean"]>;
   shopName: Maybe<Scalars["String"]>;
   accessToken: Maybe<Scalars["String"]>;
@@ -17959,6 +17962,7 @@ export interface SitePluginPluginOptionsFilterInput {
   include_favicon: Maybe<BooleanQueryOperatorInput>;
   legacy: Maybe<BooleanQueryOperatorInput>;
   theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
+  cacheDigest: Maybe<StringQueryOperatorInput>;
   pure: Maybe<BooleanQueryOperatorInput>;
   shopName: Maybe<StringQueryOperatorInput>;
   accessToken: Maybe<StringQueryOperatorInput>;

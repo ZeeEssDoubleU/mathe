@@ -31,8 +31,9 @@ export default function CartItemHeader({ id, title }: CartItemI): ReactElement {
 			<Title>{title}</Title>
 			<button
 				aria-label="remove item"
-				className="gtm remove-item"
 				onClick={removeLineItem}
+				className="remove-item"
+				data-class="remove-item"
 			>
 				<Icon name="trashcan" />
 			</button>
