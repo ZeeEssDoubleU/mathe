@@ -1,4 +1,4 @@
-import { CreatePagesArgs } from "gatsby"
+import { CreatePagesArgs, CreateWebpackConfigArgs } from "gatsby"
 
 // ************
 // types
@@ -60,4 +60,29 @@ export async function createPages({
 			},
 		})
 	})
+}
+
+// ************
+// custom webpack config
+// ************
+
+export function onCreateWebpackConfig({
+	stage,
+	// rules,
+	loaders,
+	// plugins,
+	actions,
+}: CreateWebpackConfigArgs) {
+	if (stage === "build-html") {
+		actions.setWebpackConfig({
+			module: {
+				rules: [
+					{
+						test: /canvas/, // ! adjusted so that dompurify works with SSR
+						use: loaders.null(),
+					},
+				],
+			},
+		})
+	}
 }

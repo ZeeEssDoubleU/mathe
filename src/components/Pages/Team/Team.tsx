@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
 import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 // import components
 import Main from "../../Layout/Main"
 // import styles
@@ -32,7 +32,7 @@ export default function Team(props: TeamPageQuery["page"]): ReactElement {
 				<Header>{member.name}</Header>
 				<Body
 					dangerouslySetInnerHTML={{
-						__html: sanitizeHtml(member.bio),
+						__html: sanitize(member.bio),
 					}}
 				/>
 				<Divider />

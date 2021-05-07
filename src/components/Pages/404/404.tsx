@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 import { navigate } from "@reach/router"
 // import components
 import Main from "../../Layout/Main"
@@ -40,7 +40,7 @@ export default function NotFound(
 					<Icon name="back-chevron" />
 					<div
 						dangerouslySetInnerHTML={{
-							__html: sanitizeHtml(content.htmlEditor),
+							__html: sanitize(content.htmlEditor),
 						}}
 					/>
 				</Body>

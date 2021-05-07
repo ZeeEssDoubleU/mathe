@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 import { intersectionBy } from "lodash"
 // import components
 import Header from "./ListingHeader"
@@ -78,7 +78,7 @@ export default function ProductListing({
 			/>
 			<Description
 				dangerouslySetInnerHTML={{
-					__html: sanitizeHtml(product_description),
+					__html: sanitize(product_description),
 				}}
 			/>
 			<Tags>{tagMap}</Tags>

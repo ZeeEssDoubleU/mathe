@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 // import types
 import { DatoCmsCategoryFragment } from "../../../../graphql/types"
 // import styles
@@ -30,7 +30,7 @@ export default function ProductCategoryDescription({
 			<Body
 				expand={expand}
 				dangerouslySetInnerHTML={{
-					__html: sanitizeHtml(description),
+					__html: sanitize(description),
 				}}
 			/>
 			<Expand

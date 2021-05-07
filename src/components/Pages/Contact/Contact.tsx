@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 // import components
 import ContactDetails from "./ContactDetails"
 import ContactForm from "./ContactForm"
@@ -36,7 +36,7 @@ export default function Contact(props: ContactPageQuery["page"]): ReactElement {
 								<div
 									key={index}
 									dangerouslySetInnerHTML={{
-										__html: sanitizeHtml(section.htmlEditor),
+										__html: sanitize(section.htmlEditor),
 									}}
 								/>
 							)}

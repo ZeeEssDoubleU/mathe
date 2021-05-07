@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
-import sanitizeHtml from "sanitize-html"
+import { sanitize } from "isomorphic-dompurify"
 // import components
 import Main from "../../Layout/Main"
 // import styles
@@ -33,7 +33,7 @@ export default function About(props: AboutPageQuery["page"]): ReactElement {
 				{"htmlEditor" in content && (
 					<Body
 						dangerouslySetInnerHTML={{
-							__html: sanitizeHtml(content.htmlEditor),
+							__html: sanitize(content.htmlEditor),
 						}}
 					/>
 				)}
@@ -45,7 +45,7 @@ export default function About(props: AboutPageQuery["page"]): ReactElement {
 						<blockquote
 							className="quote"
 							dangerouslySetInnerHTML={{
-								__html: sanitizeHtml(quote.quote),
+								__html: sanitize(quote.quote),
 							}}
 						/>
 					</Quote>
