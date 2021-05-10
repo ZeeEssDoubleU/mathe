@@ -3,28 +3,14 @@ import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 // import components
 import NavMenu from "./NavMenu"
-
-// ************
-// types
-// ************
-
-interface Query_I {
-	logo: {
-		title: string
-		image: {
-			alt: string
-			title: string
-			url: string
-		}
-	}
-}
+import { NavComponentQuery } from "../../graphql/types"
 
 // ************
 // component
 // ************
 
 export default function Nav(): ReactElement {
-	const { logo }: Query_I = useStaticQuery(query)
+	const { logo }: NavComponentQuery = useStaticQuery(query)
 
 	return (
 		<Container>
@@ -34,7 +20,7 @@ export default function Nav(): ReactElement {
 				<NavLogo
 					src={logo.image.url}
 					title={logo.image.title}
-					alt={logo.image.alt}
+					alt={logo.image.alt || "Mathé"}
 					loading="eager"
 				/>
 			</h1>

@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react"
+import loadable from "@loadable/component"
 // import components
-import CartDrawer from "./CartDrawer"
+const CartDrawer = loadable(() => import("./CartDrawer"))
 import CartToggle from "./CartToggle"
 
 // ************

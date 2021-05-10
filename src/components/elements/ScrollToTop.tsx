@@ -1,7 +1,8 @@
 import React, { ReactElement, RefObject } from "react"
 import styled from "styled-components"
+import loadable from "@loadable/component"
 // import components
-import Icon from "../Icon"
+const Icon = loadable(() => import("../Icon"))
 // import styles / anim
 import { ModalButton } from "../../styles/elements"
 import { scroll_top } from "../../utils/animations"

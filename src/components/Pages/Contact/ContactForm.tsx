@@ -2,8 +2,9 @@ import React, { useState, ReactElement, FormEvent, ChangeEvent } from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 import axios from "axios"
+import loadable from "@loadable/component"
 // import components
-import Icon from "../../Icon"
+const Icon = loadable(() => import("../../Icon"))
 
 // ************
 // component

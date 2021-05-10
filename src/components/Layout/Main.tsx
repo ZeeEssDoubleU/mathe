@@ -1,9 +1,10 @@
 import React, { useRef, useState, ReactElement, ReactChild } from "react"
 import styled from "styled-components"
+import loadable from "@loadable/component"
 // import components
 import SEO from "../elements/SEO"
 import Hero from "./Hero"
-import ScrollToTop from "../elements/ScrollToTop"
+const ScrollToTop = loadable(() => import("../elements/ScrollToTop"))
 // import styles
 import { Content, ContentWrapper, MarginAuto } from "../../styles/elements"
 

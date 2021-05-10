@@ -18,7 +18,7 @@ async function main() {
 		!fs.existsSync(datocms) && fs.mkdirSync(datocms)
 		!fs.existsSync(mathe) && fs.mkdirSync(mathe)
 
-		const uploads = await client.uploads.all({}, { allPages: true })
+		const assets = await client.uploads.all({}, { allPages: true })
 		const getAsset = async (upload) => {
 			console.log(`Downloading ${upload.url}...`) // ? debug
 			const asset = await fetch(upload.url)
@@ -34,7 +34,7 @@ async function main() {
 		}
 
 		// reduce chains together promise declarations followed by getAsset calls
-		uploads.reduce(async (chain, upload) => {
+		assets.reduce(async (chain, upload) => {
 			await chain
 			return await getAsset(upload)
 		}, Promise.resolve())

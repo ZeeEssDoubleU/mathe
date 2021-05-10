@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
+import loadable from "@loadable/component"
 // import components
-import Icon from "../Icon"
+const Icon = loadable(() => import("../Icon"))
 // import styles
 import { ModalButton } from "../../styles/elements"
 // import store
@@ -37,6 +38,7 @@ export default function CartToggle(): ReactElement {
 
 const Container = styled(ModalButton)`
 	top: 24px;
+	right: 0;
 
 	@media (min-width: ${({ theme }) => theme.media.tablet}) {
 		top: 7.5%;

@@ -2,9 +2,10 @@ import React, { ReactElement } from "react"
 import styled from "styled-components"
 import { sanitize } from "isomorphic-dompurify"
 import { navigate } from "@reach/router"
+import loadable from "@loadable/component"
 // import components
 import Main from "../../Layout/Main"
-import Icon from "../../Icon"
+const Icon = loadable(() => import("../../Icon"))
 // import styles
 import {
 	ContentHeader,

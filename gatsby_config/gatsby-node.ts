@@ -18,7 +18,7 @@ export interface CreatePagesI {
 }
 
 // ************
-// create pages
+// lifecycle hook
 // ************
 
 export async function createPages({
@@ -63,7 +63,7 @@ export async function createPages({
 }
 
 // ************
-// custom webpack config
+// lifecycle hook
 // ************
 
 export function onCreateWebpackConfig({

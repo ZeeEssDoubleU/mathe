@@ -1,5 +1,3 @@
-import fs from "fs"
-import axios, { AxiosResponse } from "axios"
 import { app_green_hsl } from "../src/styles/styled-components/theme"
 
 // dotenv needed to protect contentful API keys
@@ -9,26 +7,8 @@ import "dotenv/config"
 import shop from "./queries/shopify/shop"
 import products from "./queries/shopify/products"
 
-// creates favicon.svg and faviconShare.svg file for gatsby-plugin-manifest
-const faviconPath = "src/components/Icon/icons/favicon.svg"
-const faviconSharePath = "src/components/Icon/icons/faviconShare.svg"
-const saveIcons = async (): Promise<void> => {
-	const favicon: AxiosResponse = await axios.get(
-		"https://www.datocms-assets.com/16917/1575087444-favicon.svg",
-	)
-	const faviconShare: AxiosResponse = await axios.get(
-		"https://www.datocms-assets.com/16917/1575087312-favicon-share.svg",
-	)
-	fs.writeFile(faviconPath, favicon.data, (err) => {
-		if (err) console.log(err)
-		else console.log("Favicon was saved!")
-	})
-	fs.writeFile(faviconSharePath, faviconShare.data, (err) => {
-		if (err) console.log(err)
-		else console.log("Shareable favicon was saved!")
-	})
-}
-saveIcons()
+// import icon paths
+import { faviconPath, faviconSharePath } from "./prebuild"
 
 export default {
 	siteMetadata: {
@@ -36,7 +16,7 @@ export default {
 		titleTemplate: " | Mathé", // declared in globalSEO on DatoCMS
 		description: "Premium yerba mate and tea blends.", // declared in globalSEO on DatoCMS
 		siteUrl: "https://www.mathetea.com", // No trailing slash allowed!
-		image: "src/components/Icon/icons/faviconShare.svg", // declared in globalSEO on DatoCMS
+		image: faviconSharePath, // declared in globalSEO on DatoCMS
 		themeColor: "",
 		keywords:
 			"yerba mate, tea, premium tea, premium yerba mate, healthy drink, antioxidant, organic, organic yerba mate",

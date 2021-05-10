@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react"
 import styled from "styled-components"
+import loadable from "@loadable/component"
 // import components
-import Icon from "../../Icon"
+const Icon = loadable(() => import("../../Icon"))
 // import store
 import { useCheckout } from "../../../api/shopify"
 
