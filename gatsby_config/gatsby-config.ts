@@ -1,4 +1,7 @@
-import { app_green_hsl } from "../src/styles/styled-components/theme"
+import {
+	app_green_hex,
+	app_green_hsl,
+} from "../src/styles/styled-components/theme"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"
@@ -71,9 +74,12 @@ export default {
 				short_name: "Mathé",
 				start_url: "/",
 				background_color: "black",
-				theme_color: `hsla(${app_green_hsl}, 1.0)`,
+				theme_color: app_green_hex,
 				display: "standalone",
 				icon: faviconPath, // declared in globalSEO on DatoCMS,
+				icon_options: {
+					purpose: `any maskable`,
+				},
 			},
 		},
 		{
