@@ -11,7 +11,7 @@ import { categorySlice } from "./categorySlice"
 import { shopifySlice } from "./shopifySlice"
 import { animationSlice } from "./animationSlice"
 // import types
-import { Provider_I } from "../@types/custom"
+import { Provider_I } from "../@types"
 
 // ************
 // store

@@ -6,7 +6,7 @@ export default async function setPluginKey(
 	setPluginStatus,
 	key,
 	value,
-): void {
+) {
 	try {
 		const plugin = state.flattenedPlugins.find(
 			(plugin) => plugin.name === selectedPlugin,

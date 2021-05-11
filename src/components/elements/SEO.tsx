@@ -88,7 +88,7 @@ export default function SEO(props: Seo_I): ReactElement {
 					globalSeo.fallbackSeo.image.url
 				}
 			/>
-			<meta name="theme-color" content={siteMetadata.themeColor} />
+			{/* <meta name="theme-color" content={siteMetadata.themeColor} /> */}
 			<meta
 				name="keywords"
 				content={props.keywords || siteMetadata.keywords}

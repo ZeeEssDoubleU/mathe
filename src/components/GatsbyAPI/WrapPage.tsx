@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 // import components
 import Layout from "../Layout/Layout"
 // import types
-import { WrapElementWithProps_I } from "../../@types/custom"
+import { WrapElementWithProps_I } from "../../@types"
 
 // ************
 // component

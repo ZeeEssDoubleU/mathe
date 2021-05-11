@@ -7,7 +7,7 @@ import ReduxProvider from "../../redux"
 import ResetStyle from "../../styles/reset"
 import GlobalStyle from "../../styles/global"
 // import types
-import { WrapElement_I } from "../../@types/custom"
+import { WrapElement_I } from "../../@types"
 
 // ************
 // component

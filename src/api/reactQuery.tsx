@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "react-query/devtools"
 // import experimentals
 // TODO: lock react-query to patch version until these are non-experimental
 import { broadcastQueryClient } from "react-query/broadcastQueryClient-experimental"
-import { Provider_I } from "../@types/custom"
+import { Provider_I } from "../@types"
 
 // ************
 // init

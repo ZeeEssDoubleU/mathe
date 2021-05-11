@@ -2,7 +2,7 @@ import React from "react"
 import { ThemeProvider } from "styled-components"
 import { theme } from "./theme"
 // import types
-import { Provider_I } from "../../@types/custom"
+import { Provider_I } from "../../@types"
 
 // ************
 // module declaration

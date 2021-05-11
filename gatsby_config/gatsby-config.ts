@@ -1,7 +1,4 @@
-import {
-	app_green_hex,
-	app_green_hsl,
-} from "../src/styles/styled-components/theme"
+import { app_green_hex } from "../src/styles/styled-components/theme"
 
 // dotenv needed to protect contentful API keys
 import "dotenv/config"
@@ -20,7 +17,7 @@ export default {
 		description: "Premium yerba mate and tea blends.", // declared in globalSEO on DatoCMS
 		siteUrl: "https://www.mathetea.com", // No trailing slash allowed!
 		image: faviconSharePath, // declared in globalSEO on DatoCMS
-		themeColor: "",
+		themeColor: app_green_hex,
 		keywords:
 			"yerba mate, tea, premium tea, premium yerba mate, healthy drink, antioxidant, organic, organic yerba mate",
 		lang: "en",
