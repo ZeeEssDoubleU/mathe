@@ -35,7 +35,7 @@
 		"canvas": "^2.7.0",
 		"datocms-client": "^3.3.0",
 		"express": "^4.17.1",
-		"gatsby": "^3.0.4",
+		"gatsby": "^4.25.7",
 		"gatsby-image": "^3.0.0",
 		"gatsby-plugin-google-tagmanager": "^3.3.0",
 		"gatsby-plugin-image": "^1.0.1",
